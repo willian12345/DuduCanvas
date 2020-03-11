@@ -28,6 +28,9 @@ export default class DisplayObject {
 	static setContext(ctx){
 		_context = ctx
 	}
+	static getContext(){
+		return _context
+	}
 	addChild(...args){
 		// 指定父级
 		let childs = args.map((v) => {
@@ -40,6 +43,25 @@ export default class DisplayObject {
 		this.childs.forEach((v)=>{
 			v._draw(_context)
 		})
+	}
+	/**
+	 * getPosition 获取自己绝对位置
+	 * @return {[x, y]} 返回数组
+	 */
+	getPosition(){
+		let parent = this.parent
+		let x = this.x, y = this.y
+		
+		while(parent && parent.name != 'Stage'){
+			x = this.x + parent.x
+			y = this.y + parent.y
+			parent = parent.parent
+		}
+		
+		return [x, y]
+	}
+	getBounds(){
+		return {x:0, y:0, w:0, h:0,}
 	}
 }
 

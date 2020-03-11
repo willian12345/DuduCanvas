@@ -15,8 +15,6 @@ export default class Shape extends DisplayObject{
 			parent = parent.parent
 		}
 
-		console.log(this.x, this.y)
-
 		if(l){
 			for(let i=0; i<l; i++){
 				let action = this._actions[i]

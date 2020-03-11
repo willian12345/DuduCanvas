@@ -66,32 +66,32 @@ Page({
       //   }
       // }
 
-      let t1 = new DuduCan.Text({font: '44px sans-serif'})
-      t1.setFontSize(14)
+      let t1 = new DuduCan.Text({font: 'italic 18px sans-serif'})
       .setFillStyle('red')
       .setTextBaseline('top')
-      .fillText('你好世界', 0, 0)
-
-
+      .setWrapWidth(100)
+      .setTextAlign('left')
+      .setLineDistance(6)
+      .fillText('你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff', 10, 20)
+      
       let container1 = new DuduCan.Container()
       container1.x = 100
       container1.y = 200
       container1.addChild(t1)
-
-      let t2 = new DuduCan.Text({
-        text: '美好中国',
-        size: 22,
-        color: '#32c002'
-      })
-      stage.addChild(container1, t2)
+      
+      
+      stage.addChild(container1)
       stage.update()
 
 
+      
+
       // setInterval(()=>{
       //   shape.x += 1
-      //   t1.y += 1
+      //   t1.y += 10
       //   stage.update()
-      // }, 24)
+      // }, 1000)
+      
     }, this)
   }
 })
