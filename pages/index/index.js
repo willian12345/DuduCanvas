@@ -10,24 +10,88 @@ Page({
   },
   onLoad: function () {
     new DuduCan.Stage('myCanvas', (ctx, stage)=>{
-      let shape = new DuduCan.Shape()
-      shape.graphics.beginFill('red').drawCircle(0, 0, 30)
-      shape.x = 375/2
-      shape.y = 130
-
-      let container = new DuduCan.Container()
-      container.x = 0
-      container.y = 0
-      container.addChild(shape)
-
-      let shape1 = new DuduCan.Shape()
-      shape1.graphics.beginFill('green').drawCircle(375/2, 130, 40)
-
-
-      stage.addChild(shape1, container)
       
+      let shape = new DuduCan.Shape()
+      shape.graphics.fillStyle('red').fillCircle(30, 30, 30)
+
+      // let container = new DuduCan.Container()
+      // container.x = 0
+      // container.y = 0
+      // container.addChild(shape)
+
+      // let shape1 = new DuduCan.Shape()
+      // shape1.graphics.fillStyle('green').fillCircle(375/2, 130, 40)
+
+      // stage.addChild(shape1, container)
+
+      // let rect = new DuduCan.Shape()
+      // rect.graphics.fillStyle('yellow').fillRect(0, 100, 100, 40)
+      // let rect1 = new DuduCan.Shape()
+      // rect1.graphics.strokeStyle('green').strokeRect(20, 110, 100, 10)
+
+      // let path = new DuduCan.Shape()
+      // path.x = 200
+      // path.y = 200
+      // path.graphics
+      // .strokeStyle('red')
+      // .beginPath()
+      // .moveTo(75, 50)
+      // .lineTo(100, 75)
+      // .lineTo(100, 25)
+      // .fill()
+
+
+      // for(var i=0;i<4;i++){
+      //  for(var j=0;j<3;j++){
+      //     let path = new DuduCan.Shape()
+      //     path.x = 100
+      //     path.y = 120
+      //     path.graphics.beginPath();
+          
+      //     var x = 25+j*50; // x 坐标值
+      //     var y = 25+i*50; // y 坐标值
+      //     var radius = 20; // 圆弧半径
+      //     var startAngle = 0; // 开始点
+      //     var endAngle = Math.PI+(Math.PI*j)/2; // 结束点
+      //     var anticlockwise = i%2==0 ? false : true; // 顺时针或逆时针
+          
+      //     path.graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise)
+      //     if (i > 1){
+      //       path.graphics.fill();
+      //     } else {
+      //       path.graphics.strokeStyle('blue')
+      //       path.graphics.stroke();
+      //     }
+      //     stage.addChild(path)
+      //   }
+      // }
+
+      let t1 = new DuduCan.Text({font: '44px sans-serif'})
+      t1.setFontSize(14)
+      .setFillStyle('red')
+      .setTextBaseline('top')
+      .fillText('你好世界', 0, 0)
+
+
+      let container1 = new DuduCan.Container()
+      container1.x = 100
+      container1.y = 200
+      container1.addChild(t1)
+
+      let t2 = new DuduCan.Text({
+        text: '美好中国',
+        size: 22,
+        color: '#32c002'
+      })
+      stage.addChild(container1, t2)
       stage.update()
 
+
+      // setInterval(()=>{
+      //   shape.x += 1
+      //   t1.y += 1
+      //   stage.update()
+      // }, 24)
     }, this)
   }
 })

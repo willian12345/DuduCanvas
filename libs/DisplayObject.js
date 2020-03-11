@@ -1,7 +1,6 @@
+let _context = null
 export default class DisplayObject {
-	constructor(){
-		
-	}
+	name = "DisplayObject"
 	width = 0
 	height = 0
 	x = 0
@@ -19,21 +18,29 @@ export default class DisplayObject {
 	mask = null
 	name = null
 	parent = null
-	_childs = []
+	childs = []
+	constructor(){
+		
+	}
+	/**
+	 * 保存 Stage 时传入 canvas context
+	 */
+	static setContext(ctx){
+		_context = ctx
+	}
 	addChild(...args){
+		// 指定父级
 		let childs = args.map((v) => {
 			v.parent = this
 			return v
 		})
-		this._childs = this._childs.concat(childs)
+		this.childs = this.childs.concat(childs)
 	}
 	_draw(){
-		this._childs.forEach((v)=>{
-			v.draw(this.context)
+		this.childs.forEach((v)=>{
+			v._draw(_context)
 		})
 	}
-	context = null
-	parent = null
 }
 
  

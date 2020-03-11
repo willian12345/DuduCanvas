@@ -3,11 +3,12 @@ import DisplayObject from './DisplayObject.js'
 export default class Stage extends DisplayObject {
 	constructor(id, callback, that) {
 	  super()
-		// 旧接口
-		this.context = wx.createCanvasContext(id, that)
-		super.context = this.context
-		callback(this.context, this)
-		// 新接口
+		// canvas 旧接口
+		this._context = wx.createCanvasContext(id, that)
+		DisplayObject.setContext(this._context)
+		callback(this._context, this)
+
+		// canvas 新接口, 还处于公测阶段
 		// const query = wx.createSelectorQuery()
 		// query.select(id)
 		// .fields({ node: true, size: true })
@@ -27,6 +28,6 @@ export default class Stage extends DisplayObject {
 	canvas = null
 	update(){
 		this._draw()
-		this.context.draw(false, ()=>{})
+		this._context.draw(false)
 	}
 }
