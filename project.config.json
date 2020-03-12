@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.2",
+	"libVersion": "2.10.3",
 	"appid": "wx5a7ad0ebf4916506",
 	"projectname": "duduCan",
 	"debugOptions": {

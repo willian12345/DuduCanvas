@@ -57,7 +57,6 @@ export default class DisplayObject {
 			y = this.y + parent.y
 			parent = parent.parent
 		}
-		
 		return [x, y]
 	}
 	getBounds(){

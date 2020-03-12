@@ -1,10 +1,10 @@
 import DisplayObject from './DisplayObject.js'
 
 export default class Stage extends DisplayObject {
-	constructor(id, callback, that) {
+	constructor(id, callback, PageInstance) {
 	  super()
 		// canvas 旧接口
-		this._context = wx.createCanvasContext(id, that)
+		this._context = wx.createCanvasContext(id, PageInstance)
 		DisplayObject.setContext(this._context)
 		callback(this._context, this)
 
