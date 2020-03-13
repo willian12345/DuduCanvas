@@ -5,6 +5,7 @@ import Stage from './Stage.js'
 import Text from './Text.js'
 import Image from './Image.js'
 import ImgLoader from './ImgLoader.js'
+import Sprite from './Sprite.js'
 
 let context = null
 
@@ -29,5 +30,8 @@ export default {
 	},
 	Image: (args) => {
 		return new Image(args)
+	},
+	Sprite: (args) => {
+		return new Sprite(args)
 	}
 }

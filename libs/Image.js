@@ -1,6 +1,7 @@
 import DisplayObject from './DisplayObject.js'
 export default class Image extends DisplayObject{	
 	name = 'Image'
+	image = null
 	path = ''
 	sx = undefined
 	sy = undefined
@@ -15,10 +16,10 @@ export default class Image extends DisplayObject{
 		for(let v in args){
 			this[v] = args[v]
 		}
+		this.path = this.image.path
 	}
 	_draw(ctx){
 		let [x, y] = this.getPosition()
-		console.log(x, y)
 		this.x = this.dx + x
 		this.y = this.dy + y
 
@@ -44,6 +45,7 @@ export default class Image extends DisplayObject{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.path, this.x, this.y)
 		}
+
 	}
 }
 

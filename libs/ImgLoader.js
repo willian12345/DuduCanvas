@@ -1,27 +1,36 @@
-let isloaded  = Symbol('isloaded')
-let total  = Symbol('total')
-let loaded  = Symbol('loaded')
+const isloaded  = Symbol('isloaded')
+const total  = Symbol('total')
+const loaded  = Symbol('loaded')
 const loadingCallbacks  = Symbol('loadingCallbacks')
 const doneCallbacks  = Symbol('doneCallbacks')
+const imageMap = Symbol('imageMap')
+const PATH_REG = /^http*/
 
 export default class ImgLoader {
-	loadedImages = []
 	constructor(imgArr){
 		this[total] = imgArr.length
 		this[loaded] = 0
 		this[loadingCallbacks] = []
 		this[doneCallbacks] = []
 		this[isloaded] = false
-		
+		this[imageMap] = new Map()
 		this.load(imgArr)
+		return this
+	}
+	get(id){
+		return this[imageMap].get(id)
 	}
 	load(imgArr){
 		imgArr.forEach( v => {
 			wx.getImageInfo({
-        src: v,
+        src: v.src,
         success: res => {
-          console.log(res)
-          this.loadedImages.push({
+          // console.log(res)
+          if(!PATH_REG.test(v.src)){
+          	res.path = '/' + res.path
+          }
+          this[imageMap].set(v.id, {
+          	path: res.path,
           	width: res.width,
           	height: res.height,
 
@@ -34,7 +43,7 @@ export default class ImgLoader {
           if(p >= 1){
           	this[isloaded] = true
           	this[doneCallbacks].forEach(v => {
-	          	v()
+	          	v(this)
 	          })
           }
         }
