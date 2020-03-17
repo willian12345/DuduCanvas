@@ -1,48 +1,191 @@
 import DisplayObject from './DisplayObject.js'
+const append = Symbol('append')
+const instructions = Symbol('instructions')
 
-const cmds = ['arc', 'fillRect', 'strokeRect', 'moveTo', 'lineTo']
+class BeginPath {
+	constructor(){}
+	exec(ctx) {
+		ctx.beginPath()
+	}
+}
+class MoveTo {
+	constructor(x, y){
+		this.x = x
+		this.y = y
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.moveTo(this.x + _x, this.y + _y)	
+	}
+}
+class LineTo {
+	constructor(x, y){
+		this.x = x
+		this.y = y
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.LineTo(this.x + _x, this.y + _y)	
+	}
+}
+
+class Arc {
+	constructor(x, y, radius, startAngle, endAngle, anticlockwise){
+		this.x = x
+		this.y = y
+		this.radius = radius
+		this.startAngle = startAngle
+		this.endAngle = endAngle
+		this.anticlockwise = anticlockwise
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.arc(this.x + _x, this.y + _y, this.radius, this.startAngle, this.endAngle, this.anticlockwise)
+	}
+}
+class ArcTo {
+	constructor(x1, y1, x2, y2, radius){
+		this.x1 = x1
+		this.y1 = y1
+		this.x2 = x2
+		this.y2 = y2
+		this.radius = radius
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.arcTo(this.x1 + _x, this.y1 + _y, this.x2 + _x, this.y2 + _y, this.radius)
+	}
+}
+
+class Stroke {
+	exec(ctx){
+		ctx.stroke()
+	}
+}
+class Fill {
+	exec(ctx){
+		ctx.fill()
+	}
+}
+class SetFillStyle{
+	constructor(color){
+		this.color = color
+	}
+	exec(ctx){
+		ctx.setFillStyle(this.color)
+	}
+}
+class SetStrokeStyle{
+	constructor(color){
+		this.color = color
+	}
+	exec(ctx){
+		ctx.setStrokeStyle(this.color)
+	}
+}
+
+class Clip{
+	exec(ctx){
+		ctx.clip()
+	}
+}
+
+class DrawCircle {
+	constructor(x, y, radius, fill = false){
+		this.x = x
+		this.y = y
+		this.radius = radius
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.beginPath()
+		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
+		console.log(this.x + _x, this.y + _y, this.radius)
+		if(this.fill){
+			ctx.fill()
+		}
+	}
+}
+
+
+
+class FillRect{
+	constructor(x, y, w, h){
+		this.x = x
+		this.y = y
+		this.w = w
+		this.h = h
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.fillRect(this.x + _x, this.y + _y, this.w, this.h)
+	}
+}
+class StrokeRect{
+	constructor(x, y, w, h){
+		this.x = x
+		this.y = y
+		this.w = w
+		this.h = h
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.strokeRect(this.x + _x, this.y + _y, this.w, this.h)
+	}
+}
+
+class ClearRect{
+	constructor(x, y, w, h){
+		this.x = x
+		this.y = y
+		this.w = w
+		this.h = h
+	}
+	exec(ctx, instance){
+		let [_x, _y] = instance.getPosition()
+		ctx.clearRect(this.x + _x, this.y + _y, this.w, this.h)
+	}
+}
+
+
+
+
+
 export default class Shape extends DisplayObject{
+	name = 'Shape'
 	constructor(){
 		super()
+
+		// 指令集
+		this[instructions] = []
+		
 	}
 	_draw(context){
-		const l = this._actions.length
-		let parent = this.parent
-		let x = 0, y = 0
-		while(parent && parent.name != 'Stage'){
-			x = this.x + parent.x
-			y = this.y + parent.y
-			parent = parent.parent
-		}
-
-		if(l){
-			for(let i=0; i<l; i++){
-				let action = this._actions[i]
-				let f = action[0]
-				let args = action.length > 1 ? action.slice(1) : null;
-				
-				if(typeof(context[f]) == "function") {
-					if(cmds.includes(f)){
-						args[0] = x + args[0]
-						args[1] = y + args[1]
-					}
-					context[f].apply(context, args);
-				}
-			}
-		}
+		this[instructions].map((instruction) => {
+			instruction.exec(context, this)
+		})
 	}
-	_actions = []
+	
+	[append](instructionsObject) {
+		this[instructions].push(instructionsObject)
+	}
+	fillCircle(x, y, radius){
+		this[append](new DrawCircle(x, y, radius, true))
+	}
+	drawCircle(x, y, radius){
+		this[append](new DrawCircle(x, y, radius))
+	}
 	graphics = {
 		beginPath: () => {
-			this._actions.push(['beginPath'])
+			this[append](new BeginPath())
 			return this.graphics
 		},
 		moveTo: (x, y) => {
-			this._actions.push(['moveTo', x, y])
+			this[append](new MoveTo(x, y))
 			return this.graphics
 		},
 		lineTo: (x, y) => {
-			this._actions.push(['lineTo', x, y])
+			this[append](new LoveTo(x, y))
 			return this.graphics
 		},
 		/**
@@ -50,57 +193,52 @@ export default class Shape extends DisplayObject{
 		 从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
 		 */
 		arc: (x, y, radius, startAngle, endAngle, anticlockwise = false) => {
-			console.log(...arguments)
-			this._actions.push(['arc', x, y, radius, startAngle, endAngle, anticlockwise])
+			this[append](new Arc(x, y, radius, startAngle, endAngle, anticlockwise))
 			return this.graphics
 		},
 		/**
 		 根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点
 		 */
 		arcTo: (x1, y1, x2, y2, radius) => {
-			this._actions.push(['arcTo', x1, y1, x2, y2, radius])
+			this[append](new ArcTo(x1, y1, x2, y2, radius))
 			return this.graphics
 		},
 		stroke: () => {
-			this._actions.push(['stroke'])
+			this[append](new Stroke())
 			return this.graphics
 		},
 		fill: () => {
-			this._actions.push(['fill'])
+			this[append](new Fill())
 			return this.graphics
 		},
 		fillStyle: color => {
-			this._actions.push(['setFillStyle', color])
+			this[append](new SetFillStyle(color))
 			return this.graphics
 		},
 		strokeStyle: color => {
-			this._actions.push(['setStrokeStyle', color])
+			this[append](new SetStrokeStyle(color))
 			return this.graphics
 		},
 		fillCircle: (x=0, y=0, radius=20) => {
-			this._actions.push(['save'])
-			this._actions.push(['beginPath'])
-			this._actions.push(['arc', x, y, radius, 0, 2 * Math.PI])
-			this._actions.push(['fill'])
-			this._actions.push(['restore'])
+			this[append](new FillCircle(x, y, radius))
 			return this.graphics
 		},
 		fillRect: (x=0, y=0, w=10, h=20) => {
-			this._actions.push(['fillRect', x, y, w, h])
+			this[append](new FillRect(x, y, w, h))
 			return this.graphics
 		},
 		/**
 		 * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
 		 */
 		strokeRect: (x=0, y=0, w=10, h=20) => {
-			this._actions.push(['strokeRect', x, y, w, h])
+			this[append](new StrokeRect(x,y,w,h))
 			return this.graphics
 		},
 		/**
 		 * 设置指定矩形区域内（以 点 (x, y) 为起点，范围是(width, height) ）所有像素变成透明，并擦除之前绘制的所有内容的方
 		 */
-		clearRect: (x, y, width, height) => {
-			this._actions.push(['clearRect',x, y, width, height])
+		clearRect: (x, y, w, h) => {
+			this[append](new ClearRect(x, y, w, h))
 			return this.graphics
 		}
 	}

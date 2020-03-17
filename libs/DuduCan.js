@@ -6,6 +6,7 @@ import Text from './Text.js'
 import Image from './Image.js'
 import ImgLoader from './ImgLoader.js'
 import Sprite from './Sprite.js'
+import base64src from './base64src.js'
 
 let context = null
 
@@ -28,10 +29,14 @@ export default {
 	Text: t => {
 		return new Text(t)
 	},
-	Image: (args) => {
+	Image: args => {
 		return new Image(args)
 	},
-	Sprite: (args) => {
+	Sprite: args => {
 		return new Sprite(args)
+	},
+	// base64 转图片
+	base64: str => {
+		return base64src(str)
 	}
 }

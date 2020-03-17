@@ -65,3 +65,35 @@
       // container1.x = 100
       // container1.y = 200
       // container1.addChild(t1)
+
+let img = new DuduCan.Image({
+          image: loader.get('btn1'),
+          sx: 0,
+          sy: 0, 
+          sWidth: 346, 
+          sHeight: 85,
+          dx: 0, 
+          dy: 100, 
+          dWidth: 346,
+          dHeight: 85
+        })
+
+
+        let sprite = new DuduCan.Sprite(loader.get('btn1'))
+        sprite.setSlice(30, 33, 30, 33)
+        sprite.width = 346
+        sprite.height = 185
+
+        
+        let sprite1 = new DuduCan.Sprite(loader.get('btn'))
+        sprite1.setSlice(147, 188, 101, 174)
+        sprite1.scaleX = .5
+        sprite1.scaleY = .5
+        sprite1.width = 569
+        sprite1.height = 600
+        // sprite1.x = 200
+        // sprite1.y = 100
+
+        // stage.addChild(img)
+        stage.addChild(sprite)
+        stage.addChild(sprite1)

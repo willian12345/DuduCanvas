@@ -25,56 +25,39 @@ Page({
     ])
     .done((loader) => {
       new DuduCan.Stage('myCanvas', (ctx, stage) => {
-        // let img = new DuduCan.Image({
-        //   image: loader.get('health'),
-        //   sx: 0,
-        //   sy: 0, 
-        //   sWidth: 72, 
-        //   sHeight: 72,
-        //   dx: 0, 
-        //   dy: 0, 
-        //   dWidth: 120,
-        //   dHeight: 120
-        // })
-        // img.x = 100
-        // img.y = 100
+        let container = new DuduCan.Container()
+        // container.x = 100
+        // container.y = 100
+
+        let shape = new DuduCan.Shape()
+        shape.drawCircle(0, 0, 40)
+
         let img = new DuduCan.Image({
-          image: loader.get('btn1'),
+          image: loader.get('health'),
           sx: 0,
           sy: 0, 
-          sWidth: 346, 
-          sHeight: 85,
+          sWidth: 72, 
+          sHeight: 72,
           dx: 0, 
-          dy: 100, 
-          dWidth: 346,
-          dHeight: 85
+          dy: 0, 
+          dWidth: 120,
+          dHeight: 120
         })
+        img.setClipCircle(0, 0, 60)
+        img.x = 100
+        img.y = 100
+        // img.mask = shape
 
-
-        let sprite = new DuduCan.Sprite(loader.get('btn1'))
-        sprite.setSlice(30, 33, 30, 33)
-        sprite.width = 346
-        sprite.height = 185
+        // container.addChild()
+        stage.addChild(img)
+        stage.update()
 
         
-        let sprite1 = new DuduCan.Sprite(loader.get('btn'))
-        sprite1.setSlice(147, 188, 101, 174)
-        sprite1.scaleX = .5
-        sprite1.scaleY = .5
-        sprite1.width = 569
-        sprite1.height = 600
-        // sprite1.x = 200
-        // sprite1.y = 100
-
-        // stage.addChild(img)
-        stage.addChild(sprite)
-        stage.addChild(sprite1)
-        stage.update()
-      
         // setInterval(()=>{
-        //   img.y += 1
+        //   container.y += 1
+        //   container.x += 1
         //   stage.update()
-        // }, 100)
+        // }, 1000)
         
       }, this)
     })
