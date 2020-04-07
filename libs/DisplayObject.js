@@ -12,6 +12,7 @@ export default class DisplayObject {
 	scale = 1
 	scaleX = 1
 	scaleY = 1
+	rotate = 0
 	skewX = 0
 	skewY = 0
 	filters = null
@@ -45,7 +46,7 @@ export default class DisplayObject {
 		})
 	}
 	/**
-	 * getPosition 获取自己绝对位置
+	 * getPosition 获取实例距画布左上角原点(0,0)的绝对位置
 	 * @return {[x, y]} 返回数组
 	 */
 	getPosition(){
@@ -53,11 +54,24 @@ export default class DisplayObject {
 		let x = this.x, y = this.y
 		
 		while(parent && parent.name != 'Stage'){
-			x = this.x + parent.x
-			y = this.y + parent.y
+			x += parent.x
+			y += parent.y
 			parent = parent.parent
 		}
 		return [x, y]
+	}
+	/**
+	 * 获取旋转角度
+	 */
+	getRotate(){
+		let parent = this.parent
+		let rotate = this.rotate
+		
+		while(parent && parent.name != 'Stage'){
+			rotate += parent.rotate
+			parent = parent.parent
+		}
+		return rotate
 	}
 	getBounds(){
 		return {x:0, y:0, w:0, h:0,}

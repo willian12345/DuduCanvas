@@ -95,18 +95,42 @@ class DrawCircle {
 		this.x = x
 		this.y = y
 		this.radius = radius
+		this.fill = fill
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
+		let centerPointerX = this.radius + this.x
+		let centerPointerY = this.radius + this.y
+		
+		ctx.save()
+		ctx.translate(centerPointerX, centerPointerY)
+		ctx.rotate(instance.rotate)
+		ctx.translate(-centerPointerX, -centerPointerY)
 		ctx.beginPath()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
-		console.log(this.x + _x, this.y + _y, this.radius)
 		if(this.fill){
 			ctx.fill()
 		}
+		ctx.closePath()
+		
+		ctx.restore()
 	}
 }
 
+/**
+ * 计算某一点旋转后的坐标点
+ * @param point
+ * @param degree
+ */
+const calculateRotate = (point, degree) => {
+	let x = point.x * Math.cos(degree * Math.PI / 180) + point.y * Math.sin(degree * Math.PI / 180);
+	let y = -point.x * Math.sin(degree * Math.PI / 180) + point.y * Math.cos(degree * Math.PI / 180);
+	let relativeOriginPoint = {
+			x: Math.round(x * 100) / 100,
+			y: Math.round(y * 100) / 100
+	};
+	return relativeOriginPoint;
+};
 
 
 class FillRect{
@@ -118,7 +142,25 @@ class FillRect{
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
-		ctx.fillRect(this.x + _x, this.y + _y, this.w, this.h)
+		let _rotate = instance.getRotate()
+		let dx = this.x + _x
+		let dy = this.y + _y
+		// 如果有父级，且父级有旋转
+		let p = instance.parent
+		let regPointerX = _x + instance.regX
+		let regPointerY = _y + instance.regY
+		ctx.save()
+		if(p && p.name != 'Stage' && p.rotate){
+			let [_x, _y] = p.getPosition()
+			regPointerX = _x + p.regX
+			regPointerY = _y + p.regY
+		}
+		
+		ctx.translate(regPointerX, regPointerY)
+		ctx.rotate(_rotate)
+		ctx.translate(-regPointerX, -regPointerY)
+		ctx.fillRect(dx, dy, this.w, this.h)
+		ctx.restore()
 	}
 }
 class StrokeRect{
@@ -220,10 +262,13 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		},
 		fillCircle: (x=0, y=0, radius=20) => {
-			this[append](new FillCircle(x, y, radius))
+			console.log(111)
+			this[append](new DrawCircle(x, y, radius, true))
 			return this.graphics
 		},
 		fillRect: (x=0, y=0, w=10, h=20) => {
+			this.width = w
+			this.height = h
 			this[append](new FillRect(x, y, w, h))
 			return this.graphics
 		},
