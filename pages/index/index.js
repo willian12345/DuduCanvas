@@ -26,29 +26,12 @@ Page({
     .done((loader) => {
       new DuduCan.Stage('myCanvas', (ctx, stage) => {
         let container = new DuduCan.Container()
-        container.x = 150
-        container.y = 150
-        container.regX = 150 * .5
-        container.regY = 150 * .5
-        container.rotate = 40 * Math.PI / 180
-
-        let shape = new DuduCan.Shape()
-        shape.graphics.fillStyle('green')
-        shape.graphics.fillRect(0, 0, 150, 150)
-
+        container.x = 120
+        container.y = 120
+        
         let shape1 = new DuduCan.Shape()
         shape1.graphics.fillStyle('red')
-        shape1.graphics.fillRect(0, 0, 50, 50)
-        shape1.x = 4
-        shape1.y = 40
-        // shape1.rotate = 45 * Math.PI / 180
-        
-        // let shape1 = new DuduCan.Shape()
-        // shape1.x = 10
-        // shape1.y = 100
-        // shape1.graphics.fillStyle('red')
-        // shape1.graphics.fillCircle(0, 0, 40)
-        // shape1.rotate = shape.rotate
+        shape1.graphics.fillCircle(60, 60, 40)
 
         let img = new DuduCan.Image({
           image: loader.get('health'),
@@ -61,12 +44,10 @@ Page({
           dWidth: 120,
           dHeight: 120
         })
+        img.mask = shape1
         img.x = 0
         img.y = 0
-        // img.rotate = 40 * Math.PI / 180
-        // img.mask = shape
-        container.addChild(shape)
-        container.addChild(shape1)
+        container.addChild(img)
         stage.addChild(container)
         // stage.addChild(shape1)
         stage.update()

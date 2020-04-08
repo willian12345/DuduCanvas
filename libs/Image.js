@@ -67,11 +67,6 @@ export default class Image extends DisplayObject{
 		 * drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 		 */
 		
-		if(this.rotate){
-			ctx.save()
-			ctx.rotate(this.rotate)
-		}
-
 		if(this.sx != undefined){
 			// 如果传了原始图起点，则说明要填完整所有参数
 			ctx.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)	
@@ -82,32 +77,17 @@ export default class Image extends DisplayObject{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.path, x, y)
 		}
-		ctx.restore()
 	}
 	_draw(ctx){
 		let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
 
-		// if(this[circle]){
-		// 	ctx.save()
-		// 	ctx.beginPath()
-		// 	ctx.arc(x + this[circle].x, y + this[circle].y, this[circle].radius, 0, 2 * Math.PI)
-		// 	ctx.fill()
-		// 	ctx.closePath()
-		// 	ctx.clip()
-		// 	this[drawImage](ctx, x, y)
-		// 	console.log(ctx, x, y)
-		// 	console.log(x + this[circle].x + (this.dWidth * .5), y + this[circle].y + (this.dHeight * .5), this[circle].radius)
-		// 	ctx.restore()
-		// }
-
 		if(this.mask){
 			
 			if(this.mask.name == 'Shape'){
 				ctx.save()
 				this.mask.parent = this
-				this.mask.rotate = this.rotate
 				this.mask._draw(ctx, this.mask)
 				ctx.clip()
 				this[drawImage](ctx, x, y)

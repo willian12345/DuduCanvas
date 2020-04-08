@@ -118,18 +118,25 @@ class DrawCircle {
 }
 
 /**
- * 计算某一点旋转后的坐标点
- * @param point
- * @param degree
+ * 属性变形
  */
-const calculateRotate = (point, degree) => {
-	let x = point.x * Math.cos(degree * Math.PI / 180) + point.y * Math.sin(degree * Math.PI / 180);
-	let y = -point.x * Math.sin(degree * Math.PI / 180) + point.y * Math.cos(degree * Math.PI / 180);
-	let relativeOriginPoint = {
-			x: Math.round(x * 100) / 100,
-			y: Math.round(y * 100) / 100
-	};
-	return relativeOriginPoint;
+const transformProps = (ctx, instance) => {
+	let [_x, _y] = instance.getPosition()
+	let _rotate = instance.getRotate()
+	// 如果有父级，且父级有旋转
+	let p = instance.parent
+	let regPointerX = _x + instance.regX
+	let regPointerY = _y + instance.regY
+	ctx.save()
+	if(p && p.name != 'Stage' && p.rotate){
+		let [_x, _y] = p.getPosition()
+		regPointerX = _x + p.regX
+		regPointerY = _y + p.regY
+	}
+	console.log(_rotate)
+	ctx.translate(regPointerX, regPointerY)
+	ctx.rotate(_rotate)
+	ctx.translate(-regPointerX, -regPointerY)
 };
 
 
@@ -142,23 +149,9 @@ class FillRect{
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
-		let _rotate = instance.getRotate()
 		let dx = this.x + _x
 		let dy = this.y + _y
-		// 如果有父级，且父级有旋转
-		let p = instance.parent
-		let regPointerX = _x + instance.regX
-		let regPointerY = _y + instance.regY
-		ctx.save()
-		if(p && p.name != 'Stage' && p.rotate){
-			let [_x, _y] = p.getPosition()
-			regPointerX = _x + p.regX
-			regPointerY = _y + p.regY
-		}
-		
-		ctx.translate(regPointerX, regPointerY)
-		ctx.rotate(_rotate)
-		ctx.translate(-regPointerX, -regPointerY)
+		transformProps.call(this, ctx, instance)
 		ctx.fillRect(dx, dy, this.w, this.h)
 		ctx.restore()
 	}
@@ -262,7 +255,6 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		},
 		fillCircle: (x=0, y=0, radius=20) => {
-			console.log(111)
 			this[append](new DrawCircle(x, y, radius, true))
 			return this.graphics
 		},
