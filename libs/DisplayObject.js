@@ -12,7 +12,7 @@ export default class DisplayObject {
 	scale = 1
 	scaleX = 1
 	scaleY = 1
-	rotate = 0
+	rotation = undefined
 	skewX = 0
 	skewY = 0
 	filters = null
@@ -42,6 +42,7 @@ export default class DisplayObject {
 	}
 	_draw(){
 		this.childs.forEach((v)=>{
+			this.transform(v, _context)
 			v._draw(_context)
 		})
 	}
@@ -52,7 +53,6 @@ export default class DisplayObject {
 	getPosition(){
 		let parent = this.parent
 		let x = this.x, y = this.y
-		
 		while(parent && parent.name != 'Stage'){
 			x += parent.x
 			y += parent.y
@@ -72,6 +72,19 @@ export default class DisplayObject {
 			parent = parent.parent
 		}
 		return rotate
+	}
+	transform(v, _context){
+		if(v.name == 'Stage') return
+		const ctx = _context
+		const [_x, _y] = v.getPosition()
+		const regPointerX = _x + v.regX
+		const regPointerY = _y + v.regY
+		if(v.rotation){
+			ctx.save()
+			ctx.translate(regPointerX, regPointerY)
+			ctx.rotate(v.rotation * Math.PI / 180)
+			ctx.translate(-regPointerX, -regPointerY)	
+		}
 	}
 	getBounds(){
 		return {x:0, y:0, w:0, h:0,}

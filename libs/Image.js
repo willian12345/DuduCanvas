@@ -83,13 +83,16 @@ export default class Image extends DisplayObject{
 		x = this.dx + x
 		y = this.dy + y
 
+		
 		if(this.mask){
-			
 			if(this.mask.name == 'Shape'){
-				ctx.save()
 				this.mask.parent = this
 				this.mask._draw(ctx, this.mask)
+				ctx.restore()
+				ctx.save()
 				ctx.clip()
+				this.transform(this, ctx)
+				console.log(this.rotation)
 				this[drawImage](ctx, x, y)
 				ctx.restore()
 			}

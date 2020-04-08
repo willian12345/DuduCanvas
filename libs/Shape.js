@@ -102,10 +102,10 @@ class DrawCircle {
 		let centerPointerX = this.radius + this.x
 		let centerPointerY = this.radius + this.y
 		
-		ctx.save()
-		ctx.translate(centerPointerX, centerPointerY)
-		ctx.rotate(instance.rotate)
-		ctx.translate(-centerPointerX, -centerPointerY)
+		// ctx.save()
+		// ctx.translate(centerPointerX, centerPointerY)
+		// ctx.rotate(instance.rotate)
+		// ctx.translate(-centerPointerX, -centerPointerY)
 		ctx.beginPath()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
 		if(this.fill){
@@ -113,31 +113,10 @@ class DrawCircle {
 		}
 		ctx.closePath()
 		
-		ctx.restore()
+		// ctx.restore()
 	}
 }
 
-/**
- * 属性变形
- */
-const transformProps = (ctx, instance) => {
-	let [_x, _y] = instance.getPosition()
-	let _rotate = instance.getRotate()
-	// 如果有父级，且父级有旋转
-	let p = instance.parent
-	let regPointerX = _x + instance.regX
-	let regPointerY = _y + instance.regY
-	ctx.save()
-	if(p && p.name != 'Stage' && p.rotate){
-		let [_x, _y] = p.getPosition()
-		regPointerX = _x + p.regX
-		regPointerY = _y + p.regY
-	}
-	console.log(_rotate)
-	ctx.translate(regPointerX, regPointerY)
-	ctx.rotate(_rotate)
-	ctx.translate(-regPointerX, -regPointerY)
-};
 
 
 class FillRect{
@@ -151,7 +130,7 @@ class FillRect{
 		let [_x, _y] = instance.getPosition()
 		let dx = this.x + _x
 		let dy = this.y + _y
-		transformProps.call(this, ctx, instance)
+		// transformProps.call(this, ctx, instance)
 		ctx.fillRect(dx, dy, this.w, this.h)
 		ctx.restore()
 	}
@@ -183,9 +162,6 @@ class ClearRect{
 }
 
 
-
-
-
 export default class Shape extends DisplayObject{
 	name = 'Shape'
 	constructor(){
@@ -197,6 +173,9 @@ export default class Shape extends DisplayObject{
 	}
 	_draw(context){
 		this[instructions].map((instruction) => {
+			// 先弹栈，在 DisplayObject transform 内有入栈过
+			context.restore()
+
 			instruction.exec(context, this)
 		})
 	}
