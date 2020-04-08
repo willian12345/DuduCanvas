@@ -58,6 +58,8 @@ export default class Image extends DisplayObject{
 		this[circle] = null
 		this[rect] = null
 		this.path = this.image.path
+		this.width = this.dWidth
+		this.height = this.dHeight
 	}
 	[drawImage](ctx, x, y){
 		/**
@@ -92,7 +94,6 @@ export default class Image extends DisplayObject{
 				ctx.save()
 				ctx.clip()
 				this.transform(this, ctx)
-				console.log(this.rotation)
 				this[drawImage](ctx, x, y)
 				ctx.restore()
 			}

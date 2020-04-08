@@ -1,5 +1,6 @@
 import DisplayObject from './DisplayObject.js'
 const append = Symbol('append')
+const bounds = Symbol('bounds')
 const instructions = Symbol('instructions')
 
 class BeginPath {
@@ -8,6 +9,7 @@ class BeginPath {
 		ctx.beginPath()
 	}
 }
+
 class MoveTo {
 	constructor(x, y){
 		this.x = x
@@ -18,6 +20,7 @@ class MoveTo {
 		ctx.moveTo(this.x + _x, this.y + _y)	
 	}
 }
+
 class LineTo {
 	constructor(x, y){
 		this.x = x
@@ -96,24 +99,16 @@ class DrawCircle {
 		this.y = y
 		this.radius = radius
 		this.fill = fill
+		
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
-		let centerPointerX = this.radius + this.x
-		let centerPointerY = this.radius + this.y
-		
-		// ctx.save()
-		// ctx.translate(centerPointerX, centerPointerY)
-		// ctx.rotate(instance.rotate)
-		// ctx.translate(-centerPointerX, -centerPointerY)
 		ctx.beginPath()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
 		if(this.fill){
 			ctx.fill()
 		}
 		ctx.closePath()
-		
-		// ctx.restore()
 	}
 }
 
@@ -130,7 +125,6 @@ class FillRect{
 		let [_x, _y] = instance.getPosition()
 		let dx = this.x + _x
 		let dy = this.y + _y
-		// transformProps.call(this, ctx, instance)
 		ctx.fillRect(dx, dy, this.w, this.h)
 		ctx.restore()
 	}
@@ -166,28 +160,19 @@ export default class Shape extends DisplayObject{
 	name = 'Shape'
 	constructor(){
 		super()
-
 		// 指令集
-		this[instructions] = []
-		
+		this[instructions] = []	
+		this[bounds] = []
 	}
 	_draw(context){
 		this[instructions].map((instruction) => {
 			// 先弹栈，在 DisplayObject transform 内有入栈过
 			context.restore()
-
 			instruction.exec(context, this)
 		})
 	}
-	
 	[append](instructionsObject) {
 		this[instructions].push(instructionsObject)
-	}
-	fillCircle(x, y, radius){
-		this[append](new DrawCircle(x, y, radius, true))
-	}
-	drawCircle(x, y, radius){
-		this[append](new DrawCircle(x, y, radius))
 	}
 	graphics = {
 		beginPath: () => {
@@ -234,12 +219,12 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		},
 		fillCircle: (x=0, y=0, radius=20) => {
+			this[bounds].push({x: x, y: y, w: radius, h: radius})
 			this[append](new DrawCircle(x, y, radius, true))
 			return this.graphics
 		},
 		fillRect: (x=0, y=0, w=10, h=20) => {
-			this.width = w
-			this.height = h
+			this[bounds].push({x: x, y: y, w: w, h: h})
 			this[append](new FillRect(x, y, w, h))
 			return this.graphics
 		},
@@ -247,6 +232,7 @@ export default class Shape extends DisplayObject{
 		 * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
 		 */
 		strokeRect: (x=0, y=0, w=10, h=20) => {
+			this[bounds].push({x: x, y: y, w: w, h: h})
 			this[append](new StrokeRect(x,y,w,h))
 			return this.graphics
 		},
@@ -257,6 +243,20 @@ export default class Shape extends DisplayObject{
 			this[append](new ClearRect(x, y, w, h))
 			return this.graphics
 		}
+	}
+	getBounds(){
+		let x=this.x, y=this.y, w=0, h=0
+		this[bounds].forEach(ins => {
+			const distanceW = ins.w + ins.x
+			const distanceH = ins.h + ins.y
+			if(w < distanceW){
+				w = distanceW
+			}
+			if(h < distanceH){
+				h = distanceH
+			}
+		})
+		return {x,y,w,h}
 	}
 }
 

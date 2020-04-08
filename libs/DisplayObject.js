@@ -12,7 +12,7 @@ export default class DisplayObject {
 	scale = 1
 	scaleX = 1
 	scaleY = 1
-	rotation = undefined
+	rotation = 0
 	skewX = 0
 	skewY = 0
 	filters = null
@@ -63,26 +63,29 @@ export default class DisplayObject {
 	/**
 	 * 获取旋转角度
 	 */
-	getRotate(){
+	getRotation(){
 		let parent = this.parent
-		let rotate = this.rotate
+		let rotation = this.rotation
 		
 		while(parent && parent.name != 'Stage'){
-			rotate += parent.rotate
+			rotation += parent.rotation
 			parent = parent.parent
 		}
-		return rotate
+		return rotation
 	}
 	transform(v, _context){
 		if(v.name == 'Stage') return
 		const ctx = _context
 		const [_x, _y] = v.getPosition()
+		const rotation = v.getRotation()
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
-		if(v.rotation){
+		
+		
+		if(rotation){
 			ctx.save()
 			ctx.translate(regPointerX, regPointerY)
-			ctx.rotate(v.rotation * Math.PI / 180)
+			ctx.rotate(rotation * Math.PI / 180)
 			ctx.translate(-regPointerX, -regPointerY)	
 		}
 	}

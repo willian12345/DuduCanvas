@@ -28,9 +28,9 @@ Page({
         const container = new DuduCan.Container()
         container.x = 120
         container.y = 120
+        container.rotation = 90
         container.regX = 60
         container.regY = 60
-        // container.rotation = 40
         const shape = new DuduCan.Shape()
         shape.graphics.fillStyle('red')
         shape.graphics.fillCircle(60, 60, 40)
@@ -47,21 +47,23 @@ Page({
           dHeight: 120
         })
         img.mask = shape
-        img.x = 100
-        img.y = 100
         img.regX = 60
         img.regY = 60
-        img.rotation = 90
-        // container.addChild(img)
-        stage.addChild(img)
+        img.y = 0
+        img.x = 110
+        img.rotation = 180
+        stage.addChild(container)
 
         const rect = new DuduCan.Shape()
         rect.graphics
         .fillStyle('green')
         .fillRect(10, 10, 100, 50)
-        stage.addChild(rect)
+        .fillStyle('yellow')
+        .fillCircle(-20, 120, 30, 40)
+        // .fillRect(220, 220, 20, 20)
+        stage.addChild(rect, img)
 
-
+        console.log(rect.getBounds())
 
         stage.update()
         
