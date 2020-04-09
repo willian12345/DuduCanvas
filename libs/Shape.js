@@ -16,7 +16,7 @@ class MoveTo {
 		this.y = y
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		ctx.moveTo(this.x + _x, this.y + _y)	
 	}
 }
@@ -42,7 +42,7 @@ class Arc {
 		this.anticlockwise = anticlockwise
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, this.startAngle, this.endAngle, this.anticlockwise)
 	}
 }
@@ -55,7 +55,7 @@ class ArcTo {
 		this.radius = radius
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		ctx.arcTo(this.x1 + _x, this.y1 + _y, this.x2 + _x, this.y2 + _y, this.radius)
 	}
 }
@@ -122,9 +122,9 @@ class FillRect{
 		this.h = h
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
-		let dx = this.x + _x
-		let dy = this.y + _y
+		const [_x, _y] = instance.getPosition()
+		const dx = this.x + _x
+		const dy = this.y + _y
 		ctx.fillRect(dx, dy, this.w, this.h)
 		ctx.restore()
 	}
@@ -137,7 +137,7 @@ class StrokeRect{
 		this.h = h
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		ctx.strokeRect(this.x + _x, this.y + _y, this.w, this.h)
 	}
 }
@@ -150,7 +150,7 @@ class ClearRect{
 		this.h = h
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		ctx.clearRect(this.x + _x, this.y + _y, this.w, this.h)
 	}
 }

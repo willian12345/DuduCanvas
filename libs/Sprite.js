@@ -15,7 +15,7 @@ export default class Sprite extends DisplayObject{
 		}
 	}
 	_draw(ctx){
-		let [x, y] = this.getPosition()
+		const [x, y] = this.getPosition()
 		
 		this.wRatio = this.width / this.img.width
 		this.hRatio = this.height / this.img.height
@@ -42,7 +42,7 @@ export default class Sprite extends DisplayObject{
 		lt._draw(ctx)	
 	}
 	[drawSliced](ctx, x, y){
-		let ltParams = {
+		const ltParams = {
 			image: this.img,
 			sx: 0,
 			sy: 0,
@@ -54,7 +54,7 @@ export default class Sprite extends DisplayObject{
 			dy: y,
 		}
 
-		let tParams = {
+		const tParams = {
 			image: this.img,
 			sx: this.left,
 			sy: 0,
@@ -67,7 +67,7 @@ export default class Sprite extends DisplayObject{
 		}
 
 
-		let rtParams = {
+		const rtParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
 			sy: 0,
@@ -79,7 +79,7 @@ export default class Sprite extends DisplayObject{
 			dy: y,
 		}
 
-		let rParams = {
+		const rParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
 			sy: this.top,
@@ -93,7 +93,7 @@ export default class Sprite extends DisplayObject{
 
 
 		
-		let rbParams = {
+		const rbParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
 			sy: this.img.height - this.bottom,
@@ -105,7 +105,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy + rParams.dHeight,
 		}
 
-		let bParams = {
+		const bParams = {
 			image: this.img,
 			sx: this.left,
 			sy: this.img.height - this.bottom,
@@ -117,7 +117,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy + rParams.dHeight,
 		}
 
-		let lbParams = {
+		const lbParams = {
 			image: this.img,
 			sx: 0,
 			sy: this.img.height - this.bottom,
@@ -128,7 +128,7 @@ export default class Sprite extends DisplayObject{
 			dx: ltParams.dx,
 			dy: rParams.dy + rParams.dHeight,
 		}
-		let lParams = {
+		const lParams = {
 			image: this.img,
 			sx: 0,
 			sy: this.top,
@@ -140,7 +140,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy,
 		}
 
-		let cParams = {
+		const cParams = {
 			image: this.img,
 			sx: ltParams.sWidth,
 			sy: ltParams.sHeight,
@@ -148,8 +148,8 @@ export default class Sprite extends DisplayObject{
 			sHeight: lParams.sHeight,
 			dWidth: this.enableWidth,
 			dHeight: this.enableHeight,
-			dx: ltParams.dWidth,
-			dy: ltParams.dHeight,
+			dx: ltParams.dx + ltParams.dWidth,
+			dy: ltParams.dy + ltParams.dHeight,
 		}
 
 

@@ -63,8 +63,15 @@ Page({
         // .fillRect(220, 220, 20, 20)
         stage.addChild(rect, img)
 
-        console.log(rect.getBounds())
-
+        let sprite = new DuduCan.Sprite(loader.get('btn1'))
+        sprite.setSlice(30, 33, 30, 33)
+        sprite.width = 346
+        sprite.height = 185
+        sprite.scaleX = sprite.scaleY = .5
+        sprite.x = 150
+        sprite.rotation = 10
+        sprite.y = 200
+        stage.addChild(sprite)
         stage.update()
         
         

@@ -13,8 +13,8 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   if (typeof radius === 'number') {
     radius = {tl: radius, tr: radius, br: radius, bl: radius};
   } else {
-    var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
-    for (var side in defaultRadius) {
+    const defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+    for (let side in defaultRadius) {
       radius[side] = radius[side] || defaultRadius[side];
     }
   }
@@ -90,7 +90,6 @@ export default class Image extends DisplayObject{
 			if(this.mask.name == 'Shape'){
 				this.mask.parent = this
 				this.mask._draw(ctx, this.mask)
-				ctx.restore()
 				ctx.save()
 				ctx.clip()
 				this.transform(this, ctx)
@@ -114,6 +113,7 @@ export default class Image extends DisplayObject{
 			ctx.clip()
 			this[drawImage](ctx, x, y)
 			ctx.restore()
+			console.log(111)
 		}else{
 			this[drawImage](ctx, x, y)
 		}

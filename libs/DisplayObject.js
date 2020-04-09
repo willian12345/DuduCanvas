@@ -34,7 +34,7 @@ export default class DisplayObject {
 	}
 	addChild(...args){
 		// 指定父级
-		let childs = args.map((v) => {
+		const childs = args.map((v) => {
 			v.parent = this
 			return v
 		})
@@ -44,6 +44,7 @@ export default class DisplayObject {
 		this.childs.forEach((v)=>{
 			this.transform(v, _context)
 			v._draw(_context)
+			_context.restore()
 		})
 	}
 	/**

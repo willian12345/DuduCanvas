@@ -1,4 +1,3 @@
-import DisplayObject from './DisplayObject.js'
 import Container from './Container.js'
 import Shape from './Shape.js'
 import Stage from './Stage.js'
@@ -8,7 +7,6 @@ import ImgLoader from './ImgLoader.js'
 import Sprite from './Sprite.js'
 import base64src from './base64src.js'
 
-let context = null
 
 export default {
 	load: imgArr => {
@@ -16,7 +14,6 @@ export default {
 	},
 	Stage: (id, callback, page) => {
 		return new Stage(id, (ctx, stage)=>{
-			context = ctx
 			callback(ctx, stage)
 		}, page)
 	},
