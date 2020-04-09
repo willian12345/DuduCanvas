@@ -113,7 +113,6 @@ export default class Image extends DisplayObject{
 			ctx.clip()
 			this[drawImage](ctx, x, y)
 			ctx.restore()
-			console.log(111)
 		}else{
 			this[drawImage](ctx, x, y)
 		}
