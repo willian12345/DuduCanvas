@@ -92,7 +92,6 @@ export default class Image extends DisplayObject{
 				this.mask._draw(ctx, this.mask)
 				ctx.save()
 				ctx.clip()
-				this.transform(this, ctx)
 				this[drawImage](ctx, x, y)
 				ctx.restore()
 			}

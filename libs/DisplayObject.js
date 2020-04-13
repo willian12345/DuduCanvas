@@ -1,4 +1,5 @@
 let _context = null
+let scale = Symbol('scale')
 export default class DisplayObject {
 	name = "DisplayObject"
 	width = 0
@@ -9,7 +10,6 @@ export default class DisplayObject {
 	alpha = 1
 	regX = 0
 	regY = 0
-	scale = 1
 	scaleX = 1
 	scaleY = 1
 	rotation = 0
@@ -20,8 +20,16 @@ export default class DisplayObject {
 	name = null
 	parent = null
 	childs = []
+	get scale(){
+		return this[scale]
+	}
+	set scale(s) {
+		this.scaleX = s
+		this.scaleY = s
+		this[scale] = s
+	}
 	constructor(){
-		
+		this[scale] = 1
 	}
 	/**
 	 * 保存 Stage 时传入 canvas context
@@ -42,8 +50,12 @@ export default class DisplayObject {
 	}
 	_draw(){
 		this.childs.forEach((v)=>{
+			_context.save()
+			// canvas 上下文 context 先形变
 			this.transform(v, _context)
+			// 再开始绘制
 			v._draw(_context)
+			// 绘制完后弹栈
 			_context.restore()
 		})
 	}
@@ -74,21 +86,32 @@ export default class DisplayObject {
 		}
 		return rotation
 	}
+	getScale(){
+		let parent = this.parent
+		let scale = this.scale
+		let scaleX = this.scaleX
+		let scaleY = this.scaleY
+		while(parent && parent.name != 'Stage'){
+			scaleX += parent.scaleX
+			scaleY += parent.scaleY
+			parent = parent.parent
+		}
+		return [scaleX, scaleY]
+	}
 	transform(v, _context){
 		if(v.name == 'Stage') return
 		const ctx = _context
 		const [_x, _y] = v.getPosition()
 		const rotation = v.getRotation()
+		let [scaleX, scaleY] = v.getScale()
+
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
 		
-		
-		if(rotation){
-			ctx.save()
-			ctx.translate(regPointerX, regPointerY)
-			ctx.rotate(rotation * Math.PI / 180)
-			ctx.translate(-regPointerX, -regPointerY)	
-		}
+		ctx.translate(regPointerX, regPointerY)
+		ctx.scale(scaleX,scaleY)
+		ctx.rotate(rotation * Math.PI / 180)
+		ctx.translate(-regPointerX, -regPointerY)	
 	}
 	getBounds(){
 		return {x:0, y:0, w:0, h:0,}

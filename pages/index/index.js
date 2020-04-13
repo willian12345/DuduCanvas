@@ -52,7 +52,7 @@ Page({
         img.y = 0
         img.x = 110
         img.rotation = 180
-        stage.addChild(container)
+        
 
         const rect = new DuduCan.Shape()
         rect.graphics
@@ -60,18 +60,21 @@ Page({
         .fillRect(10, 10, 100, 50)
         .fillStyle('yellow')
         .fillCircle(-20, 120, 30, 40)
-        // .fillRect(220, 220, 20, 20)
-        stage.addChild(rect, img)
+        .fillRect(220, 220, 20, 20)
+        stage.addChild(rect)
+        stage.addChild(img)
 
         let sprite = new DuduCan.Sprite(loader.get('btn1'))
         sprite.setSlice(30, 33, 30, 33)
         sprite.width = 346
         sprite.height = 185
-        sprite.scaleX = sprite.scaleY = .5
+        sprite.scaleX = .5
+        sprite.scaleY = .5
         sprite.x = 150
         sprite.rotation = 10
         sprite.y = 200
         stage.addChild(sprite)
+        stage.addChild(container)
         stage.update()
         
         

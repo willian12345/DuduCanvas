@@ -126,7 +126,6 @@ class FillRect{
 		const dx = this.x + _x
 		const dy = this.y + _y
 		ctx.fillRect(dx, dy, this.w, this.h)
-		ctx.restore()
 	}
 }
 class StrokeRect{
@@ -166,8 +165,6 @@ export default class Shape extends DisplayObject{
 	}
 	_draw(context){
 		this[instructions].map((instruction) => {
-			// 先弹栈，在 DisplayObject transform 内有入栈过
-			context.restore()
 			instruction.exec(context, this)
 		})
 	}
