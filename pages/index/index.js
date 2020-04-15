@@ -24,7 +24,7 @@ Page({
       }
     ])
     .done((loader) => {
-      new DuduCan.Stage('myCanvas', (ctx, stage) => {
+      DuduCan.Stage('myCanvas', (ctx, stage) => {
         const container = new DuduCan.Container()
         container.x = 120
         container.y = 120
@@ -75,9 +75,16 @@ Page({
         sprite.y = 200
         stage.addChild(sprite)
         stage.addChild(container)
+        
+        
+        const t1 = new DuduCan.Text({font: 'italic 18px sans-serif'})
+        .setWrapWidth(100)
+        .fillText('你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff')
+        t1.x = 100
+        t1.y = 300
+        stage.addChild(t1)
+
         stage.update()
-        
-        
         // let i = 1
         // setInterval(()=>{
         //   i+=8
