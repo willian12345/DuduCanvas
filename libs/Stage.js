@@ -26,7 +26,7 @@ export default class Stage extends DisplayObject {
 	}
 	name = 'Stage'
 	canvas = null
-	update(){
+	render(){
 		this._draw()
 		this._context.draw(false)
 	}

@@ -35,7 +35,7 @@
       // 添加至舞台
       stage.addChild(img)
       // 渲染画面
-      stage.update()      
+      stage.render()      
     }, this)
   })
 ```
@@ -45,12 +45,13 @@
 DuduCan.Stage('myCanvas', (ctx, stage) => {
   const t1 = new DuduCan.Text()
   .fillText('你好世界Hello')
+  t1.color = 'red'
   t1.x = 100
   t1.y = 300
   // 添加至舞台
   stage.addChild(t1)
   // 别忘记渲染画面
-  stage.update()
+  stage.render()
 })
 ```
 

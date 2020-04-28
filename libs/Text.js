@@ -45,7 +45,6 @@ class FillText {
 		let x = _x + this.x
 		let y = _y + this.y
 		ctx.font = instance.font
-
 		// 如果设置了文本框宽度，则需要判断是否显示成多行
 		if(instance.wrapWidth > -1){
 			let textArr = getTextArr(ctx, instance, this.text)
@@ -55,6 +54,7 @@ class FillText {
 		}else{
 			ctx.fillText(this.text, x, y)
 		}
+		
 	}
 }
 
@@ -118,6 +118,9 @@ export default class Text extends DisplayObject {
 	setFillStyle(color='black'){
 		this.color = color
 		return this
+	}
+	fillStyle(color){
+		return this.setFillStyle(color)
 	}
 	/**
 	 * fillText 绘制文本

@@ -50,6 +50,7 @@ export default class Image extends DisplayObject{
 	dWidth = undefined
 	dHeight = undefined
 	mask = null
+	addChild = null
 	constructor(args){
 		super()
 		for(let v in args){

@@ -56,10 +56,11 @@ Page({
 
         const rect = new DuduCan.Shape()
         rect.graphics
-        .fillStyle('green')
+        .fillStyle('red')
         .fillRect(10, 10, 100, 50)
         .fillStyle('yellow')
         .fillCircle(-20, 120, 30, 40)
+        .fillStyle('green')
         .fillRect(220, 220, 20, 20)
         stage.addChild(rect)
         stage.addChild(img)
@@ -72,26 +73,24 @@ Page({
         sprite.scaleY = .5
         sprite.x = 150
         sprite.rotation = 10
-        sprite.y = 200
+        sprite.y = 220
+
+        const t0 = new DuduCan.Text({font: 'italic 18px sans-serif'})
+        .fillStyle('green')
+        .fillText('余杭区')
+        sprite.addChild(t0)
         stage.addChild(sprite)
-        stage.addChild(container)
         
         
         const t1 = new DuduCan.Text({font: 'italic 18px sans-serif'})
         .setWrapWidth(100)
         .fillText('你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff')
+        t1.color = 'red'
         t1.x = 100
         t1.y = 300
         stage.addChild(t1)
 
-        stage.update()
-        // let i = 1
-        // setInterval(()=>{
-        //   i+=8
-        //   container.rotate = i * Math.PI / 180
-        //   stage.update()
-        // }, 16)
-        
+        stage.render()
       }, this)
     })
     

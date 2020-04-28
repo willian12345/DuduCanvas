@@ -29,7 +29,11 @@ export default class Sprite extends DisplayObject{
 		}else{
 			this[drawImage](ctx, x, y)
 		}
-
+		
+		// 绘制子元素
+		this.childs.forEach( v=>{
+			v._draw(ctx)
+		})
 	}
 	[drawImage](ctx, x, y){
 		const lt = new DuduCan.Image({
@@ -42,6 +46,10 @@ export default class Sprite extends DisplayObject{
 		lt._draw(ctx)	
 	}
 	[drawSliced](ctx, x, y){
+		
+		// 计算九宫格每块位置信息
+
+		// 上左
 		const ltParams = {
 			image: this.img,
 			sx: 0,
@@ -54,6 +62,7 @@ export default class Sprite extends DisplayObject{
 			dy: y,
 		}
 
+		// 上中
 		const tParams = {
 			image: this.img,
 			sx: this.left,
@@ -66,7 +75,7 @@ export default class Sprite extends DisplayObject{
 			dy: y,
 		}
 
-
+		// 上右
 		const rtParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
@@ -79,6 +88,7 @@ export default class Sprite extends DisplayObject{
 			dy: y,
 		}
 
+		// 右中
 		const rParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
@@ -92,7 +102,7 @@ export default class Sprite extends DisplayObject{
 		}
 
 
-		
+		// 右下
 		const rbParams = {
 			image: this.img,
 			sx: this.img.width - this.right,
@@ -105,6 +115,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy + rParams.dHeight,
 		}
 
+		// 下中
 		const bParams = {
 			image: this.img,
 			sx: this.left,
@@ -117,6 +128,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy + rParams.dHeight,
 		}
 
+		// 左下
 		const lbParams = {
 			image: this.img,
 			sx: 0,
@@ -128,6 +140,7 @@ export default class Sprite extends DisplayObject{
 			dx: ltParams.dx,
 			dy: rParams.dy + rParams.dHeight,
 		}
+		// 左中
 		const lParams = {
 			image: this.img,
 			sx: 0,
@@ -140,6 +153,7 @@ export default class Sprite extends DisplayObject{
 			dy: rParams.dy,
 		}
 
+		// 中间 
 		const cParams = {
 			image: this.img,
 			sx: ltParams.sWidth,
