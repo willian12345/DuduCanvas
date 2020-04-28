@@ -34,7 +34,7 @@
       })
       // 添加至舞台
       stage.addChild(img)
-      // 渲染画面
+      // 渲染
       stage.render()      
     }, this)
   })
@@ -43,14 +43,15 @@
 ##### 添加文本
 ```
 DuduCan.Stage('myCanvas', (ctx, stage) => {
-  const t1 = DuduCan.Text()
-  .fillText('你好世界Hello')
-  t1.color = 'red'
+  const t1 = DuduCan.Text({
+    text: '你好世界Hello', 
+    color: 'red'
+  })
   t1.x = 100
   t1.y = 300
   // 添加至舞台
   stage.addChild(t1)
-  // 别忘记渲染画面
+  // 别忘记渲染
   stage.render()
 })
 ```

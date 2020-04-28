@@ -82,9 +82,11 @@ Page({
         stage.addChild(sprite)
         
         
-        const t1 = DuduCan.Text({font: 'italic 18px sans-serif'})
+        const t1 = DuduCan.Text({
+          font: 'italic 18px sans-serif',
+          text: '你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff'
+        })
         .setWrapWidth(100)
-        .fillText('你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff')
         t1.color = 'red'
         t1.x = 100
         t1.y = 300
