@@ -1,5 +1,5 @@
-## Developing...
-## 小程序 canvas 海报生成最佳实践
+## 边用边开发中...
+## 小程序 canvas 海报生成注意事项
 - 网络图片必须先通过 getImageInfo 下载后才能绘制
 - 微信头像需要下载后上传至自己的服务器绘制，直接使用微信服务器上的头像绘制时某些 Android 机型上会下载超时导致绘制失败
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败
@@ -21,7 +21,7 @@
     // 新建 Stage 舞台, 即 canvas 对象
     DuduCan.Stage('myCanvas', (ctx, stage) => {
       // 添加图片，
-      const img = new DuduCan.Image({
+      const img = DuduCan.Image({
         image: loader.get('avatar'), // 'avatar'是 load 时的 id
         sx: 0,
         sy: 0, 
@@ -43,7 +43,7 @@
 ##### 添加文本
 ```
 DuduCan.Stage('myCanvas', (ctx, stage) => {
-  const t1 = new DuduCan.Text()
+  const t1 = DuduCan.Text()
   .fillText('你好世界Hello')
   t1.color = 'red'
   t1.x = 100

@@ -25,17 +25,17 @@ Page({
     ])
     .done((loader) => {
       DuduCan.Stage('myCanvas', (ctx, stage) => {
-        const container = new DuduCan.Container()
+        const container = DuduCan.Container()
         container.x = 120
         container.y = 120
         container.rotation = 90
         container.regX = 60
         container.regY = 60
-        const shape = new DuduCan.Shape()
+        const shape = DuduCan.Shape()
         shape.graphics.fillStyle('red')
         shape.graphics.fillCircle(60, 60, 40)
 
-        const img = new DuduCan.Image({
+        const img = DuduCan.Image({
           image: loader.get('health'),
           sx: 0,
           sy: 0, 
@@ -54,7 +54,7 @@ Page({
         img.rotation = 180
         
 
-        const rect = new DuduCan.Shape()
+        const rect = DuduCan.Shape()
         rect.graphics
         .fillStyle('red')
         .fillRect(10, 10, 100, 50)
@@ -65,7 +65,7 @@ Page({
         stage.addChild(rect)
         stage.addChild(img)
 
-        let sprite = new DuduCan.Sprite(loader.get('btn1'))
+        let sprite = DuduCan.Sprite(loader.get('btn1'))
         sprite.setSlice(30, 33, 30, 33)
         sprite.width = 346
         sprite.height = 185
@@ -75,14 +75,14 @@ Page({
         sprite.rotation = 10
         sprite.y = 220
 
-        const t0 = new DuduCan.Text({font: 'italic 18px sans-serif'})
+        const t0 = DuduCan.Text({font: 'italic 18px sans-serif'})
         .fillStyle('green')
         .fillText('余杭区')
         sprite.addChild(t0)
         stage.addChild(sprite)
         
         
-        const t1 = new DuduCan.Text({font: 'italic 18px sans-serif'})
+        const t1 = DuduCan.Text({font: 'italic 18px sans-serif'})
         .setWrapWidth(100)
         .fillText('你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff')
         t1.color = 'red'
