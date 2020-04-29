@@ -9,6 +9,11 @@
 ## 微信小程序 canvas 基础库
 
 #### 快速开始
+
+##### 页面内添加 canvas 标签
+```
+  <canvas id="myCanvas" canvas-id="myCanvas" style="width: 375px; height: 800px"></canvas>
+```
 ##### 添加图片
 ```
   // 如果有图片先加载图片
@@ -18,8 +23,8 @@
     }
   ])
   .done((loader) => {
-    // 新建 Stage 舞台, 即 canvas 对象
-    DuduCan.Stage('myCanvas', (ctx, stage) => {
+    // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
+    DuduCan.Stage('myCanvas', stage => {
       // 添加图片，
       const img = DuduCan.Image({
         image: loader.get('avatar'), // 'avatar'是 load 时的 id
@@ -42,7 +47,7 @@
 
 ##### 添加文本
 ```
-DuduCan.Stage('myCanvas', (ctx, stage) => {
+DuduCan.Stage('myCanvas', stage => {
   const t1 = DuduCan.Text({
     text: '你好世界Hello', 
     color: 'red'
@@ -56,7 +61,17 @@ DuduCan.Stage('myCanvas', (ctx, stage) => {
 })
 ```
 
-
+##### 获取 context 直接操作 canvas 
+###### 库只包含了一些简单的 API, 某些情况下无法满足业务需求，可直接操作 context 手动绘制
+```
+  DuduCan.Stage('myCanvas', (stage, context) => {
+    context.fillStyle = 'blue'
+    context.fillRect(50, 100, 100, 100)
+    // 这里需要调用 stage.render 实例方法才能保住在 stage 上原先绘制的图形
+    // 如果直接调用的是 context.draw()，则画布将完全重绘
+    stage.render()
+  })
+```
 
 
 #### 类

@@ -6,7 +6,7 @@ export default class Stage extends DisplayObject {
 		// canvas 旧接口
 		this._context = wx.createCanvasContext(id, PageInstance)
 		DisplayObject.setContext(this._context)
-		callback(this._context, this)
+		callback(this, this._context)
 
 		// canvas 新接口, 还处于公测阶段
 		// const query = wx.createSelectorQuery()
@@ -26,6 +26,9 @@ export default class Stage extends DisplayObject {
 	}
 	name = 'Stage'
 	canvas = null
+	getContext(){
+		return this._context
+	}
 	render(){
 		this._draw()
 		this._context.draw(false)

@@ -107,6 +107,7 @@ export default class Text extends DisplayObject {
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
 		context.setFillStyle(this.color)
+		
 		this._instruction.map((instruction) => {
 			instruction.exec(context, this)
 		})

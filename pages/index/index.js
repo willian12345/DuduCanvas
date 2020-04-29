@@ -23,8 +23,8 @@ Page({
         src: '/image/btn.png'
       }
     ])
-    .done((loader) => {
-      DuduCan.Stage('myCanvas', (ctx, stage) => {
+    .done( loader => {
+      DuduCan.Stage('myCanvas', (stage, ctx) => {
         const container = DuduCan.Container()
         container.x = 120
         container.y = 120
@@ -93,6 +93,7 @@ Page({
         stage.addChild(t1)
 
         stage.render()
+        
       }, this)
     })
     
