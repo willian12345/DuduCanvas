@@ -17,16 +17,16 @@
 ##### 添加图片
 ```
   // 如果有图片先加载图片
-  DuduCan.load([{
+  DuduCanvas.load([{
       id: 'avatar',
       src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
     }
   ])
   .done((loader) => {
     // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
-    DuduCan.Stage('myCanvas', stage => {
+    DuduCanvas.Stage('myCanvas', stage => {
       // 添加图片，
-      const img = DuduCan.Image({
+      const img = DuduCanvas.Image({
         image: loader.get('avatar'), // 'avatar'是 load 时的 id
         sx: 0,
         sy: 0, 
@@ -47,8 +47,8 @@
 
 ##### 添加文本
 ```
-DuduCan.Stage('myCanvas', stage => {
-  const t1 = DuduCan.Text({
+DuduCanvas.Stage('myCanvas', stage => {
+  const t1 = DuduCanvas.Text({
     text: '你好世界Hello', 
     color: 'red'
   })
@@ -64,7 +64,7 @@ DuduCan.Stage('myCanvas', stage => {
 ##### 获取 context 直接操作 canvas 
 ###### 库只包含了一些简单的 API, 某些情况下无法满足业务需求，可直接操作 context 手动绘制
 ```
-  DuduCan.Stage('myCanvas', (stage, context) => {
+  DuduCanvas.Stage('myCanvas', (stage, context) => {
     context.fillStyle = 'blue'
     context.fillRect(50, 100, 100, 100)
     // 这里需要调用 stage.render 实例方法才能保住在 stage 上原先绘制的图形

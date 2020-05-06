@@ -2,14 +2,14 @@
 //获取应用实例
 const app = getApp()
 
-import DuduCan from '../../libs/DuduCan.js'
+import DuduCanvas from '../../libs/DuduCanvas.js'
 
 Page({
   data: {
     motto: 'Hello World',
   },
   onLoad: function () {
-    let t = DuduCan.load([{
+    let t = DuduCanvas.load([{
         id: 'avatar',
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
       },{
@@ -24,18 +24,18 @@ Page({
       }
     ])
     .done( loader => {
-      DuduCan.Stage('myCanvas', (stage, ctx) => {
-        const container = DuduCan.Container()
+      DuduCanvas.Stage('myCanvas', (stage, ctx) => {
+        const container = DuduCanvas.Container()
         container.x = 120
         container.y = 120
         container.rotation = 90
         container.regX = 60
         container.regY = 60
-        const shape = DuduCan.Shape()
+        const shape = DuduCanvas.Shape()
         shape.graphics.fillStyle('red')
         shape.graphics.fillCircle(60, 60, 40)
 
-        const img = DuduCan.Image({
+        const img = DuduCanvas.Image({
           image: loader.get('health'),
           sx: 0,
           sy: 0, 
@@ -54,7 +54,7 @@ Page({
         img.rotation = 180
         
 
-        const rect = DuduCan.Shape()
+        const rect = DuduCanvas.Shape()
         rect.graphics
         .fillStyle('red')
         .fillRect(10, 10, 100, 50)
@@ -65,7 +65,7 @@ Page({
         stage.addChild(rect)
         stage.addChild(img)
 
-        let sprite = DuduCan.Sprite(loader.get('btn1'))
+        let sprite = DuduCanvas.Sprite(loader.get('btn1'))
         sprite.setSlice(30, 33, 30, 33)
         sprite.width = 346
         sprite.height = 185
@@ -75,14 +75,14 @@ Page({
         sprite.rotation = 10
         sprite.y = 220
 
-        const t0 = DuduCan.Text({font: 'italic 18px sans-serif'})
+        const t0 = DuduCanvas.Text({font: 'italic 18px sans-serif'})
         .fillStyle('green')
         .fillText('余杭区')
         sprite.addChild(t0)
         stage.addChild(sprite)
         
         
-        const t1 = DuduCan.Text({
+        const t1 = DuduCanvas.Text({
           font: 'italic 18px sans-serif',
           text: '你好因s你而美丽阑珊春意秋意浓常用要地人地要w-寺s ff'
         })

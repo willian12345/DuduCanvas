@@ -1,5 +1,5 @@
 import DisplayObject from './DisplayObject.js'
-import DuduCan from './DuduCan.js'
+import DuduCanvas from './DuduCanvas.js'
 
 const drawImage = Symbol('drawImage')
 const drawSliced = Symbol('drawSliced')
@@ -36,7 +36,7 @@ export default class Sprite extends DisplayObject{
 		})
 	}
 	[drawImage](ctx, x, y){
-		const lt = new DuduCan.Image({
+		const lt = new DuduCanvas.Image({
 			image: this.img,
 			dx: x,
 			dy: y,
@@ -168,31 +168,31 @@ export default class Sprite extends DisplayObject{
 
 
 
-		const lt = new DuduCan.Image(ltParams)
+		const lt = new DuduCanvas.Image(ltParams)
 		lt._draw(ctx)
 		
-		const t = new DuduCan.Image(tParams)
+		const t = new DuduCanvas.Image(tParams)
 		t._draw(ctx)
 
-		const rt = new DuduCan.Image(rtParams)
+		const rt = new DuduCanvas.Image(rtParams)
 		rt._draw(ctx)
 
-		const r = new DuduCan.Image(rParams)
+		const r = new DuduCanvas.Image(rParams)
 		r._draw(ctx)
 
-		const rb = new DuduCan.Image(rbParams)
+		const rb = new DuduCanvas.Image(rbParams)
 		rb._draw(ctx)
 
-		const b = new DuduCan.Image(bParams)
+		const b = new DuduCanvas.Image(bParams)
 		b._draw(ctx)
 
-		const lb = new DuduCan.Image(lbParams)
+		const lb = new DuduCanvas.Image(lbParams)
 		lb._draw(ctx)
 
-		const l = new DuduCan.Image(lParams)
+		const l = new DuduCanvas.Image(lParams)
 		l._draw(ctx)
 
-		const c = new DuduCan.Image(cParams)
+		const c = new DuduCanvas.Image(cParams)
 		c._draw(ctx)
 
 	}
