@@ -41,9 +41,20 @@ class FillText {
 		this.y = y
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
+		
+		if(instance.parent && instance.parent.name != 'Stage'){
+			const rotation = instance.rotation
+			const regPointerX = _x + instance.regX
+			const regPointerY = _y + instance.regY
+			ctx.translate(regPointerX, regPointerY)
+			ctx.rotate(rotation * Math.PI / 180)
+			ctx.translate(-regPointerX, -regPointerY)
+		}
+
 		let x = _x + this.x
 		let y = _y + this.y
+
 		ctx.font = instance.font
 		// 如果设置了文本框宽度，则需要判断是否显示成多行
 		if(instance.wrapWidth > -1){
@@ -95,6 +106,11 @@ export default class Text extends DisplayObject {
 			this.text = text
 			this.fillText(this.text)
 		}
+		let that = this
+		// that.a = super.transform
+		// this.transform = function(v, context) {
+		// 	return that.a(v, context)
+		// }
 	}
 	// 指令集
 	_instruction = []
@@ -107,7 +123,6 @@ export default class Text extends DisplayObject {
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
 		context.setFillStyle(this.color)
-		
 		this._instruction.map((instruction) => {
 			instruction.exec(context, this)
 		})

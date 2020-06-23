@@ -1,41 +1,7 @@
 import DisplayObject from './DisplayObject.js'
-const circle = Symbol('circle')
-const rect = Symbol('rect')
 const drawImage = Symbol('drawImage')
 
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  if (typeof stroke === 'undefined') {
-    stroke = true;
-  }
-  if (typeof radius === 'undefined') {
-    radius = 5;
-  }
-  if (typeof radius === 'number') {
-    radius = {tl: radius, tr: radius, br: radius, bl: radius};
-  } else {
-    const defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
-    for (let side in defaultRadius) {
-      radius[side] = radius[side] || defaultRadius[side];
-    }
-  }
-  ctx.beginPath();
-  ctx.moveTo(x + radius.tl, y);
-  ctx.lineTo(x + width - radius.tr, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-  ctx.lineTo(x + width, y + height - radius.br);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-  ctx.lineTo(x + radius.bl, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-  ctx.lineTo(x, y + radius.tl);
-  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
-  ctx.closePath();
-  if (fill) {
-    ctx.fill();
-  }
-  if (stroke) {
-    ctx.stroke();
-  }
-}
+
 
 export default class Image extends DisplayObject{	
 	name = 'Image'
@@ -56,11 +22,10 @@ export default class Image extends DisplayObject{
 		for(let v in args){
 			this[v] = args[v]
 		}
-		this[circle] = null
-		this[rect] = null
 		this.path = this.image.path
 		this.width = this.dWidth
 		this.height = this.dHeight
+		this._parentDraw = super._draw
 	}
 	[drawImage](ctx, x, y){
 		/**
@@ -89,30 +54,21 @@ export default class Image extends DisplayObject{
 		
 		if(this.mask){
 			if(this.mask.name == 'Shape'){
-				this.mask.parent = this
-				this.mask._draw(ctx, this.mask)
-				ctx.save()
+				// this.mask.parent = this
+				// this._parentDraw()
+				// this.mask._draw(ctx, this.mask)
+				// ctx.clip()
+				// ctx.translate(110, 0)
+				ctx.rotate(10* Math.PI / 180)
+				
+				ctx.fillRect(0, 0, 100, 100)
+				// ctx.translate(-110, 0)
 				ctx.clip()
+				ctx.rotate(-10* Math.PI / 180)
+				// ctx.save()
 				this[drawImage](ctx, x, y)
-				ctx.restore()
+				// ctx.restore()
 			}
-		}else if(this[rect]){
-			ctx.save()
-			if(this[rect].radius > 0){
-				roundRect(ctx,
-					 x + this[rect].x,
-					 y + this[rect].y, 
-					 this[rect].w, 
-					 this[rect].h, 
-					 this[rect].radius,
-					 false, false)
-			}else{
-				ctx.beginPath()
-				ctx.rect(x + this[rect].x, y + this[rect].y, this[rect].w, this[rect].h)
-			}
-			ctx.clip()
-			this[drawImage](ctx, x, y)
-			ctx.restore()
 		}else{
 			this[drawImage](ctx, x, y)
 		}

@@ -61,6 +61,26 @@ DuduCanvas.Stage('myCanvas', stage => {
 })
 ```
 
+##### 添加形状
+```
+  const shape = DuduCanvas.Shape()
+  shape.graphics.fillStyle('green')
+  shape.graphics.fillCircle(160, 160, 40)
+  stage.addChild(shape)
+```
+##### Shape内可以画多个图形形状
+```
+  const muliShape = DuduCanvas.Shape()
+  muliShape.graphics
+  .fillStyle('red')
+  .fillRect(10, 110, 100, 50)
+  .fillStyle('yellow')
+  .fillCircle(10, 180, 30, 40)
+  .fillStyle('green')
+  .fillRect(10, 220, 40, 20)
+  stage.addChild(muliShape)
+```
+
 ##### 获取 context 直接操作 canvas 
 ###### 库只包含了一些简单的 API, 某些情况下无法满足业务需求，可直接操作 context 手动绘制
 ```

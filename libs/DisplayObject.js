@@ -1,5 +1,6 @@
 let _context = null
 let scale = Symbol('scale')
+let _id = 1
 export default class DisplayObject {
 	name = "DisplayObject"
 	width = 0
@@ -30,6 +31,7 @@ export default class DisplayObject {
 	}
 	constructor(){
 		this[scale] = 1
+		this._id = _id++
 	}
 	/**
 	 * 保存 Stage 时传入 canvas context
@@ -40,18 +42,30 @@ export default class DisplayObject {
 	static getContext(){
 		return _context
 	}
+	// 添加子元素
 	addChild(...args){
 		// 指定父级
 		const childs = args.map((v) => {
+			if(v._id === this._id){
+				throw new Error(`不能自己添加自己为 child :${v.name}`)
+			}
 			v.parent = this
 			return v
 		})
+		
 		this.childs = this.childs.concat(childs)
 	}
+	// 删除子元素
+	removeChild(child){
+		this.childs = this.childs.filter( v =>  v != child)
+	}
+	// 递归绘制
 	_draw(){
+		console.log(this.childs)
 		this.childs.forEach((v)=>{
+			// 绘制前压栈
 			_context.save()
-			// canvas 上下文 context 先形变
+			// canvas 上下文 context 先 transform 
 			this.transform(v, _context)
 			// 再开始绘制
 			v._draw(_context)
@@ -86,6 +100,9 @@ export default class DisplayObject {
 		}
 		return rotation
 	}
+	/**
+	 * 获取缩放程度
+	 */
 	getScale(){
 		let parent = this.parent
 		let scale = this.scale
@@ -98,20 +115,24 @@ export default class DisplayObject {
 		}
 		return [scaleX, scaleY]
 	}
+	/**
+	 * 移动、缩放、旋转 canvas “坐标矩阵”
+	 */
 	transform(v, _context){
 		if(v.name == 'Stage') return
 		const ctx = _context
 		const [_x, _y] = v.getPosition()
 		const rotation = v.getRotation()
-		let [scaleX, scaleY] = v.getScale()
+		let [scaleX, scaleY] = [v.scaleX, v.scaleY]
 
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
-		
+		console.log(rotation, v.name)
 		ctx.translate(regPointerX, regPointerY)
-		ctx.scale(scaleX,scaleY)
+		ctx.scale(scaleX, scaleY)
 		ctx.rotate(rotation * Math.PI / 180)
 		ctx.translate(-regPointerX, -regPointerY)	
+		return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
 	}
 	getBounds(){
 		return {x:0, y:0, w:0, h:0,}

@@ -156,21 +156,58 @@ class ClearRect{
 
 
 class RoundRect{
-	constructor(ctx, x, y, width, height, radius, fill, stroke){
+	constructor(x, y, width, height, radius, fill, stroke){
+		
 		if (typeof stroke === 'undefined') {
-			stroke = true;
+			this.stroke = true;
+		}else{
+			this.stroke = stroke;
 		}
 		if (typeof radius === 'undefined') {
 			radius = 5;
 		}
+		this.x = x
+		this.y = y
+		this.width = width
+		this.height = height
+		this.fill = fill
+		
 		if (typeof radius === 'number') {
 			radius = {tl: radius, tr: radius, br: radius, bl: radius};
-		} else {
-			const defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
-			for (let side in defaultRadius) {
-				radius[side] = radius[side] || defaultRadius[side];
-			}
 		}
+
+		const defaultRadius = radius;
+		this.radius = {}
+		for (let side in defaultRadius) {
+			this.radius[side] = this.radius[side] || defaultRadius[side];
+		}
+		
+	}
+	exec(ctx, instance){
+		const [_x, _y] = instance.getPosition()
+		let x = _x + this.x,
+				y = _y + this.y,
+				radius = this.radius,
+				width = this.width,
+				height = this.height
+
+		let fill, stroke
+		if(false){ // instance.isMask
+			fill = false
+			stroke = false
+		}else{
+			fill = this.fill
+			stroke = this.stroke
+		}
+		// ctx.save()
+		instance.transform(instance, ctx)
+		// const rotation = instance.rotation
+		// const regPointerX = _x + instance.regX
+		// const regPointerY = _y + instance.regY
+		// // ctx.translate(regPointerX, regPointerY)
+		// // ctx.rotate(rotation * Math.PI / 180)
+		// // ctx.translate(-regPointerX, -regPointerY)
+		// // ctx.rotate(0)
 		ctx.beginPath();
 		ctx.moveTo(x + radius.tl, y);
 		ctx.lineTo(x + width - radius.tr, y);
@@ -189,11 +226,7 @@ class RoundRect{
 			ctx.stroke();
 		}
 	}
-	exec(ctx, instance){
-		
-	}
 }
-
 
 export default class Shape extends DisplayObject{
 	name = 'Shape'
@@ -203,7 +236,8 @@ export default class Shape extends DisplayObject{
 		this[instructions] = []	
 		this[bounds] = []
 	}
-	_draw(context){
+	_draw(context, isMask){
+		this.isMask = !!isMask
 		this[instructions].map((instruction) => {
 			instruction.exec(context, this)
 		})
@@ -263,6 +297,11 @@ export default class Shape extends DisplayObject{
 		fillRect: (x=0, y=0, w=10, h=20) => {
 			this[bounds].push({x: x, y: y, w: w, h: h})
 			this[append](new FillRect(x, y, w, h))
+			return this.graphics
+		},
+		fillRoundRect: (x=0, y=0, w=10, h=10, radius=8, fill, stroke) => {
+			this[bounds].push({x: x, y: y, w: w, h: h})
+			this[append](new RoundRect(x, y, w, h, radius, fill, stroke))
 			return this.graphics
 		},
 		/**
