@@ -1,3 +1,6 @@
+/**
+ * 文本类
+ */
 import DisplayObject from './DisplayObject'
 
 
@@ -65,7 +68,6 @@ class FillText {
 		}else{
 			ctx.fillText(this.text, x, y)
 		}
-		
 	}
 }
 

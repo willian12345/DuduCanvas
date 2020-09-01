@@ -1,3 +1,10 @@
+/**
+ * Shape 图形类
+ * 1、包含了各类绘制 api
+ * 2、Shape 对象内 通过 graphics 对象可以绘制无限个图形
+ * 3、所有绘制 api 命令都存在于 graphics 对象内， graphics 绘制在 Shape 对象内不参与 z 轴排序
+ * 
+ */
 import DisplayObject from './DisplayObject.js'
 const append = Symbol('append')
 const bounds = Symbol('bounds')
@@ -28,7 +35,7 @@ class LineTo {
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
-		ctx.LineTo(this.x + _x, this.y + _y)	
+		ctx.lineTo(this.x + _x, this.y + _y)	
 	}
 }
 
@@ -103,12 +110,16 @@ class DrawCircle {
 	}
 	exec(ctx, instance){
 		let [_x, _y] = instance.getPosition()
+		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
 		ctx.beginPath()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
-		if(this.fill){
-			ctx.fill()
+		if(instance.isMask){
+			ctx.clip()
+		}else{
+			if(this.fill){
+				ctx.fill()
+			}
 		}
-		ctx.closePath()
 	}
 }
 
@@ -125,7 +136,14 @@ class FillRect{
 		const [_x, _y] = instance.getPosition()
 		const dx = this.x + _x
 		const dy = this.y + _y
-		ctx.fillRect(dx, dy, this.w, this.h)
+		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
+		ctx.beginPath()
+		if(instance.isMask){
+			ctx.rect(dx, dy, this.w, this.h)
+			ctx.clip()
+		}else{
+			ctx.fillRect(dx, dy, this.w, this.h)
+		}
 	}
 }
 class StrokeRect{
@@ -199,15 +217,7 @@ class RoundRect{
 			fill = this.fill
 			stroke = this.stroke
 		}
-		// ctx.save()
 		instance.transform(instance, ctx)
-		// const rotation = instance.rotation
-		// const regPointerX = _x + instance.regX
-		// const regPointerY = _y + instance.regY
-		// // ctx.translate(regPointerX, regPointerY)
-		// // ctx.rotate(rotation * Math.PI / 180)
-		// // ctx.translate(-regPointerX, -regPointerY)
-		// // ctx.rotate(0)
 		ctx.beginPath();
 		ctx.moveTo(x + radius.tl, y);
 		ctx.lineTo(x + width - radius.tr, y);
@@ -219,17 +229,22 @@ class RoundRect{
 		ctx.lineTo(x, y + radius.tl);
 		ctx.quadraticCurveTo(x, y, x + radius.tl, y);
 		ctx.closePath();
-		if (fill) {
-			ctx.fill();
-		}
-		if (stroke) {
-			ctx.stroke();
+		if(instance.isMask){
+			ctx.clip()
+		}else {
+			if (fill) {
+				ctx.fill();
+			}
+			if (stroke) {
+				ctx.stroke();
+			}
 		}
 	}
 }
 
 export default class Shape extends DisplayObject{
 	name = 'Shape'
+	isMask = false
 	constructor(){
 		super()
 		// 指令集
@@ -255,7 +270,7 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		},
 		lineTo: (x, y) => {
-			this[append](new LoveTo(x, y))
+			this[append](new LineTo(x, y))
 			return this.graphics
 		},
 		/**

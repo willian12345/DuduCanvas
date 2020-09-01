@@ -4,12 +4,6 @@ export default class Container extends DisplayObject{
 		super()
 	}
 	name = 'Container'
-	// draw(){
-	// 	console.log(this.x, this.y)
-	// 	this._childs.forEach((v)=>{
-	// 		v.draw(this.context)
-	// 	})
-	// }
 }
 
  

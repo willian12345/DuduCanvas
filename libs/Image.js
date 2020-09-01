@@ -1,7 +1,8 @@
+/**
+ * 图片类
+ */
 import DisplayObject from './DisplayObject.js'
 const drawImage = Symbol('drawImage')
-
-
 
 export default class Image extends DisplayObject{	
 	name = 'Image'
@@ -15,7 +16,6 @@ export default class Image extends DisplayObject{
 	dy = 0
 	dWidth = undefined
 	dHeight = undefined
-	mask = null
 	addChild = null
 	constructor(args){
 		super()
@@ -37,7 +37,7 @@ export default class Image extends DisplayObject{
 		
 		if(this.sx != undefined){
 			// 如果传了原始图起点，则说明要填完整所有参数
-			ctx.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)	
+			ctx.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)
 		}else if(this.dWidth != undefined){
 			// 如果传了绘制目标宽，则认为不管原图，只管绘制目标位置与宽高
 			ctx.drawImage(this.path, x, y, this.dWidth, this.dHeight)
@@ -45,39 +45,22 @@ export default class Image extends DisplayObject{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.path, x, y)
 		}
+		
 	}
 	_draw(ctx){
 		let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
-
-		
+		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
 		if(this.mask){
 			if(this.mask.name == 'Shape'){
-				// this.mask.parent = this
-				// this._parentDraw()
-				// this.mask._draw(ctx, this.mask)
-				// ctx.clip()
-				// ctx.translate(110, 0)
-				ctx.rotate(10* Math.PI / 180)
-				
-				ctx.fillRect(0, 0, 100, 100)
-				// ctx.translate(-110, 0)
-				ctx.clip()
-				ctx.rotate(-10* Math.PI / 180)
-				// ctx.save()
+				// 遮罩层不参与显示所以也没有父级元素
+				this.mask._draw(ctx, true)
 				this[drawImage](ctx, x, y)
-				// ctx.restore()
 			}
 		}else{
 			this[drawImage](ctx, x, y)
 		}
-	}
-	setClipCircle(x, y, radius){
-		this[circle] = {x, y, radius}
-	}
-	setClipRect(x, y, w, h, radius = 0){
-		this[rect] = {x, y, w, h, radius}	
 	}
 }
 

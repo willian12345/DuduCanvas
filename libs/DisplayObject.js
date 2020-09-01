@@ -1,5 +1,9 @@
+/**
+ * 显示对象类
+ */
 let _context = null
 let scale = Symbol('scale')
+let mask = Symbol('mask')
 let _id = 1
 export default class DisplayObject {
 	name = "DisplayObject"
@@ -17,10 +21,16 @@ export default class DisplayObject {
 	skewX = 0
 	skewY = 0
 	filters = null
-	mask = null
 	name = null
 	parent = null
 	childs = []
+	get mask(){
+		return this[mask]
+	}
+	set mask(s){
+		s.isMask = true
+		this[mask] = s
+	}
 	get scale(){
 		return this[scale]
 	}
@@ -48,6 +58,8 @@ export default class DisplayObject {
 		const childs = args.map((v) => {
 			if(v._id === this._id){
 				throw new Error(`不能自己添加自己为 child :${v.name}`)
+			}else if(v.isMask){
+				throw new Error(`已被设置成 mask 遮罩 不能 addChild 到其它父级内:${v.name}`)
 			}
 			v.parent = this
 			return v
@@ -61,7 +73,6 @@ export default class DisplayObject {
 	}
 	// 递归绘制
 	_draw(){
-		console.log(this.childs)
 		this.childs.forEach((v)=>{
 			// 绘制前压栈
 			_context.save()
@@ -93,7 +104,6 @@ export default class DisplayObject {
 	getRotation(){
 		let parent = this.parent
 		let rotation = this.rotation
-		
 		while(parent && parent.name != 'Stage'){
 			rotation += parent.rotation
 			parent = parent.parent
@@ -127,7 +137,6 @@ export default class DisplayObject {
 
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
-		console.log(rotation, v.name)
 		ctx.translate(regPointerX, regPointerY)
 		ctx.scale(scaleX, scaleY)
 		ctx.rotate(rotation * Math.PI / 180)
