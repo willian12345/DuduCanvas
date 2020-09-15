@@ -62,6 +62,10 @@ export default class DisplayObject {
 				throw new Error(`已被设置成 mask 遮罩 不能 addChild 到其它父级内:${v.name}`)
 			}
 			v.parent = this
+			// 如果添加的对象有 mask 遮罩则 mask 也指定父级，以对应对象的坐标
+			if(v.mask){
+				v.mask.parent = this
+			}
 			return v
 		})
 		

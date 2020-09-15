@@ -42,10 +42,18 @@ Page({
         img.mask = shape
         img.regX = 60
         img.regY = 60
-        img.rotation = 45
+        // img.rotation = 45
 
-        stage.addChild(img)
-      
+        // stage.addChild(img)
+
+        const g = DuduCanvas.Container()
+        g.x = 30
+        g.y = 30
+
+        const circle = DuduCanvas.Shape()
+        circle.graphics.fillCircle(0, 0, 30)
+        g.addChild(circle, img)
+        stage.addChild(g)
         stage.render()
       }, this)
     })

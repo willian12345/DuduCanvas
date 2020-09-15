@@ -203,6 +203,7 @@ class RoundRect{
 	}
 	exec(ctx, instance){
 		const [_x, _y] = instance.getPosition()
+		console.log(instance.parent)
 		let x = _x + this.x,
 				y = _y + this.y,
 				radius = this.radius,
