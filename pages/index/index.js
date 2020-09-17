@@ -22,9 +22,7 @@ Page({
         
         const shape = DuduCanvas.Shape()
         shape.graphics.fillStyle('red')
-        shape.graphics.fillRoundRect(20, 20, 60, 60, 8)
-        shape.regX = 0
-        shape.regY = 0
+        shape.graphics.fillRoundRect(0, 0, 120, 120, 18)
 
 
         const img = DuduCanvas.Image({
@@ -38,22 +36,27 @@ Page({
           dWidth: 120,
           dHeight: 120
         })
-        
+        img.x = 100
+        img.y = 100
         img.mask = shape
         img.regX = 60
         img.regY = 60
-        // img.rotation = 45
-
+        // img.rotation = 50
+        img.rotation = 10
+        img.scaleX = 1.5
+        img.scaleY = 1.5
         // stage.addChild(img)
-
-        const g = DuduCanvas.Container()
+        // console.log(img.x, img.y)
+        const g = DuduCanvas.Group()
         g.x = 30
         g.y = 30
 
         const circle = DuduCanvas.Shape()
-        circle.graphics.fillCircle(0, 0, 30)
-        g.addChild(circle, img)
-        stage.addChild(g)
+        circle.graphics.fillRoundRect(0, 0, 50, 20, 8, true)
+        g.addChild(circle)
+        console.log(g.width)
+        console.log(img.getBounds())
+        stage.addChild(img, g)
         stage.render()
       }, this)
     })

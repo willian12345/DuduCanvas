@@ -45,7 +45,6 @@ export default class Image extends DisplayObject{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.path, x, y)
 		}
-		
 	}
 	_draw(ctx){
 		let [x, y] = this.getPosition()
@@ -55,12 +54,17 @@ export default class Image extends DisplayObject{
 		if(this.mask){
 			if(this.mask.name == 'Shape'){
 				// 遮罩层不参与显示所以也没有父级元素
+				this.mask.masked = this
 				this.mask._draw(ctx, true)
 				this[drawImage](ctx, x, y)
 			}
 		}else{
 			this[drawImage](ctx, x, y)
 		}
+	}
+	getWidth(){
+		// console.log(this.width)
+		// console.log(this.height)
 	}
 }
 

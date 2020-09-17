@@ -140,7 +140,7 @@ class FillRect{
 		ctx.beginPath()
 		if(instance.isMask){
 			ctx.rect(dx, dy, this.w, this.h)
-			ctx.clip()
+			// ctx.clip()
 		}else{
 			ctx.fillRect(dx, dy, this.w, this.h)
 		}
@@ -202,14 +202,19 @@ class RoundRect{
 		
 	}
 	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		console.log(instance.parent)
+		let posArr
+		// 如果是作为遮罩，则需要获取并参照定位于被遮罩物的坐标
+		if(instance.masked){
+			posArr = instance.masked.getPosition()
+		}else{
+			posArr = instance.getPosition()
+		}
+		const [_x, _y] = posArr
 		let x = _x + this.x,
 				y = _y + this.y,
 				radius = this.radius,
 				width = this.width,
 				height = this.height
-
 		let fill, stroke
 		if(false){ // instance.isMask
 			fill = false
@@ -218,7 +223,9 @@ class RoundRect{
 			fill = this.fill
 			stroke = this.stroke
 		}
-		instance.transform(instance, ctx)
+		
+		// instance.transform(instance, ctx)
+		
 		ctx.beginPath();
 		ctx.moveTo(x + radius.tl, y);
 		ctx.lineTo(x + width - radius.tr, y);
@@ -230,7 +237,9 @@ class RoundRect{
 		ctx.lineTo(x, y + radius.tl);
 		ctx.quadraticCurveTo(x, y, x + radius.tl, y);
 		ctx.closePath();
+		
 		if(instance.isMask){
+			ctx.fill();
 			ctx.clip()
 		}else {
 			if (fill) {

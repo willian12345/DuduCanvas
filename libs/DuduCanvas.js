@@ -1,4 +1,4 @@
-import Container from './Container.js'
+import Group from './Group.js'
 import Shape from './Shape.js'
 import Stage from './Stage.js'
 import Text from './Text.js'
@@ -20,8 +20,8 @@ export default {
 	Shape: () => {
 		return new Shape()
 	},
-	Container: () => {
-		return new Container()
+	Group: () => {
+		return new Group()
 	},
 	Text: t => {
 		return new Text(t)

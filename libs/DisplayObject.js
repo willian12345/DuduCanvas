@@ -94,10 +94,10 @@ export default class DisplayObject {
 	 */
 	getPosition(){
 		let parent = this.parent
-		let x = this.x, y = this.y
+		let x = this.x - this.regX, y = this.y - this.regY
 		while(parent && parent.name != 'Stage'){
-			x += parent.x
-			y += parent.y
+			x += parent.x - parent.regX
+			y += parent.y - parent.regY
 			parent = parent.parent
 		}
 		return [x, y]
@@ -109,7 +109,6 @@ export default class DisplayObject {
 		let parent = this.parent
 		let rotation = this.rotation
 		while(parent && parent.name != 'Stage'){
-			rotation += parent.rotation
 			parent = parent.parent
 		}
 		return rotation
@@ -130,6 +129,7 @@ export default class DisplayObject {
 		return [scaleX, scaleY]
 	}
 	/**
+	 * 先形变后再绘制
 	 * 移动、缩放、旋转 canvas “坐标矩阵”
 	 */
 	transform(v, _context){
@@ -138,17 +138,96 @@ export default class DisplayObject {
 		const [_x, _y] = v.getPosition()
 		const rotation = v.getRotation()
 		let [scaleX, scaleY] = [v.scaleX, v.scaleY]
-
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
 		ctx.translate(regPointerX, regPointerY)
 		ctx.scale(scaleX, scaleY)
 		ctx.rotate(rotation * Math.PI / 180)
 		ctx.translate(-regPointerX, -regPointerY)	
+		// console.log(_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY)
 		return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
 	}
+	/**
+	 * 
+	 * 获取旋转后的坐标
+	 */
+	getPosAfterRotation(rotation, x, y) {
+		const angle = rotation * (Math.PI / 180)
+		const _x = Math.cos(angle) * x  - Math.sin(angle) * y
+		const _y = Math.cos(angle) * y + Math.sin(angle) * x
+		return {x: _x , y: _y}
+	}
+	/**
+	 * 获取对象形变后的位置与宽度
+	 * scale 形变不在 getBounds 计算之内
+	 * scale 形变后宽高可请自行乘上相应的 scale 倍数
+	 */
 	getBounds(){
-		return {x:0, y:0, w:0, h:0,}
+		let x = this.x
+		let y = this.y 
+		let w = this.width
+		let h = this.height
+		
+		if(this.rotation !== 0){
+			let regX = this.regX
+			let regY = this.regY
+			// left top
+			let lt = this.getPosAfterRotation(this.rotation, -regX,  -regY)
+			// right top
+			let rt = this.getPosAfterRotation(this.rotation, w - regX,  -regY)
+			// right bottom
+			let rb = this.getPosAfterRotation(this.rotation, w - regX, h - regY)
+			// left bottom
+			let lb = this.getPosAfterRotation(this.rotation, -regX, h - regY)
+			
+			lt.x = lt.x + x
+			lt.y = lt.y + y
+			
+			rt.x = rt.x + x
+			rt.y = rt.y + y
+			
+			rb.x = rb.x + x
+			rb.y = rb.y + y
+			
+			lb.x = lb.x + x
+			lb.y = lb.y + y
+
+			const posArr = [lt, rt,rb, lb]
+			let minX = lt.x
+			let maxX = lt.x
+			let minY = lt.y
+			let maxY = lt.y
+
+			// console.log(lt, rt,rb, lb)
+
+			// 计算最小最大的 x,y 值
+			for(var i=1; i<4; i++){
+				if(minX > posArr[i].x){
+					minX = posArr[i].x
+				}
+				if(posArr[i].x > maxX){
+					maxX = posArr[i].x
+				}
+
+				if(minY > posArr[i].y){
+					minY = posArr[i].y
+				}
+				if(posArr[i].y > maxY){
+					maxY = posArr[i].y
+				}
+
+			}
+			
+			w = maxX - minX
+			h = maxY - minY
+		}
+		
+		return {x, y, w, h,}
+	}
+	getWidth(){
+		this.childs.forEach((v)=>{
+			console.log(v)
+		})
 	}
 }
 
