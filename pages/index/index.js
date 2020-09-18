@@ -20,10 +20,20 @@ Page({
     .done( loader => {
       DuduCanvas.Stage('myCanvas', (stage, ctx) => {
         
-        const shape = DuduCanvas.Shape()
-        shape.graphics.fillStyle('red')
-        shape.graphics.fillRoundRect(0, 0, 120, 120, 18)
+        // const shape = DuduCanvas.Shape()
+        // shape.graphics.fillStyle('red')
+        // .fillRoundRect(0, 0, 120, 120, 18)
 
+        const avatar = DuduCanvas.Image({
+          image: loader.get('avatar'),
+          width: 100,
+          height: 100
+        })
+        avatar.regX = 60
+        avatar.regY = 60
+        avatar.x = 200
+        avatar.y = 200
+        avatar.rotation = 10
 
         const img = DuduCanvas.Image({
           image: loader.get('health'),
@@ -38,25 +48,28 @@ Page({
         })
         img.x = 100
         img.y = 100
-        img.mask = shape
+        // img.mask = shape
         img.regX = 60
         img.regY = 60
-        // img.rotation = 50
-        img.rotation = 10
-        img.scaleX = 1.5
-        img.scaleY = 1.5
+        img.rotation = 90
+        // img.rotation = 10
         // stage.addChild(img)
-        // console.log(img.x, img.y)
+        
+        
         const g = DuduCanvas.Group()
-        g.x = 30
-        g.y = 30
+        g.x = 40
+        g.y = 40
 
-        const circle = DuduCanvas.Shape()
-        circle.graphics.fillRoundRect(0, 0, 50, 20, 8, true)
-        g.addChild(circle)
-        console.log(g.width)
-        console.log(img.getBounds())
-        stage.addChild(img, g)
+        const g1 = DuduCanvas.Group()
+        g1.x = -40
+        g1.y = -40
+        g1.addChild(avatar)
+        // const circle = DuduCanvas.Shape()
+        // circle.graphics.fillRoundRect(0, 0, 50, 20, 8, true)
+        g.addChild(g1, img)
+        // console.log('width:', g.getWidth())
+        stage.addChild(g)
+        console.log(g.getBound())
         stage.render()
       }, this)
     })

@@ -23,8 +23,20 @@ export default class Image extends DisplayObject{
 			this[v] = args[v]
 		}
 		this.path = this.image.path
-		this.width = this.dWidth
-		this.height = this.dHeight
+
+		// 如果设置了 width 则认 width 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
+		if(!this.width){
+			this.width = this.dWidth
+		}else{
+			this.dWidth = this.width
+		}
+		// 如果设置了 height 则认 height 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
+		if(!this.height){
+			this.height = this.dHeight
+		}else{
+			this.dHeight = this.height
+		}
+		
 		this._parentDraw = super._draw
 	}
 	[drawImage](ctx, x, y){
@@ -61,10 +73,6 @@ export default class Image extends DisplayObject{
 		}else{
 			this[drawImage](ctx, x, y)
 		}
-	}
-	getWidth(){
-		// console.log(this.width)
-		// console.log(this.height)
 	}
 }
 

@@ -216,15 +216,13 @@ class RoundRect{
 				width = this.width,
 				height = this.height
 		let fill, stroke
-		if(false){ // instance.isMask
+		if(instance.masked){ // instance.isMask
 			fill = false
 			stroke = false
 		}else{
 			fill = this.fill
 			stroke = this.stroke
 		}
-		
-		// instance.transform(instance, ctx)
 		
 		ctx.beginPath();
 		ctx.moveTo(x + radius.tl, y);
@@ -260,6 +258,8 @@ export default class Shape extends DisplayObject{
 		// 指令集
 		this[instructions] = []	
 		this[bounds] = []
+		this.width = 0
+		this.height = 0
 	}
 	_draw(context, isMask){
 		this.isMask = !!isMask
@@ -345,20 +345,20 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		}
 	}
-	getBounds(){
-		let x=this.x, y=this.y, w=0, h=0
-		this[bounds].forEach(ins => {
-			const distanceW = ins.w + ins.x
-			const distanceH = ins.h + ins.y
-			if(w < distanceW){
-				w = distanceW
-			}
-			if(h < distanceH){
-				h = distanceH
-			}
-		})
-		return {x,y,w,h}
-	}
+	// getBounds(){
+	// 	let x=this.x, y=this.y, w=0, h=0
+	// 	this[bounds].forEach(ins => {
+	// 		const distanceW = ins.w + ins.x
+	// 		const distanceH = ins.h + ins.y
+	// 		if(w < distanceW){
+	// 			w = distanceW
+	// 		}
+	// 		if(h < distanceH){
+	// 			h = distanceH
+	// 		}
+	// 	})
+	// 	return {x,y,w,h}
+	// }
 }
 
  
