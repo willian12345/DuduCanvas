@@ -55,12 +55,17 @@ export default class Text extends DisplayObject {
 	}
 	// 执行指令集
 	draw(context){
+		if(this.mask && this.mask.name == 'Shape'){
+			this.mask.masked = this
+			this.mask.draw(context, true)
+		}
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
 		context.setFillStyle(this.color)
 		this[instruction].map((v) => {
 			v.exec(context, this)
 		})
+		
 	}
 	/**
 	 * setFillStyle 设置文本颜色

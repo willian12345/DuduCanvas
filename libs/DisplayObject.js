@@ -64,13 +64,11 @@ export default class DisplayObject {
 	addChild(...args){
 		// 指定父级
 		const childs = args.map((v) => {
-			
 			if(v.id === this.id){
 				throw new Error(`不能自己添加自己为 child :${v.name}`)
 			}else if(v.isMask){
 				throw new Error(`已被设置成 mask 遮罩 不能 addChild 到其它父级内:${v.name}`)
 			}
-			
 
 			// 如果添加的对象有 mask 遮罩则 mask 也指定父级，以对应对象的坐标
 			if(v.mask){
@@ -105,7 +103,14 @@ export default class DisplayObject {
 	 * @return {[x, y]} 返回数组
 	 */
 	getPosition(){
-		let parent = this.parent
+		let parent
+		// 如果自身是 mask 则坐标取被遮罩的对象为父级
+		if(this.masked){
+			parent = this.masked
+		}else{
+			parent = this.parent
+		}
+
 		let x = this.x - this.regX, y = this.y - this.regY
 		while(parent && parent.name != 'Stage'){
 			x += parent.x - parent.regX

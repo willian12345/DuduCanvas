@@ -8,6 +8,7 @@
 import DisplayObject from './DisplayObject.js'
 const append = Symbol('append')
 const bounds = Symbol('bounds')
+const getPosition = Symbol('getPosition')
 const instructions = Symbol('instructions')
 
 class BeginPath {
@@ -109,7 +110,7 @@ class DrawCircle {
 		
 	}
 	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
+		const [_x, _y] = instance.getPosition()
 		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
 		ctx.beginPath()
 		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
@@ -202,14 +203,8 @@ class RoundRect{
 		
 	}
 	exec(ctx, instance){
-		let posArr
 		// 如果是作为遮罩，则需要获取并参照定位于被遮罩物的坐标
-		if(instance.masked){
-			posArr = instance.masked.getPosition()
-		}else{
-			posArr = instance.getPosition()
-		}
-		const [_x, _y] = posArr
+		const [_x, _y] = instance.getPosition()
 		let x = _x + this.x,
 				y = _y + this.y,
 				radius = this.radius,
@@ -237,7 +232,7 @@ class RoundRect{
 		ctx.closePath();
 		
 		if(instance.isMask){
-			ctx.fill();
+			// ctx.fill();
 			ctx.clip()
 		}else {
 			if (fill) {
@@ -270,6 +265,13 @@ export default class Shape extends DisplayObject{
 	[append](instructionsObject) {
 		this[instructions].push(instructionsObject)
 	}
+	// getPosition(){
+	// 	if(this.masked){
+	// 		return this.masked.getPosition()
+	// 	}else{
+	// 		return this.getPosition()
+	// 	}
+	// }
 	graphics = {
 		beginPath: () => {
 			this[append](new BeginPath())
@@ -345,20 +347,6 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		}
 	}
-	// getBounds(){
-	// 	let x=this.x, y=this.y, w=0, h=0
-	// 	this[bounds].forEach(ins => {
-	// 		const distanceW = ins.w + ins.x
-	// 		const distanceH = ins.h + ins.y
-	// 		if(w < distanceW){
-	// 			w = distanceW
-	// 		}
-	// 		if(h < distanceH){
-	// 			h = distanceH
-	// 		}
-	// 	})
-	// 	return {x,y,w,h}
-	// }
 }
 
  

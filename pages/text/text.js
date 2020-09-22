@@ -10,12 +10,16 @@ Page({
       t0.rotation = 45
       stage.addChild(t0)
       
+
+      const shape = DuduCanvas.Shape()
+      shape.graphics.fillCircle(20,20,20,20)
       
       const t1 = DuduCanvas.Text({
-        font: 'italic 18px sans-serif',
+        font: 'italic 20px sans-serif',
         text: '临感科技是一家由创新交互体验驱动的车辆网泛娱乐社交公司'
       })
-      .setWrapWidth(100)
+      t1.setWrapWidth(100)
+      t1.mask = shape
       t1.color = 'red'
       t1.x = 100
       t1.y = 100

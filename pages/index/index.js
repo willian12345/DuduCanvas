@@ -19,6 +19,8 @@ Page({
     ])
     .done( loader => {
       DuduCanvas.Stage('myCanvas', (stage, ctx) => {
+        const shape = DuduCanvas.Shape()
+        shape.graphics.fillRoundRect(0,0,60,60,10,false)
 
         const avatar = DuduCanvas.Image({
           image: loader.get('avatar'),
@@ -44,18 +46,17 @@ Page({
         })
         img.x = 100
         img.y = 100
-        // img.mask = shape
         img.regX = 60
         img.regY = 60
-        img.rotation = 90
+        img.rotation = 45
+        img.mask = shape
         // img.rotation = 10
         // stage.addChild(img)
         
+        
         const t1 = DuduCanvas.Text({
-          fontSize: 12,
           text: '临感科技是一家由创新交互体验驱动的车辆网泛娱乐社交公司'
         })
-        // t1.setWrapWidth(100)
         const g = DuduCanvas.Group()
         g.x = 40
         g.y = 40
