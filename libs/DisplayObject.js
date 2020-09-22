@@ -1,6 +1,5 @@
-/**
- * 显示对象类
- */
+import { getPosAfterRotation, getMaxValue }  from './utils'
+
 let context = null
 const scale = Symbol('scale')
 const mask = Symbol('mask')
@@ -9,34 +8,9 @@ const getBound = Symbol('getBound')
 let id = 1
 
 
-function getMaxValue(arr){
-	let minX = arr[0].x
-	let maxX = arr[0].x
-	let minY = arr[0].y
-	let maxY = arr[0].y
-
-	// 计算最小最大的 x,y 值
-	for(var i=1, l = arr.length; i < l; i++){
-		if(minX > arr[i].x){
-			minX = arr[i].x
-		}
-		if(arr[i].x > maxX){
-			maxX = arr[i].x
-		}
-
-		if(minY > arr[i].y){
-			minY = arr[i].y
-		}
-		if(arr[i].y > maxY){
-			maxY = arr[i].y
-		}
-	}
-	return [minX, minY, maxX, maxY] // left top right bottom
-}
-
-
-
-
+/**
+ * 显示对象类
+ */
 
 export default class DisplayObject {
 	name = "DisplayObject"
@@ -187,16 +161,7 @@ export default class DisplayObject {
 		// return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
 		return this
 	}
-	/**
-	 * 
-	 * 获取旋转后的坐标
-	 */
-	getPosAfterRotation(rotation, x, y) {
-		const angle = rotation * (Math.PI / 180)
-		const _x = Math.cos(angle) * x  - Math.sin(angle) * y
-		const _y = Math.cos(angle) * y + Math.sin(angle) * x
-		return {x: _x , y: _y}
-	}
+	
 	/**
 	 * 获取对象形变后的相较于舞台的绝对位置与宽度
 	 * scale 形变不在 getbound 计算之内
@@ -211,13 +176,13 @@ export default class DisplayObject {
 		if(this.rotation !== 0){
 			// 获取左上、右上、右下，左下绕自身注册点旋转后的坐标
 			// left top
-			let lt = this.getPosAfterRotation(this.rotation, -regX,  -regY)
+			let lt = getPosAfterRotation(this.rotation, -regX,  -regY)
 			// right top
-			let rt = this.getPosAfterRotation(this.rotation, w - regX,  -regY)
+			let rt = getPosAfterRotation(this.rotation, w - regX,  -regY)
 			// right bottom
-			let rb = this.getPosAfterRotation(this.rotation, w - regX, h - regY)
+			let rb = getPosAfterRotation(this.rotation, w - regX, h - regY)
 			// left bottom
-			let lb = this.getPosAfterRotation(this.rotation, -regX, h - regY)
+			let lb = getPosAfterRotation(this.rotation, -regX, h - regY)
 			
 			// 相对坐标+原本的 x y 值成为绝对坐标
 			const arr = [lt, rt, rb, lb]
@@ -286,5 +251,3 @@ export default class DisplayObject {
 		}
 	}
 }
-
- 
