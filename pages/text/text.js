@@ -21,7 +21,7 @@ Page({
       t1.y = 100
       stage.addChild(t1)
       
-      let t2 = new DuduCanvas.Text({font: 'italic 18px sans-serif'})
+      let t2 = DuduCanvas.Text({font: 'italic 18px sans-serif'})
       .setFillStyle('blue')
       .setTextBaseline('top')
       .setWrapWidth(200)

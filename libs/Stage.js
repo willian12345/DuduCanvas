@@ -30,7 +30,7 @@ export default class Stage extends DisplayObject {
 		return this._context
 	}
 	render(){
-		this._draw()
+		this.draw()
 		this._context.draw(false)
 	}
 }

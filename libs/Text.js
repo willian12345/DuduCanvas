@@ -1,16 +1,6 @@
-/**
- * 文本类
- */
+
 import DisplayObject from './DisplayObject'
 
-
-/**
- * 计算文本宽度，中文2，非中文1
- */
-const getLength = function(str) {
-  //先把中文替换成两个字节的英文，在计算长度
-  return str.replace(/[\u0391-\uFFE5]/g,"aa").length 
-}
 
 /**
  * getTextArr 多行时计算每行显示多少个字符
@@ -20,11 +10,10 @@ const getTextArr = function(ctx, instance, text){
 
 	let i = 0, j= 0, t = null, lineWidth = 0
 	let arr = []
-	
 	while(t=text[i]){
-		// lineWidth += (getLength(t) * instance.fontSize / 2)	
+		// 根据每个单字计算字符宽度
 		lineWidth += ctx.measureText(t).width
-		if(lineWidth < wrapWidth){
+		if(lineWidth <= wrapWidth){
 			arr[j] ? arr[j] += text[i] : arr[j] = text[i]
 		}else{
 			lineWidth = 0
@@ -45,25 +34,16 @@ class FillText {
 	}
 	exec(ctx, instance){
 		const [_x, _y] = instance.getPosition()
-		
-		if(instance.parent && instance.parent.name != 'Stage'){
-			const rotation = instance.rotation
-			const regPointerX = _x + instance.regX
-			const regPointerY = _y + instance.regY
-			ctx.translate(regPointerX, regPointerY)
-			ctx.rotate(rotation * Math.PI / 180)
-			ctx.translate(-regPointerX, -regPointerY)
-		}
-
 		let x = _x + this.x
 		let y = _y + this.y
-
 		ctx.font = instance.font
 		// 如果设置了文本框宽度，则需要判断是否显示成多行
 		if(instance.wrapWidth > -1){
 			let textArr = getTextArr(ctx, instance, this.text)
+			let h = 0
 			for(let i=0,l=textArr.length; i<l; i++){
-				ctx.fillText(textArr[i], x, y + (i * (instance.fontSize + instance.lineDistance)))
+				h = y + (i * (instance.fontSize + instance.lineDistance))
+				ctx.fillText(textArr[i], x, h)
 			}
 		}else{
 			ctx.fillText(this.text, x, y)
@@ -73,31 +53,40 @@ class FillText {
 
 
 
+const defaultFontSize = 10
 
 
+/**
+ * 文本类
+ */
 export default class Text extends DisplayObject {
 	name = 'Text'
-	/**
-	 * 文本宽度，如果设置后文本超过此宽度，则文本换行
-	 */
+	// 文本宽度，如果设置后文本超过此宽度，则文本换行
 	wrapWidth = -1
 	// 多行文本时的行距
 	lineDistance = 0
 	// 当前字体样式的属性。符合 CSS font 语法 的 DOMString 字符串，至少需要提供字体大小和字体族名。默认值为 10px sans-serif
-	font = '10px sans-serif'
-	fontSize = 10
+	font = `${defaultFontSize}px sans-serif`
+	fontSize = defaultFontSize
+	height = defaultFontSize
 	constructor(t = {}){
 		super()
 		
-		let {text, font, color} = t
+		let { text, font, color, fontSize } = t
 		
 		if(font){
 			this.font = font
 			let fontSize = font.match(/\d+/)[0]
 			if(fontSize){
 				this.fontSize = parseInt(fontSize)
+				this.height = this.fontSize
 			}
+		}else if(fontSize){
+			this.fontSize = fontSize
+			this.font = `${fontSize}px sans-serif`
+			this.height = fontSize
 		}
+		
 		if(color){
 			this.color = color
 		}
@@ -107,12 +96,9 @@ export default class Text extends DisplayObject {
 		if(text){
 			this.text = text
 			this.fillText(this.text)
+			this.width = this.measureWidth(this.text, this.fontSize)
 		}
-		let that = this
-		// that.a = super.transform
-		// this.transform = function(v, context) {
-		// 	return that.a(v, context)
-		// }
+		console.log(this.fontSize)
 	}
 	// 指令集
 	_instruction = []
@@ -121,7 +107,7 @@ export default class Text extends DisplayObject {
 		this._instruction.push(instructionsObject)
 	}
 	// 执行指令集
-	_draw(context){
+	draw(context){
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
 		context.setFillStyle(this.color)
@@ -200,22 +186,12 @@ export default class Text extends DisplayObject {
 	}
 	setWrapWidth(w){
 		this.wrapWidth = w
+		this.width = w
+		this.height = (this.measureWidth(this.text, this.fontSize) / w >> 0) * this.fontSize
 		return this
 	}
-	getBounds(){
+	measureWidth(text, fontSize){
 		const ctx = DisplayObject.getContext()
-		let _w = 0, _h = 0
-		if(this.wrapWidth > -1){
-			_w = this.wrapWidth
-			let mt = getTextArr(ctx, this, this.text)
-		}else{
-			_w = ctx.measureText(this.text).width
-		}
-		return {
-			x: this.x,
-			y: this.y,
-			w:  _w,
-			h: _h
-		}
+		return ctx.measureText(text).width * (fontSize / defaultFontSize)
 	}
 }

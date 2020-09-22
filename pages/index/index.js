@@ -3,7 +3,7 @@ import DuduCanvas from '../../libs/DuduCanvas.js'
 
 Page({
   onLoad: function () {
-    let t = DuduCanvas.load([{
+    DuduCanvas.load([{
         id: 'avatar',
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
       },{
@@ -19,10 +19,6 @@ Page({
     ])
     .done( loader => {
       DuduCanvas.Stage('myCanvas', (stage, ctx) => {
-        
-        // const shape = DuduCanvas.Shape()
-        // shape.graphics.fillStyle('red')
-        // .fillRoundRect(0, 0, 120, 120, 18)
 
         const avatar = DuduCanvas.Image({
           image: loader.get('avatar'),
@@ -55,21 +51,26 @@ Page({
         // img.rotation = 10
         // stage.addChild(img)
         
-        
+        const t1 = DuduCanvas.Text({
+          fontSize: 12,
+          text: '临感科技是一家由创新交互体验驱动的车辆网泛娱乐社交公司'
+        })
+        // t1.setWrapWidth(100)
         const g = DuduCanvas.Group()
         g.x = 40
         g.y = 40
-
+        
         const g1 = DuduCanvas.Group()
         g1.x = -40
         g1.y = -40
         g1.addChild(avatar)
+        g.addChild(t1)
         // const circle = DuduCanvas.Shape()
         // circle.graphics.fillRoundRect(0, 0, 50, 20, 8, true)
         g.addChild(g1, img)
         // console.log('width:', g.getWidth())
         stage.addChild(g)
-        console.log(g.getBound())
+        console.log(t1.getBound())
         stage.render()
       }, this)
     })

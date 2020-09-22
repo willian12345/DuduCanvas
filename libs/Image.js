@@ -37,7 +37,7 @@ export default class Image extends DisplayObject{
 			this.dHeight = this.height
 		}
 		
-		this._parentDraw = super._draw
+		this.parentDraw = super.draw
 	}
 	[drawImage](ctx, x, y){
 		/**
@@ -58,7 +58,7 @@ export default class Image extends DisplayObject{
 			ctx.drawImage(this.path, x, y)
 		}
 	}
-	_draw(ctx){
+	draw(ctx){
 		let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
@@ -67,7 +67,7 @@ export default class Image extends DisplayObject{
 			if(this.mask.name == 'Shape'){
 				// 遮罩层不参与显示所以也没有父级元素
 				this.mask.masked = this
-				this.mask._draw(ctx, true)
+				this.mask.draw(ctx, true)
 				this[drawImage](ctx, x, y)
 			}
 		}else{

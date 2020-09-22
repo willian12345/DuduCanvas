@@ -4,7 +4,7 @@
 let context = null
 const scale = Symbol('scale')
 const mask = Symbol('mask')
-const nodeBoundsArray = Symbol('nodeBoundsArray')
+const nodeBoundArray = Symbol('nodeBoundArray')
 const getBound = Symbol('getBound')
 let id = 1
 
@@ -111,17 +111,17 @@ export default class DisplayObject {
 	}
 	// 删除子元素
 	removeChild(child){
-		this.childs = this.childs.filter( v =>  v != child)
+		this.childs = this.childs.filter( v =>  v.id != child.id)
 	}
-	// 递归绘制
-	_draw(){
+	// 绘制
+	draw(){
 		this.childs.forEach((v)=>{
 			// 绘制前压栈
 			context.save()
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
-			// 再开始绘制
-			v._draw(context)
+			// 递归绘制
+			v.draw(context)
 			// 绘制完后弹栈
 			context.restore()
 		})
@@ -184,7 +184,8 @@ export default class DisplayObject {
 		ctx.rotate(rotation * Math.PI / 180)
 		ctx.translate(-regPointerX, -regPointerY)	
 		// console.log(_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY)
-		return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
+		// return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
+		return this
 	}
 	/**
 	 * 
@@ -241,8 +242,8 @@ export default class DisplayObject {
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
 	findNodesBounds(node){
-		this[nodeBoundsArray] = this[nodeBoundsArray] || []
-		const arr = this[nodeBoundsArray]
+		this[nodeBoundArray] = this[nodeBoundArray] || []
+		const arr = this[nodeBoundArray]
 		if(!node.childs.length){
 			arr.push(node[getBound]())
 		}else{

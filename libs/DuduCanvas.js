@@ -29,10 +29,9 @@ export default {
 	Image: args => {
 		return new Image(args)
 	},
-	Sprite: args => {
-		return new Sprite(args)
+	Sprite: (img, sliceBound) => {
+		return new Sprite(img, sliceBound)
 	},
-	// base64 转图片
 	base64: str => {
 		return base64src(str)
 	}

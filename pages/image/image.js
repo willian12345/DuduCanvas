@@ -18,7 +18,7 @@ Page({
     ])
     .done( loader => {
       DuduCanvas.Stage('myCanvas', (stage, ctx) => {
-        let img = new DuduCanvas.Image({
+        let img = DuduCanvas.Image({
           image: loader.get('avatar'),
           sx: 300,
           sy: 0, 
@@ -26,9 +26,8 @@ Page({
           sHeight: 60,
         })
     
-    
-        let sprite = new DuduCanvas.Sprite(loader.get('btn1'))
-        sprite.setSlice(30, 33, 30, 33)
+
+        let sprite = DuduCanvas.Sprite(loader.get('btn1'), {left: 30, top: 33, right: 30, bottom: 33})
         sprite.x = 0
         sprite.y = 200
         sprite.scaleX = .5
@@ -37,8 +36,8 @@ Page({
         sprite.height = 185
     
         
-        let sprite1 = new DuduCanvas.Sprite(loader.get('btn'))
-        sprite1.setSlice(147, 188, 101, 174)
+        let sprite1 = DuduCanvas.Sprite(loader.get('btn'))
+        sprite1.setSlice({left: 147, top: 188, right: 101, bottom: 174})
         sprite1.scaleX = .5
         sprite1.scaleY = .5
         sprite1.width = 569

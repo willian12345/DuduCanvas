@@ -261,7 +261,7 @@ export default class Shape extends DisplayObject{
 		this.width = 0
 		this.height = 0
 	}
-	_draw(context, isMask){
+	draw(context, isMask){
 		this.isMask = !!isMask
 		this[instructions].map((instruction) => {
 			instruction.exec(context, this)

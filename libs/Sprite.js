@@ -1,27 +1,42 @@
-import DisplayObject from './DisplayObject.js'
+import Group from './Group.js'
 import DuduCanvas from './DuduCanvas.js'
 
 const drawImage = Symbol('drawImage')
 const drawSliced = Symbol('drawSliced')
+const left = Symbol('left')
+const top = Symbol('top')
+const right = Symbol('right')
+const bottom = Symbol('bottom')
+const setSlice = Symbol('setSlice')
 
-export default class Sprite extends DisplayObject{	
+export default class Sprite extends Group{	
 	name = 'Sprite'
 	img = null
 	sliced = false
-	constructor(img){
+	/**
+	 * 
+	 * @param {*} img Image 对象
+	 * @param {*} sliceBound 九宫格图 {left: 0, top: 0, right: 0, bottom: 0}
+	 */
+	constructor(img, sliceBound){
 		super()
 		if(img){
 			this.img = img	
 		}
+
+		if(sliceBound){
+			this[setSlice](sliceBound)
+		}
 	}
-	_draw(ctx){
+	draw(ctx){
 		const [x, y] = this.getPosition()
 		
 		this.wRatio = this.width / this.img.width
 		this.hRatio = this.height / this.img.height
 
-		this.enableWidth = (this.width - this.left - this.right) * this.scaleX
-		this.enableHeight = (this.height - this.top - this.bottom) * this.scaleY
+		// 伸缩后的宽、高
+		this.enableWidth = (this.width - this[left] - this[right]) * this.scaleX
+		this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY
 
 		
 		if(this.sliced){
@@ -31,33 +46,32 @@ export default class Sprite extends DisplayObject{
 		}
 		
 		// 绘制子元素
-		this.childs.forEach( v=>{
-			v._draw(ctx)
+		this.childs.forEach( v =>{
+			v.draw(ctx)
 		})
 	}
 	[drawImage](ctx, x, y){
-		const lt = new DuduCanvas.Image({
+		const img = DuduCanvas.Image({
 			image: this.img,
 			dx: x,
 			dy: y,
 			dWidth: this.width,
 			dHeight: this.height
 		})
-		lt._draw(ctx)	
+		img.draw(ctx)
 	}
+	// 绘制九宫格图像
 	[drawSliced](ctx, x, y){
-		
 		// 计算九宫格每块位置信息
-
 		// 上左
 		const ltParams = {
 			image: this.img,
 			sx: 0,
 			sy: 0,
-			sWidth: this.left,
-			sHeight: this.top,
-			dWidth: this.left * this.scaleX,
-			dHeight: this.top * this.scaleY,
+			sWidth: this[left],
+			sHeight: this[top],
+			dWidth: this[left] * this.scaleX,
+			dHeight: this[top] * this.scaleY,
 			dx: x,
 			dy: y,
 		}
@@ -65,52 +79,52 @@ export default class Sprite extends DisplayObject{
 		// 上中
 		const tParams = {
 			image: this.img,
-			sx: this.left,
+			sx: this[left],
 			sy: 0,
-			sWidth: this.img.width - this.right - this.left,
-			sHeight: this.top,
+			sWidth: this.img.width - this[right] - this[left],
+			sHeight: this[top],
 			dWidth: this.enableWidth,
-			dHeight: this.top * this.scaleY,
-			dx: (this.left * this.scaleX) + x,
+			dHeight: this[top] * this.scaleY,
+			dx: (this[left] * this.scaleX) + x,
 			dy: y,
 		}
 
 		// 上右
 		const rtParams = {
 			image: this.img,
-			sx: this.img.width - this.right,
+			sx: this.img.width - this[right],
 			sy: 0,
-			sWidth: this.right,
-			sHeight: this.top,
-			dWidth: this.right * this.scaleX,
-			dHeight: this.top * this.scaleY,
-			dx: (this.left * this.scaleX) + tParams.dWidth + x,
+			sWidth: this[right],
+			sHeight: this[top],
+			dWidth: this[right] * this.scaleX,
+			dHeight: this[top] * this.scaleY,
+			dx: (this[left] * this.scaleX) + tParams.dWidth + x,
 			dy: y,
 		}
 
 		// 右中
 		const rParams = {
 			image: this.img,
-			sx: this.img.width - this.right,
-			sy: this.top,
-			sWidth: this.right,
-			sHeight: this.img.height - this.bottom - this.top,
-			dWidth: this.right * this.scaleX,
+			sx: this.img.width - this[right],
+			sy: this[top],
+			sWidth: this[right],
+			sHeight: this.img.height - this[bottom] - this[top],
+			dWidth: this[right] * this.scaleX,
 			dHeight: this.enableHeight,
 			dx: rtParams.dx,
-			dy: rtParams.dy + (this.top * this.scaleY),
+			dy: rtParams.dy + (this[top] * this.scaleY),
 		}
 
 
 		// 右下
 		const rbParams = {
 			image: this.img,
-			sx: this.img.width - this.right,
-			sy: this.img.height - this.bottom,
-			sWidth: this.right,
-			sHeight: this.bottom,
-			dWidth: this.right * this.scaleX,
-			dHeight: this.bottom  * this.scaleY,
+			sx: this.img.width - this[right],
+			sy: this.img.height - this[bottom],
+			sWidth: this[right],
+			sHeight: this[bottom],
+			dWidth: this[right] * this.scaleX,
+			dHeight: this[bottom]  * this.scaleY,
 			dx: rtParams.dx,
 			dy: rParams.dy + rParams.dHeight,
 		}
@@ -118,12 +132,12 @@ export default class Sprite extends DisplayObject{
 		// 下中
 		const bParams = {
 			image: this.img,
-			sx: this.left,
-			sy: this.img.height - this.bottom,
-			sWidth: this.img.width - this.left - this.right,
-			sHeight: this.bottom,
+			sx: this[left],
+			sy: this.img.height - this[bottom],
+			sWidth: this.img.width - this[left] - this[right],
+			sHeight: this[bottom],
 			dWidth: this.enableWidth,
-			dHeight: this.bottom * this.scaleY,
+			dHeight: this[bottom] * this.scaleY,
 			dx: tParams.dx,
 			dy: rParams.dy + rParams.dHeight,
 		}
@@ -132,11 +146,11 @@ export default class Sprite extends DisplayObject{
 		const lbParams = {
 			image: this.img,
 			sx: 0,
-			sy: this.img.height - this.bottom,
-			sWidth: this.left,
-			sHeight: this.bottom,
-			dWidth: this.left * this.scaleX,
-			dHeight: this.bottom  * this.scaleX,
+			sy: this.img.height - this[bottom],
+			sWidth: this[left],
+			sHeight: this[bottom],
+			dWidth: this[left] * this.scaleX,
+			dHeight: this[bottom]  * this.scaleX,
 			dx: ltParams.dx,
 			dy: rParams.dy + rParams.dHeight,
 		}
@@ -144,10 +158,10 @@ export default class Sprite extends DisplayObject{
 		const lParams = {
 			image: this.img,
 			sx: 0,
-			sy: this.top,
-			sWidth: this.left,
-			sHeight: this.img.height - this.top - this.bottom,
-			dWidth: this.left * this.scaleX,
+			sy: this[top],
+			sWidth: this[left],
+			sHeight: this.img.height - this[top] - this[bottom],
+			dWidth: this[left] * this.scaleX,
 			dHeight: this.enableHeight,
 			dx: ltParams.dx,
 			dy: rParams.dy,
@@ -166,50 +180,28 @@ export default class Sprite extends DisplayObject{
 			dy: ltParams.dy + ltParams.dHeight,
 		}
 
-
-
-		const lt = new DuduCanvas.Image(ltParams)
-		lt._draw(ctx)
-		
-		const t = new DuduCanvas.Image(tParams)
-		t._draw(ctx)
-
-		const rt = new DuduCanvas.Image(rtParams)
-		rt._draw(ctx)
-
-		const r = new DuduCanvas.Image(rParams)
-		r._draw(ctx)
-
-		const rb = new DuduCanvas.Image(rbParams)
-		rb._draw(ctx)
-
-		const b = new DuduCanvas.Image(bParams)
-		b._draw(ctx)
-
-		const lb = new DuduCanvas.Image(lbParams)
-		lb._draw(ctx)
-
-		const l = new DuduCanvas.Image(lParams)
-		l._draw(ctx)
-
-		const c = new DuduCanvas.Image(cParams)
-		c._draw(ctx)
-
+		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
+		peices.map(v => DuduCanvas.Image(v).draw(ctx))
+		return this
 	}
 	/**
-	 * 九宫格图
-	 * @param {Number} left   左边距
-	 * @param {Number} top    上边距
-	 * @param {Number} right  右边距
-	 * @param {Number} bottom 下边距
+	 * 供内部调用的九宫格边界
+	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
 	 */
-	setSlice(left, top, right, bottom){
+	[setSlice](sliceBound){
 		this.sliced = true
-		this.left = left
-		this.top = top
-		this.right = right
-		this.bottom = bottom
+		this[left] = sliceBound.left
+		this[top] = sliceBound.top
+		this[right] = sliceBound.right
+		this[bottom] = sliceBound.bottom
 		return this
+	}
+	/**
+	 * 九宫格边界
+	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
+	 */
+	setSlice(sliceBound){
+		return this[setSlice](sliceBound)
 	}
 }
 
