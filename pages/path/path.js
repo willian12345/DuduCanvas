@@ -5,7 +5,7 @@ Page({
     DuduCanvas.Stage('myCanvas', (stage, ctx) => {
       for(var i=0;i<4;i++){
         for(var j=0;j<3;j++){
-           let path = new DuduCanvas.Shape()
+           let path = DuduCanvas.Shape()
            path.x = 100
            path.y = 220
            path.graphics.beginPath();
@@ -28,7 +28,7 @@ Page({
          }
        }
 
-      let rect = new DuduCanvas.Shape()
+      let rect = DuduCanvas.Shape()
       rect.graphics.fillStyle('red')
       .beginPath()
       .lineWidth(10)

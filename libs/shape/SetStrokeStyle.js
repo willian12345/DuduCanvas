@@ -1,8 +1,8 @@
 export default class SetStrokeStyle{
-	constructor(color){
-		this.color = color
+	constructor(style){
+		this.style = style
 	}
 	exec(ctx){
-		ctx.setStrokeStyle(this.color)
+		ctx.strokeStyle = this.style
 	}
 }

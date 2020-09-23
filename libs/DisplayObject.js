@@ -10,6 +10,7 @@ const mask = Symbol('mask')
 const nodeBoundArray = Symbol('nodeBoundArray')
 
 const getBound = Symbol('getBound')
+const setShadow = Symbol('setShadow')
 
 
 /**
@@ -43,6 +44,9 @@ export default class DisplayObject {
 		return this[mask]
 	}
 	set mask(s){
+		if(s.name !== 'Shape'){
+			throw new Error('遮罩必须是 Shape 对象')
+		}
 		s.isMask = true
 		this[mask] = s
 	}
@@ -96,12 +100,13 @@ export default class DisplayObject {
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
 			if(v.shadow.length){
-				this.setShadow(v)
+				this[setShadow](v)
 			}
 			// 递归绘制
 			v[draw](context)
 			// 绘制完后弹栈
 			context.restore()
+			
 		})
 	}
 	/**
@@ -109,7 +114,7 @@ export default class DisplayObject {
 	 * 添加阴影效果， 遮罩(clip)过的对象不支持 shadow 效果
 	 * @param {*} shadow "10 10 10 black"
 	 */
-	setShadow(el){
+	[setShadow](el){
 		const valueArr = el.shadow.split(' ')
 		if(el.name === 'Sprite' || el.name === 'Group'){
 			throw new Error('Sprite 或 Group 组件对象不允许设置 shadow')

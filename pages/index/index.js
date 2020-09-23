@@ -30,11 +30,10 @@ Page({
         })
         avatar.regX = 60
         avatar.regY = 60
-        avatar.x = 200
-        avatar.y = 200
+        avatar.x = 100
+        avatar.y = 100
         avatar.rotation = 10
         avatar.shadow = '0 0 10 red'
-
         const img = DuduCanvas.Image({
           image: loader.get('health'),
           sx: 0,
@@ -46,8 +45,8 @@ Page({
           dWidth: 120,
           dHeight: 120
         })
-        img.x = 100
-        img.y = 100
+        img.x = 200
+        img.y = 200
         img.regX = 60
         img.regY = 60
         img.rotation = 45
