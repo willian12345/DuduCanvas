@@ -31,7 +31,9 @@ export default class Stage extends DisplayObject {
 		return this._context
 	}
 	render(){
+		// 调用 draw 方法绘制自身级子级
 		this[draw]()
+		// 调用 canvas draw 方法渲染图像
 		this._context.draw(false)
 	}
 }

@@ -4,7 +4,6 @@ export default class DrawCircle {
 		this.y = y
 		this.radius = radius
 		this.fill = fill
-		
 	}
 	exec(ctx, instance){
 		const [_x, _y] = instance.getPosition()

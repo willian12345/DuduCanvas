@@ -2,11 +2,14 @@ import { getPosAfterRotation, getMaxValue }  from './utils'
 import { draw } from './config'
 
 let context = null
+let displayObjectId = 0
+const id = Symbol('id')
 const scale = Symbol('scale')
 const mask = Symbol('mask')
+// 所有子显示对象的边界值
 const nodeBoundArray = Symbol('nodeBoundArray')
+
 const getBound = Symbol('getBound')
-let id = 1
 
 
 /**
@@ -29,12 +32,12 @@ export default class DisplayObject {
 	skewX = 0
 	skewY = 0
 	filters = null
-	name = null
 	parent = null
 	childs = []
+	shadow = ''
 	constructor(){
 		this[scale] = 1
-		this.id = id++
+		this[id] = displayObjectId++
 	}
 	get mask(){
 		return this[mask]
@@ -65,12 +68,11 @@ export default class DisplayObject {
 	addChild(...args){
 		// 指定父级
 		const childs = args.map((v) => {
-			if(v.id === this.id){
+			if(v[id] === this[id]){
 				throw new Error(`不能自己添加自己为 child :${v.name}`)
 			}else if(v.isMask){
 				throw new Error(`已被设置成 mask 遮罩 不能 addChild 到其它父级内:${v.name}`)
 			}
-
 			// 如果添加的对象有 mask 遮罩则 mask 也指定父级，以对应对象的坐标
 			if(v.mask){
 				v.mask.parent = this
@@ -84,7 +86,7 @@ export default class DisplayObject {
 	}
 	// 删除子元素
 	removeChild(child){
-		this.childs = this.childs.filter( v =>  v.id != child.id)
+		this.childs = this.childs.filter( v =>  v[id] != child[id])
 	}
 	// 绘制
 	[draw](){
@@ -93,11 +95,32 @@ export default class DisplayObject {
 			context.save()
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
+			if(v.shadow.length){
+				this.setShadow(v)
+			}
 			// 递归绘制
 			v[draw](context)
 			// 绘制完后弹栈
 			context.restore()
 		})
+	}
+	/**
+	 * setShadow
+	 * 添加阴影效果， 遮罩(clip)过的对象不支持 shadow 效果
+	 * @param {*} shadow "10 10 10 black"
+	 */
+	setShadow(el){
+		const valueArr = el.shadow.split(' ')
+		if(el.name === 'Sprite' || el.name === 'Group'){
+			throw new Error('Sprite 或 Group 组件对象不允许设置 shadow')
+		}
+		if(valueArr.length < 4){
+			throw new Error('shadow 需要 4 个值 eg: "10 10 10 black"')
+		}
+		context.shadowOffsetX = valueArr[0]
+		context.shadowOffsetY = valueArr[1]
+		context.shadowBlur = valueArr[2]
+		context.shadowColor = valueArr[3];
 	}
 	/**
 	 * getPosition 获取实例距画布左上角原点(0,0)的绝对位置
@@ -148,7 +171,7 @@ export default class DisplayObject {
 	}
 	/**
 	 * 先形变后再绘制
-	 * 移动、缩放、旋转 canvas “坐标矩阵”
+	 * 移动、缩放、旋转 canvas
 	 */
 	transform(v, context){
 		if(v.name == 'Stage') return
@@ -158,12 +181,12 @@ export default class DisplayObject {
 		let [scaleX, scaleY] = [v.scaleX, v.scaleY]
 		const regPointerX = _x + v.regX
 		const regPointerY = _y + v.regY
-
+		// 变形过程顺序必须为先移动位置，再放大缩小或旋转
+		// 再移动回原来的位置
 		ctx.translate(regPointerX, regPointerY)
 		ctx.scale(scaleX, scaleY)
 		ctx.rotate(rotation * Math.PI / 180)
 		ctx.translate(-regPointerX, -regPointerY)	
-		// console.log(_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY)
 		// return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
 		return this
 	}

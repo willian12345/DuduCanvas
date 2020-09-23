@@ -7,6 +7,8 @@
  */
 import { draw } from './config'
 import DisplayObject from './DisplayObject.js'
+
+// 路径
 import BeginPath from './shape/BeginPath'
 import MoveTo from './shape/MoveTo'
 import LineTo from './shape/LineTo'
@@ -17,10 +19,19 @@ import Fill from './shape/Fill'
 import SetFillStyle from './shape/SetFillStyle'
 import SetStrokeStyle from './shape/SetStrokeStyle'
 import Clip from './shape/Clip'
+import QuadraticCurveTo from './shape/QuadraticCurveTo'
+import BezierCurveTo from './shape/BezierCurveTo'
+
+// 矩形与圆
 import DrawCircle from './shape/DrawCircle'
 import Rect from './shape/Rect'
-import ClearRect from './shape/ClearRect'
 import RoundRect from './shape/RoundRect'
+import ClearRect from './shape/ClearRect'
+
+// 线条样式
+import LineCap from './shape/LineCap'
+import LineJoin from './shape/LineJoin'
+import LineWidth from './shape/LineWidth'
 
 const append = Symbol('append')
 const bounds = Symbol('bounds')
@@ -56,8 +67,28 @@ export default class Shape extends DisplayObject{
 			this[append](new MoveTo(x, y))
 			return this.graphics
 		},
+		lineWidth: (width) => {
+			this[append](new LineWidth(width))
+			return this.graphics
+		},
+		lineCap: (style) => {
+			this[append](new LineCap(style))
+			return this.graphics
+		},
+		lineJoin: (style) => {
+			this[append](new LineJoin(style))
+			return this.graphics
+		},
 		lineTo: (x, y) => {
 			this[append](new LineTo(x, y))
+			return this.graphics
+		},
+		quadraticCurveTo: (cpx, cpy, x, y) => {
+			this[append](new QuadraticCurveTo(cpx, cpy, x, y))
+			return this.graphics
+		},
+		bezierCurveTo: (cp1x, cp1y, cp2x, cp2y, x, y) => {
+			this[append](new BezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y))
 			return this.graphics
 		},
 		/**
@@ -92,7 +123,6 @@ export default class Shape extends DisplayObject{
 			return this.graphics
 		},
 		fillCircle: (x = 0, y = 0, radius = 20) => {
-			this[bounds].push({x: x, y: y, w: radius, h: radius})
 			this[append](new DrawCircle(x, y, radius, true))
 			return this.graphics
 		},

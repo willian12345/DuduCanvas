@@ -29,16 +29,18 @@ Page({
        }
 
       let rect = new DuduCanvas.Shape()
-      rect.graphics.fillStyle('yellow').fillRect(0, 100, 100, 40)
-      let rect1 = new DuduCanvas.Shape()
-      rect1.graphics.strokeStyle('green').strokeRect(20, 110, 100, 10)
+      rect.graphics.fillStyle('red')
+      .beginPath()
+      .lineWidth(10)
+      .lineCap('round')
+      .moveTo(20,20)
+      .bezierCurveTo(20,100,200,100,200,20)
+      .stroke()
+      rect.x = 100
+      rect.y = 100
+      rect.shadow = '0 0 10 green'
 
-      stage.addChild(rect, rect1)
-
-      let shape1 = new DuduCanvas.Shape()
-      shape1.graphics.fillStyle('green').fillCircle(375/2, 130, 40)
-
-      stage.addChild(shape1)
+      stage.addChild(rect)
 
       stage.render()
     }, this)

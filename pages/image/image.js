@@ -1,4 +1,5 @@
 import DuduCanvas from '../../libs/DuduCanvas.js'
+import Sprite from '../../libs/Sprite.js'
 
 Page({
   onLoad: function () {
@@ -28,12 +29,16 @@ Page({
     
 
         let sprite = DuduCanvas.Sprite(loader.get('btn1'), {left: 30, top: 33, right: 30, bottom: 33})
-        sprite.x = 0
-        sprite.y = 200
+        sprite.x = 200
+        sprite.y = 300
+        sprite.regX = 346/2
+        sprite.regY = 185/2
         sprite.scaleX = .5
         sprite.scaleY = .5
         sprite.width = 346
         sprite.height = 185
+        sprite.rotation = 45
+
     
         
         let sprite1 = DuduCanvas.Sprite(loader.get('btn'))

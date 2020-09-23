@@ -38,9 +38,8 @@ export default class Sprite extends Group{
 		// 伸缩后的宽、高
 		this.enableWidth = (this.width - this[left] - this[right]) * this.scaleX
 		this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY
-
-		
 		if(this.sliced){
+			// sprite 九宫格不允许使用 boxShadow
 			this[drawSliced](ctx, x, y)
 		}else{
 			this[drawImage](ctx, x, y)
@@ -180,7 +179,6 @@ export default class Sprite extends Group{
 			dx: ltParams.dx + ltParams.dWidth,
 			dy: ltParams.dy + ltParams.dHeight,
 		}
-
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
 		peices.map(v => DuduCanvas.Image(v)[draw](ctx))
 		return this
