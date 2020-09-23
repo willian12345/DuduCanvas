@@ -1,5 +1,6 @@
 import Group from './Group.js'
 import DuduCanvas from './DuduCanvas.js'
+import { draw } from './config'
 
 const drawImage = Symbol('drawImage')
 const drawSliced = Symbol('drawSliced')
@@ -28,7 +29,7 @@ export default class Sprite extends Group{
 			this[setSlice](sliceBound)
 		}
 	}
-	draw(ctx){
+	[draw](ctx){
 		const [x, y] = this.getPosition()
 		
 		this.wRatio = this.width / this.img.width
@@ -47,7 +48,7 @@ export default class Sprite extends Group{
 		
 		// 绘制子元素
 		this.childs.forEach( v =>{
-			v.draw(ctx)
+			v[draw](ctx)
 		})
 	}
 	[drawImage](ctx, x, y){
@@ -58,7 +59,7 @@ export default class Sprite extends Group{
 			dWidth: this.width,
 			dHeight: this.height
 		})
-		img.draw(ctx)
+		img[draw](ctx)
 	}
 	// 绘制九宫格图像
 	[drawSliced](ctx, x, y){
@@ -181,7 +182,7 @@ export default class Sprite extends Group{
 		}
 
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
-		peices.map(v => DuduCanvas.Image(v).draw(ctx))
+		peices.map(v => DuduCanvas.Image(v)[draw](ctx))
 		return this
 	}
 	/**

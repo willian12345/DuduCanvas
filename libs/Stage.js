@@ -1,4 +1,5 @@
 import DisplayObject from './DisplayObject.js'
+import { draw } from './config'
 
 export default class Stage extends DisplayObject {
 	constructor(id, callback, PageInstance) {
@@ -30,7 +31,7 @@ export default class Stage extends DisplayObject {
 		return this._context
 	}
 	render(){
-		this.draw()
+		this[draw]()
 		this._context.draw(false)
 	}
 }

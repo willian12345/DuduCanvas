@@ -1,4 +1,5 @@
 import { getPosAfterRotation, getMaxValue }  from './utils'
+import { draw } from './config'
 
 let context = null
 const scale = Symbol('scale')
@@ -86,14 +87,14 @@ export default class DisplayObject {
 		this.childs = this.childs.filter( v =>  v.id != child.id)
 	}
 	// 绘制
-	draw(){
+	[draw](){
 		this.childs.forEach((v)=>{
 			// 绘制前压栈
 			context.save()
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
 			// 递归绘制
-			v.draw(context)
+			v[draw](context)
 			// 绘制完后弹栈
 			context.restore()
 		})

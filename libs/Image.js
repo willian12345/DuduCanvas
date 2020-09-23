@@ -2,6 +2,7 @@
  * 图片类
  */
 import DisplayObject from './DisplayObject.js'
+import { draw } from './config'
 const drawImage = Symbol('drawImage')
 
 export default class Image extends DisplayObject{	
@@ -22,6 +23,7 @@ export default class Image extends DisplayObject{
 		for(let v in args){
 			this[v] = args[v]
 		}
+		// 图片地址路径 远程/本地
 		this.path = this.image.path
 
 		// 如果设置了 width 则认 width 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
@@ -36,8 +38,6 @@ export default class Image extends DisplayObject{
 		}else{
 			this.dHeight = this.height
 		}
-		
-		this.parentDraw = super.draw
 	}
 	[drawImage](ctx, x, y){
 		/**
@@ -58,7 +58,7 @@ export default class Image extends DisplayObject{
 			ctx.drawImage(this.path, x, y)
 		}
 	}
-	draw(ctx){
+	[draw](ctx){
 		let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
@@ -67,7 +67,7 @@ export default class Image extends DisplayObject{
 			if(this.mask.name == 'Shape'){
 				// 遮罩层不参与显示所以也没有父级元素
 				this.mask.masked = this
-				this.mask.draw(ctx, true)
+				this.mask[draw](ctx, true)
 				this[drawImage](ctx, x, y)
 			}
 		}else{

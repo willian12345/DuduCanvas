@@ -71,7 +71,10 @@ Page({
         g.addChild(g1, img)
         // console.log('width:', g.getWidth())
         stage.addChild(g)
-        console.log(t1.getBound())
+        
+
+        console.log(img)
+
         stage.render()
       }, this)
     })

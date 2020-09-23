@@ -5,245 +5,27 @@
  * 3、所有绘制 api 命令都存在于 graphics 对象内， graphics 绘制在 Shape 对象内不参与 z 轴排序
  * 
  */
+import { draw } from './config'
 import DisplayObject from './DisplayObject.js'
+import BeginPath from './shape/BeginPath'
+import MoveTo from './shape/MoveTo'
+import LineTo from './shape/LineTo'
+import Arc from './shape/Arc'
+import ArcTo from './shape/ArcTo'
+import Stroke from './shape/Stroke'
+import Fill from './shape/Fill'
+import SetFillStyle from './shape/SetFillStyle'
+import SetStrokeStyle from './shape/SetStrokeStyle'
+import Clip from './shape/Clip'
+import DrawCircle from './shape/DrawCircle'
+import Rect from './shape/Rect'
+import ClearRect from './shape/ClearRect'
+import RoundRect from './shape/RoundRect'
+
 const append = Symbol('append')
 const bounds = Symbol('bounds')
-const getPosition = Symbol('getPosition')
 const instructions = Symbol('instructions')
 
-class BeginPath {
-	constructor(){}
-	exec(ctx) {
-		ctx.beginPath()
-	}
-}
-
-class MoveTo {
-	constructor(x, y){
-		this.x = x
-		this.y = y
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		ctx.moveTo(this.x + _x, this.y + _y)	
-	}
-}
-
-class LineTo {
-	constructor(x, y){
-		this.x = x
-		this.y = y
-	}
-	exec(ctx, instance){
-		let [_x, _y] = instance.getPosition()
-		ctx.lineTo(this.x + _x, this.y + _y)	
-	}
-}
-
-class Arc {
-	constructor(x, y, radius, startAngle, endAngle, anticlockwise){
-		this.x = x
-		this.y = y
-		this.radius = radius
-		this.startAngle = startAngle
-		this.endAngle = endAngle
-		this.anticlockwise = anticlockwise
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		ctx.arc(this.x + _x, this.y + _y, this.radius, this.startAngle, this.endAngle, this.anticlockwise)
-	}
-}
-class ArcTo {
-	constructor(x1, y1, x2, y2, radius){
-		this.x1 = x1
-		this.y1 = y1
-		this.x2 = x2
-		this.y2 = y2
-		this.radius = radius
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		ctx.arcTo(this.x1 + _x, this.y1 + _y, this.x2 + _x, this.y2 + _y, this.radius)
-	}
-}
-
-class Stroke {
-	exec(ctx){
-		ctx.stroke()
-	}
-}
-class Fill {
-	exec(ctx){
-		ctx.fill()
-	}
-}
-class SetFillStyle{
-	constructor(color){
-		this.color = color
-	}
-	exec(ctx){
-		ctx.setFillStyle(this.color)
-	}
-}
-class SetStrokeStyle{
-	constructor(color){
-		this.color = color
-	}
-	exec(ctx){
-		ctx.setStrokeStyle(this.color)
-	}
-}
-
-class Clip{
-	exec(ctx){
-		ctx.clip()
-	}
-}
-
-class DrawCircle {
-	constructor(x, y, radius, fill = false){
-		this.x = x
-		this.y = y
-		this.radius = radius
-		this.fill = fill
-		
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
-		ctx.beginPath()
-		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
-		if(instance.isMask){
-			ctx.clip()
-		}else{
-			if(this.fill){
-				ctx.fill()
-			}
-		}
-	}
-}
-
-
-
-class FillRect{
-	constructor(x, y, w, h){
-		this.x = x
-		this.y = y
-		this.w = w
-		this.h = h
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		const dx = this.x + _x
-		const dy = this.y + _y
-		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
-		ctx.beginPath()
-		if(instance.isMask){
-			ctx.rect(dx, dy, this.w, this.h)
-			// ctx.clip()
-		}else{
-			ctx.fillRect(dx, dy, this.w, this.h)
-		}
-	}
-}
-class StrokeRect{
-	constructor(x, y, w, h){
-		this.x = x
-		this.y = y
-		this.w = w
-		this.h = h
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		ctx.strokeRect(this.x + _x, this.y + _y, this.w, this.h)
-	}
-}
-
-class ClearRect{
-	constructor(x, y, w, h){
-		this.x = x
-		this.y = y
-		this.w = w
-		this.h = h
-	}
-	exec(ctx, instance){
-		const [_x, _y] = instance.getPosition()
-		ctx.clearRect(this.x + _x, this.y + _y, this.w, this.h)
-	}
-}
-
-
-class RoundRect{
-	constructor(x, y, width, height, radius, fill, stroke){
-		
-		if (typeof stroke === 'undefined') {
-			this.stroke = true;
-		}else{
-			this.stroke = stroke;
-		}
-		if (typeof radius === 'undefined') {
-			radius = 5;
-		}
-		this.x = x
-		this.y = y
-		this.width = width
-		this.height = height
-		this.fill = fill
-		
-		if (typeof radius === 'number') {
-			radius = {tl: radius, tr: radius, br: radius, bl: radius};
-		}
-
-		const defaultRadius = radius;
-		this.radius = {}
-		for (let side in defaultRadius) {
-			this.radius[side] = this.radius[side] || defaultRadius[side];
-		}
-		
-	}
-	exec(ctx, instance){
-		// 如果是作为遮罩，则需要获取并参照定位于被遮罩物的坐标
-		const [_x, _y] = instance.getPosition()
-		let x = _x + this.x,
-				y = _y + this.y,
-				radius = this.radius,
-				width = this.width,
-				height = this.height
-		let fill, stroke
-		if(instance.masked){ // instance.isMask
-			fill = false
-			stroke = false
-		}else{
-			fill = this.fill
-			stroke = this.stroke
-		}
-		
-		ctx.beginPath();
-		ctx.moveTo(x + radius.tl, y);
-		ctx.lineTo(x + width - radius.tr, y);
-		ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-		ctx.lineTo(x + width, y + height - radius.br);
-		ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-		ctx.lineTo(x + radius.bl, y + height);
-		ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-		ctx.lineTo(x, y + radius.tl);
-		ctx.quadraticCurveTo(x, y, x + radius.tl, y);
-		ctx.closePath();
-		
-		if(instance.isMask){
-			// ctx.fill();
-			ctx.clip()
-		}else {
-			if (fill) {
-				ctx.fill();
-			}
-			if (stroke) {
-				ctx.stroke();
-			}
-		}
-	}
-}
 
 export default class Shape extends DisplayObject{
 	name = 'Shape'
@@ -256,7 +38,7 @@ export default class Shape extends DisplayObject{
 		this.width = 0
 		this.height = 0
 	}
-	draw(context, isMask){
+	[draw](context, isMask){
 		this.isMask = !!isMask
 		this[instructions].map((instruction) => {
 			instruction.exec(context, this)
@@ -265,13 +47,6 @@ export default class Shape extends DisplayObject{
 	[append](instructionsObject) {
 		this[instructions].push(instructionsObject)
 	}
-	// getPosition(){
-	// 	if(this.masked){
-	// 		return this.masked.getPosition()
-	// 	}else{
-	// 		return this.getPosition()
-	// 	}
-	// }
 	graphics = {
 		beginPath: () => {
 			this[append](new BeginPath())
@@ -316,17 +91,17 @@ export default class Shape extends DisplayObject{
 			this[append](new SetStrokeStyle(color))
 			return this.graphics
 		},
-		fillCircle: (x=0, y=0, radius=20) => {
+		fillCircle: (x = 0, y = 0, radius = 20) => {
 			this[bounds].push({x: x, y: y, w: radius, h: radius})
 			this[append](new DrawCircle(x, y, radius, true))
 			return this.graphics
 		},
-		fillRect: (x=0, y=0, w=10, h=20) => {
+		fillRect: (x = 0, y = 0, w = 10, h = 20) => {
 			this[bounds].push({x: x, y: y, w: w, h: h})
-			this[append](new FillRect(x, y, w, h))
+			this[append](new Rect(x, y, w, h))
 			return this.graphics
 		},
-		fillRoundRect: (x=0, y=0, w=10, h=10, radius=8, fill, stroke) => {
+		fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius = 8, fill, stroke) => {
 			this[bounds].push({x: x, y: y, w: w, h: h})
 			this[append](new RoundRect(x, y, w, h, radius, fill, stroke))
 			return this.graphics
@@ -334,9 +109,9 @@ export default class Shape extends DisplayObject{
 		/**
 		 * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
 		 */
-		strokeRect: (x=0, y=0, w=10, h=20) => {
+		strokeRect: (x = 0, y = 0, w = 10, h = 20) => {
 			this[bounds].push({x: x, y: y, w: w, h: h})
-			this[append](new StrokeRect(x,y,w,h))
+			this[append](new Rect(x,y,w,h))
 			return this.graphics
 		},
 		/**

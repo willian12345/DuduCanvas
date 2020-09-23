@@ -1,7 +1,7 @@
 /**
  * 文本类
  */
-
+import { draw } from './config'
 import DisplayObject from './DisplayObject'
 import FillText from './text/FillText'
 const instruction = Symbol('instruction')
@@ -54,10 +54,10 @@ export default class Text extends DisplayObject {
 		this[instruction].push(instructionsObject)
 	}
 	// 执行指令集
-	draw(context){
+	[draw](context){
 		if(this.mask && this.mask.name == 'Shape'){
 			this.mask.masked = this
-			this.mask.draw(context, true)
+			this.mask[draw](context, true)
 		}
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
