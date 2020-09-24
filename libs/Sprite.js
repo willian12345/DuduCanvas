@@ -1,6 +1,6 @@
 import Group from './Group.js'
 import DuduCanvas from './DuduCanvas.js'
-import { draw } from './config'
+import { draw, getAlpha } from './config'
 
 const drawImage = Symbol('drawImage')
 const drawSliced = Symbol('drawSliced')
@@ -24,7 +24,7 @@ export default class Sprite extends Group{
 		if(img){
 			this.img = img	
 		}
-
+		this.parentDraw = super[draw]
 		if(sliceBound){
 			this[setSlice](sliceBound)
 		}
@@ -40,7 +40,7 @@ export default class Sprite extends Group{
 		this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY
 		if(this.sliced){
 			// sprite 九宫格不允许使用 boxShadow
-			this[drawSliced](ctx, x, y)
+			this[drawSliced](ctx, x, y, this[getAlpha]())
 		}else{
 			this[drawImage](ctx, x, y)
 		}
@@ -61,7 +61,7 @@ export default class Sprite extends Group{
 		img[draw](ctx)
 	}
 	// 绘制九宫格图像
-	[drawSliced](ctx, x, y){
+	[drawSliced](ctx, x, y, alpha){
 		// 计算九宫格每块位置信息
 		// 上左
 		const ltParams = {
@@ -180,7 +180,11 @@ export default class Sprite extends Group{
 			dy: ltParams.dy + ltParams.dHeight,
 		}
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
-		peices.map(v => DuduCanvas.Image(v)[draw](ctx))
+		peices.map(v => {
+			const i = DuduCanvas.Image(v)
+			i.alpha = alpha
+			i[draw](ctx)
+		})
 		return this
 	}
 	/**

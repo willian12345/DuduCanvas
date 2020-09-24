@@ -1,5 +1,5 @@
 import { getPosAfterRotation, getMaxValue }  from './utils'
-import { draw } from './config'
+import { draw, getAlpha } from './config'
 
 let context = null
 let displayObjectId = 0
@@ -80,9 +80,8 @@ export default class DisplayObject {
 			// 如果添加的对象有 mask 遮罩则 mask 也指定父级，以对应对象的坐标
 			if(v.mask){
 				v.mask.parent = this
-			}else{
-				v.parent = this
 			}
+			v.parent = this
 			return v
 		})
 		
@@ -99,9 +98,15 @@ export default class DisplayObject {
 			context.save()
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
+
+			// 设置投影
 			if(v.shadow.length){
 				this[setShadow](v)
 			}
+
+			// 设置 alpha 透明度
+			context.globalAlpha = this[getAlpha]()
+
 			// 递归绘制
 			v[draw](context)
 			// 绘制完后弹栈
@@ -126,6 +131,18 @@ export default class DisplayObject {
 		context.shadowOffsetY = valueArr[1]
 		context.shadowBlur = valueArr[2]
 		context.shadowColor = valueArr[3];
+	}
+	/**
+	 * 获取元素透明度
+	 */
+	[getAlpha](){
+		let parent = this.parent
+		let alpha = this.alpha
+		while(parent && parent.name != 'Stage'){
+			alpha *= parent.alpha
+			parent = parent.parent
+		}
+		return alpha
 	}
 	/**
 	 * getPosition 获取实例距画布左上角原点(0,0)的绝对位置

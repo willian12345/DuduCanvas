@@ -24,6 +24,7 @@ Page({
              path.graphics.strokeStyle('blue')
              path.graphics.stroke();
            }
+           path.alpha = .2
            stage.addChild(path)
          }
        }

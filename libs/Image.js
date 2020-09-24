@@ -2,7 +2,8 @@
  * 图片类
  */
 import DisplayObject from './DisplayObject.js'
-import { draw } from './config'
+import { draw, getAlpha } from './config'
+
 const drawImage = Symbol('drawImage')
 
 export default class Image extends DisplayObject{	
@@ -47,6 +48,8 @@ export default class Image extends DisplayObject{
 		 * drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 		 */
 		
+		 ctx.globalAlpha = this[getAlpha]()
+
 		if(this.sx != undefined){
 			// 如果传了原始图起点，则说明要填完整所有参数
 			ctx.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)

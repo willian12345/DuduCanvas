@@ -5,7 +5,7 @@
  * 3、所有绘制 api 命令都存在于 graphics 对象内， graphics 绘制在 Shape 对象内不参与 z 轴排序
  * 
  */
-import { draw } from './config'
+import { draw, getAlpha } from './config'
 import DisplayObject from './DisplayObject.js'
 
 // 路径
@@ -50,7 +50,13 @@ export default class Shape extends DisplayObject{
 		this.height = 0
 	}
 	[draw](context, isMask){
+		// shape 是否为遮罩
 		this.isMask = !!isMask
+
+		// 设置透明度
+		context.globalAlpha = this[getAlpha]()
+
+		// 执行所有命令
 		this[instructions].map((instruction) => {
 			instruction.exec(context, this)
 		})
@@ -58,6 +64,7 @@ export default class Shape extends DisplayObject{
 	[append](instructionsObject) {
 		this[instructions].push(instructionsObject)
 	}
+	// 绘图命令
 	graphics = {
 		beginPath: () => {
 			this[append](new BeginPath())

@@ -1,5 +1,4 @@
 import DuduCanvas from '../../libs/DuduCanvas.js'
-import Sprite from '../../libs/Sprite.js'
 
 Page({
   onLoad: function () {
