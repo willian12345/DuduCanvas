@@ -1,8 +1,9 @@
-// 私有方法名 draw
+/**
+ * 私有方法名
+ * 使用 Symbol 对象作为私有方法名
+ */
 export const draw = Symbol('draw')
-
 export const getAlpha = Symbol('getAlpha')
-
 
 
 /**
@@ -10,24 +11,21 @@ export const getAlpha = Symbol('getAlpha')
  * 如果要获取网络图片的信息，需要预先在开发者平台配置 download 的域名白名单
  * https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.getImageInfo.html
  */
-let getImageInfoFunction = null
-const _getImageInfo = function(){
-  if(getImageInfoFunction) return getImageInfoFunction
 
+export const getImageInfo = (function(){
   try{
-    return getImageInfoFunction = uni.getImageInfo
+    return uni.getImageInfo
   }catch(e){}
 
   try{
-    return getImageInfoFunction = wx.getImageInfo
+    return wx.getImageInfo
   }catch(e){}
 
   try{
-    return getImageInfoFunction = my.getImageInfo
+    return my.getImageInfo
   }catch(e){}
 
   try{
-    return getImageInfoFunction = tt.getImageInfo
+    return tt.getImageInfo
   }catch(e){}
-}
-export const getImageInfo = _getImageInfo()
+})()

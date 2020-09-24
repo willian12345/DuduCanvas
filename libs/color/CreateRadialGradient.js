@@ -22,7 +22,7 @@ export default class CreateRadialGradient {
     if(ctx.createRadialGradient){
       return ctx.createRadialGradient.apply(this, args)
     }else{
-      console.warn('微信小程序不支持传6个参数，请查阅: https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.createCircularGradient.html')
+      console.warn('小程序不支持传6个参数，请查阅: createCircularGradient 对应文档')
       return ctx.createCircularGradient.apply(this, args)
     }
   }
