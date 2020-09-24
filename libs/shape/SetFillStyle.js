@@ -9,7 +9,11 @@ export default class SetFillStyle{
 	constructor(style){
 		this.style = style
 	}
-	exec(ctx){
-		ctx.fillStyle = this.style
+	exec(ctx, instance){
+		if(this.style.name === 'CreateLinearGradient' || this.style.name === 'CreateRadialGradient'){
+			ctx.fillStyle = this.style.exec(ctx, instance)
+		}else{
+			ctx.fillStyle = this.style
+		}
 	}
 }

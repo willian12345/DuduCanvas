@@ -1,3 +1,5 @@
+import { getImageInfo } from './config'
+
 const isloaded  = Symbol('isloaded')
 const total  = Symbol('total')
 const loaded  = Symbol('loaded')
@@ -6,6 +8,9 @@ const doneCallbacks  = Symbol('doneCallbacks')
 const imageMap = Symbol('imageMap')
 const PATH_REG = /^http*/
 
+/**
+ * getImageInfo, 如果要获取网络图片的信息，需要预先在开发者平台配置 download 的域名白名单
+ */
 export default class ImgLoader {
 	constructor(imgArr){
 		this[total] = imgArr.length
@@ -14,7 +19,9 @@ export default class ImgLoader {
 		this[doneCallbacks] = []
 		this[isloaded] = false
 		this[imageMap] = new Map()
+
 		this.load(imgArr)
+
 		return this
 	}
 	get(id){
@@ -22,7 +29,7 @@ export default class ImgLoader {
 	}
 	load(imgArr){
 		imgArr.forEach( v => {
-			wx.getImageInfo({
+			getImageInfo({
         src: v.src,
         success: res => {
           // console.log(res)

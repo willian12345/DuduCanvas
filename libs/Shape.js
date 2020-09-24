@@ -33,6 +33,8 @@ import LineCap from './shape/LineCap'
 import LineJoin from './shape/LineJoin'
 import LineWidth from './shape/LineWidth'
 
+
+
 const append = Symbol('append')
 const bounds = Symbol('bounds')
 const instructions = Symbol('instructions')
@@ -121,12 +123,12 @@ export default class Shape extends DisplayObject{
 			this[append](new Fill())
 			return this.graphics
 		},
-		fillStyle: color => {
-			this[append](new SetFillStyle(color))
+		fillStyle: style => {
+			this[append](new SetFillStyle(style))
 			return this.graphics
 		},
-		strokeStyle: color => {
-			this[append](new SetStrokeStyle(color))
+		strokeStyle: style => {
+			this[append](new SetStrokeStyle(style))
 			return this.graphics
 		},
 		fillCircle: (x = 0, y = 0, radius = 20) => {

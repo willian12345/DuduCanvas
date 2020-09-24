@@ -7,6 +7,9 @@ import ImgLoader from './ImgLoader.js'
 import Sprite from './Sprite.js'
 import base64src from './base64src.js'
 
+import CreateLinearGradient from './color/CreateLinearGradient'
+import CreateRadialGradient from './color/CreateRadialGradient'
+
 
 export default {
 	load: imgArr => {
@@ -34,5 +37,13 @@ export default {
 	},
 	base64: str => {
 		return base64src(str)
+	},
+	color: {
+		createLinearGradient (x0, y0, x1, y1) {
+			return new CreateLinearGradient(x0, y0, x1, y1)
+		},
+		createRadialGradient (x0, y0, r0, x1, y1, r1) {
+			return new CreateRadialGradient(x0, y0, r0, x1, y1, r1)
+		}
 	}
 }
