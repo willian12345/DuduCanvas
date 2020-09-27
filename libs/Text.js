@@ -88,6 +88,7 @@ export default class Text extends DisplayObject {
 		this.text = text
 		this.x += x
 		this.y += y
+		this.width = this.measureWidth(this.text, this.fontSize)
 		// !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
 		// !! 因为会错过画布更新
 		this[append](new FillText(text, this.x, this.y))	

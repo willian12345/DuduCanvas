@@ -9,8 +9,8 @@ export default class FillText {
 	}
 	exec(ctx, instance){
 		const [_x, _y] = instance.getPosition()
-		let x = _x + this.x
-		let y = _y + this.y
+		let x = _x + this.x - instance.regX
+		let y = _y + this.y - instance.regY
 		ctx.font = instance.font
 		// 如果设置了文本框宽度，则需要判断是否显示成多行
 		if(instance.wrapWidth > -1){

@@ -19,19 +19,19 @@ Page({
     ])
     .done( loader => {
       DuduCanvas.Stage('myCanvas', (stage, ctx) => {
-        const shape = DuduCanvas.Shape()
-        shape.graphics.fillCircle(60,60,50)
+        // const shape = DuduCanvas.Shape()
+        // shape.graphics.fillCircle(60,60,50)
 
-        const avatar = DuduCanvas.Image({
-          image: loader.get('avatar'),
-          width: 100,
-          height: 100
-        })
-        avatar.regX = 60
-        avatar.regY = 60
-        avatar.x = 100
-        avatar.y = 100
-        avatar.rotation = 10
+        // const avatar = DuduCanvas.Image({
+        //   image: loader.get('avatar'),
+        //   width: 100,
+        //   height: 100
+        // })
+        // avatar.regX = 60
+        // avatar.regY = 60
+        // avatar.x = 100
+        // avatar.y = 100
+        // avatar.rotation = 10
 
 
         const img = DuduCanvas.Image({
@@ -45,12 +45,12 @@ Page({
           dWidth: 120,
           dHeight: 120
         })
-        img.x = 200
-        img.y = 200
-        img.regX = 60
-        img.regY = 60
-        img.rotation = 45
-        img.mask = shape
+        img.x = 100
+        img.y = 100
+        img.regX = 100
+        img.regY = 100
+        // img.rotation = 45
+        // img.mask = shape
         img.alpha = .5
         
 
