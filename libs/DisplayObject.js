@@ -1,5 +1,6 @@
 import { getPosAfterRotation, getMaxValue }  from './utils'
 import { draw, getAlpha } from './config'
+import DuduCanvas from './DuduCanvas'
 
 let context = null
 let displayObjectId = 0
@@ -88,16 +89,6 @@ export default class DisplayObject {
 		})
 		
 		this.childs = this.childs.concat(childs)
-		// if(this.name === 'Group'){
-		// 	const xLeft = []
-		// 	const yTop = []
-		// 	this.childs.map( v => {
-		// 		xLeft.push(v.x)
-		// 		yTop.push(v.y)
-		// 	})
-		// 	this.regX = Math.min(...xLeft)
-		// 	this.regY = Math.min(...yTop)
-		// }
 	}
 	// 删除子元素
 	removeChild(child){
@@ -127,9 +118,12 @@ export default class DisplayObject {
 
 			// 显示可视对象边界线用于调试
 			var b = v.getBound()
-			context.beginPath();
-			context.strokeStyle = 'blue'
-			context.strokeRect(b.left,b.top,b.width,b.height);
+			if(v.name === 'Group'){
+				console.log(v.rotation)
+				context.beginPath();
+				context.strokeStyle = 'blue'
+				context.strokeRect(b.left,b.top,b.width,b.height);
+			}
 		})
 	}
 	/**
@@ -232,7 +226,20 @@ export default class DisplayObject {
 		// return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
 		return this
 	}
-	
+
+	getRectangleRotatedPosition(rotation, w, h, regX, regY){
+		// 获取左上、右上、右下，左下绕自身注册点旋转后的坐标
+		// left top
+		let lt = getPosAfterRotation(rotation, -regX,  -regY)
+		// right top
+		let rt = getPosAfterRotation(rotation, w - regX,  -regY)
+		// right bottom
+		let rb = getPosAfterRotation(rotation, w - regX, h - regY)
+		// left bottom
+		let lb = getPosAfterRotation(rotation, -regX, h - regY)
+		
+		return [lt, rt, rb, lb]
+	}
 	/**
 	 * 获取对象形变后的相较于舞台的绝对位置与宽度
 	 * scale 形变不在 getbound 计算之内
@@ -246,19 +253,9 @@ export default class DisplayObject {
 		let regY = this.regY
 		
 		if(this.rotation !== 0){
-			// 获取左上、右上、右下，左下绕自身注册点旋转后的坐标
-			// left top
-			let lt = getPosAfterRotation(this.rotation, -regX,  -regY)
-			// right top
-			let rt = getPosAfterRotation(this.rotation, w - regX,  -regY)
-			// right bottom
-			let rb = getPosAfterRotation(this.rotation, w - regX, h - regY)
-			// left bottom
-			let lb = getPosAfterRotation(this.rotation, -regX, h - regY)
-			
+			const arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
 			// 相对坐标+原本的 x y 值成为绝对坐标
-			const arr = [lt, rt, rb, lb]
-			arr.map((v)=>{
+			arr.map( v =>{
 				v.x = v.x + x + regX
 				v.y = v.y + y + regY
 			})
@@ -298,9 +295,7 @@ export default class DisplayObject {
 	// 获取元素的绝对宽度
 	getBound(){
 		this[nodeBoundArray] = []
-		if(this.name === 'Group'){
-			// console.log(this.childs)
-		}
+		
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
 			return this[getBound]()
@@ -324,9 +319,35 @@ export default class DisplayObject {
 				const top = Math.min(...t)
 				const bottom = Math.max(...b)
 				
-				
+				// 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
 
-				return {left, top, right, bottom, width: right - left, height: bottom - top}
+				const rect = DuduCanvas.Shape()
+				// console.log(this)
+				if(this.name === 'Group'){
+					rect.width = right - left
+					rect.height = bottom - top
+					rect.x = this.x
+					rect.y = this.y
+					rect.regX = this.regX + 10
+					rect.regY = this.regY + 10
+					rect.rotation = this.rotation
+					const b  = this[getBound].call(rect)
+					console.log(b)
+					return b
+				}
+				
+				// const arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
+				// // 相对坐标+原本的 x y 值成为绝对坐标
+				// arr.map( v =>{
+				// 	v.x = v.x + x + regX
+				// 	v.y = v.y + y + regY
+				// })
+				
+				// // 获取最左，最右，最上最下 坐标
+				// let [minX, minY, maxX, maxY] = getMaxValue(arr)
+				// console.log([minX, minY, maxX, maxY])
+
+				// return {left, top, right, bottom, width: right - left, height: bottom - top}
 			}
 		}
 	}

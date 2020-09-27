@@ -78,19 +78,19 @@ Page({
         point.x = avatar.width / 2 - 5
         point.y = avatar.height / 2 - 5
 
-        const groupBound = g.getBound()
-        console.log(groupBound)
-        const rect = DuduCanvas.Shape()
-        rect.graphics.fillStyle('blue')
-        .fillRect(0, 0, groupBound.width, groupBound.height)
-        rect.regX = groupBound.width / 2
-        rect.regY = groupBound.height / 2
-        rect.x = groupBound.left + rect.regX
-        rect.y = groupBound.top + rect.regY
-        rect.width = groupBound.width
-        rect.height = groupBound.height
-        rect.rotation = 45
-        console.log(rect.getBound())
+        // const groupBound = g.getBound()
+        // console.log(groupBound)
+        // const rect = DuduCanvas.Shape()
+        // rect.graphics.fillStyle('blue')
+        // .fillRect(0, 0, groupBound.width, groupBound.height)
+        // rect.regX = groupBound.width / 2
+        // rect.regY = groupBound.height / 2
+        // rect.x = groupBound.left + rect.regX
+        // rect.y = groupBound.top + rect.regY
+        // rect.width = groupBound.width
+        // rect.height = groupBound.height
+        // rect.rotation = 45
+        // console.log(rect.getBound())
 
 
 
@@ -124,14 +124,14 @@ Page({
         // g1.addChild(img)
         // g.addChild(g1)
         // g.rotation = 45
-        stage.addChild(rect, g)
+        stage.addChild(g)
         stage.render()
         
 
         setInterval(()=>{
-          rect.rotation = g.rotation+=1
+          g.rotation += 1
           stage.render()
-        }, 16)
+        }, 400)
       }, this)
     })
     
