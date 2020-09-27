@@ -36,6 +36,7 @@ export default class DisplayObject {
 	parent = null
 	childs = []
 	shadow = ''
+	zIndex = 0
 	constructor(){
 		this[scale] = 1
 		this[id] = displayObjectId++
@@ -71,7 +72,7 @@ export default class DisplayObject {
 	// 添加子元素
 	addChild(...args){
 		// 指定父级
-		const childs = args.map((v) => {
+		const childs = args.map((v, index) => {
 			if(v[id] === this[id]){
 				throw new Error(`不能自己添加自己为 child :${v.name}`)
 			}else if(v.isMask){
@@ -82,10 +83,21 @@ export default class DisplayObject {
 				v.mask.parent = this
 			}
 			v.parent = this
+			v.zIndex = index
 			return v
 		})
 		
 		this.childs = this.childs.concat(childs)
+		// if(this.name === 'Group'){
+		// 	const xLeft = []
+		// 	const yTop = []
+		// 	this.childs.map( v => {
+		// 		xLeft.push(v.x)
+		// 		yTop.push(v.y)
+		// 	})
+		// 	this.regX = Math.min(...xLeft)
+		// 	this.regY = Math.min(...yTop)
+		// }
 	}
 	// 删除子元素
 	removeChild(child){
@@ -98,6 +110,7 @@ export default class DisplayObject {
 			context.save()
 			// canvas 上下文 context 先 transform 
 			this.transform(v, context)
+			
 
 			// 设置投影
 			if(v.shadow.length){
@@ -106,12 +119,17 @@ export default class DisplayObject {
 
 			// 设置 alpha 透明度
 			context.globalAlpha = this[getAlpha]()
-
+			context.rotate(0)
 			// 递归绘制
 			v[draw](context)
 			// 绘制完后弹栈
 			context.restore()
-			
+
+			// 显示可视对象边界线用于调试
+			var b = v.getBound()
+			context.beginPath();
+			context.strokeStyle = 'blue'
+			context.strokeRect(b.left,b.top,b.width,b.height);
 		})
 	}
 	/**
@@ -169,11 +187,13 @@ export default class DisplayObject {
 	 * 获取旋转角度
 	 */
 	getRotation(){
+		// 角度不需要根据父级计算叠加
 		let parent = this.parent
 		let rotation = this.rotation
-		while(parent && parent.name != 'Stage'){
-			parent = parent.parent
-		}
+		// while(parent && parent.name != 'Stage'){
+		// 	rotation = parent.rotation
+		// 	parent = parent.parent
+		// }
 		return rotation
 	}
 	/**
@@ -224,6 +244,7 @@ export default class DisplayObject {
 		let h = this.height
 		let regX = this.regX
 		let regY = this.regY
+		
 		if(this.rotation !== 0){
 			// 获取左上、右上、右下，左下绕自身注册点旋转后的坐标
 			// left top
@@ -253,7 +274,7 @@ export default class DisplayObject {
 			x = x
 			y = y
 		}
-
+		
 		return {left: x, top: y, right: x + w, bottom: y + h, width: w, height: h}
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
@@ -276,12 +297,17 @@ export default class DisplayObject {
 	}
 	// 获取元素的绝对宽度
 	getBound(){
+		this[nodeBoundArray] = []
+		if(this.name === 'Group'){
+			// console.log(this.childs)
+		}
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
 			return this[getBound]()
 		}else{
 			if(this.childs){
 				let bounds = this.findNodesBounds(this)
+				
 				const l = []
 				const r = []
 				const t = []
@@ -297,6 +323,9 @@ export default class DisplayObject {
 				const right = Math.max(...r)
 				const top = Math.min(...t)
 				const bottom = Math.max(...b)
+				
+				
+
 				return {left, top, right, bottom, width: right - left, height: bottom - top}
 			}
 		}
