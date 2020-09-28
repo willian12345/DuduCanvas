@@ -3,7 +3,20 @@
  * 获取旋转后的坐标
  * @param {*} rotation 旋转角度
  * @param {*} x 
- * @param {*} y 
+ * @param {*} y
+ * 旋转公式转自 Foundation Actionscript3.0 Animation
+ * 第十章“坐标旋转及角度反弹”及第十八章“矩阵数学”
+ * 可认为是绕虚拟z轴旋转矩阵 
+ * [cos  sin   0]
+ * [-sin cos   0]
+ * [ 0    0    1]
+ * 计算 x 与 y 
+ * x = (x * cos + y * -sin)
+ * y = (x * sin + y * cos)
+ * 得
+ * x = Math.cos(angle) * x - Math.sin(angle) * y
+ * y =  Math.cos(angle) * y + Math.sin(angle) * x
+ *
  */
 export function getPosAfterRotation(rotation, x, y) {
 	const angle = rotation * (Math.PI / 180)
