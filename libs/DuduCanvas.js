@@ -16,8 +16,8 @@ export default {
 		return new ImgLoader(imgArr)
 	},
 	Stage: (id, callback, page) => {
-		return new Stage(id, (ctx, stage)=>{
-			callback(ctx, stage)
+		return new Stage(id, (...args)=>{
+			callback(...args)
 		}, page)
 	},
 	Shape: () => {
@@ -32,18 +32,18 @@ export default {
 	Image: args => {
 		return new Image(args)
 	},
-	Sprite: (img, sliceBound) => {
-		return new Sprite(img, sliceBound)
+	Sprite: (...args) => {
+		return new Sprite(...args)
 	},
 	base64: str => {
 		return base64src(str)
 	},
 	color: {
-		createLinearGradient (x0, y0, x1, y1) {
-			return new CreateLinearGradient(x0, y0, x1, y1)
+		createLinearGradient (...args) {
+			return new CreateLinearGradient(...args)
 		},
-		createRadialGradient (x0, y0, r0, x1, y1, r1) {
-			return new CreateRadialGradient(x0, y0, r0, x1, y1, r1)
+		createRadialGradient (...args) {
+			return new CreateRadialGradient(...args)
 		}
 	}
 }

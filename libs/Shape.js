@@ -9,29 +9,29 @@ import { draw, getAlpha } from './config'
 import DisplayObject from './DisplayObject.js'
 
 // 路径
-import BeginPath from './shape/BeginPath'
-import MoveTo from './shape/MoveTo'
-import LineTo from './shape/LineTo'
-import Arc from './shape/Arc'
-import ArcTo from './shape/ArcTo'
-import Stroke from './shape/Stroke'
-import Fill from './shape/Fill'
-import SetFillStyle from './shape/SetFillStyle'
-import SetStrokeStyle from './shape/SetStrokeStyle'
-import Clip from './shape/Clip'
-import QuadraticCurveTo from './shape/QuadraticCurveTo'
-import BezierCurveTo from './shape/BezierCurveTo'
+import BeginPath from './graphics/BeginPath'
+import MoveTo from './graphics/MoveTo'
+import LineTo from './graphics/LineTo'
+import Arc from './graphics/Arc'
+import ArcTo from './graphics/ArcTo'
+import Stroke from './graphics/Stroke'
+import Fill from './graphics/Fill'
+import SetFillStyle from './graphics/SetFillStyle'
+import SetStrokeStyle from './graphics/SetStrokeStyle'
+import Clip from './graphics/Clip'
+import QuadraticCurveTo from './graphics/QuadraticCurveTo'
+import BezierCurveTo from './graphics/BezierCurveTo'
 
 // 矩形与圆
-import DrawCircle from './shape/DrawCircle'
-import Rect from './shape/Rect'
-import RoundRect from './shape/RoundRect'
-import ClearRect from './shape/ClearRect'
+import DrawCircle from './graphics/DrawCircle'
+import Rect from './graphics/Rect'
+import RoundRect from './graphics/RoundRect'
+import ClearRect from './graphics/ClearRect'
 
 // 线条样式
-import LineCap from './shape/LineCap'
-import LineJoin from './shape/LineJoin'
-import LineWidth from './shape/LineWidth'
+import LineCap from './graphics/LineCap'
+import LineJoin from './graphics/LineJoin'
+import LineWidth from './graphics/LineWidth'
 
 
 

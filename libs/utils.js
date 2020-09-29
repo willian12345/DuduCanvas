@@ -53,3 +53,22 @@ export function getMaxValue(arr){
 	}
 	return [minX, minY, maxX, maxY]
 }
+
+export function findNodes(node){
+	const l = node.childs.length
+	const arr = []
+	if(l){
+		for(let i=0; i<l; i++){
+			if(node.childs[i].childs && node.childs[i].childs.length){
+				const nodes = findNodes(node.childs[i])
+				arr.push(node.childs[i])
+				return arr.concat(nodes)
+			}else{
+				arr.push(node.childs[i])
+			}
+		}	
+	}else{
+		arr.push(node)
+	}
+	return arr
+}

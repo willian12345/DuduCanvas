@@ -1,4 +1,4 @@
-import { getPosAfterRotation, getMaxValue }  from './utils'
+import { getPosAfterRotation, getMaxValue, findNodes }  from './utils'
 import { draw, getAlpha } from './config'
 import DuduCanvas from './DuduCanvas'
 
@@ -31,8 +31,6 @@ export default class DisplayObject {
 	scaleX = 1
 	scaleY = 1
 	rotation = 0
-	skewX = 0
-	skewY = 0
 	filters = null
 	parent = null
 	childs = []
@@ -116,10 +114,9 @@ export default class DisplayObject {
 			// 绘制完后弹栈
 			context.restore()
 
-			// 显示可视对象边界线用于调试
+			// 调试显示可视对象边界线用于调试
 			var b = v.getBound()
-			if(v.name === 'Group'){
-				console.log(v.rotation)
+			if(!v.sliced){
 				context.beginPath();
 				context.strokeStyle = 'blue'
 				context.strokeRect(b.left,b.top,b.width,b.height);
@@ -319,35 +316,20 @@ export default class DisplayObject {
 				const top = Math.min(...t)
 				const bottom = Math.max(...b)
 				
-				// 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
-
-				const rect = DuduCanvas.Shape()
-				// console.log(this)
 				if(this.name === 'Group'){
+					// 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
+					const rect = DuduCanvas.Shape()
 					rect.width = right - left
 					rect.height = bottom - top
 					rect.x = this.x
 					rect.y = this.y
-					rect.regX = this.regX + 10
-					rect.regY = this.regY + 10
+					rect.regX = this.regX
+					rect.regY = this.regY
 					rect.rotation = this.rotation
-					const b  = this[getBound].call(rect)
-					console.log(b)
-					return b
+					return this[getBound].call(rect)
+				}else{
+					return {left, top, right, bottom, width: right - left, height: bottom - top}
 				}
-				
-				// const arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
-				// // 相对坐标+原本的 x y 值成为绝对坐标
-				// arr.map( v =>{
-				// 	v.x = v.x + x + regX
-				// 	v.y = v.y + y + regY
-				// })
-				
-				// // 获取最左，最右，最上最下 坐标
-				// let [minX, minY, maxX, maxY] = getMaxValue(arr)
-				// console.log([minX, minY, maxX, maxY])
-
-				// return {left, top, right, bottom, width: right - left, height: bottom - top}
 			}
 		}
 	}
