@@ -115,12 +115,12 @@ export default class DisplayObject {
 			context.restore()
 
 			// 调试显示可视对象边界线用于调试
-			var b = v.getBound()
-			if(!v.sliced){
-				context.beginPath();
-				context.strokeStyle = 'blue'
-				context.strokeRect(b.left,b.top,b.width,b.height);
-			}
+			// var b = v.getBound()
+			// if(!v.sliced){
+			// 	context.beginPath();
+			// 	context.strokeStyle = 'blue'
+			// 	context.strokeRect(b.left,b.top,b.width,b.height);
+			// }
 		})
 	}
 	/**

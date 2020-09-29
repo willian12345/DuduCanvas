@@ -19,11 +19,13 @@ export default class Text extends DisplayObject {
 	font = `${defaultFontSize}px sans-serif`
 	fontSize = defaultFontSize
 	height = defaultFontSize
-	constructor(t = {}){
+	constructor(t){
 		super()
 		this[instruction] = []
+		this.init(t)
+	}
+	init(t = {}){
 		let { text, font, color, fontSize } = t
-		
 		if(font){
 			this.font = font
 			let fontSize = font.match(/\d+/)[0]
@@ -31,7 +33,8 @@ export default class Text extends DisplayObject {
 				this.fontSize = parseInt(fontSize)
 				this.height = this.fontSize + this.lineDistance
 			}
-		}else if(fontSize){
+		}
+		if(fontSize){
 			this.font = `${fontSize}px sans-serif`
 			this.fontSize = parseInt(fontSize)
 			this.height = fontSize  + this.lineDistance
@@ -45,7 +48,6 @@ export default class Text extends DisplayObject {
 
 		if(text){
 			this.text = text
-			this.fillText(this.text)
 			this.width = this.measureWidth(this.text, this.fontSize)
 		}
 	}
@@ -53,12 +55,22 @@ export default class Text extends DisplayObject {
 	[append](instructionsObject){
 		this[instruction].push(instructionsObject)
 	}
+	collectStatus(){
+		if(this.fontSize){
+			this.font = `${this.fontSize}px sans-serif`
+			this.height = this.fontSize  + this.lineDistance
+		}
+		this.fillText(this.text)
+	}
 	// 执行指令集
 	[draw](context){
+		this.collectStatus()
+
 		if(this.mask && this.mask.name == 'Shape'){
 			this.mask.masked = this
 			this.mask[draw](context, true)
 		}
+
 		context.setTextAlign(this.textAlign)
 		context.setTextBaseline(this.textBaseline)
 		context.setFillStyle(this.color)
@@ -89,9 +101,11 @@ export default class Text extends DisplayObject {
 		this.x += x
 		this.y += y
 		this.width = this.measureWidth(this.text, this.fontSize)
+
 		// !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
 		// !! 因为会错过画布更新
 		this[append](new FillText(text, this.x, this.y))	
+
 		return this
 	}
 	/**

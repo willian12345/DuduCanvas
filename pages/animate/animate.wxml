@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <canvas id="myCanvas" canvas-id="myCanvas" style="width: 375px; height: 400px"></canvas>
+  <view class="nav-list">
+    <navigator url="/pages/path/path" class="nav" hover-class="navigator-hover">路径demo</navigator>
+    <navigator url="/pages/text/text" class="nav" hover-class="navigator-hover">文本demo</navigator>
+    <navigator url="/pages/image/image" class="nav" hover-class="navigator-hover">图片demo</navigator>
+  </view>
+</view>

@@ -28,15 +28,10 @@
       // 添加图片，
       const img = DuduCanvas.Image({
         image: loader.get('avatar'), // 'avatar'是 load 时的 id
-        sx: 0,
-        sy: 0, 
-        sWidth: 72, 
-        sHeight: 72,
-        dx: 0, 
-        dy: 0, 
-        dWidth: 120,
-        dHeight: 120
+        width: 120,
+        height: 120
       })
+      
       // 添加至舞台
       stage.addChild(img)
       // 渲染
@@ -48,10 +43,9 @@
 ##### 添加文本
 ```
 DuduCanvas.Stage('myCanvas', stage => {
-  const t1 = DuduCanvas.Text({
-    text: '你好世界Hello', 
-    color: 'red'
-  })
+  const t1 = DuduCanvas.Text()
+  t1.text = '你好世界Hello'
+  t1.color = 'red'
   t1.x = 100
   t1.y = 300
   // 添加至舞台

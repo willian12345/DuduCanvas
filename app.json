@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/text/text",
     "pages/image/image",
-    "pages/path/path"
+    "pages/path/path",
+    "pages/animate/animate"
   ],
   "window": {
     "backgroundTextStyle": "light",
