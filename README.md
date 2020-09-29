@@ -78,7 +78,7 @@ DuduCanvas.Stage('#myCanvas', stage => {
 ##### 获取 context 直接操作 canvas 
 ###### 库只包含了一些简单的 API, 某些情况下无法满足业务需求，可直接操作 context 手动绘制
 ```
-  DuduCanvas.Stage('myCanvas', (stage, context) => {
+  DuduCanvas.Stage('#myCanvas', (stage, context) => {
     context.fillStyle = 'blue'
     context.fillRect(50, 100, 100, 100)
     // 这里需要调用 stage.render 实例方法才能保住在 stage 上原先绘制的图形
