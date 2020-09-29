@@ -7,19 +7,10 @@ Page({
     DuduCanvas.load([{
         id: 'avatar',
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
-      },{
-        id: 'health',
-        src: '/image/health-bad.png'
-      },{
-        id: 'btn1',
-        src: '/image/btn1.png'
-      },{
-        id: 'btn',
-        src: '/image/btn.png'
       }
     ])
     .done( loader => {
-      DuduCanvas.Stage('myCanvas', (stage, ctx) => {
+      DuduCanvas.Stage('#myCanvas', (stage, ctx) => {
         // const shape = DuduCanvas.Shape()
         // shape.graphics.fillCircle(60,60,50)
         const stageWidth = 375

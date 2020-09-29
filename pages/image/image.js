@@ -17,7 +17,7 @@ Page({
       }
     ])
     .done( loader => {
-      DuduCanvas.Stage('myCanvas', (stage, ctx) => {
+      DuduCanvas.Stage('#myCanvas', (stage, ctx) => {
         let img = DuduCanvas.Image({
           image: loader.get('avatar'),
           sx: 300,

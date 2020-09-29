@@ -2,7 +2,7 @@ import DuduCanvas from '../../libs/DuduCanvas.js'
 
 Page({
   onLoad: function () {
-    DuduCanvas.Stage('myCanvas', (stage, ctx) => {
+    DuduCanvas.Stage('#myCanvas', (stage, ctx) => {
       const g = DuduCanvas.Group()
       g.x = 375/2
       g.y = 200
