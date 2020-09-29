@@ -24,7 +24,7 @@
   ])
   .done((loader) => {
     // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
-    DuduCanvas.Stage('myCanvas', stage => {
+    DuduCanvas.Stage('#myCanvas', stage => {
       // 添加图片，
       const img = DuduCanvas.Image({
         image: loader.get('avatar'), // 'avatar'是 load 时的 id
@@ -42,7 +42,7 @@
 
 ##### 添加文本
 ```
-DuduCanvas.Stage('myCanvas', stage => {
+DuduCanvas.Stage('#myCanvas', stage => {
   const t1 = DuduCanvas.Text()
   t1.text = '你好世界Hello'
   t1.color = 'red'
