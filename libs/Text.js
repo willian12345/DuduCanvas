@@ -66,7 +66,7 @@ export default class Text extends DisplayObject {
 	[draw](context){
 		this.collectStatus()
 
-		if(this.mask && this.mask.name == 'Shape'){
+		if(this.mask && this.mask.name === 'Shape'){
 			this.mask.masked = this
 			this.mask[draw](context, true)
 		}

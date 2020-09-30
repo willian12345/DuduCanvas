@@ -67,7 +67,7 @@ export default class Image extends DisplayObject{
 		y = this.dy + y
 		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
 		if(this.mask){
-			if(this.mask.name == 'Shape'){
+			if(this.mask.name === 'Shape'){
 				// 遮罩层不参与显示所以也没有父级元素
 				this.mask.masked = this
 				this.mask[draw](ctx, true)

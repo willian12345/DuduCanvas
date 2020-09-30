@@ -7,8 +7,6 @@ let displayObjectId = 0
 const id = Symbol('id')
 const scale = Symbol('scale')
 const mask = Symbol('mask')
-// 所有子显示对象的边界值
-const nodeBoundArray = Symbol('nodeBoundArray')
 
 const getBound = Symbol('getBound')
 const setShadow = Symbol('setShadow')
@@ -115,8 +113,9 @@ export default class DisplayObject {
 			context.restore()
 
 			// 调试显示可视对象边界线用于调试
-			// var b = v.getBound()
+			
 			// if(!v.sliced){
+			// 	const b = v.getBound()
 			// 	context.beginPath();
 			// 	context.strokeStyle = 'blue'
 			// 	context.strokeRect(b.left,b.top,b.width,b.height);
@@ -207,7 +206,7 @@ export default class DisplayObject {
 	 * 移动、缩放、旋转 canvas
 	 */
 	transform(v, context){
-		if(v.name == 'Stage') return
+		if(v.name === 'Stage') return
 		const ctx = context
 		const [_x, _y] = v.getPosition()
 		const rotation = v.getRotation()
@@ -273,26 +272,14 @@ export default class DisplayObject {
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
 	findNodesBounds(node){
-		this[nodeBoundArray] = this[nodeBoundArray] || []
-		const arr = this[nodeBoundArray]
-		if(!node.childs.length){
-			arr.push(node[getBound]())
-		}else{
-			node.childs.forEach((v) => {
-				if(!v.childs.length){
-					const b = v[getBound]()
-					arr.push(b)
-				}else{
-					this.findNodesBounds(v)
-				}
-			})
-		}
+		const arr = []
+		findNodes(node).map( v => {
+			arr.push(v[getBound]())
+		})
 		return arr
 	}
 	// 获取元素的绝对宽度
 	getBound(){
-		this[nodeBoundArray] = []
-		
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
 			return this[getBound]()

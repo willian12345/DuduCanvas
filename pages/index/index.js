@@ -11,21 +11,34 @@ Page({
       DuduCanvas.Stage('#myCanvas', stage => {
 
         const t1 = DuduCanvas.Text()
-        t1.color = 'green'
+        t1.color = '#cda79f'
         t1.text = 'DuduCanvas 示例'
-        t1.textAlign = 'center'
         t1.fontSize = 20
-        t1.x = stage.width / 2
-        t1.y = 120
+        t1.x = 40
+        t1.y = 40
 
-        
-        let img = DuduCanvas.Image({
+
+        let avatar = DuduCanvas.Image({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
         })
 
-        stage.addChild(t1, img)
+        let name = new DuduCanvas.Text()
+        name.color = '#6c5149'
+        name.text = '龙傲天'
+        name.textAlign = "center"
+        name.x = avatar.width / 2
+        name.y = 110
+
+        let group = DuduCanvas.Group()
+        group.x = stage.width / 2
+        group.y = 220
+        group.regX = avatar.width / 2
+        group.addChild(avatar, name)
+        
+        console.log(group.getBound())
+        stage.addChild(t1, group)
         stage.render()
       }, this)
     })
