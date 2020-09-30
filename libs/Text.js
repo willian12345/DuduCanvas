@@ -4,6 +4,9 @@
 import { draw } from './config'
 import DisplayObject from './DisplayObject'
 import FillText from './text/FillText'
+import SetFillStyle from './text/SetFillStyle'
+import SetTextAlign from './text/SetTextAlign'
+import SetTextBaseline from './text/SetTextBaseline'
 const instruction = Symbol('instruction')
 const append = Symbol('append')
 
@@ -60,6 +63,9 @@ export default class Text extends DisplayObject {
 			this.font = `${this.fontSize}px sans-serif`
 			this.height = this.fontSize  + this.lineDistance
 		}
+		this.setTextAlign(this.textAlign)
+		this.setTextBaseline(this.textBaseline)
+		this.setFillStyle(this.color)
 		this.fillText(this.text)
 	}
 	// 执行指令集
@@ -70,10 +76,6 @@ export default class Text extends DisplayObject {
 			this.mask.masked = this
 			this.mask[draw](context, true)
 		}
-
-		context.setTextAlign(this.textAlign)
-		context.setTextBaseline(this.textBaseline)
-		context.setFillStyle(this.color)
 		this[instruction].map((v) => {
 			v.exec(context, this)
 		})
@@ -85,6 +87,7 @@ export default class Text extends DisplayObject {
 	 */
 	setFillStyle(color='black'){
 		this.color = color
+		this[append](new SetFillStyle(color))
 		return this
 	}
 	fillStyle(color){
@@ -133,6 +136,7 @@ export default class Text extends DisplayObject {
 	 */
 	setTextBaseline(textBaseline) {
 		this.textBaseline = textBaseline
+		this[append](new SetTextBaseline(textBaseline))
 		return this
 	}
 	/**
@@ -141,6 +145,7 @@ export default class Text extends DisplayObject {
 	 */
 	setTextAlign(textAlign) {
 		this.textAlign = textAlign
+		this[append](new SetTextAlign(textAlign))
 		return this
 	}
 	/**

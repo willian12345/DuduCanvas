@@ -37,7 +37,6 @@ Page({
         group.regX = avatar.width / 2
         group.addChild(avatar, name)
         
-        console.log(group.getBound())
         stage.addChild(t1, group)
         stage.render()
       }, this)

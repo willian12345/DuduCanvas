@@ -14,9 +14,11 @@ export default class Stage extends DisplayObject {
 				this.height = data.height
 
 				if(data.node){
+					const canvas = data.node
 					// canvas 新接口, 还处于公测阶段
 					this._context = canvas.getContext('2d')
 				}else{
+					// 旧接口
 					this._context = wx.createCanvasContext(id.slice(1), PageInstance)
 				}
 				DisplayObject.setContext(this._context)	
