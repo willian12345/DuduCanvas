@@ -18,6 +18,7 @@ Page({
           height: 45,
         })
         
+        //九宫格按钮，可随意拉升宽高示例
         let sprite = DuduCanvas.Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
         sprite.x = stage.width / 2
         sprite.y = stage.width / 2
