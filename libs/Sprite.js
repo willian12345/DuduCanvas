@@ -10,6 +10,8 @@ const right = Symbol('right')
 const bottom = Symbol('bottom')
 const setSlice = Symbol('setSlice')
 
+const rotation = Symbol('rotation')
+
 export default class Sprite extends Group{	
 	name = 'Sprite'
 	img = null
@@ -27,6 +29,16 @@ export default class Sprite extends Group{
 		this.parentDraw = super[draw]
 		if(sliceBound){
 			this[setSlice](sliceBound)
+		}
+	}
+	get rotation(){
+		return this[rotation]
+	}
+	set rotation(r){
+		if(this.sliced){
+			throw new Error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转')
+		}else{
+			this[rotation] = r
 		}
 	}
 	[draw](ctx){
@@ -75,7 +87,7 @@ export default class Sprite extends Group{
 			dx: x,
 			dy: y,
 		}
-
+		
 		// 上中
 		const tParams = {
 			image: this.img,
@@ -85,7 +97,7 @@ export default class Sprite extends Group{
 			sHeight: this[top],
 			dWidth: this.enableWidth,
 			dHeight: this[top] * this.scaleY,
-			dx: (this[left] * this.scaleX) + x,
+			dx: ((this[left] * this.scaleX) + x),
 			dy: y,
 		}
 
@@ -125,7 +137,7 @@ export default class Sprite extends Group{
 			sHeight: this[bottom],
 			dWidth: this[right] * this.scaleX,
 			dHeight: this[bottom]  * this.scaleY,
-			dx: rtParams.dx,
+			dx: rtParams.dx - .3,
 			dy: rParams.dy + rParams.dHeight,
 		}
 
@@ -181,6 +193,7 @@ export default class Sprite extends Group{
 		}
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
 		peices.map(v => {
+			console.log(v)
 			const i = DuduCanvas.Image(v)
 			i.alpha = alpha
 			i[draw](ctx)

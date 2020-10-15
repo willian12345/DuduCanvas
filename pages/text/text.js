@@ -1,5 +1,5 @@
 /**
- * 使用单个引用对象
+ * 单独引入需要使用的类，以便编译器实现树摇减小体积
  */
 import { Stage, Text, Group } from '../../libs/index.js'
 

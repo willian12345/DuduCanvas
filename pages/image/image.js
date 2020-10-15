@@ -9,8 +9,8 @@ Page({
         id: 'health',
         src: '/image/health-bad.png'
       },{
-        id: 'btn1',
-        src: '/image/btn1.png'
+        id: 'button',
+        src: '/image/button.png'
       },{
         id: 'btn',
         src: '/image/btn.png'
@@ -20,36 +20,20 @@ Page({
       DuduCanvas.Stage('#myCanvas', (stage, ctx) => {
         let img = DuduCanvas.Image({
           image: loader.get('avatar'),
-          sx: 300,
-          sy: 0, 
-          sWidth: 60, 
-          sHeight: 60,
+          width: 45, 
+          height: 45,
         })
-    
-
-        let sprite = DuduCanvas.Sprite(loader.get('btn1'), {left: 30, top: 33, right: 30, bottom: 33})
-        sprite.x = 200
-        sprite.y = 300
-        sprite.regX = 346/2
-        sprite.regY = 185/2
-        sprite.scaleX = .5
-        sprite.scaleY = .5
-        sprite.width = 346
-        sprite.height = 185
-        sprite.rotation = 45
-
-    
         
-        let sprite1 = DuduCanvas.Sprite(loader.get('btn'))
-        sprite1.setSlice({left: 147, top: 188, right: 101, bottom: 174})
-        sprite1.scaleX = .5
-        sprite1.scaleY = .5
-        sprite1.width = 569
-        sprite1.height = 600
+        let sprite = DuduCanvas.Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
+        sprite.x = 375 / 2
+        sprite.y = 300
+        sprite.regX = 328/2
+        sprite.regY = 64/2
+        sprite.width = 328
+        sprite.height = 104
     
         stage.addChild(img)
         stage.addChild(sprite)
-        stage.addChild(sprite1)
         stage.render()
       })
     })
