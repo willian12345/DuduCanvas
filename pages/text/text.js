@@ -1,20 +1,24 @@
-import DuduCanvas from '../../libs/DuduCanvas.js'
+/**
+ * 使用单个引用对象
+ */
+import { Stage, Text, Group } from '../../libs/index.js'
 
 Page({
   onLoad: function () {
-    DuduCanvas.Stage('#myCanvas', (stage, ctx) => {
-      const g = DuduCanvas.Group()
+    console.log(Stage)
+    new Stage('#myCanvas', (stage, ctx) => {
+      const g = new Group()
       g.x = 375/2
       g.y = 200
       g.rotation = 45
       
-      const t0 = DuduCanvas.Text({font: 'italic 18px sans-serif'})
+      const t0 = new Text({font: 'italic 18px sans-serif'})
       t0.color = 'red'
-      t0.text = '你好嘟嘟-司机开车都在用的社交app'
+      t0.text = '通过单独引用各个类的方式实现编码'
 
-      const t1 = DuduCanvas.Text()
+      const t1 = new Text()
       t1.color = 'green'
-      t1.text = '你好嘟嘟-司机开车都在用的社交app'
+      t1.text = '你好嘟嘟-通过单独引用各个类的方式实现编码'
       g.addChild(t1)
       
 

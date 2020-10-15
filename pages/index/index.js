@@ -1,5 +1,4 @@
 import DuduCanvas from '../../libs/DuduCanvas.js'
-
 Page({
   onLoad: function () {
     DuduCanvas.load([{
