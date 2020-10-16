@@ -1,8 +1,14 @@
+/**
+ * 一次引入全部开放类至 DuduCanvas 对象内，方便使用
+ * eg:
+ * const t1 = DuduCanvas.Text({text: '你好世界'})
+ * 
+ */
 import Group from './Group.js'
 import Shape from './Shape.js'
 import Stage from './Stage.js'
 import Text from './Text.js'
-import Image from './Image.js'
+import ImageDudu from './ImageDudu.js'
 import ImgLoader from './ImgLoader.js'
 import Sprite from './Sprite.js'
 import base64src from './base64src.js'
@@ -29,8 +35,8 @@ export default {
 	Text: t => {
 		return new Text(t)
 	},
-	Image: args => {
-		return new Image(args)
+	ImageDudu: args => {
+		return new ImageDudu(args)
 	},
 	Sprite: (...args) => {
 		return new Sprite(...args)

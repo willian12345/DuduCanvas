@@ -1,7 +1,7 @@
 /**
  * 单独引入需要使用的类，以便编译器实现树摇减小体积
  */
-import { Stage, Text, Group } from '../../duducanvas/index.js'
+import { Stage, Text, Group } from '../../duducanvas/index'
 
 Page({
   onLoad: function () {

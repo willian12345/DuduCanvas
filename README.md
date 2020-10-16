@@ -1,4 +1,5 @@
 ## 微信小程序 canvas ui 基础库
+## 开发中...
 
 #### 快速开始
 
@@ -9,7 +10,7 @@
 ##### 添加图片
 ```
   // 从 duducanvas 引入使用到的类
-  import { ImgLoader, Stage, Image} from '../../duducanvas/index.js'
+  import { ImgLoader, Stage, ImageDudu} from '../../duducanvas/index.js'
   
   // 如果有图片先加载图片
   new ImgLoader([{
@@ -20,12 +21,18 @@
   .done((loader) => {
     // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
     new Stage('#myCanvas', stage => {
+      // 圆形用于遮罩
+      const circle = new Shape()
+      circle.graphics.fillCircle(50, 50, 50)
+
       // 添加图片，
-      const avatar = new Image({
+      const avatar = new ImageDudu({
         image: loader.get('avatar'),
         width: 100, 
         height: 100,
       })
+      avatar.mask = circle // 给方形的头像设置圆形遮罩
+
       
       // 添加至舞台
       stage.addChild(img)
@@ -89,13 +96,13 @@ new Stage('#myCanvas', stage => {
 - Stage
 - DisplayObject
 - Group
-- Image
+- ImageDudu
 - Shape
 - Sprite
 - Text
 
-## 边用边开发中...
-## 小程序 canvas 海报生成注意事项
+
+### 小程序 canvas 海报生成注意事项
 - 网络图片必须先通过 getImageInfo 下载后才能绘制
 - 微信头像需要下载后上传至自己的服务器绘制，直接使用微信服务器上的头像绘制时某些 Android 机型上会下载超时导致绘制失败
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败

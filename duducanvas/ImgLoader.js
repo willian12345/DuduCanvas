@@ -20,8 +20,9 @@ export default class ImgLoader {
 		this[isloaded] = false
 		this[imageMap] = new Map()
 
-		this.load(imgArr)
-
+		setTimeout(()=>{
+			this.load(imgArr)
+		}, 0)
 		return this
 	}
 	get(id){
@@ -32,7 +33,7 @@ export default class ImgLoader {
 			getImageInfo({
         src: v.src,
         success: res => {
-          // console.log(res)
+					// 为本地图片地址最前主动加上 '/' , 以符合绘图接口的路径规则
           if(!PATH_REG.test(v.src)){
           	res.path = '/' + res.path
           }
@@ -46,9 +47,9 @@ export default class ImgLoader {
           let p = this[loaded] / this[total]
           this[loadingCallbacks].forEach(v => {
           	v(p)
-          })
+					})
           if(p >= 1){
-          	this[isloaded] = true
+						this[isloaded] = true
           	this[doneCallbacks].forEach(v => {
 	          	v(this)
 	          })
@@ -63,6 +64,9 @@ export default class ImgLoader {
 		return this
 	}
 	done(f){
+		if(f && this[isloaded]){
+			f(this)
+		}
 		this[doneCallbacks].push(f)
 		return this
 	}

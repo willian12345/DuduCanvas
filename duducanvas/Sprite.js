@@ -1,5 +1,5 @@
 import Group from './Group.js'
-import Image from './Image.js'
+import ImageDudu from './ImageDudu.js'
 import { draw, getAlpha } from './config'
 
 const drawImage = Symbol('drawImage')
@@ -18,7 +18,7 @@ export default class Sprite extends Group{
 	sliced = false
 	/**
 	 * 
-	 * @param {*} img Image 对象
+	 * @param {*} img ImageDudu 对象
 	 * @param {*} sliceBound 九宫格图 {left: 0, top: 0, right: 0, bottom: 0}
 	 */
 	constructor(img, sliceBound){
@@ -63,7 +63,7 @@ export default class Sprite extends Group{
 		})
 	}
 	[drawImage](ctx, x, y){
-		const img = new Image({
+		const img = new ImageDudu({
 			image: this.img,
 			dx: x,
 			dy: y,
@@ -193,8 +193,7 @@ export default class Sprite extends Group{
 		}
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
 		peices.map(v => {
-			console.log(v)
-			const i = new Image(v)
+			const i = new ImageDudu(v)
 			i.alpha = alpha
 			i[draw](ctx)
 		})

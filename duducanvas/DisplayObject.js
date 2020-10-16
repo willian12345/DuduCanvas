@@ -20,18 +20,17 @@ export default class DisplayObject {
 	y = 0
 	width = 0
 	height = 0
-	visible = true
 	alpha = 1
 	regX = 0
 	regY = 0
 	scaleX = 1
 	scaleY = 1
 	rotation = 0
-	filters = null
 	parent = null
 	childs = []
 	shadow = ''
-	zIndex = 0
+	// skewX = 0
+	// skewY = 0
 	constructor(){
 		this[scale] = 1
 		this[id] = displayObjectId++

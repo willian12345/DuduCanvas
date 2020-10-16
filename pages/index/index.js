@@ -1,7 +1,8 @@
-import { ImgLoader, Stage, Text, Group, Image} from '../../duducanvas/index.js'
+import { ImgLoader, Stage, Text, Group, ImageDudu, Shape} from '../../duducanvas/index'
 Page({
   onLoad: function () {
-    new ImgLoader([{
+    new ImgLoader([
+      {
         id: 'avatar',
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
       }
@@ -16,12 +17,17 @@ Page({
         t1.x = 40
         t1.y = 40
 
+        // 圆形用于遮罩
+        const circle = new Shape()
+        circle.graphics.fillCircle(50, 50, 50)
 
-        const avatar = new Image({
+        const avatar = new ImageDudu({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
         })
+        avatar.mask = circle // 给方形的头像设置圆形遮罩
+
 
         const name = new Text()
         name.color = '#6c5149'

@@ -1,4 +1,3 @@
-//index.js
 import DuduCanvas from '../../duducanvas/DuduCanvas.js'
 
 Page({
@@ -60,7 +59,7 @@ Page({
         g.regX = 60
         g.regY = 60
         g.rotation = 45
-        const avatar = DuduCanvas.Image({
+        const avatar = DuduCanvas.ImageDudu({
           image: loader.get('avatar'),
           width: 100,
           height: 100

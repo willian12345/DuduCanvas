@@ -1,13 +1,14 @@
 /**
  * 图片类
+ * ImageDudu 名是为了防止后期可能与系统中保留的 Image 类冲突
  */
 import DisplayObject from './DisplayObject.js'
 import { draw, getAlpha } from './config'
 
 const drawImage = Symbol('drawImage')
 
-export default class Image extends DisplayObject{	
-	name = 'Image'
+export default class ImageDudu extends DisplayObject{	
+	name = 'ImageDudu'
 	image = null
 	path = ''
 	sx = undefined

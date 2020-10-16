@@ -1,8 +1,8 @@
-import { ImgLoader, Stage, Image, Sprite, Text } from '../../duducanvas/index.js'
+import { ImgLoader, Stage, ImageDudu, Sprite, Text } from '../../duducanvas/index'
 
 Page({
   onLoad: function () {
-    // 例子按钮来自 LayaAir
+    // 例子按钮图片来自 LayaAir
     new ImgLoader([
       {
         id: 'button',
@@ -11,9 +11,8 @@ Page({
     ])
     .done( loader => {
       new Stage('#myCanvas', stage => {
-        
         // 原始按钮大小
-        let button = new Image({
+        let button = new ImageDudu({
           image: loader.get('button'),
           width: 128, 
           height: 64
