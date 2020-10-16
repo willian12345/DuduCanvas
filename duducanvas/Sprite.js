@@ -1,5 +1,5 @@
 import Group from './Group.js'
-import DuduCanvas from './DuduCanvas.js'
+import Image from './Image.js'
 import { draw, getAlpha } from './config'
 
 const drawImage = Symbol('drawImage')
@@ -63,7 +63,7 @@ export default class Sprite extends Group{
 		})
 	}
 	[drawImage](ctx, x, y){
-		const img = DuduCanvas.Image({
+		const img = new Image({
 			image: this.img,
 			dx: x,
 			dy: y,
@@ -194,7 +194,7 @@ export default class Sprite extends Group{
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
 		peices.map(v => {
 			console.log(v)
-			const i = DuduCanvas.Image(v)
+			const i = new Image(v)
 			i.alpha = alpha
 			i[draw](ctx)
 		})

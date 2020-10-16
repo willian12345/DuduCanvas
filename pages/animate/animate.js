@@ -1,6 +1,5 @@
 //index.js
-import DuduCanvas from '../../libs/DuduCanvas.js'
-import { findNodes }  from '../../libs/utils'
+import DuduCanvas from '../../duducanvas/DuduCanvas.js'
 
 Page({
   onLoad: function () {

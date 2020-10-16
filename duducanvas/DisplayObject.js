@@ -1,7 +1,5 @@
 import { getPosAfterRotation, getMaxValue, findNodes }  from './utils'
 import { draw, getAlpha } from './config'
-import DuduCanvas from './DuduCanvas'
-
 let context = null
 let displayObjectId = 0
 const id = Symbol('id')
@@ -305,7 +303,7 @@ export default class DisplayObject {
 				
 				if(this.name === 'Group'){
 					// 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
-					const rect = DuduCanvas.Shape()
+					const rect = new Object()
 					rect.width = right - left
 					rect.height = bottom - top
 					rect.x = this.x

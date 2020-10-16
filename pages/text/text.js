@@ -1,11 +1,10 @@
 /**
  * 单独引入需要使用的类，以便编译器实现树摇减小体积
  */
-import { Stage, Text, Group } from '../../libs/index.js'
+import { Stage, Text, Group } from '../../duducanvas/index.js'
 
 Page({
   onLoad: function () {
-    console.log(Stage)
     new Stage('#myCanvas', (stage, ctx) => {
       const g = new Group()
       g.x = 375/2
@@ -25,6 +24,5 @@ Page({
       stage.addChild(t0, g)
       stage.render()
     }, this)
-    
   }
 })

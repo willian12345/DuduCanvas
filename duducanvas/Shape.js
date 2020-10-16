@@ -39,7 +39,6 @@ const append = Symbol('append')
 const bounds = Symbol('bounds')
 const instructions = Symbol('instructions')
 
-
 export default class Shape extends DisplayObject{
 	name = 'Shape'
 	isMask = false
