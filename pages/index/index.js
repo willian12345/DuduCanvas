@@ -1,4 +1,3 @@
-// import DuduCanvas from '../../duducanvas/DuduCanvas.js'
 import { ImgLoader, Stage, Text, Group, Image} from '../../duducanvas/index.js'
 Page({
   onLoad: function () {
@@ -18,20 +17,20 @@ Page({
         t1.y = 40
 
 
-        let avatar = new Image({
+        const avatar = new Image({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
         })
 
-        let name = new Text()
+        const name = new Text()
         name.color = '#6c5149'
         name.text = '龙傲天'
         name.textAlign = "center"
         name.x = avatar.width / 2
         name.y = 110
 
-        let group = new Group()
+        const group = new Group()
         group.x = stage.width / 2
         group.y = 220
         group.regX = avatar.width / 2
