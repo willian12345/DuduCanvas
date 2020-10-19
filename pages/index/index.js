@@ -7,7 +7,7 @@ Page({
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
       }
     ])
-    .done( loader => {
+    .then( loader => {
       new Stage('#myCanvas', stage => {
 
         const t1 = new Text()

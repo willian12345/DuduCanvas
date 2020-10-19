@@ -1,34 +1,32 @@
+// getImageInfo, 如果要获取网络图片的信息，需要预先在开发者平台配置 download 的域名白名单
 import { getImageInfo } from './config'
 
-const isloaded  = Symbol('isloaded')
 const total  = Symbol('total')
 const loaded  = Symbol('loaded')
-const loadingCallbacks  = Symbol('loadingCallbacks')
-const doneCallbacks  = Symbol('doneCallbacks')
+const loadProgressCallback  = Symbol('loadProgressCallback')
 const imageMap = Symbol('imageMap')
 const PATH_REG = /^http*/
 
 /**
- * getImageInfo, 如果要获取网络图片的信息，需要预先在开发者平台配置 download 的域名白名单
+ * 预加载图片
+ * 
  */
 export default class ImgLoader {
-	constructor(imgArr){
+	constructor(imgArr, loadProgressCallback){
 		this[total] = imgArr.length
 		this[loaded] = 0
-		this[loadingCallbacks] = []
-		this[doneCallbacks] = []
-		this[isloaded] = false
+		this[loadProgressCallback] = loadProgressCallback
 		this[imageMap] = new Map()
-
-		setTimeout(()=>{
-			this.load(imgArr)
-		}, 0)
-		return this
+		
+		// 直接返回一个 Promise
+		return new Promise((resolve) => {
+			this.load(imgArr, resolve)
+		})
 	}
 	get(id){
 		return this[imageMap].get(id)
 	}
-	load(imgArr){
+	load(imgArr, resolve){
 		imgArr.forEach( v => {
 			getImageInfo({
         src: v.src,
@@ -43,31 +41,17 @@ export default class ImgLoader {
           	height: res.height,
 
           })
-          this[loaded]++
-          let p = this[loaded] / this[total]
-          this[loadingCallbacks].forEach(v => {
-          	v(p)
-					})
-          if(p >= 1){
-						this[isloaded] = true
-          	this[doneCallbacks].forEach(v => {
-	          	v(this)
-	          })
+					this[loaded]++
+					const progress = this[loaded] / this[total]
+					if(this[loadProgressCallback]){
+						this[loadProgressCallback](p)
+					}
+          if(progress >= 1){
+						resolve(this)
           }
         }
       })
 		})
-		return this
-	}
-	loading(f){
-		this[loadingCallbacks].push(f)
-		return this
-	}
-	done(f){
-		if(f && this[isloaded]){
-			f(this)
-		}
-		this[doneCallbacks].push(f)
 		return this
 	}
 }

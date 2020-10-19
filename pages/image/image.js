@@ -9,7 +9,7 @@ Page({
         src: '/image/button.png'
       }
     ])
-    .done( loader => {
+    .then( loader => {
       new Stage('#myCanvas', stage => {
         // 原始按钮大小
         let button = new ImageDudu({

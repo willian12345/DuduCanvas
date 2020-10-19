@@ -18,7 +18,7 @@
         src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
       }
   ])
-  .done((loader) => {
+  .then((loader) => {
     // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
     new Stage('#myCanvas', stage => {
       // 圆形用于遮罩
