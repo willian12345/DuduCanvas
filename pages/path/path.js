@@ -65,8 +65,6 @@ Page({
 
 
       stage.addChild(rect1, curve)
-
-      stage.render()
     }, this)
   }
 })

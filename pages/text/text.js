@@ -22,7 +22,6 @@ Page({
       
 
       stage.addChild(t0, g)
-      stage.render()
     }, this)
   }
 })

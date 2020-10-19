@@ -3,6 +3,7 @@ import { getImageInfo } from './config'
 
 const total  = Symbol('total')
 const loaded  = Symbol('loaded')
+const load  = Symbol('load')
 const loadProgressCallback  = Symbol('loadProgressCallback')
 const imageMap = Symbol('imageMap')
 const PATH_REG = /^http*/
@@ -20,13 +21,13 @@ export default class ImgLoader {
 		
 		// 直接返回一个 Promise
 		return new Promise((resolve) => {
-			this.load(imgArr, resolve)
+			this[load](imgArr, resolve)
 		})
 	}
 	get(id){
 		return this[imageMap].get(id)
 	}
-	load(imgArr, resolve){
+	[load](imgArr, resolve){
 		imgArr.forEach( v => {
 			getImageInfo({
         src: v.src,

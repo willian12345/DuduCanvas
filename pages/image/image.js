@@ -41,7 +41,6 @@ Page({
         t2.y = sprite.y + sprite.height
 
         stage.addChild(button, t1, sprite, t2)
-        stage.render()
       })
     })
   }

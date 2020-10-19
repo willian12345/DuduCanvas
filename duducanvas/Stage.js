@@ -1,5 +1,6 @@
 import DisplayObject from './DisplayObject.js'
 import { draw } from './config'
+const render = Symbol('render')
 
 export default class Stage extends DisplayObject {
 	constructor(id, callback, PageInstance) {
@@ -23,6 +24,8 @@ export default class Stage extends DisplayObject {
 				}
 				DisplayObject.setContext(this._context)	
 				callback(this, this._context)
+				// 自动调用一次渲染
+				this[render]()
 			}else{
 				throw new Error('无法找到 canvas ')
 			}
@@ -33,7 +36,11 @@ export default class Stage extends DisplayObject {
 	getContext(){
 		return this._context
 	}
-	render(){
+	update(){
+		this[render]()
+	}
+	[render](){
+		this._context.clearRect(0, 0, this.width, this.height)
 		// 调用 draw 方法绘制自身级子级
 		this[draw]()
 		// 调用 canvas draw 方法渲染图像

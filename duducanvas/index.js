@@ -12,3 +12,4 @@ export { default as Sprite } from './Sprite.js';
 export { default as base64src } from './base64src.js'
 export { default as CreateLinearGradient } from './color/CreateLinearGradient'
 export { default as CreateRadialGradient } from './color/CreateRadialGradient'
+

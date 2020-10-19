@@ -43,7 +43,7 @@ Page({
         group.addChild(avatar, name)
         
         stage.addChild(t1, group)
-        stage.render()
+        
       }, this)
     })
     

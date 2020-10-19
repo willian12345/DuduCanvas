@@ -36,8 +36,6 @@
       
       // 添加至舞台
       stage.addChild(img)
-      // 渲染
-      stage.render()      
     }, this)
   })
 ```
@@ -53,8 +51,6 @@ new Stage('#myCanvas', stage => {
   t1.y = 300
   // 添加至舞台
   stage.addChild(t1)
-  // 别忘记渲染
-  stage.render()
 })
 ```
 
@@ -84,10 +80,14 @@ new Stage('#myCanvas', stage => {
   new Stage('#myCanvas', (stage, context) => {
     context.fillStyle = 'blue'
     context.fillRect(50, 100, 100, 100)
-    // 这里需要调用 stage.render 实例方法才能保住在 stage 上原先绘制的图形
-    // 如果直接调用的是 context.draw()，则画布将完全重绘
-    stage.render()
   })
+```
+
+##### 重新渲染舞台
+###### ***异步添加的元素***，需要手动调用 stage.update 方法
+```
+  // 重新渲染舞台
+  stage.update()
 ```
 
 

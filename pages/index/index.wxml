@@ -5,6 +5,6 @@
     <navigator url="/pages/path/path" class="nav" hover-class="navigator-hover">path</navigator>
     <navigator url="/pages/text/text" class="nav" hover-class="navigator-hover">文本</navigator>
     <navigator url="/pages/image/image" class="nav" hover-class="navigator-hover">图片</navigator>
-    <navigator url="/pages/animate/animate" class="nav" hover-class="navigator-hover">动画</navigator>
+    <navigator url="/pages/animate/animate" class="nav" hover-class="navigator-hover">异步渲染</navigator>
   </view>
 </view>
