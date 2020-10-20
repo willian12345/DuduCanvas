@@ -31,16 +31,16 @@ export default class Sprite extends Group{
 			this[setSlice](sliceBound)
 		}
 	}
-	get rotation(){
-		return this[rotation]
-	}
-	set rotation(r){
-		if(this.sliced){
-			throw new Error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转')
-		}else{
-			this[rotation] = r
-		}
-	}
+	// get rotation(){
+	// 	return this[rotation]
+	// }
+	// set rotation(r){
+	// 	if(this.sliced){
+	// 		throw new Error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
+	// 	}else{
+	// 		this[rotation] = r
+	// 	}
+	// }
 	[draw](ctx){
 		const [x, y] = this.getPosition()
 		
@@ -192,11 +192,18 @@ export default class Sprite extends Group{
 			dy: ltParams.dy + ltParams.dHeight,
 		}
 		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
-		peices.map(v => {
+		// 用离屏渲染成整张图再绘制到主canvas中解决接触缝隙问题以及性能问题
+		// const offScreen = wx.createOffscreenCanvas(375, 375)
+		// var offScreenCtx = offScreen.getContext("2d")		
+		if(this.rotation != 0){
+			console.error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
+		}
+		peices.map( v => {
 			const i = new ImageDudu(v)
 			i.alpha = alpha
 			i[draw](ctx)
 		})
+
 		return this
 	}
 	/**

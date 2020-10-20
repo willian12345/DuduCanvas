@@ -12,7 +12,7 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {
         // 原始按钮大小
-        let button = new ImageDudu({
+        const button = new ImageDudu({
           image: loader.get('button'),
           width: 128, 
           height: 64
@@ -27,7 +27,7 @@ Page({
         
         
         // 九宫格按钮，可随意拉升宽高示例
-        let sprite = new Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
+        const sprite = new Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
         sprite.x = stage.width / 2
         sprite.y = 280
         sprite.width = 328
@@ -41,6 +41,7 @@ Page({
         t2.y = sprite.y + sprite.height
 
         stage.addChild(button, t1, sprite, t2)
+        stage.addChild(sprite)
       })
     })
   }

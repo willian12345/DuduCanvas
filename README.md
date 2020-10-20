@@ -108,3 +108,7 @@ new Stage('#myCanvas', stage => {
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败
 - canvas 不能像h5中的canvas那样通过style来缩小，所以为了生成海报不模糊必须将 canvas 至少设置放大两倍，然后将canvas通过 css position 负值移到屏幕外，绘制后可以直接通过image标签来实现预览
 
+#### TodoList
+- skew 属性，基本没在业务中使用到过
+- addEventListener 事件系统，事件系统感觉有点儿鸡肋，如果加上了事件系统，那为什么不干脆使用小游戏开发
+
