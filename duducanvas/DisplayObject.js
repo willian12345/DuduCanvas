@@ -264,7 +264,7 @@ export default class DisplayObject {
 			x = x
 			y = y
 		}
-		
+
 		return {left: x, top: y, right: x + w, bottom: y + h, width: w, height: h}
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
@@ -302,7 +302,7 @@ export default class DisplayObject {
 				
 				if(this.name === 'Group'){
 					// 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
-					const rect = new Object()
+					const rect = new DisplayObject()
 					rect.width = right - left
 					rect.height = bottom - top
 					rect.x = this.x

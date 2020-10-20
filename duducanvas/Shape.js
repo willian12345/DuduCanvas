@@ -65,6 +65,10 @@ export default class Shape extends DisplayObject{
 	[append](instructionsObject) {
 		this[instructions].push(instructionsObject)
 	}
+	getBound(){
+		console.error('Shape 不提供getBound方法')
+		return null
+	}
 	// 绘图命令
 	graphics = {
 		beginPath: () => {
@@ -149,7 +153,7 @@ export default class Shape extends DisplayObject{
 		 */
 		strokeRect: (x = 0, y = 0, w = 10, h = 20) => {
 			this[bounds].push({x: x, y: y, w: w, h: h})
-			this[append](new Rect(x,y,w,h))
+			this[append](new Rect(x,y,w,h, true))
 			return this.graphics
 		},
 		/**

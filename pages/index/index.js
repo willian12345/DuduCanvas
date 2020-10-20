@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Group, ImageDudu, Shape} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Group, ImageDudu, Shape, Sprite} from '../../duducanvas/index'
 Page({
   onLoad: function () {
     new ImgLoader([
@@ -10,39 +10,65 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {
 
-        const t1 = new Text()
-        t1.color = '#cda79f'
-        t1.text = 'DuduCanvas 示例'
-        t1.fontSize = 20
-        t1.x = 40
-        t1.y = 40
+        const stageWidth = stage.width
+        const stageHeight = stage.height
+          
+        const avatar = new ImageDudu({
+          image: loader.get('avatar'),
+          width: 40, 
+          height: 40,
+        })
+        avatar.x = 20
+        avatar.y = 20
 
         // 圆形用于遮罩
         const circle = new Shape()
-        circle.graphics.fillCircle(50, 50, 50)
-
-        const avatar = new ImageDudu({
-          image: loader.get('avatar'),
-          width: 100, 
-          height: 100,
-        })
+        circle.graphics.fillCircle(avatar.width / 2, avatar.height / 2, avatar.width / 2)
         avatar.mask = circle // 给方形的头像设置圆形遮罩
 
+        stage.addChild(avatar)
 
-        const name = new Text()
-        name.color = '#6c5149'
-        name.text = '龙傲天'
-        name.textAlign = "center"
-        name.x = avatar.width / 2
-        name.y = 110
-
-        const group = new Group()
-        group.x = stage.width / 2
-        group.y = 220
-        group.regX = avatar.width / 2
-        group.addChild(avatar, name)
         
-        stage.addChild(t1, group)
+        // 主要类结构图
+        
+        const g = new Group()
+        g.x = stageWidth * .5
+        g.y = 140
+
+        const textStage = new Text()
+        textStage.text = 'Stage'
+        textStage.fontSize = 20
+        textStage.textAlign = 'center'
+
+        const rect = new Shape()
+        rect.graphics.strokeStyle('#999')
+        .strokeRect(-textStage.width * .5,  0, textStage.width,  textStage.height)
+        
+        g.addChild(textStage, rect)
+        stage.addChild(g)
+        
+        // const g1 = new Group()
+        // g1.x = stageWidth * .5
+        // g1.y = 140 + textStage.height
+
+    
+        
+        
+
+        const textDisplayObject = new Text()
+        textDisplayObject.text = 'DisplayObject'
+        textDisplayObject.fontSize = 20
+        textDisplayObject.textAlign = 'center'
+        textDisplayObject.x = stageWidth * .5
+        textDisplayObject.y = 190
+        const rectDisplayObject = new Shape()
+        rectDisplayObject.graphics.strokeStyle('#999')
+        .strokeRect(textDisplayObject.x - textDisplayObject.width * .5 , textDisplayObject.y, textDisplayObject.width, textDisplayObject.height)
+        stage.addChild(textDisplayObject, rectDisplayObject)
+
+        const textArr = ['']
+        
+        
         
       }, this)
     })

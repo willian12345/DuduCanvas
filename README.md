@@ -101,6 +101,11 @@ new Stage('#myCanvas', stage => {
 - Sprite
 - Text
 
+#### 注意事项
+- Shape 类没有没有自动计算 width 与 height 属性，如有需要可自行主动设置
+- Group 类没有自动计算 width 与 height 属性，可通过实例方法 getBound 获取 {left, top, right, bottom}
+
+
 
 ### 小程序 canvas 海报生成注意事项
 - 网络图片必须先通过 getImageInfo 下载后才能绘制
