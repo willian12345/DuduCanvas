@@ -19,7 +19,6 @@ export default class ImageDudu extends DisplayObject{
 	dy = 0
 	dWidth = undefined
 	dHeight = undefined
-	addChild = null
 	constructor(args){
 		super()
 		for(let v in args){
@@ -77,6 +76,7 @@ export default class ImageDudu extends DisplayObject{
 		}else{
 			this[drawImage](ctx, x, y)
 		}
+		this.childs && this.childs.map( v => v[draw](ctx))
 	}
 }
 

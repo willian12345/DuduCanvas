@@ -49,6 +49,8 @@ export default class Shape extends DisplayObject{
 		this[bounds] = []
 		this.width = 0
 		this.height = 0
+		// 新建一个shape对象时先执行beginPath命令，以重新开始 path 上下文
+		this.graphics.beginPath()
 	}
 	[draw](context, isMask){
 		// shape 是否为遮罩

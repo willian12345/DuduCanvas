@@ -11,6 +11,9 @@ Page({
     ])
     .then( loader => {
       new Stage('#myCanvas', stage => {
+
+        
+
         // 原始按钮大小
         const button = new ImageDudu({
           image: loader.get('button'),
@@ -19,29 +22,30 @@ Page({
         })
         button.x = stage.width / 2 - button.width / 2
         button.y = 80
-
         const t1 = new Text({text: '原始按钮大小'})
-        t1.x = button.x
-        t1.y = button.y + button.height + 10
-        
-        
+        t1.fontSize = 14
+        t1.textAlign = 'center'
+        t1.x = button.width * .5
+        t1.y = button.height * .5 - (t1.height * .5)
+        button.addChild(t1)
         
         // 九宫格按钮，可随意拉升宽高示例
-        const sprite = new Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
-        sprite.x = stage.width / 2
-        sprite.y = 280
-        sprite.width = 328
-        sprite.height = 104
-        sprite.regX = sprite.width / 2
-        sprite.regY = sprite.height / 2
+        const bigButton = new Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
+        bigButton.x = stage.width * .5
+        bigButton.y = 280
+        bigButton.width = 288
+        bigButton.height = 80
+        bigButton.regX = bigButton.width * .5
+        bigButton.regY = bigButton.height * .5
 
-        const t2 = new Text({text: '变成九宫格按钮，可拉伸'})
+        const t2 = new Text({text: '九宫格拉伸按钮'})
+        t2.fontSize = 20
         t2.textAlign = 'center'
-        t2.x = sprite.x
-        t2.y = sprite.y + sprite.height
+        t2.x = bigButton.width * .5
+        t2.y = bigButton.height * .5 - (t2.height * .5)
+        bigButton.addChild(t2)
 
-        stage.addChild(button, t1, sprite, t2)
-        stage.addChild(sprite)
+        stage.addChild(button, bigButton)
       })
     })
   }

@@ -6,14 +6,19 @@ import { Stage, Text, Group } from '../../duducanvas/index'
 Page({
   onLoad: function () {
     new Stage('#myCanvas', (stage, ctx) => {
-      const g = new Group()
-      g.x = 375/2
-      g.y = 200
-      g.rotation = 45
       
       const t0 = new Text({font: 'italic 18px sans-serif'})
       t0.color = 'red'
       t0.text = '通过单独引用各个类的方式实现编码'
+      t0.x = 20
+      t0.y = 80
+      t0.rotation = 20
+
+      // 将文本放到 group 内
+      const g = new Group()
+      g.x = 375/2
+      g.y = 200
+      g.rotation = 90
 
       const t1 = new Text()
       t1.color = 'green'
