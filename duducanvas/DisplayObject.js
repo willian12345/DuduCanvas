@@ -6,7 +6,7 @@ const id = Symbol('id')
 const scale = Symbol('scale')
 const mask = Symbol('mask')
 
-const getBound = Symbol('getBound')
+const getBounds = Symbol('getBounds')
 const setShadow = Symbol('setShadow')
 
 
@@ -112,7 +112,7 @@ export default class DisplayObject {
 			// 调试显示可视对象边界线用于调试
 			
 			// if(!v.sliced){
-			// 	const b = v.getBound()
+			// 	const b = v.getBounds()
 			// 	context.beginPath();
 			// 	context.strokeStyle = 'blue'
 			// 	context.strokeRect(b.left,b.top,b.width,b.height);
@@ -235,10 +235,10 @@ export default class DisplayObject {
 	}
 	/**
 	 * 获取对象形变后的相较于舞台的绝对位置与宽度
-	 * scale 形变不在 getbound 计算之内
+	 * scale 形变不在 getBounds 计算之内
 	 * scale 形变后宽高可请自行乘上相应的 scale 倍数
 	 */
-	[getBound](){
+	[getBounds](){
 		let [x, y] = this.getPosition()
 		let w = this.width
 		let h = this.height
@@ -276,7 +276,7 @@ export default class DisplayObject {
 		return arr
 	}
 	// 获取元素的绝对宽度
-	getBound(){
+	getBounds(){
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
 			return this[getBound]()
@@ -310,7 +310,7 @@ export default class DisplayObject {
 					rect.regX = this.regX
 					rect.regY = this.regY
 					rect.rotation = this.rotation
-					return this[getBound].call(rect)
+					return this[getBounds].call(rect)
 				}else{
 					return {left, top, right, bottom, width: right - left, height: bottom - top}
 				}

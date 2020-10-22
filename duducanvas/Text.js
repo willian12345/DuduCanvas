@@ -39,7 +39,6 @@ export default class Text extends DisplayObject {
 			this.font = font
 			let fontSize = font.match(/\d+/)[0]
 			if(fontSize){
-				console.log(this.fontSize)
 				this.fontSize = parseInt(fontSize)
 				this.height = this.fontSize + this.lineDistance
 			}

@@ -1,22 +1,44 @@
+// 旋转 90 弧度 直接得出常数 (90 * Math.PI / 180) 免于实时计算
+const ROTATE_90DEG = 1.5707963267948966
+// 需要旋转的 Unicode 码范围, 如中、日、韩文字
+const NO_ROTATION_RANGE = [
+  [0x2E80, 0x2FEF],
+  [0x3040, 0x9FFF],
+  [0xAC00, 0xD7FF],
+  [0xF900, 0xFAFF],
+  [0x1D300, 0x1D35F],
+  [0x20000, 0x2FA1F]
+]
+
+function needRotation (char) {
+  let codePoint = char.codePointAt(0)
+  for (let [lowerBound, upperBound] of NO_ROTATION_RANGE) {
+    if (lowerBound <= codePoint && codePoint <= upperBound) {
+      return false
+    }
+  }
+  return true
+}
 /**
  *  文本绘制命令
  */
 export default class FillText {
+	instance = null
 	constructor (text, x, y) {
 		this.text = text
 		this.x  = x
 		this.y = y
 	}
 	exec(ctx, instance){
+		this.instance = instance
 		const [x, y] = instance.getPosition()
-		// let x = _x + this.x - instance.regX
-		// let y = _y + this.y - instance.regY
-		// let x = _x + this.x - instance.regX
-		// let y = _y + this.y - instance.regY
-		// console.log(_x, _y, this.x, this.y)
+		
 		ctx.font = instance.font
-		// 如果设置了文本框宽度，则需要判断是否显示成多行
-		if(instance.wrapWidth > -1){
+		if(instance.writeMode === 'vertical-rl'){
+			// 文字竖排从右向左
+			this.verticalRight2Left(ctx, x, y)
+		}else if(instance.wrapWidth > -1){
+			// 如果设置了文本框宽度，则需要判断是否显示成多行
 			let textArr = this.getTextArr(ctx, instance, this.text)
 			let h = 0
 			for(let i=0,l=textArr.length; i<l; i++){
@@ -47,5 +69,38 @@ export default class FillText {
 			i++
 		}
 		return arr
+	}
+	getVerticalTextInfo(){
+		// this.lineWidth = this.instance.fontSize
+		var arr = this.text.split('')
+		return arr
+	}
+	verticalRight2Left(ctx, x, y){
+		const textArr = this.getVerticalTextInfo()
+		const lineWidth = this.instance.fontSize + this.instance.lineDistance
+		const fontSize = this.instance.fontSize
+		const fontSizeHalf = fontSize * .5
+		let offsetY = y
+		let verticalHeight = 0
+		textArr.map( (t,i) => {
+			ctx.save()
+			if(needRotation(t)){
+				const left = x + fontSizeHalf
+				const top = offsetY + fontSizeHalf
+				ctx.translate(left , top)
+				ctx.rotate(ROTATE_90DEG)
+				ctx.translate(-left, -top)	
+				// x 和 y 此处要和正常没旋转时的文本一样对待
+				ctx.fillText(t, x, offsetY)
+				offsetY += fontSizeHalf
+				verticalHeight += fontSizeHalf
+			}else{
+				ctx.fillText(t, x, offsetY)
+				offsetY += fontSize
+				verticalHeight += fontSize
+			}
+			ctx.restore()
+		})
+		console.log(verticalHeight)
 	}
 }
