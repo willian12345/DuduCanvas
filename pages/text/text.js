@@ -9,14 +9,18 @@ Page({
 
       const t0 = new Text({font: 'italic 18px sans-serif'})
       t0.color = 'red'
-      // t0.text = '1.,文字竖排,从右向左, and hello 嘟嘟'
-      t0.text = '1.1.2 文字竖排 abcABC s 地'
-      t0.writeMode = 'vertical-rl'
+      t0.lineGap = 10 // 行间距
+      t0.writeMode = 'vertical-lr'
+      t0.text = '通过 vertical-rl 可实现文字竖排'
       t0.x = 100
       t0.y = 20
+      t0.wrapHeight = 200
+      console.log(t0.width)
 
       const t1 = new Text()
       t1.text = '你好嘟嘟-通过单独引用各个类的方式实现编码'
+      t1.wrapWidth = 100
+      console.log(t1.height)
 
       stage.addChild(t0, t1)
     }, this)

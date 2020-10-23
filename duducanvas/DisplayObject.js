@@ -109,6 +109,7 @@ export default class DisplayObject {
 			// 绘制完后弹栈
 			context.restore()
 
+			// context.setTransform(1, 0, 0, 1, 0, 0) 重置上下文向量坐标
 			// 调试显示可视对象边界线用于调试
 			
 			// if(!v.sliced){

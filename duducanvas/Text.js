@@ -22,8 +22,10 @@ export default class Text extends DisplayObject {
 	name = 'Text'
 	// 文本宽度，如果设置后文本超过此宽度，则文本换行
 	wrapWidth = -1
+	// 竖排文字时可设置高度，超市高度则文本换行
+	wrapHeight = -1
 	// 多行文本时的行距
-	lineDistance = 0
+	lineGap = 0
 	// 当前字体样式的属性。符合 CSS font 语法 的 DOMString 字符串，至少需要提供字体大小和字体族名。默认值为 10px sans-serif
 	font = `${defaultFontSize}px sans-serif`
 	fontSize = defaultFontSize
@@ -40,13 +42,13 @@ export default class Text extends DisplayObject {
 			let fontSize = font.match(/\d+/)[0]
 			if(fontSize){
 				this.fontSize = parseInt(fontSize)
-				this.height = this.fontSize + this.lineDistance
+				this.height = this.fontSize + this.lineGap
 			}
 		}
 		if(fontSize){
 			this.font = `${fontSize}px sans-serif`
 			this.fontSize = parseInt(fontSize)
-			this.height = fontSize  + this.lineDistance
+			this.height = fontSize  + this.lineGap
 		}
 		
 		if(color){
@@ -79,8 +81,8 @@ export default class Text extends DisplayObject {
 	get height(){
 		return this[_height]
 	}
-	set height(w){
-		this[_height] = w
+	set height(h){
+		this[_height] = h
 	}
 	get fontSize(){
 		return this[_fontSize]
@@ -88,12 +90,12 @@ export default class Text extends DisplayObject {
 	set fontSize(v){
 		this[_fontSize] = v
 		this[_width] = this.measureWidth(this.text, v)
-		this.height = v  + this.lineDistance
+		this.height = v  + this.lineGap
 	}
 	collectStatus(){
 		if(this.fontSize){
 			this.font = `${this.fontSize}px sans-serif`
-			this.height = this.fontSize  + this.lineDistance
+			this[_height] = this.fontSize  + this.lineGap
 		}
 
 		this.setTextAlign(this.textAlign)
@@ -182,17 +184,19 @@ export default class Text extends DisplayObject {
 		return this
 	}
 	/**
-	 * setLineDistance 设置多文本时文本行垂直间距
+	 * setlineGap 设置多文本时文本行垂直间距
 	 * @param { Number } h 相比使用行距，直接使用间距设置比较方便计算
 	 */
-	setLineDistance(h){
-		this.lineDistance = h
+	setlineGap(h){
+		this.lineGap = h
 		return this
 	}
 	setWrapWidth(w){
 		this.wrapWidth = w
-		this.width = w
-		this.height = (this.measureWidth(this[_text], this.fontSize) / w >> 0) * (this.fontSize + this.lineDistance)
+		return this
+	}
+	setWrapHeight(h){
+		this.wrapHeight = h
 		return this
 	}
 	measureWidth(text, fontSize){

@@ -34,15 +34,15 @@ export default class FillText {
 		const [x, y] = instance.getPosition()
 		
 		ctx.font = instance.font
-		if(instance.writeMode === 'vertical-rl'){
+		if(instance.writeMode === 'vertical-rl' || instance.writeMode === 'vertical-lr' ){
 			// 文字竖排从右向左
-			this.verticalRight2Left(ctx, x, y)
+			this.vertical(ctx, x, y)
 		}else if(instance.wrapWidth > -1){
 			// 如果设置了文本框宽度，则需要判断是否显示成多行
 			let textArr = this.getTextArr(ctx, instance, this.text)
 			let h = 0
 			for(let i=0,l=textArr.length; i<l; i++){
-				h = y + (i * (instance.fontSize + instance.lineDistance))
+				h = y + (i * (instance.fontSize + instance.lineGap))
 				ctx.fillText(textArr[i], x, h)
 			}
 		}else{
@@ -70,37 +70,44 @@ export default class FillText {
 		}
 		return arr
 	}
-	getVerticalTextInfo(){
-		// this.lineWidth = this.instance.fontSize
-		var arr = this.text.split('')
-		return arr
-	}
-	verticalRight2Left(ctx, x, y){
-		const textArr = this.getVerticalTextInfo()
-		const lineWidth = this.instance.fontSize + this.instance.lineDistance
+	// 文本竖排
+	vertical(ctx, x, y){
+		const textArr = this.text.split('')
+		const verticalLineWidth = this.instance.fontSize + this.instance.lineGap
+		const lineWidth = this.instance.writeMode === 'vertical-rl' ? -verticalLineWidth : verticalLineWidth
 		const fontSize = this.instance.fontSize
 		const fontSizeHalf = fontSize * .5
-		let offsetY = y
-		let verticalHeight = 0
-		textArr.map( (t,i) => {
-			ctx.save()
-			if(needRotation(t)){
-				const left = x + fontSizeHalf
-				const top = offsetY + fontSizeHalf
+		let offsetY = 0
+		let offsetX = 0
+		const wrapHeight = this.instance.wrapHeight
+		
+		textArr.map( (t) => {
+			if(needRotation(t)){	
+				// 如果竖直文本大于限制高度，x 轴则向左或向右移一行
+				if(wrapHeight > -1 && offsetY + y + fontSizeHalf > wrapHeight + y){
+					offsetX += lineWidth
+					offsetY = 0
+				}
+				
+				const left = x + offsetX + fontSizeHalf
+				const top = y + offsetY + fontSizeHalf
+				ctx.save()
 				ctx.translate(left , top)
 				ctx.rotate(ROTATE_90DEG)
 				ctx.translate(-left, -top)	
 				// x 和 y 此处要和正常没旋转时的文本一样对待
-				ctx.fillText(t, x, offsetY)
+				ctx.fillText(t, x + offsetX,  y + offsetY)
 				offsetY += fontSizeHalf
-				verticalHeight += fontSizeHalf
+				ctx.restore()
 			}else{
-				ctx.fillText(t, x, offsetY)
+				// 如果竖直文本大于限制高度，x 轴则向左移一行
+				if(wrapHeight > -1 && offsetY + y + fontSize > wrapHeight + y){
+					offsetX += lineWidth
+					offsetY = 0
+				}
+				ctx.fillText(t, x + offsetX, y + offsetY)
 				offsetY += fontSize
-				verticalHeight += fontSize
 			}
-			ctx.restore()
 		})
-		console.log(verticalHeight)
 	}
 }
