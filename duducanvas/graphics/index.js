@@ -1,4 +1,4 @@
-import { append, instructions } from '../config'
+import { append, instructions,  drawGraphics } from '../config'
 
 // 路径
 import BeginPath from './BeginPath'
@@ -31,7 +31,12 @@ export default class Graphics{
   }  	// 添加至指令集
 	[append](instructionsObject){
 		this[instructions].push(instructionsObject)
-	}
+  }
+  [drawGraphics](ctx){
+    this[instructions].map((instruction) => {
+			instruction.exec(ctx, this)
+		})
+  }
   graphics = {
     beginPath: () => {
       this[append](new BeginPath())
@@ -102,12 +107,12 @@ export default class Graphics{
       return this
     },
     fillRect: (x = 0, y = 0, w = 10, h = 20)=> {
-      this[bounds].push({x: x, y: y, w: w, h: h})
+      // this[bounds].push({x: x, y: y, w: w, h: h})
       this[append](new Rect(x, y, w, h))
       return this
     },
     fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius = 8, fill, stroke)=> {
-      this[bounds].push({x: x, y: y, w: w, h: h})
+      // this[bounds].push({x: x, y: y, w: w, h: h})
       this[append](new RoundRect(x, y, w, h, radius, fill, stroke))
       return this
     },
@@ -115,7 +120,7 @@ export default class Graphics{
      * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
      */
     strokeRect: (x = 0, y = 0, w = 10, h = 20)=> {
-      this[bounds].push({x: x, y: y, w: w, h: h})
+      // this[bounds].push({x: x, y: y, w: w, h: h})
       this[append](new Rect(x,y,w,h, true))
       return this
     },
