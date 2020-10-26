@@ -1,11 +1,11 @@
 import DisplayObject from './DisplayObject.js'
-import { draw } from './config'
+import { draw, createSelectorQuery, createCanvasContext } from './config'
 const render = Symbol('render')
 
 export default class Stage extends DisplayObject {
 	constructor(id, callback, PageInstance) {
 	  super()
-		const query = wx.createSelectorQuery()
+		const query = createSelectorQuery()
 		query.select(id)
 		.fields({node: true, size: true})
 		.exec(res => {
@@ -20,7 +20,7 @@ export default class Stage extends DisplayObject {
 					this._context = canvas.getContext('2d')
 				}else{
 					// 旧接口
-					this._context = wx.createCanvasContext(id.slice(1), PageInstance)
+					this._context = createCanvasContext(id.slice(1), PageInstance)
 				}
 				DisplayObject.setContext(this._context)	
 				callback(this, this._context)

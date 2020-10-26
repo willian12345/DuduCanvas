@@ -9,3 +9,11 @@ page{
   display: inline-block;
   margin: 0 12px;
 }
+.btn{
+  font-size: 11px;
+}
+.path{
+  width: 320px;
+  font-size: 10px;
+  word-wrap: break-word;
+}

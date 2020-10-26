@@ -1,5 +1,8 @@
 import { ImgLoader, Stage, Text, Group, Image, Shape, Sprite} from '../../duducanvas/index'
 Page({
+  data:{
+    tempPath: ''
+  },
   onLoad: function () {
     new ImgLoader([
       {
@@ -45,7 +48,33 @@ Page({
         
         
       }, this)
-    })
-    
+    }) 
+  },
+  genTempPath(){
+    wx.canvasToTempFilePath({
+			x: 0,
+			y: 0,
+			fileType: 'jpg',
+			quality: '.8',
+			canvasId: 'myCanvas',
+			success:  (res) => {
+        console.log(res.tempFilePath)
+        this.setData({
+          tempPath: res.tempFilePath
+        })
+        wx.showToast({
+					title: 'canvas转图成功' + res.tempFilePath,
+					duration: 3000
+				})
+			},
+			fail:  (res) => {
+				console.log(res)
+				wx.showToast({
+					title: 'canvas转图片失败' + JSON.stringify(res),
+					icon: 'none',
+					duration: 3000
+				})
+			}
+		}, this)
   }
 })
