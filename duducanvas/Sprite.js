@@ -1,5 +1,5 @@
 import Group from './Group.js'
-import ImageDudu from './ImageDudu.js'
+import Image from './Image.js'
 import { draw, getAlpha } from './config'
 
 const drawImage = Symbol('drawImage')
@@ -18,7 +18,7 @@ export default class Sprite extends Group{
 	sliced = false
 	/**
 	 * 
-	 * @param {*} img ImageDudu 对象
+	 * @param {*} img Image 对象
 	 * @param {*} sliceBound 九宫格图 {left: 0, top: 0, right: 0, bottom: 0}
 	 */
 	constructor(img, sliceBound){
@@ -63,7 +63,7 @@ export default class Sprite extends Group{
 		})
 	}
 	[drawImage](ctx, x, y){
-		const img = new ImageDudu({
+		const img = new Image({
 			image: this.img,
 			dx: x,
 			dy: y,
@@ -199,7 +199,7 @@ export default class Sprite extends Group{
 			console.error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
 		}
 		peices.map( v => {
-			const i = new ImageDudu(v)
+			const i = new Image(v)
 			i.alpha = alpha
 			i[draw](ctx)
 		})

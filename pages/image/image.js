@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, ImageDudu, Sprite, Text } from '../../duducanvas/index'
+import { ImgLoader, Stage, Image, Sprite, Text } from '../../duducanvas/index'
 
 Page({
   onLoad: function () {
@@ -15,7 +15,7 @@ Page({
         
 
         // 原始按钮大小
-        const button = new ImageDudu({
+        const button = new Image({
           image: loader.get('button'),
           width: 128, 
           height: 64

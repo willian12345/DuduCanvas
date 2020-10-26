@@ -10,7 +10,7 @@
 ##### 添加图片
 ```
   // 从 duducanvas 引入使用到的类
-  import { ImgLoader, Stage, ImageDudu} from '../../duducanvas/index.js'
+  import { ImgLoader, Stage, Image} from '../../duducanvas/index.js'
   
   // 如果有图片先加载图片
   new ImgLoader([{
@@ -26,7 +26,7 @@
       circle.graphics.fillCircle(50, 50, 50)
 
       // 添加图片，
-      const avatar = new ImageDudu({
+      const avatar = new Image({
         image: loader.get('avatar'),
         width: 100, 
         height: 100,
@@ -96,7 +96,7 @@ new Stage('#myCanvas', stage => {
 - Stage
 - DisplayObject
 - Group
-- ImageDudu
+- Image
 - Shape
 - Sprite
 - Text

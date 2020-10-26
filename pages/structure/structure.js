@@ -54,7 +54,7 @@ Page({
         structureGroup.addChild(verticalLine)
 
         // 五个一级子类名
-        const classArr = ['Text 类', 'DuduImage 类', 'Shape 类',  'Group 类', 'Sprite 类']
+        const classArr = ['Text 类', 'Image 类', 'Shape 类',  'Group 类', 'Sprite 类']
         const lineOffsetX = (stageWidth - 80) / classArr.length * .5
         // 集中放在一个 subClassGroup 内
         const subClassGroup = new Group()

@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Group, ImageDudu, Shape, Sprite} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Group, Image, Shape, Sprite} from '../../duducanvas/index'
 Page({
   onLoad: function () {
     new ImgLoader([
@@ -21,7 +21,7 @@ Page({
         const circle = new Shape()
         circle.graphics.fillCircle(50, 50, 50)
 
-        const avatar = new ImageDudu({
+        const avatar = new Image({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
