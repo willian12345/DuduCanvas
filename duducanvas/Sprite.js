@@ -1,6 +1,6 @@
 import Group from './Group.js'
 import Image from './Image.js'
-import { draw, getAlpha } from './config'
+import { draw, getAlpha,instructions } from './config'
 
 const drawImage = Symbol('drawImage')
 const drawSliced = Symbol('drawSliced')
@@ -59,6 +59,12 @@ export default class Sprite extends Group{
 		// 伸缩后的宽、高
 		this.enableWidth = (this.width - this[left] - this[right]) * this.scaleX
 		this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY
+
+		// 执行所有命令
+		this[instructions].map((instruction) => {
+			instruction.exec(ctx, this)
+		})
+
 		if(this.sliced){
 			// sprite 九宫格不允许使用 boxShadow
 			this[drawSliced](ctx, x, y, this[getAlpha]())
@@ -70,6 +76,7 @@ export default class Sprite extends Group{
 		this.childs.forEach( v =>{
 			v[draw](ctx)
 		})
+		
 	}
 	[drawImage](ctx, x, y){
 		const img = new Image({

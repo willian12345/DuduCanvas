@@ -1,7 +1,7 @@
 /**
  * 文本类
  */
-import { draw } from './config'
+import { draw, append, instructions } from './config'
 import DisplayObject from './DisplayObject'
 import Shape from './Shape'
 import FillText from './text/FillText'
@@ -9,8 +9,6 @@ import SetFillStyle from './text/SetFillStyle'
 import SetTextAlign from './text/SetTextAlign'
 import SetTextBaseline from './text/SetTextBaseline'
 
-const instruction = Symbol('instruction')
-const _append = Symbol('_append')
 const _text = Symbol('_text')
 const _width = Symbol('_width')
 const _height = Symbol('_height')
@@ -32,7 +30,6 @@ export default class Text extends DisplayObject {
 	height = defaultFontSize
 	constructor(t){
 		super()
-		this[instruction] = []
 		this.init(t)
 	}
 	init(t = {}){
@@ -61,10 +58,7 @@ export default class Text extends DisplayObject {
 			this[_text] = text
 		}
 	}
-	// 添加至指令集
-	[_append](instructionsObject){
-		this[instruction].push(instructionsObject)
-	}
+
 	get text(){
 		return this[_text]
 	}
@@ -106,14 +100,15 @@ export default class Text extends DisplayObject {
 	// 执行指令集
 	[draw](context){
 		this.collectStatus()
-
+		this[instructions].map((v) => {
+			v.exec(context, this)
+		})
+		
 		if(this.mask && this.mask.name === 'Shape'){
 			this.mask.masked = this
 			this.mask[draw](context, true)
 		}
-		this[instruction].map((v) => {
-			v.exec(context, this)
-		})
+		
 		
 	}
 	/**
@@ -122,7 +117,7 @@ export default class Text extends DisplayObject {
 	 */
 	setFillStyle(color='black'){
 		this.color = color
-		this[_append](new SetFillStyle(color))
+		this[append](new SetFillStyle(color))
 		return this
 	}
 	fillStyle(color){
@@ -142,7 +137,7 @@ export default class Text extends DisplayObject {
 
 		// !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
 		// !! 因为会错过画布更新
-		this[_append](new FillText(text, this.x, this.y))	
+		this[append](new FillText(text, this.x, this.y))	
 
 		return this
 	}
@@ -171,7 +166,7 @@ export default class Text extends DisplayObject {
 	 */
 	setTextBaseline(textBaseline) {
 		this.textBaseline = textBaseline
-		this[_append](new SetTextBaseline(textBaseline))
+		this[append](new SetTextBaseline(textBaseline))
 		return this
 	}
 	/**
@@ -180,7 +175,7 @@ export default class Text extends DisplayObject {
 	 */
 	setTextAlign(textAlign) {
 		this.textAlign = textAlign
-		this[_append](new SetTextAlign(textAlign))
+		this[append](new SetTextAlign(textAlign))
 		return this
 	}
 	/**

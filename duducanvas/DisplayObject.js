@@ -1,5 +1,6 @@
 import { getPosAfterRotation, getMaxValue, findNodes }  from './utils'
 import { draw, getAlpha } from './config'
+import Graphics from './graphics/index'
 let context = null
 let displayObjectId = 0
 const id = Symbol('id')
@@ -14,7 +15,7 @@ const setShadow = Symbol('setShadow')
  * 显示对象类
  */
 
-export default class DisplayObject {
+export default class DisplayObject  extends Graphics{
 	name = "DisplayObject"
 	x = 0
 	y = 0
@@ -32,6 +33,7 @@ export default class DisplayObject {
 	// skewX = 0
 	// skewY = 0
 	constructor(){
+		super()
 		this[scale] = 1
 		this[id] = displayObjectId++
 	}

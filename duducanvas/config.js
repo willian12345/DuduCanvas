@@ -4,7 +4,8 @@
  */
 export const draw = Symbol('draw')
 export const getAlpha = Symbol('getAlpha')
-
+export const append = Symbol('append')
+export const instructions = Symbol('instructions')
 
 
 

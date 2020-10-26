@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/image/image",
     "pages/text/text",
     "pages/structure/structure",
-    "pages/image/image",
     "pages/path/path",
     "pages/animate/animate"
   ],

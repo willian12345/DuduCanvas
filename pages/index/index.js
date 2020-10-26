@@ -19,6 +19,7 @@ Page({
         t1.fontSize = 20
         t1.x = 40
         t1.y = 40
+        t1.graphics.fillCircle(20, 20, 20)
 
         // 圆形用于遮罩
         const circle = new Shape()
