@@ -10,7 +10,7 @@ Page({
     .then( loader => {
       DuduCanvas.Stage('#myCanvas', stage => {
 
-        const avatar = DuduCanvas.ImageDudu({
+        const avatar = DuduCanvas.Image({
           image: loader.get('avatar'),
           width: 100,
           height: 100

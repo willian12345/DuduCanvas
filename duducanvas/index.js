@@ -1,6 +1,6 @@
 /**
  * 集中各类并提供输出引用
- * 单独引入并输出需要使用的类，以便编译器实现树摇减小体积
+ * 单独引入并输出需要使用的类，以便编译器实现树摇
  */
 export { default as ImgLoader } from './ImgLoader.js'
 export { default as Group } from './Group.js';

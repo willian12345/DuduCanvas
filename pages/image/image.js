@@ -30,7 +30,8 @@ Page({
         button.addChild(t1)
         
         // 九宫格按钮，可随意拉升宽高示例
-        const bigButton = new Sprite(loader.get('button'), {left: 29, top: 21, right: 23, bottom: 24})
+        const bigButton = new Sprite(loader.get('button'))
+        bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
         bigButton.x = stage.width * .5
         bigButton.y = 280
         bigButton.width = 288

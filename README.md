@@ -113,14 +113,7 @@ new Stage('#myCanvas', stage => {
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败
 - canvas 不能像h5中的canvas那样通过style来缩小，所以为了生成海报不模糊必须将 canvas 至少设置放大两倍，然后将canvas通过 css position 负值移到屏幕外，绘制后可以直接通过image标签来实现预览
 
-#### TodoList
-  - [x] 文本竖排
-  - [ ] 文本宽、高自动设置
-  - [ ] 图像保存到相册
-  - [ ] skew
-  - [ ] createPattern
-  - [ ] Sprite九宫格图 rotation 属性
-  - [ ] globalCompositeOperation
+
 
 #### 资料参考
 - canvas api 资料参考 https://www.w3school.com.cn/tags/html_ref_canvas.asp

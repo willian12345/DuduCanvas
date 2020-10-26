@@ -9,6 +9,7 @@ const top = Symbol('top')
 const right = Symbol('right')
 const bottom = Symbol('bottom')
 const setSlice = Symbol('setSlice')
+const _sliceBounds = Symbol('_sliceBounds')
 
 const rotation = Symbol('rotation')
 
@@ -16,6 +17,14 @@ export default class Sprite extends Group{
 	name = 'Sprite'
 	img = null
 	sliced = false
+	get sliceBounds(){
+		return this[_sliceBounds]
+	}
+	set sliceBounds(bounds){
+		// const { left, top, right, bottom } = bounds
+		this[setSlice](bounds)
+		this[_sliceBounds] = bounds
+	}
 	/**
 	 * 
 	 * @param {*} img Image 对象
