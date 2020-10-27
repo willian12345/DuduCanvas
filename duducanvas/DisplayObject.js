@@ -1,5 +1,5 @@
 import { getPosAfterRotation, getMaxValue, findNodes }  from './utils'
-import { draw, getAlpha } from './config'
+import { draw, getAlpha, drawGraphics } from './config'
 import Graphics from './graphics/index'
 let context = null
 let displayObjectId = 0
@@ -34,6 +34,7 @@ export default class DisplayObject  extends Graphics{
 	// skewY = 0
 	constructor(){
 		super()
+		this[drawGraphics] = super[drawGraphics]
 		this[scale] = 1
 		this[id] = displayObjectId++
 	}
@@ -91,6 +92,9 @@ export default class DisplayObject  extends Graphics{
 	}
 	// 绘制
 	[draw](){
+		// 执行绘制 graphics 指令
+		this[drawGraphics](context)
+		
 		this.childs.forEach((v)=>{
 			// 绘制前压栈
 			context.save()

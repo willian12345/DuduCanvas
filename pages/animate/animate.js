@@ -26,7 +26,7 @@ Page({
         setInterval(() => {
           avatar.rotation += 2
           stage.update()
-        }, 16)
+        }, 400)
 
       }, this)
     })

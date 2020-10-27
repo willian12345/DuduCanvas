@@ -3,7 +3,7 @@
  * Image 名是为了防止后期可能与系统中保留的 Image 类冲突
  */
 import DisplayObject from './DisplayObject.js'
-import { draw, getAlpha, instructions } from './config'
+import { draw, getAlpha, drawGraphics } from './config'
 
 const drawImage = Symbol('drawImage')
 
@@ -21,6 +21,7 @@ export default class Image extends DisplayObject{
 	dHeight = undefined
 	constructor(args){
 		super()
+		this[drawGraphics] = super[drawGraphics]
 		for(let v in args){
 			this[v] = args[v]
 		}
@@ -65,10 +66,8 @@ export default class Image extends DisplayObject{
 		let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
-		// 执行所有命令
-		this[instructions].map((instruction) => {
-			instruction.exec(ctx, this)
-		})
+		// 优先执行 graphics 指令
+		this[drawGraphics](ctx)
 		
 		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
 		if(this.mask){

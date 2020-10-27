@@ -19,7 +19,10 @@ Page({
         t1.fontSize = 20
         t1.x = 40
         t1.y = 40
-        t1.graphics.fillCircle(20, 20, 20)
+        
+        // 给文本加个底色
+        t1.graphics.fillStyle('yellow')
+        .fillRect(0, 0, 100, 20)
 
         // 圆形用于遮罩
         const circle = new Shape()

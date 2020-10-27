@@ -20,7 +20,6 @@ Page({
           width: 128, 
           height: 64
         })
-        button.graphics.fillCircle(100, 100, 100)
         button.x = stage.width / 2 - button.width / 2
         button.y = 80
         const t1 = new Text({text: '原始按钮大小'})

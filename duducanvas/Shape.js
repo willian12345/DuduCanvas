@@ -11,16 +11,12 @@ import DisplayObject from './DisplayObject.js'
 export default class Shape extends DisplayObject{
 	name = 'Shape'
 	isMask = false
+	width = 0
+	height = 0
 	constructor(){
 		super()
 		this[drawGraphics] = super[drawGraphics]
-		this.width = 0
-		this.height = 0
-		// console.log(Graphics)
-		// 绘图命令
-		//  this.graphics = new Graphics(this[append])
-		//  Object.assign(this.graphics, graphics)
-		//  console.log(this.graphics)
+		
 		// 新建一个shape对象时先执行beginPath命令，以重新开始 path 上下文
 		this.graphics.beginPath()
 	}

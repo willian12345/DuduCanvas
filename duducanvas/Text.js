@@ -1,7 +1,7 @@
 /**
  * 文本类
  */
-import { draw, append, instructions } from './config'
+import { draw, append, drawGraphics } from './config'
 import DisplayObject from './DisplayObject'
 import Shape from './Shape'
 import FillText from './text/FillText'
@@ -30,6 +30,7 @@ export default class Text extends DisplayObject {
 	height = defaultFontSize
 	constructor(t){
 		super()
+		this[drawGraphics] = super[drawGraphics]
 		this.init(t)
 	}
 	init(t = {}){
@@ -98,18 +99,14 @@ export default class Text extends DisplayObject {
 		this.fillText(this[_text])
 	}
 	// 执行指令集
-	[draw](context){
+	[draw](ctx){
 		this.collectStatus()
-		this[instructions].map((v) => {
-			v.exec(context, this)
-		})
-		
+		// 优先执行 graphics 指令
+		this[drawGraphics](ctx)
 		if(this.mask && this.mask.name === 'Shape'){
 			this.mask.masked = this
-			this.mask[draw](context, true)
+			this.mask[draw](ctx, true)
 		}
-		
-		
 	}
 	/**
 	 * setFillStyle 设置文本颜色
