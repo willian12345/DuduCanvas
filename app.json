@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/image/image",
     "pages/text/text",
+    "pages/image/image",
     "pages/structure/structure",
     "pages/path/path",
     "pages/animate/animate"

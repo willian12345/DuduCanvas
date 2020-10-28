@@ -15,7 +15,6 @@ Page({
       t0.x = 100
       t0.y = 20
       t0.wrapHeight = 200
-      console.log(t0.width)
 
       const t1 = new Text()
       t1.text = '你好嘟嘟-通过单独引用各个类的方式实现编码'

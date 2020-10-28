@@ -3,8 +3,7 @@
  */
 import { draw, append, drawGraphics } from './config'
 import DisplayObject from './DisplayObject'
-import Shape from './Shape'
-import FillText from './text/FillText'
+import { FillText, needRotation } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
 import SetTextAlign from './text/SetTextAlign'
 import SetTextBaseline from './text/SetTextBaseline'
@@ -13,21 +12,18 @@ const _text = Symbol('_text')
 const _width = Symbol('_width')
 const _height = Symbol('_height')
 const _fontSize = Symbol('_fontSize')
+const _wrapWidth = Symbol('_wrapWidth')
+const _wrapHeight = Symbol('_wrapHeight')
+const _writeMode = Symbol('_writeMode')
 
 const defaultFontSize = 10
 
 export default class Text extends DisplayObject {
 	name = 'Text'
-	// 文本宽度，如果设置后文本超过此宽度，则文本换行
-	wrapWidth = -1
-	// 竖排文字时可设置高度，超市高度则文本换行
-	wrapHeight = -1
 	// 多行文本时的行距
 	lineGap = 0
 	// 当前字体样式的属性。符合 CSS font 语法 的 DOMString 字符串，至少需要提供字体大小和字体族名。默认值为 10px sans-serif
 	font = `${defaultFontSize}px sans-serif`
-	fontSize = defaultFontSize
-	height = defaultFontSize
 	constructor(t){
 		super()
 		this[drawGraphics] = super[drawGraphics]
@@ -35,37 +31,40 @@ export default class Text extends DisplayObject {
 	}
 	init(t = {}){
 		let { text, font, color, fontSize } = t
+		this[_writeMode] = ''
 		if(font){
 			this.font = font
 			let fontSize = font.match(/\d+/)[0]
 			if(fontSize){
 				this.fontSize = parseInt(fontSize)
-				this.height = this.fontSize + this.lineGap
+				this[_height] = this.fontSize + this.lineGap
 			}
 		}
 		if(fontSize){
 			this.font = `${fontSize}px sans-serif`
 			this.fontSize = parseInt(fontSize)
-			this.height = fontSize  + this.lineGap
+			this[_height] = fontSize  + this.lineGap
 		}
-		
+		if(!this.fontSize){
+			this.fontSize = defaultFontSize
+		}
 		if(color){
 			this.color = color
 		}
 		this.textAlign = 'left'
 		this.textBaseline = 'top'
-
+		this[_text] = ''
 		if(text){
 			this[_text] = text
 		}
 	}
-
 	get text(){
 		return this[_text]
 	}
 	set text(t){
 		this[_text] = t
 		this[_width] = this.measureWidth(t, this.fontSize)
+		this.height = this.fontSize
 	}
 	get width(){
 		return this[_width]
@@ -79,13 +78,40 @@ export default class Text extends DisplayObject {
 	set height(h){
 		this[_height] = h
 	}
+	// 竖排文字时可设置高度，超市高度则文本换行
+	get wrapHeight(){
+		return this[_wrapHeight]
+	}
+	set wrapHeight(v){
+		this[_wrapHeight] = v
+		this[_height] = v
+		this.initVerticalSize()
+	}
+	// 文本宽度，如果设置后文本超过此宽度，则文本换行
+	get wrapWidth(){
+		return this[_wrapWidth]
+	}
+	set wrapWidth(v){
+		this[_wrapWidth] = v
+		this[_width] = v
+		this[_height] = this.getHeightByWrapWidth()
+	}
 	get fontSize(){
 		return this[_fontSize]
 	}
 	set fontSize(v){
 		this[_fontSize] = v
 		this[_width] = this.measureWidth(this.text, v)
-		this.height = v  + this.lineGap
+		this[_height] = v  + this.lineGap
+	}
+	get writeMode(){
+		return this[_writeMode]
+	}
+	set writeMode(v){
+		this[_writeMode] = v
+		if(v.length > 0){
+			this.initVerticalSize()
+		}
 	}
 	collectStatus(){
 		if(this.fontSize){
@@ -185,6 +211,7 @@ export default class Text extends DisplayObject {
 	}
 	setWrapWidth(w){
 		this.wrapWidth = w
+		this.width = w
 		return this
 	}
 	setWrapHeight(h){
@@ -192,8 +219,88 @@ export default class Text extends DisplayObject {
 		return this
 	}
 	measureWidth(text, fontSize){
+		let w
+		if(this.writeMode.length){
+			w = fontSize
+		}else{
+			const ctx = DisplayObject.getContext()
+			w = ctx.measureText(text).width * (fontSize / defaultFontSize)
+		}
+		return w
+	}
+	// 初始化竖排文本时的整体宽与高属性
+	initVerticalSize(){
+		if(this.text.length){
+			const { width,  height} = this.getVerticalSize()
+			this[_width] = width
+			this[_height] = height
+		}
+	}	
+	// 计算竖排文本时的整体文本宽,高
+	getVerticalSize(){
+		const fontSize = this.fontSize 
+		const lineGap = this.lineGap
+		const wrapHeight = this.wrapHeight
+		const halfFont = fontSize * .5
+		let w = 0, h = 0
+		let height = 0
+		let width = 0
+		let offset = 0
+		// 二维数组存放每个字文本与文本高度信息
+		let arr = []
+		// 二维数组游标，可代表当前指向哪一行
+		let arrIndex = 0
+		
+		// 计算每个字高度
+		this.text.split('').map((v)=>{
+			let charHeight = 0
+			if(needRotation(v)){
+				charHeight = halfFont + lineGap
+			}else{	
+				charHeight = fontSize + lineGap
+			}
+			h += charHeight
+			offset += charHeight
+			if(offset > (wrapHeight)){
+				arrIndex++
+				offset = 0
+			}
+			arr[arrIndex] = arr[arrIndex] || []
+			arr[arrIndex].push({text: v, height: charHeight})
+		})
+		if(wrapHeight){
+			height = wrapHeight
+			width = arr.length * fontSize + (arr.length * lineGap - lineGap)
+		}else{
+			width = fontSize
+			height = h
+		}
+		// 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
+		return {width, height}
+	}
+	// 获取受限宽度下的文本整体高度，因为有可能会换行
+	getHeightByWrapWidth(){
 		const ctx = DisplayObject.getContext()
-		return ctx.measureText(text).width * (fontSize / defaultFontSize)
+		const wrapWidth = this.wrapWidth
+		const fontSize = this.fontSize 
+		const text = this.text
+		let i = 0, j= 0, t = null, lineWidth = 0
+		let arr = []
+		
+		while(t=text[i]){
+			// 根据每个单字计算字符宽度
+			lineWidth += ctx.measureText(t).width * (fontSize / defaultFontSize)
+			if(lineWidth <= wrapWidth){
+				arr[j] ? arr[j] += text[i] : arr[j] = text[i]
+			}else{
+				lineWidth = 0
+				j++
+			}
+			i++
+		}
+		// 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
+		// 高度 = 文本行数 * 字体大小 + 行间距
+		return this.height = arr.length * fontSize + (arr.length * this.lineGap - this.lineGap)
 	}
 	addChild(){
 		throw new Error('不能给 Text 类添加子元素')

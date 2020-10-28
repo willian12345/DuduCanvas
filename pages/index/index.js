@@ -19,10 +19,10 @@ Page({
         t1.fontSize = 20
         t1.x = 40
         t1.y = 40
-        
         // 给文本加个底色
         t1.graphics.fillStyle('yellow')
         .fillRect(0, 0, 100, 20)
+        console.log(t1.width, t1.height)
 
         // 圆形用于遮罩
         const circle = new Shape()
@@ -49,7 +49,7 @@ Page({
         group.addChild(avatar, name)
         
         stage.addChild(t1, group)
-        
+        // stage.addChild(t1)
         
       }, this)
     }) 

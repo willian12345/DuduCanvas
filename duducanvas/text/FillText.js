@@ -1,7 +1,7 @@
 // 旋转 90 弧度 直接得出常数 (90 * Math.PI / 180) 免于实时计算
 const ROTATE_90DEG = 1.5707963267948966
 // 需要旋转的 Unicode 码范围, 如中、日、韩文字
-const NO_ROTATION_RANGE = [
+export const NO_ROTATION_RANGE = [
   [0x2E80, 0x2FEF],
   [0x3040, 0x9FFF],
   [0xAC00, 0xD7FF],
@@ -10,7 +10,7 @@ const NO_ROTATION_RANGE = [
   [0x20000, 0x2FA1F]
 ]
 
-function needRotation (char) {
+export function needRotation (char) {
   let codePoint = char.codePointAt(0)
   for (let [lowerBound, upperBound] of NO_ROTATION_RANGE) {
     if (lowerBound <= codePoint && codePoint <= upperBound) {
@@ -22,7 +22,7 @@ function needRotation (char) {
 /**
  *  文本绘制命令
  */
-export default class FillText {
+export class FillText {
 	instance = null
 	constructor (text, x, y) {
 		this.text = text
