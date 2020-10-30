@@ -19,22 +19,16 @@ Page({
         t1.fontSize = 20
         t1.x = 40
         t1.y = 40
-
         // 给文本加个底色
         t1.graphics.fillStyle('yellow')
-        .fillRect(0, 0, t1.width, t1.height)
-
-        // 圆形用于遮罩
-        const circle = new Shape()
-        circle.graphics.fillCircle(50, 50, 50)
-        const roundRect = new Shape()
-        roundRect.graphics.fillRoundRect(0, 0, 100, 100, {tl: 0, tr: 20, br: 0, bl: 20})
+        .fillRect(0, 0, t1.width, t1.height)        
 
         const avatar = new Image({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
         })
+        // 头像显示成圆形
         avatar.borderRadius = '100%'
         
         

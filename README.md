@@ -111,4 +111,7 @@ new Stage('#myCanvas', stage => {
 
 
 #### 资料参考
-- canvas api 资料参考 https://www.w3school.com.cn/tags/html_ref_canvas.asp
+- 小程序 canvas 开发文档 https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.html
+- 小程序开发工具 https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+- canvas 参考手册  https://www.w3school.com.cn/tags/html_ref_canvas.asp
+- canvas API https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API
