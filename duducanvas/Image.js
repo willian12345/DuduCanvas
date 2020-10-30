@@ -46,7 +46,7 @@ export default class Image extends DisplayObject {
 	dy = 0
 	dWidth = undefined
 	dHeight = undefined
-	borderRadiusValue = 0
+	borderRadiusValue = ''
 	/**
 	 * 1、borderRadius值设置请参与 css3 的 border-radius 属性;
 	 * eg1: '10'
@@ -118,8 +118,10 @@ export default class Image extends DisplayObject {
 		y = this.dy + y
 		// 优先执行 graphics 指令
 		this[drawGraphics](ctx)
-		
-		this.initBorderRadiusMask()
+		// 如果设置了 borderRadius 值则需要使用遮罩实现圆角
+		if(this.borderRadiusValue){
+			this.initBorderRadiusMask()
+		}
 
 		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
 		if(this.mask){
