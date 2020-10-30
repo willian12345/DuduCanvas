@@ -33,9 +33,9 @@ export default class DisplayObject  extends Graphics{
 	// skewY = 0
 	constructor(){
 		super()
-		if(new.target === DisplayObject){
-			new Error('不能直接使用 DisplayObject, 只能实例化子类')
-		}
+		// if(new.target === DisplayObject){
+		// 	new Error('不能直接使用 DisplayObject, 只能实例化子类')
+		// }
 		this[drawGraphics] = super[drawGraphics]
 		this[scale] = 1
 		this[id] = displayObjectId++

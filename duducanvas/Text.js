@@ -25,12 +25,8 @@ export default class Text extends DisplayObject {
 	font = `${defaultFontSize}px sans-serif`
 	constructor(t){
 		super()
-		if (new.target !== undefined) {
-			this[drawGraphics] = super[drawGraphics]
-			this.init(t)	
-		} else {
-			throw new Error('必须使用 new 命令生成实例');
-		}
+		this[drawGraphics] = super[drawGraphics]
+		this.init(t)
 	}
 	init(t = {}){
 		let { text, font, color, fontSize } = t
