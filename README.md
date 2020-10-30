@@ -21,18 +21,14 @@
   .then((loader) => {
     // 通过页面中的 id 新建 Stage 舞台, 所有可视对象 (DisplayObject) 都将绘制在舞台
     new Stage('#myCanvas', stage => {
-      // 圆形用于遮罩
-      const circle = new Shape()
-      circle.graphics.fillCircle(50, 50, 50)
-
       // 添加图片，
       const avatar = new Image({
         image: loader.get('avatar'),
         width: 100, 
         height: 100,
       })
-      avatar.mask = circle // 给方形的头像设置圆形遮罩
-
+      // 将头像变成圆形
+      avatar.borderRadius = '100%'
       
       // 添加至舞台
       stage.addChild(img)
