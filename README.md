@@ -1,6 +1,5 @@
-## 微信小程序 canvas ui 基础库
-## 开发中...
-
+## Duducanvas 微信小程序 canvas ui 基础库 
+version alpha 1.0.0
 #### 快速开始
 
 ##### 页面内添加 canvas 标签
