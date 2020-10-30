@@ -27,13 +27,17 @@ Page({
         // 圆形用于遮罩
         const circle = new Shape()
         circle.graphics.fillCircle(50, 50, 50)
+        const roundRect = new Shape()
+        roundRect.graphics.fillRoundRect(0, 0, 100, 100, {tl: 0, tr: 20, br: 0, bl: 20})
 
         const avatar = new Image({
           image: loader.get('avatar'),
           width: 100, 
           height: 100,
         })
-        avatar.mask = circle // 给方形的头像设置圆形遮罩
+        avatar.borderRadius = '100%'
+        
+        
 
         const name = new Text()
         name.color = '#6c5149'

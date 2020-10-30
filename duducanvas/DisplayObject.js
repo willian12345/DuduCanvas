@@ -184,7 +184,7 @@ export default class DisplayObject  extends Graphics{
 	 */
 	getRotation(){
 		// 角度不需要根据父级计算叠加
-		let parent = this.parent
+		// let parent = this.parent
 		let rotation = this.rotation
 		// while(parent && parent.name != 'Stage'){
 		// 	rotation = parent.rotation
@@ -197,7 +197,6 @@ export default class DisplayObject  extends Graphics{
 	 */
 	getScale(){
 		let parent = this.parent
-		let scale = this.scale
 		let scaleX = this.scaleX
 		let scaleY = this.scaleY
 		while(parent && parent.name != 'Stage'){

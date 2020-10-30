@@ -19,6 +19,7 @@ Page({
         avatar.y = stage.width / 2
         avatar.regX = 50
         avatar.regY = 50
+        avatar.borderRadius = '10 40 10'
 
         stage.addChild(avatar)
 
