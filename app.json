@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/path/path",
     "pages/index/index",
+    "pages/path/path",
     "pages/image/image",
     "pages/text/text",
     "pages/structure/structure",

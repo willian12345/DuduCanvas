@@ -1,4 +1,4 @@
-## Duducanvas 微信小程序海报生成基础库 
+## Duducanvas 小程序海报生成基础库
 version alpha 1.0.0
 #### 快速开始
 
