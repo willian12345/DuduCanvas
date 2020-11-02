@@ -2,7 +2,7 @@ import { Stage, Shape, CreateLinearGradient, CreateRadialGradient } from '../../
 
 Page({
   onLoad: function () {
-    new Stage('#myCanvas', (stage, ctx) => {
+    new Stage('#myCanvas', (stage) => {
       for(var i=0;i<4;i++){
         for(var j=0;j<3;j++){
            let path = new Shape()
@@ -39,7 +39,7 @@ Page({
       curve.x = 100
       curve.y = 100
       curve.shadow = '0 0 10 green'
-
+      stage.addChild(curve)
       
       const linearGradient = new CreateLinearGradient(0, 0, 100, 50)
       linearGradient.addColorStop(.1, 'red')

@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/path/path",
     "pages/index/index",
     "pages/image/image",
     "pages/text/text",
     "pages/structure/structure",
-    "pages/path/path",
     "pages/animate/animate"
   ],
   "window": {
