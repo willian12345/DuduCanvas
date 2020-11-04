@@ -16,6 +16,7 @@ const setShadow = Symbol('setShadow')
  */
 
 export default class DisplayObject  extends Graphics{
+	name = 'DisplayObject'
 	x = 0
 	y = 0
 	width = 0
@@ -170,8 +171,8 @@ export default class DisplayObject  extends Graphics{
 		}else{
 			parent = this.parent
 		}
-
 		let x = this.x - this.regX, y = this.y - this.regY
+		// console.log(x)
 		while(parent && parent.name != 'Stage'){
 			x += parent.x - parent.regX
 			y += parent.y - parent.regY
@@ -279,7 +280,7 @@ export default class DisplayObject  extends Graphics{
 	findNodesBounds(node){
 		const arr = []
 		findNodes(node).map( v => {
-			arr.push(v[getBound]())
+			arr.push(v[getBounds]())
 		})
 		return arr
 	}
@@ -287,7 +288,7 @@ export default class DisplayObject  extends Graphics{
 	getBounds(){
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
-			return this[getBound]()
+			return this[getBounds]()
 		}else{
 			if(this.childs){
 				let bounds = this.findNodesBounds(this)

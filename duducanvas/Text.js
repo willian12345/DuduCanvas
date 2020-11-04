@@ -19,6 +19,7 @@ const _writeMode = Symbol('_writeMode')
 const defaultFontSize = 10
 
 export default class Text extends DisplayObject {
+	name = 'Text'
 	// 多行文本时的行距
 	lineGap = 0
 	// 当前字体样式的属性。符合 CSS font 语法 的 DOMString 字符串，至少需要提供字体大小和字体族名。默认值为 10px sans-serif
