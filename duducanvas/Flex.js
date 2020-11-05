@@ -12,8 +12,8 @@ export default class Flex extends DisplayObject{
 		super()
 		this.drawSelf = super[draw]
 		this.direction = 'row'
-		this.justifyContent = 'flex-start'
-		this.alignItems = 'flex-start'
+		this.justifyContent = 'center'
+		this.alignItems = 'center'
 	}
 	set width(v){
 		this[_width] = v
@@ -82,31 +82,30 @@ export default class Flex extends DisplayObject{
 		if(this.alignItems === 'center'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.y += parentY + parentHeight * .5 - (child.height * .5)
+				child.y += parentHeight * .5 - (child.height * .5)
 			}
 		}else if(this.alignItems === 'flex-start'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.y += parentY
+				child.y = 0
 			}
 		}else if(this.alignItems === 'flex-end'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.y += parentY + parentHeight - child.height
+				child.y += parentHeight - child.height
 			}
 		}
 	}
 	setJustifyContent(){
 		const childs = this.childs
 		const parentWidth = this.width
-		const parentX = this.x
 		if(this.justifyContent === 'flex-start'){
 			for (let index = 0; index < childs.length; index++) {
 				const child = childs[index];
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
-					child.x = this.x
+					child.x = 0
 				}
 			}
 		}else if(this.justifyContent === 'flex-end'){
@@ -116,7 +115,7 @@ export default class Flex extends DisplayObject{
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
-					child.x = parentX + parentWidth - childsWidth
+					child.x = parentWidth - childsWidth
 				}
 			}
 		}else if(this.justifyContent === 'center'){
@@ -127,7 +126,7 @@ export default class Flex extends DisplayObject{
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
-					child.x = parentX + ((parentWidth - childsWidth) * .5)
+					child.x = ((parentWidth - childsWidth) * .5)
 				}
 			}
 		}else if(this.justifyContent === 'space-between'){
@@ -135,10 +134,10 @@ export default class Flex extends DisplayObject{
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
 				if(index > 0){
-					child.x += parentX + childs[index-1].x + childs[index-1].width + betweenGapWidth
+					child.x += childs[index-1].x + childs[index-1].width + betweenGapWidth
 					console.log(child.x)
 				}else{
-					child.x += parentX
+					child.x += 0
 				}
 			}
 		}
@@ -146,46 +145,43 @@ export default class Flex extends DisplayObject{
 	setAlignItemsByColumn(){
 		const childs = this.childs
 		const parentWidth = this.width
-		const parentX = this.x
 		if(this.alignItems === 'center'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.x += parentX + parentWidth * .5 - (child.width * .5)
+				child.x += parentWidth * .5 - (child.width * .5)
 			}
 		}else if(this.alignItems === 'flex-start'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.x += parentX
+				child.x = 0
 			}
 		}else if(this.alignItems === 'flex-end'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
-				child.x += parentX + parentWidth - child.width
+				child.x += parentWidth - child.width
 			}
 		}
 	}
 	setColumn(){
 		const childs = this.childs
-		const parentY = this.y
 		for (let index = 0; index < childs.length; index++) {
 			const child = childs[index];
 			if(index > 0){
-				child.y += parentY + childs[index-1].y + childs[index-1].height
+				child.y += childs[index-1].y + childs[index-1].height
 			}else{
-				child.y += parentY
+				child.y = 0
 			}
 		}
 		this.setAlignItemsByColumn()
 	}
 	setColumnReverse(){
 		const childs = this.childs
-		let offsetY = this.y + this.height
 		for (let index = 0, l = childs.length; index < l; index++) {
 			const child = childs[index];
 			if(index > 0){
-				child.y += offsetY - childs[index-1].height - child.height
+				child.y += this.height - childs[index-1].height - child.height
 			}else{
-				child.y += offsetY - childs[index].height
+				child.y += this.height - childs[index].height
 			}
 		}
 		this.setAlignItemsByColumn()
