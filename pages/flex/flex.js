@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, FlexContainer, Image, Shape, Sprite} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Flex, Image, Shape, Sprite} from '../../duducanvas/index'
 Page({
   data:{
     tempPath: ''
@@ -12,29 +12,40 @@ Page({
     ])
     .then( loader => {
       new Stage('#myCanvas', stage => {    
-        const flexContainer = new FlexContainer()
-        flexContainer.direction = 'row'
-        flexContainer.alignItems = 'center'
-        flexContainer.x = 0
-        flexContainer.y = 0
-        flexContainer.width = 375
-        flexContainer.height = 300
+        const flex = new Flex()
+        flex.direction = 'row'
+        flex.justifyContent = 'center'
+        flex.alignItems = 'center'
+        flex.x = 0
+        flex.y = 0
+        flex.width = 375
+        flex.height = 300
         
 
-        flexContainer.graphics.beginPath()
-        flexContainer.graphics.strokeRect(0, 0, flexContainer.width, flexContainer.height)
+        flex.graphics.beginPath()
+        flex.graphics.strokeRect(0, 0, flex.width, flex.height)
         
+        const t1 = new Text()
+        t1.text = '你好啊世界'
+
+        flex.addChild(t1)
+
+        // display: flex;
+        // flex-wrap: wrap;
+        // align-content: flex-start;
+        // justify-content: center;
+
         for(let i=0;i<2;i++){
           const avatar = new Image({
             image: loader.get('avatar'),
             width: 20 * i +20, 
             height: 20 * i +20,
           })
-          flexContainer.addChild(avatar)
+          flex.addChild(avatar)
         }
-
-        stage.addChild(flexContainer)
         
+
+        stage.addChild(flex)
       }, this)
     }) 
   }
