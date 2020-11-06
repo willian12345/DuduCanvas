@@ -33,7 +33,7 @@ export default class Graphics{
 		this[instructions].push(instructionsObject)
   }
   [drawGraphics](ctx){
-    this[instructions].map((instruction) => {
+    this[instructions].forEach((instruction) => {
 			instruction.exec(ctx, this)
 		})
   }

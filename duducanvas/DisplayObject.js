@@ -30,13 +30,8 @@ export default class DisplayObject  extends Graphics{
 	parent = null
 	childs = []
 	shadow = ''
-	// skewX = 0
-	// skewY = 0
 	constructor(){
 		super()
-		// if(new.target === DisplayObject){
-		// 	new Error('不能直接使用 DisplayObject, 只能实例化子类')
-		// }
 		this[drawGraphics] = super[drawGraphics]
 		this[scale] = 1
 		this[id] = displayObjectId++
@@ -258,8 +253,7 @@ export default class DisplayObject  extends Graphics{
 			const arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
 			// 相对坐标+原本的 x y 值成为绝对坐标
 			arr.map( v =>{
-				v.x = v.x + x + regX
-				v.y = v.y + y + regY
+				return {...v, x: v.x + x + regX, y: v.y + y + regY}
 			})
 			
 			// 获取最左，最右，最上最下 坐标
@@ -278,11 +272,9 @@ export default class DisplayObject  extends Graphics{
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
 	findNodesBounds(node){
-		const arr = []
-		findNodes(node).map( v => {
-			arr.push(v[getBounds]())
+		return findNodes(node).map( v => {
+			return v[getBounds]()
 		})
-		return arr
 	}
 	// 获取元素的绝对宽度
 	getBounds(){
@@ -297,7 +289,7 @@ export default class DisplayObject  extends Graphics{
 				const r = []
 				const t = []
 				const b = []
-				bounds.map((v)=>{
+				bounds.forEach((v)=>{
 					l.push(v.left)
 					r.push(v.right)
 					t.push(v.top)

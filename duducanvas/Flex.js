@@ -1,16 +1,19 @@
 import DisplayObject from './DisplayObject.js'
 import { draw } from './config'
+
 const _width = Symbol('width')
 const _height = Symbol('height')
-const _display = Symbol('_display')
 const _alignItems = Symbol('_alignItems')
 const _justifyContent = Symbol('_justifyContent')
 const _direction = Symbol('_direction')
+const _flex = Symbol('_flex')
+const _draw = Symbol('_draw')
+
 export default class Flex extends DisplayObject{
 	name = 'Flex'
 	constructor(context){
 		super()
-		this.drawSelf = super[draw]
+		this[_draw] = super[draw]
 		this.direction = 'row'
 		this.justifyContent = 'center'
 		this.alignItems = 'center'
@@ -26,6 +29,12 @@ export default class Flex extends DisplayObject{
 	}
 	get height(){
 		return this[_height]
+	}
+	get flex(){
+		return this[_flex]
+	}
+	set flex(v){
+		this[_flex] = v
 	}
 	// 排列方向
 	get direction(){
@@ -196,8 +205,8 @@ export default class Flex extends DisplayObject{
 		}else if(this.direction === 'column-reverse'){
 			this.setColumnReverse()
 		}
-
-		this.drawSelf()
+		// 所有位置计算完后再调用 绘制
+		this[_draw]()
 	}
 }
 

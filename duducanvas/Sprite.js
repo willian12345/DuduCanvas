@@ -61,7 +61,7 @@ export default class Sprite extends Group{
 		this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY
 
 		// 执行所有命令
-		this[instructions].map((instruction) => {
+		this[instructions].forEach((instruction) => {
 			instruction.exec(ctx, this)
 		})
 
@@ -214,7 +214,7 @@ export default class Sprite extends Group{
 		if(this.rotation != 0){
 			console.error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
 		}
-		peices.map( v => {
+		peices.forEach( v => {
 			const i = new Image(v)
 			i.alpha = alpha
 			i[draw](ctx)

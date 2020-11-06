@@ -134,7 +134,7 @@ export default class Image extends DisplayObject {
 		}else{
 			this[drawImage](ctx, x, y)
 		}
-		this.childs && this.childs.map( v => v[draw](ctx))
+		this.childs && this.childs.forEach( v => v[draw](ctx))
 	}
 	/**
 	 * borderRadius 
