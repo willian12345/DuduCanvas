@@ -9,8 +9,8 @@ const _direction = Symbol('_direction')
 const _flex = Symbol('_flex')
 const _draw = Symbol('_draw')
 
-export default class Flex extends DisplayObject{
-	name = 'Flex'
+export default class Container extends DisplayObject{
+	name = 'Container'
 	constructor(context){
 		super()
 		this[_draw] = super[draw]

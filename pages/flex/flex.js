@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Flex, Image, Shape, Sprite} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Container, Image} from '../../duducanvas/index'
 Page({
   data:{
     tempPath: ''
@@ -12,24 +12,24 @@ Page({
     ])
     .then( loader => {
       new Stage('#myCanvas', stage => {    
-        const flex = new Flex()
-        // flex.direction = 'row'
-        // flex.justifyContent = 'center'
-        // flex.alignItems = 'center'
-        // flex.x = 50
-        // flex.y = 100
-        flex.width = 375
-        flex.height = 300
+        const container = new Container()
+        // container.direction = 'row'
+        // container.justifyContent = 'center'
+        // container.alignItems = 'center'
+        // container.x = 50
+        // container.y = 100
+        container.width = 375
+        container.height = 300
         
 
-        flex.graphics.beginPath()
-        flex.graphics.strokeRect(0, 0, flex.width, flex.height)
+        container.graphics.beginPath()
+        container.graphics.strokeRect(0, 0, container.width, container.height)
         
         const t1 = new Text()
         t1.fontSize = 20
         t1.text = '你好啊世界'
 
-        flex.addChild(t1)
+        container.addChild(t1)
 
         // display: flex;
         // flex-wrap: wrap;
@@ -43,12 +43,12 @@ Page({
             height: 20 * i +20,
           })
           avatar.borderRadius = 3
-          flex.addChild(avatar)
+          container.addChild(avatar)
         }
-        // flex.regX = 50
-        // flex.regY = 50
-        // flex.rotation = 40
-        stage.addChild(flex)
+        // container.regX = 50
+        // container.regY = 50
+        // container.rotation = 40
+        stage.addChild(container)
       }, this)
     }) 
   }

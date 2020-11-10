@@ -43,11 +43,10 @@ export default class ImgLoader {
 
           })
 					this[loaded]++
-					const progress = this[loaded] / this[total]
 					if(this[loadProgressCallback]){
 						this[loadProgressCallback](p)
 					}
-          if(progress >= 1){
+          if((this[loaded] / this[total]) >= 1){
 						resolve(this)
           }
         }
