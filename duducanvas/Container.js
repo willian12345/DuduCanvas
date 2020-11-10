@@ -62,32 +62,26 @@ export default class Container extends DisplayObject{
 		this.childs.map((v) => childsWidth += v.width)
 		return childsWidth
 	}
-	getBetweenGapWidth(){
+	getBetweenGapWidth(parentWidth){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length - 1)
+	}
+	getAroundGapWidth(parentWidth){
+		const childsWidth = this.getChildsWidth()
+		return (parentWidth - childsWidth) / (this.childs.length)
 	}
 	setRow(){
 		this.setJustifyContent()
 		this.setAlignItems()
 	}
 	setRowReverse(){
-		const childs = this.childs
-		let offsetX = this.x + this.width
-		for (let index = 0, l = childs.length; index < l; index++) {
-			const child = childs[index];
-			if(index > 0){
-				child.x += offsetX - childs[index-1].width - child.width
-			}else{
-				child.x += offsetX - childs[index].width
-			}
-		}
-		console.log(3333)
-		// this.setAlignItems()
+		// 水平翻转
+		this.setJustifyContent(true)
+		this.setAlignItems()
 	}
 	setAlignItems(){
 		const childs = this.childs
 		const parentHeight = this.height
-		const parentY = this.y
 		if(this.alignItems === 'center'){
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
@@ -105,10 +99,20 @@ export default class Container extends DisplayObject{
 			}
 		}
 	}
-	setJustifyContent(){
-		const childs = this.childs
+	setJustifyContent(isReverse){
 		const parentWidth = this.width
-		if(this.justifyContent === 'flex-start'){
+		let childs = this.childs
+		let justifyContent = this.justifyContent
+		if(isReverse){
+			childs = this.childs.reverse()
+			if(justifyContent === 'flex-start'){
+				justifyContent = 'flex-end'
+			}else if(justifyContent === 'flex-end'){
+				justifyContent = 'flex-start'
+			}
+		}
+
+		if(justifyContent === 'flex-start'){
 			for (let index = 0; index < childs.length; index++) {
 				const child = childs[index];
 				if(index > 0){
@@ -117,7 +121,7 @@ export default class Container extends DisplayObject{
 					child.x = 0
 				}
 			}
-		}else if(this.justifyContent === 'flex-end'){
+		}else if(justifyContent === 'flex-end'){
 			const childsWidth = this.getChildsWidth()
 			for (let index = 0; index < childs.length; index++) {
 				const child = childs[index];
@@ -127,9 +131,8 @@ export default class Container extends DisplayObject{
 					child.x = parentWidth - childsWidth
 				}
 			}
-		}else if(this.justifyContent === 'center'){
+		}else if(justifyContent === 'center'){
 			const childsWidth = this.getChildsWidth()
-
 			for (let index = 0; index < childs.length; index++) {
 				const child = childs[index];
 				if(index > 0){
@@ -138,15 +141,26 @@ export default class Container extends DisplayObject{
 					child.x = ((parentWidth - childsWidth) * .5)
 				}
 			}
-		}else if(this.justifyContent === 'space-between'){
-			const betweenGapWidth = this.getBetweenGapWidth()
+		}else if(justifyContent === 'space-between'){
+			// 水平中间间隔相等，两端无间隔
+			const betweenGapWidth = this.getBetweenGapWidth(parentWidth)
 			for (let index = 0, l = childs.length; index < l; index++) {
 				const child = childs[index];
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width + betweenGapWidth
-					console.log(child.x)
 				}else{
 					child.x += 0
+				}
+			}
+		}else if(justifyContent === 'space-around'){
+			// 水平中间间隔相等，两端间隔是中间间隔的一半
+			const aroundGapWidth = this.getAroundGapWidth(parentWidth)
+			for (let index = 0, l = childs.length; index < l; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.x += childs[index-1].x + childs[index-1].width + aroundGapWidth
+				}else{
+					child.x += aroundGapWidth * .5
 				}
 			}
 		}

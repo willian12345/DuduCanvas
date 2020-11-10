@@ -13,8 +13,8 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {    
         const container = new Container()
-        // container.direction = 'row'
-        // container.justifyContent = 'center'
+        container.direction = 'row'
+        container.justifyContent = 'space-between'
         // container.alignItems = 'center'
         // container.x = 50
         // container.y = 100
