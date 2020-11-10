@@ -59,16 +59,29 @@ export default class Container extends DisplayObject{
 	}
 	getChildsWidth(){
 		let childsWidth = 0
-		this.childs.map((v) => childsWidth += v.width)
+		this.childs.forEach((v) => childsWidth += v.width)
 		return childsWidth
+	}
+	getChildsHeight(){
+		let childsHeight = 0
+		this.childs.forEach((v) => childsHeight += v.height)
+		return childsHeight
 	}
 	getBetweenGapWidth(parentWidth){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length - 1)
 	}
+	getBetweenGapHeight(parentHeight){
+		const childsHeight = this.getChildsHeight()
+		return (parentHeight - childsHeight) / (this.childs.length - 1)
+	}
 	getAroundGapWidth(parentWidth){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length)
+	}
+	getAroundGapHeight(parentHeight){
+		const childsHeight = this.getChildsHeight()
+		return (parentHeight - childsHeight) / (this.childs.length)
 	}
 	setRow(){
 		this.setJustifyContent()
@@ -128,6 +141,7 @@ export default class Container extends DisplayObject{
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
+					// x 轴起点是总宽度-子元素总宽度
 					child.x = parentWidth - childsWidth
 				}
 			}
@@ -138,6 +152,7 @@ export default class Container extends DisplayObject{
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
+					// x 轴起点是总宽度-子元素总宽度的一半
 					child.x = ((parentWidth - childsWidth) * .5)
 				}
 			}
@@ -160,7 +175,77 @@ export default class Container extends DisplayObject{
 				if(index > 0){
 					child.x += childs[index-1].x + childs[index-1].width + aroundGapWidth
 				}else{
+					// x 轴起点是单个间隔的一半
 					child.x += aroundGapWidth * .5
+				}
+			}
+		}
+	}
+	setJustifyContentForColumn(isReverse){
+		const parentHeight = this.height
+		let childs = this.childs
+		let justifyContent = this.justifyContent
+		if(isReverse){
+			childs = this.childs.reverse()
+			if(justifyContent === 'flex-start'){
+				justifyContent = 'flex-end'
+			}else if(justifyContent === 'flex-end'){
+				justifyContent = 'flex-start'
+			}
+		}
+
+		if(justifyContent === 'flex-start'){
+			for (let index = 0; index < childs.length; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.y += childs[index-1].y + childs[index-1].height
+				}else{
+					child.y = 0
+				}
+			}
+		}else if(justifyContent === 'flex-end'){
+			const childsHeight = this.getChildsHeight()
+			for (let index = 0; index < childs.length; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.y += childs[index-1].y + childs[index-1].height
+				}else{
+					// y 轴起点是总宽度-子元素总宽度
+					child.y = parentHeight - childsHeight
+				}
+			}
+		}else if(justifyContent === 'center'){
+			const childsHeight = this.getChildsHeight()
+			for (let index = 0; index < childs.length; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.y += childs[index-1].y + childs[index-1].height
+				}else{
+					// y 轴起点是总宽度-子元素总宽度的一半
+					child.y = ((parentHeight - childsHeight) * .5)
+				}
+			}
+		}else if(justifyContent === 'space-between'){
+			// 水平中间间隔相等，两端无间隔
+			const betweenGapHeight = this.getBetweenGapHeight(parentHeight)
+			for (let index = 0, l = childs.length; index < l; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.y += childs[index-1].y + childs[index-1].height + betweenGapHeight
+				}else{
+					child.y += 0
+				}
+			}
+		}else if(justifyContent === 'space-around'){
+			// 水平中间间隔相等，两端间隔是中间间隔的一半
+			const aroundGapHeight = this.getAroundGapHeight(parentHeight)
+			for (let index = 0, l = childs.length; index < l; index++) {
+				const child = childs[index];
+				if(index > 0){
+					child.y += childs[index-1].y + childs[index-1].height + aroundGapHeight
+				}else{
+					// x 轴起点是单个间隔的一半
+					child.y += aroundGapHeight * .5
 				}
 			}
 		}
@@ -186,27 +271,11 @@ export default class Container extends DisplayObject{
 		}
 	}
 	setColumn(){
-		const childs = this.childs
-		for (let index = 0; index < childs.length; index++) {
-			const child = childs[index];
-			if(index > 0){
-				child.y += childs[index-1].y + childs[index-1].height
-			}else{
-				child.y = 0
-			}
-		}
+		this.setJustifyContentForColumn()
 		this.setAlignItemsByColumn()
 	}
 	setColumnReverse(){
-		const childs = this.childs
-		for (let index = 0, l = childs.length; index < l; index++) {
-			const child = childs[index];
-			if(index > 0){
-				child.y += this.height - childs[index-1].height - child.height
-			}else{
-				child.y += this.height - childs[index].height
-			}
-		}
+		this.setJustifyContentForColumn(true)
 		this.setAlignItemsByColumn()
 	}
 	[draw](){

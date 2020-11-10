@@ -13,11 +13,11 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {    
         const container = new Container()
-        container.direction = 'row'
-        container.justifyContent = 'space-between'
-        // container.alignItems = 'center'
-        // container.x = 50
-        // container.y = 100
+        container.direction = 'column-reverse'
+        container.justifyContent = 'space-around'
+        // container.alignItems = 'flex-star'
+        container.x = 50
+        container.y = 100
         container.width = 375
         container.height = 300
         
