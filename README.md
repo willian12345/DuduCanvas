@@ -1,12 +1,12 @@
 ## Duducanvas 小程序海报生成基础库
 version alpha 1.0.0
 ##### todoList
-- [ ] flex
+- [x] flex
 - [ ] inline-flex
-- [ ] align-items
-- [ ] justify-content
+- [x] align-items
+- [x] justify-content
 - [ ] align-self
-- [ ] flex-direction
+- [x] flex-direction
 
 #### 快速开始
 
