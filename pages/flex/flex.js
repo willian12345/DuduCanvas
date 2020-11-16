@@ -13,11 +13,11 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {    
         const container = new Container()
-        container.direction = 'column-reverse'
+        container.direction = 'row'
         container.justifyContent = 'space-around'
-        // container.alignItems = 'flex-star'
-        container.x = 50
-        container.y = 100
+        container.alignItems = 'center'
+        container.x = 0
+        container.y = 0
         container.width = 375
         container.height = 300
         
@@ -45,6 +45,7 @@ Page({
           avatar.borderRadius = 3
           container.addChild(avatar)
         }
+        container.childs[1].alignSelf = 'flex-end'
         // container.regX = 50
         // container.regY = 50
         // container.rotation = 40

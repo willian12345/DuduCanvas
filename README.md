@@ -2,10 +2,9 @@
 version alpha 1.0.0
 ##### todoList
 - [x] flex
-- [ ] inline-flex
 - [x] align-items
 - [x] justify-content
-- [ ] align-self
+- [x] align-self
 - [x] flex-direction
 
 #### 快速开始

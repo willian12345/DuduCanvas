@@ -111,6 +111,16 @@ export default class Container extends DisplayObject{
 				child.y += parentHeight - child.height
 			}
 		}
+		// align-self
+		childs.forEach((v)=>{
+			if(v.alignSelf === 'flex-start'){
+				v.y = 0
+			}else if(v.alignSelf === 'center'){
+				v.y = parentHeight * .5 - (v.height * .5)
+			}else if(v.alignSelf === 'flex-end'){
+				v.y = parentHeight - v.height
+			}
+		})
 	}
 	setJustifyContent(isReverse){
 		const parentWidth = this.width
@@ -269,6 +279,16 @@ export default class Container extends DisplayObject{
 				child.x += parentWidth - child.width
 			}
 		}
+		// align-self
+		childs.forEach((v)=>{
+			if(v.alignSelf === 'flex-start'){
+				v.x = 0
+			}else if(v.alignSelf === 'center'){
+				v.x = parentWidth * .5 - (v.width * .5)
+			}else if(v.alignSelf === 'flex-end'){
+				v.x = parentWidth - v.width
+			}
+		})
 	}
 	setColumn(){
 		this.setJustifyContentForColumn()
