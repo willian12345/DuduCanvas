@@ -13,17 +13,14 @@ Page({
     .then( loader => {
       new Stage('#myCanvas', stage => {    
         const container = new Container()
-        container.direction = 'row'
+        // container.direction = 'row'
+        // container.alignItems = 'center'
         container.justifyContent = 'space-around'
-        container.alignItems = 'center'
         container.x = 0
         container.y = 0
         container.width = 375
         container.height = 300
-        
-
-        container.graphics.beginPath()
-        container.graphics.strokeRect(0, 0, container.width, container.height)
+        container.backgroundColor = 'green'
         
         const t1 = new Text()
         t1.fontSize = 20
@@ -31,24 +28,29 @@ Page({
 
         container.addChild(t1)
 
-        // display: flex;
-        // flex-wrap: wrap;
-        // align-content: flex-start;
-        // justify-content: center;
-
         for(let i=0;i<2;i++){
           const avatar = new Image({
             image: loader.get('avatar'),
             width: 20 * i +20, 
             height: 20 * i +20,
           })
-          avatar.borderRadius = 3
+          avatar.borderRadius = 4
           container.addChild(avatar)
         }
-        container.childs[1].alignSelf = 'flex-end'
-        // container.regX = 50
-        // container.regY = 50
-        // container.rotation = 40
+
+        const t2 = new Text()
+        t2.fontSize = 30
+        t2.text = '上将村'
+
+        const subContainer = new Container()
+        subContainer.width = 120
+        subContainer.height = 80
+        subContainer.borderRadius = 20
+        subContainer.backgroundColor = '#999'
+        subContainer.addChild(t2)
+        
+        container.addChild(subContainer)
+
         stage.addChild(container)
       }, this)
     }) 

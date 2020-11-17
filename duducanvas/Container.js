@@ -1,5 +1,6 @@
 import DisplayObject from './DisplayObject.js'
-import { draw } from './config'
+import SimpleCss from './SimpleCss.js'
+import { draw, drawGraphics } from './config'
 
 const _width = Symbol('width')
 const _height = Symbol('height')
@@ -7,13 +8,21 @@ const _alignItems = Symbol('_alignItems')
 const _justifyContent = Symbol('_justifyContent')
 const _direction = Symbol('_direction')
 const _flex = Symbol('_flex')
-const _draw = Symbol('_draw')
+const extendsClassDraw = Symbol('extendsClassDraw')
 
-export default class Container extends DisplayObject{
+/**
+ * Container 
+ * 拥有 Flex 布局功能的容器，可往容器内添加子元素
+ * 实例属性
+ * direction 子元素排列方向，可使用的值: [row, row-reverse, column, column-reverse]
+ * jusifyContent 子元素水平对齐方式，可使用的值: [flex-start, center, flex-end, space-between, space-around]
+ * alignItems 子元素垂直对齐方式，可使用的值: [flex-start, center, flex-end]
+ */
+export default class Container extends SimpleCss{
 	name = 'Container'
 	constructor(context){
 		super()
-		this[_draw] = super[draw]
+		this[extendsClassDraw] = super[draw]
 		this.direction = 'row'
 		this.justifyContent = 'center'
 		this.alignItems = 'center'
@@ -152,7 +161,7 @@ export default class Container extends DisplayObject{
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
 					// x 轴起点是总宽度-子元素总宽度
-					child.x = parentWidth - childsWidth
+					child.x += parentWidth - childsWidth
 				}
 			}
 		}else if(justifyContent === 'center'){
@@ -163,7 +172,7 @@ export default class Container extends DisplayObject{
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
 					// x 轴起点是总宽度-子元素总宽度的一半
-					child.x = ((parentWidth - childsWidth) * .5)
+					child.x += ((parentWidth - childsWidth) * .5)
 				}
 			}
 		}else if(justifyContent === 'space-between'){
@@ -210,7 +219,7 @@ export default class Container extends DisplayObject{
 				if(index > 0){
 					child.y += childs[index-1].y + childs[index-1].height
 				}else{
-					child.y = 0
+					child.y += 0
 				}
 			}
 		}else if(justifyContent === 'flex-end'){
@@ -221,7 +230,7 @@ export default class Container extends DisplayObject{
 					child.y += childs[index-1].y + childs[index-1].height
 				}else{
 					// y 轴起点是总宽度-子元素总宽度
-					child.y = parentHeight - childsHeight
+					child.y += parentHeight - childsHeight
 				}
 			}
 		}else if(justifyContent === 'center'){
@@ -298,7 +307,7 @@ export default class Container extends DisplayObject{
 		this.setJustifyContentForColumn(true)
 		this.setAlignItemsByColumn()
 	}
-	[draw](){
+	[draw](ctx){
 		if(this.direction === 'row'){
 			this.setRow()
 		}else if(this.direction === 'row-reverse'){
@@ -308,8 +317,9 @@ export default class Container extends DisplayObject{
 		}else if(this.direction === 'column-reverse'){
 			this.setColumnReverse()
 		}
-		// 所有位置计算完后再调用 绘制
-		this[_draw]()
+		// 所有位置计算完后再调用 extends class 的 draw 绘制
+		// 因为 Container 本身不需要绘制渲染
+		this[extendsClassDraw](ctx)
 	}
 }
 

@@ -5,7 +5,7 @@
     <navigator url="/pages/text/text" class="nav" hover-class="navigator-hover">文本</navigator>
     <navigator url="/pages/image/image" class="nav" hover-class="navigator-hover">图片</navigator>
     <navigator url="/pages/path/path" class="nav" hover-class="navigator-hover">path</navigator>
-    <navigator url="/pages/structure/structure" class="nav" hover-class="navigator-hover">类结构图</navigator>
+    <navigator url="/pages/flex/flex" class="nav" hover-class="navigator-hover">flex</navigator>
     <navigator url="/pages/animate/animate" class="nav" hover-class="navigator-hover">异步</navigator>
   </view>
   <button type="primary" bindtap="genTempPath" class="btn">canvas生成临时图片路径</button>

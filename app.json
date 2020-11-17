@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/flex/flex",
     "pages/index/index",
+    "pages/flex/flex",
     "pages/path/path",
     "pages/image/image",
     "pages/text/text",
-    "pages/structure/structure",
     "pages/animate/animate"
   ],
   "window": {

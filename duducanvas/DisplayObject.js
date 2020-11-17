@@ -1,6 +1,7 @@
 import { getPosAfterRotation, getMaxValue, findNodes }  from './utils'
 import { draw, getAlpha, drawGraphics } from './config'
 import Graphics from './graphics/index'
+
 let context = null
 let displayObjectId = 0
 const id = Symbol('id')

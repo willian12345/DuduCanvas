@@ -44,6 +44,7 @@ export default class RoundRect{
 		}
 		
 		ctx.beginPath();
+		// ctx.fillStyle = '#ff0000'
 		ctx.moveTo(x + radius.tl, y);
 		ctx.lineTo(x + width - radius.tr, y);
 		ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
@@ -54,9 +55,7 @@ export default class RoundRect{
 		ctx.lineTo(x, y + radius.tl);
 		ctx.quadraticCurveTo(x, y, x + radius.tl, y);
 		ctx.closePath();
-		
 		if(instance.isMask){
-			// ctx.fill();
 			ctx.clip()
 		}else {
 			if (fill) {
