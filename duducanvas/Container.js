@@ -13,10 +13,13 @@ const extendsClassDraw = Symbol('extendsClassDraw')
 /**
  * Container 
  * 拥有 Flex 布局功能的容器，可往容器内添加子元素
- * 实例属性
+ * flex 相关实例属性
  * direction 子元素排列方向，可使用的值: [row, row-reverse, column, column-reverse]
  * jusifyContent 子元素水平对齐方式，可使用的值: [flex-start, center, flex-end, space-between, space-around]
  * alignItems 子元素垂直对齐方式，可使用的值: [flex-start, center, flex-end]
+ * 
+ * *注意*
+ * Container 需要主动设置 width、height，默认为都为 0
  */
 export default class Container extends SimpleCss{
 	name = 'Container'
@@ -308,13 +311,14 @@ export default class Container extends SimpleCss{
 		this.setAlignItemsByColumn()
 	}
 	[draw](ctx){
-		if(this.direction === 'row'){
+		const direction = this.direction
+		if(direction === 'row'){
 			this.setRow()
-		}else if(this.direction === 'row-reverse'){
+		}else if(direction === 'row-reverse'){
 			this.setRowReverse()
-		}else if(this.direction === 'column'){
+		}else if(direction === 'column'){
 			this.setColumn()
-		}else if(this.direction === 'column-reverse'){
+		}else if(direction === 'column-reverse'){
 			this.setColumnReverse()
 		}
 		// 所有位置计算完后再调用 extends class 的 draw 绘制

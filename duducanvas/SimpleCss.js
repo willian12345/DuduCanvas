@@ -4,9 +4,9 @@ import Shape from './Shape.js'
 
 const extendsClassDraw = Symbol('extendsClassDraw')
 
-const roundCorner = {tl: 0, tr: 0, br: 0, bl: 0}
 function getChangedBorderRadiusValue(value){
 	let borderRadiusValue
+  const roundCorner = { tl: 0, tr: 0, br: 0, bl: 0 }
 	value = String(value).split(' ').map(v => parseFloat(v))
 	const valueLength = value.length
 	if(valueLength === 1){
@@ -39,7 +39,7 @@ export default class SimpleCss extends DisplayObject {
   borderRadiusValue = ''
 	/**
 	 * 1、borderRadius值设置请参与 css3 的 border-radius 属性;
-	 * eg1: '10'
+	 * eg1: 10
 	 * eg2: '10 20'
 	 * eg3: '10 20 10'
 	 * eg4: '10, 20, 30, 40'
@@ -92,7 +92,7 @@ export default class SimpleCss extends DisplayObject {
 		if(this.borderRadiusValue === '100%'){
 			s.graphics.fillCircle(this.width * .5,  this.height * .5, this.width * .5)
 		}else{
-			s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue, '#000')
+			s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
     }
 		this.mask = s
   }
