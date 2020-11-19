@@ -21,6 +21,7 @@ Page({
         container.width = 375
         container.height = 300
         container.backgroundColor = 'green'
+        // container.borderLeft = '10px solid blue'
         
         const t1 = new Text()
         t1.fontSize = 20
@@ -47,6 +48,7 @@ Page({
         subContainer.height = 80
         subContainer.borderRadius = 20
         subContainer.backgroundColor = '#999'
+        subContainer.border = '2 dotted red'
         subContainer.addChild(t2)
         
         container.addChild(subContainer)

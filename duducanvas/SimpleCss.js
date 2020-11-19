@@ -30,12 +30,20 @@ function getChangedBorderRadiusValue(value){
 	return borderRadiusValue
 }
 
+// 仅支持二种风格的边框
+const BORDER_STYLES = ['solid', 'dashed']
+
 /**
  * SimpleCss 
  * 样式类
  */
 export default class SimpleCss extends DisplayObject {
-  backgroundColor = ''
+	backgroundColor = ''
+	border = ''
+	borderTop = ''
+	borderRight = ''
+	borderBottom = ''
+	borderLeft = ''
   borderRadiusValue = ''
 	/**
 	 * 1、borderRadius值设置请参与 css3 的 border-radius 属性;
@@ -70,7 +78,11 @@ export default class SimpleCss extends DisplayObject {
 
     if(this.backgroundColor){
       this.initBackgroundColor()
-    }
+		}
+
+		if(this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft){
+			this.initBorder()
+		}
     
 		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
 		if(this.mask){
@@ -82,6 +94,60 @@ export default class SimpleCss extends DisplayObject {
     }
     // 重载 DisplayObject draw 
     this[extendsClassDraw](ctx)
+	}
+	getBorderAttr(border){
+		let [ borderWidth, borderStyle, borderColor] = border.split(' ')
+		borderWidth = parseFloat(borderWidth)
+		if(BORDER_STYLES.indexOf(borderStyle) < 0){
+			console.warn('不支持的边框样式')
+		}
+		
+		return [ borderWidth, borderStyle, borderColor ]
+	}
+	setBorderStyles(borderWidth, borderStyle, borderColor){
+		this.graphics.beginPath()
+		if(borderStyle === 'dashed'){
+			this.graphics.setLineDash([borderWidth,borderWidth])
+		}
+		// 边框都是向内画
+		this.graphics.lineWidth(borderWidth)
+		.strokeStyle(borderColor)
+	}
+	initBorder(){
+		// 四边都有边框
+		if(this.border){
+			const [ borderWidth, borderStyle, borderColor ] = this.getBorderAttr(this.border)
+			this.setBorderStyles(borderWidth, borderStyle, borderColor)
+			const halfBorderWidth = borderWidth * .5
+			// 如果有圆角属性，则需要画圆角边框
+			if(this.borderRadius){
+				this.graphics.strokeRoundRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth, this.borderRadius)
+			}else{
+				this.graphics.strokeRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth)
+			}
+		} else {
+			if(this.borderTop){
+				this.setBorderStyles(...this.getBorderAttr(this.borderTop))
+				this.graphics.moveTo(0, 0)
+				.lineTo(this.width, 0)
+				.stroke()
+			}else if(this.borderRight){
+				this.setBorderStyles(...this.getBorderAttr(this.borderRight))
+				this.graphics.moveTo(this.width, 0)
+				.lineTo(this.width, this.height)
+				.stroke()
+			}else if(this.borderBottom){
+				this.setBorderStyles(...this.getBorderAttr(this.borderBottom))
+				this.graphics.moveTo(0, this.height)
+				.lineTo(this.width, this.height)
+				.stroke()
+			}else if(this.borderLeft){
+				this.setBorderStyles(...this.getBorderAttr(this.borderLeft))
+				this.graphics.moveTo(0, 0)
+				.lineTo(0, this.height)
+				.stroke()
+			}
+		}
 	}
 	/**
 	 * borderRadius 

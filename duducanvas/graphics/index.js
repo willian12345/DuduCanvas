@@ -24,6 +24,7 @@ import ClearRect from './ClearRect'
 import LineCap from './LineCap'
 import LineJoin from './LineJoin'
 import LineWidth from './LineWidth'
+import SetLineDash from './SetLineDash'
 export default class Graphics{
   name = 'Graphics'
   constructor(){
@@ -44,6 +45,10 @@ export default class Graphics{
     },
     moveTo: (x, y) => {
       this[append](new MoveTo(x, y))
+      return this.graphics
+    },
+    setLineDash: (dash) => {
+      this[append](new SetLineDash(dash))
       return this.graphics
     },
     lineWidth: (width) => {
@@ -111,6 +116,10 @@ export default class Graphics{
     },
     fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius = 8, fill, stroke)=> {
       this[append](new RoundRect(x, y, w, h, radius, fill, stroke))
+      return this.graphics
+    },
+    strokeRoundRect: (x, y, w, h, radius) => {
+      this[append](new RoundRect(x, y, w, h, radius, false, true))
       return this.graphics
     },
     /**
