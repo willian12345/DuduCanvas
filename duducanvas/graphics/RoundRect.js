@@ -48,6 +48,7 @@ export default class RoundRect{
 		// ctx.fillStyle = '#ff0000'
 		ctx.moveTo(x + radius.tl, y);
 		ctx.lineTo(x + width - radius.tr, y);
+		// quadraticCurveTo(控制点: cpx, cpy, 终点: x, y)
 		ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
 		ctx.lineTo(x + width, y + height - radius.br);
 		ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);

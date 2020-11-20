@@ -4,6 +4,10 @@ import Shape from './Shape.js'
 
 const extendsClassDraw = Symbol('extendsClassDraw')
 
+/**
+ * 解构圆角矩形值成  { tl: 0, tr: 0, br: 0, bl: 0 }
+ * @param {*} value 
+ */
 function getChangedBorderRadiusValue(value){
 	let borderRadiusValue
   const roundCorner = { tl: 0, tr: 0, br: 0, bl: 0 }
@@ -69,23 +73,29 @@ export default class SimpleCss extends DisplayObject {
   constructor(){
     super()
     this[extendsClassDraw] = super[draw]
-  }
+	}
+	/**
+	 * 绘制接口
+	 * @param {*} ctx 
+	 */
   [draw](ctx){
 		
     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
 		if(this.borderRadiusValue){
 			this.initBorderRadiusMask()
     }
-
+		
+		// 绘制背景
     if(this.backgroundColor){
       this.initBackgroundColor()
 		}
 
+		// 绘制边框
 		if(this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft){
 			this.initBorder()
 		}
-    
-		// 如果有遮罩，只能使用 圆形，矩形，圆角矩形
+
+		// 遮罩，主要用于显示圆角及圆
 		if(this.mask){
 			if(this.mask.name === 'Shape'){
 				// 遮罩层不参与显示所以也没有父级元素
@@ -93,9 +103,14 @@ export default class SimpleCss extends DisplayObject {
         this.mask[draw](ctx, true)
 			}
     }
-    // 重载 DisplayObject draw 
+		// 重载 DisplayObject draw 
+		// 调用 显示对象绘制方法
     this[extendsClassDraw](ctx)
 	}
+	/**
+	 * 解构边框线值字符串
+	 * @param {*} border 
+	 */
 	getBorderAttr(border){
 		let [ borderWidth, borderStyle, borderColor] = border.split(' ')
 		borderWidth = parseFloat(borderWidth)
@@ -105,6 +120,12 @@ export default class SimpleCss extends DisplayObject {
 		
 		return [ borderWidth, borderStyle, borderColor ]
 	}
+	/**
+	 * 设置边框样宽，样式，颜色
+	 * @param {*} borderWidth 
+	 * @param {*} borderStyle 
+	 * @param {*} borderColor 
+	 */
 	setBorderStyles(borderWidth, borderStyle, borderColor){
 		this.graphics.beginPath()
 		if(borderStyle === 'dashed'){
@@ -114,7 +135,12 @@ export default class SimpleCss extends DisplayObject {
 		this.graphics.lineWidth(borderWidth)
 		.strokeStyle(borderColor)
 	}
-	// 生成水平半圆角矩形路径
+	/**
+	 * 生成水平半圆角矩形路径
+	 * 当 borderRadius 值超过元素高度 height 时，表示左右显示成半圆
+	 * @param {*} width 
+	 * @param {*} height 
+	 */
 	getHorizontalRoundRectPath(width, height){
 		const s = new Shape()
 		const radius = height * .5
@@ -126,7 +152,12 @@ export default class SimpleCss extends DisplayObject {
 		.lineTo(radius, height)
 		return s
 	}
-	// 生成垂直半圆角矩形路径
+	/**
+	 * 生成垂直半圆角矩形路径
+	 * 当 borderRadius 值超过元素宽度 width 时，表示上高显示成半圆
+	 * @param {*} width 
+	 * @param {*} height 
+	 */
 	getVerticalRoundRectPath(width, height){
 		const s = new Shape()
 		const radius = width * .5
@@ -137,6 +168,9 @@ export default class SimpleCss extends DisplayObject {
 		.lineTo(0, radius)
 		return s
 	}
+	/**
+	 * 初始化边框线
+	 */
 	initBorder(){
 		// 四边都有边框
 		if(this.border){
@@ -146,7 +180,8 @@ export default class SimpleCss extends DisplayObject {
 			// 如果有圆角属性，则需要画圆角边框
 			if(this.borderRadius){
 				let s
-				if(this.borderRadius === '100%' && this.width === this.height){
+				// 值为100%或值等于宽高值，且宽高相等时 表示显示想要显示成圆形
+				if((this.borderRadius === '100%' || this.borderRadius === this.width) && (this.width === this.height)){
 					s = new Shape()
 					const radius = this.width * .5
 					s.graphics.strokeCircle(radius, radius, radius)
@@ -189,12 +224,12 @@ export default class SimpleCss extends DisplayObject {
 		}
 	}
 	/**
-	 * borderRadius 
-	 * 为图像元素添加遮罩以实现圆角
+	 * 初始化圆角
+	 * 为图像元素添加遮罩以实现 borderRadius 圆角
 	 */
 	initBorderRadiusMask(){
 		let s
-		if(this.borderRadiusValue === '100%' && this.width === this.height){
+		if((this.borderRadiusValue === '100%' || this.borderRadiusValue === this.width) && (this.width === this.height)){
 			const radius = this.width * .5
 			s = new Shape()
 			s.graphics.fillCircle(radius,  radius, radius)
@@ -211,7 +246,10 @@ export default class SimpleCss extends DisplayObject {
 			s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
 		}
 		this.mask = s
-  }
+	}
+	/**
+	 * 初始化背景颜色
+	 */
   initBackgroundColor(){
     this.graphics.beginPath()
     .fillStyle(this.backgroundColor)
