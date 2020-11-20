@@ -70,7 +70,14 @@ export default class Image extends SimpleCss {
 		y = this.dy + y
 		// 调用 extends class 的 draw 方法，因为有可能需要设置样式
 		this[extendsClassDraw](ctx)
+
+		// 绘制图片
 		this[drawImage](ctx, x, y)
+
+		// 此处的子元素一般只用来表现描述等绘制，不推荐添加其它类型的子元素
+		this.childs.forEach(v=>{
+			v[draw](ctx)
+		})
 	}
 }
 

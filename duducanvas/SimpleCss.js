@@ -71,6 +71,7 @@ export default class SimpleCss extends DisplayObject {
     this[extendsClassDraw] = super[draw]
   }
   [draw](ctx){
+		
     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
 		if(this.borderRadiusValue){
 			this.initBorderRadiusMask()
@@ -113,6 +114,29 @@ export default class SimpleCss extends DisplayObject {
 		this.graphics.lineWidth(borderWidth)
 		.strokeStyle(borderColor)
 	}
+	// 生成水平半圆角矩形路径
+	getHorizontalRoundRectPath(width, height){
+		const s = new Shape()
+		const radius = height * .5
+		s.graphics.beginPath()
+		.fillStyle('#ff00ff')
+		.arc(radius, radius, radius, Math.PI * .5, Math.PI * 1.5)
+		.lineTo(width - radius, 0)
+		.arc(width - radius, radius, radius, Math.PI * 1.5, Math.PI * 2.5)
+		.lineTo(radius, height)
+		return s
+	}
+	// 生成垂直半圆角矩形路径
+	getVerticalRoundRectPath(width, height){
+		const s = new Shape()
+		const radius = width * .5
+		s.graphics.beginPath()
+		.arc(radius, radius, radius, Math.PI, Math.PI * 2)
+		.lineTo(width, height - radius)
+		.arc(radius, height - radius, radius, 0, Math.PI)
+		.lineTo(0, radius)
+		return s
+	}
 	initBorder(){
 		// 四边都有边框
 		if(this.border){
@@ -121,7 +145,22 @@ export default class SimpleCss extends DisplayObject {
 			const halfBorderWidth = borderWidth * .5
 			// 如果有圆角属性，则需要画圆角边框
 			if(this.borderRadius){
-				this.graphics.strokeRoundRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth, this.borderRadius)
+				let s
+				if(this.borderRadius === '100%' && this.width === this.height){
+					s = new Shape()
+					const radius = this.width * .5
+					s.graphics.strokeCircle(radius, radius, radius)
+				}else if(this.borderRadius >= this.height){
+					s = this.getHorizontalRoundRectPath(this.width, this.height)
+					s.graphics.stroke()
+				}else if(this.borderRadius >= this.width){
+					s = this.getVerticalRoundRectPath(this.width, this.height)
+					s.graphics.stroke()
+				}else{
+					s = new Shape()
+					s.graphics.strokeRoundRect(0, 0, this.width, this.height, this.borderRadius)
+				}
+				this.addChild(s)
 			}else{
 				this.graphics.strokeRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth)
 			}
@@ -154,12 +193,23 @@ export default class SimpleCss extends DisplayObject {
 	 * 为图像元素添加遮罩以实现圆角
 	 */
 	initBorderRadiusMask(){
-		const s = new Shape()
-		if(this.borderRadiusValue === '100%'){
-			s.graphics.fillCircle(this.width * .5,  this.height * .5, this.width * .5)
+		let s
+		if(this.borderRadiusValue === '100%' && this.width === this.height){
+			const radius = this.width * .5
+			s = new Shape()
+			s.graphics.fillCircle(radius,  radius, radius)
+		}else if(this.borderRadiusValue >= this.height){
+			s = this.getHorizontalRoundRectPath(this.width, this.height)
+			s.graphics.clip()
+			.fill()
+		}else if(this.borderRadiusValue >= this.width){
+			s = this.getVerticalRoundRectPath(this.width, this.height)
+			s.graphics.clip()
+			.fill()
 		}else{
+			s = new Shape()
 			s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
-    }
+		}
 		this.mask = s
   }
   initBackgroundColor(){

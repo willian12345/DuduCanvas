@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Container, Image} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Container, Image, Shape} from '../../duducanvas/index'
 Page({
   data:{
     tempPath: ''
@@ -35,7 +35,11 @@ Page({
             width: 20 * i +20, 
             height: 20 * i +20,
           })
-          avatar.borderRadius = 4
+          if(i == 1){
+            avatar.borderRadius = '100%'
+            avatar.alpha = .5
+            avatar.border = '4 solid blue'
+          }
           container.addChild(avatar)
         }
 
@@ -46,9 +50,9 @@ Page({
         const subContainer = new Container()
         subContainer.width = 120
         subContainer.height = 80
-        subContainer.borderRadius = 20
+        subContainer.borderRadius = 10
         subContainer.backgroundColor = '#999'
-        subContainer.border = '2 dotted red'
+        subContainer.border = '2 solid red'
         subContainer.addChild(t2)
         
         container.addChild(subContainer)

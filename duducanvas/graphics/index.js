@@ -110,8 +110,21 @@ export default class Graphics{
       this[append](new DrawCircle(x, y, radius, true))
       return this.graphics
     },
+    strokeCircle: (x = 0, y = 0, radius = 20)=> {
+      this[append](new DrawCircle(x, y, radius))
+      this[append](new Stroke())
+      return this.graphics
+    },
     fillRect: (x = 0, y = 0, w = 10, h = 20)=> {
       this[append](new Rect(x, y, w, h))
+      return this.graphics
+    },
+    /**
+     * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
+     */
+    strokeRect: (x = 0, y = 0, w = 10, h = 20)=> {
+      this[append](new Rect(x,y,w,h, true))
+      this[append](new Stroke())
       return this.graphics
     },
     fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius = 8, fill, stroke)=> {
@@ -120,13 +133,7 @@ export default class Graphics{
     },
     strokeRoundRect: (x, y, w, h, radius) => {
       this[append](new RoundRect(x, y, w, h, radius, false, true))
-      return this.graphics
-    },
-    /**
-     * 画一个矩形(非填充)。 用 strokeStyle 设置矩形线条的颜色，如果没设置默认是黑色
-     */
-    strokeRect: (x = 0, y = 0, w = 10, h = 20)=> {
-      this[append](new Rect(x,y,w,h, true))
+      this[append](new Stroke())
       return this.graphics
     },
     /**
