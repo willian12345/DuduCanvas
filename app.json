@@ -5,7 +5,7 @@
     "pages/path/path",
     "pages/image/image",
     "pages/text/text",
-    "pages/animate/animate"
+    "pages/async/async"
   ],
   "window": {
     "backgroundTextStyle": "light",
