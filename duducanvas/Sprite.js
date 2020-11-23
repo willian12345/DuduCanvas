@@ -12,7 +12,10 @@ const setSlice = Symbol('setSlice')
 const _sliceBounds = Symbol('_sliceBounds')
 
 const rotation = Symbol('rotation')
-
+/**
+ * Sprite 雪碧类
+ * 用于显示九宫格类型的图片
+ */
 export default class Sprite extends Group{	
 	name = 'Sprite'
 	img = null

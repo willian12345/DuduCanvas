@@ -1,12 +1,12 @@
-/**
- * 图片类
- * Image 名是为了防止后期可能与系统中保留的 Image 类冲突
- */
 import SimpleCss from './SimpleCss.js'
 import { draw, getAlpha, drawGraphics, drawImage } from './config'
 
 const extendsClassDraw = Symbol('extendsClassDraw')
 
+/**
+ * Image 图片显示类
+ * 继承自SimpleCss类，支持 borderRadius、border
+ */
 export default class Image extends SimpleCss {	
 	name = 'Image'
 	image = null
@@ -74,7 +74,7 @@ export default class Image extends SimpleCss {
 		// 绘制图片
 		this[drawImage](ctx, x, y)
 
-		// 此处的子元素一般只用来表现描述等绘制，不推荐添加其它类型的子元素
+		// 此处的子元素一般只用于样式绘制，不推荐添加其它类型的子元素
 		this.childs.forEach(v=>{
 			v[draw](ctx)
 		})

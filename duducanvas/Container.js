@@ -69,41 +69,68 @@ export default class Container extends SimpleCss{
 	set justifyContent(v){
 		this[_justifyContent] = v
 	}
+	/**
+	 * 获取所有子元素宽度
+	 */
 	getChildsWidth(){
 		let childsWidth = 0
 		this.childs.forEach((v) => childsWidth += v.width)
 		return childsWidth
 	}
+	/**
+	 * 获取所有子元素高度
+	 */
 	getChildsHeight(){
 		let childsHeight = 0
 		this.childs.forEach((v) => childsHeight += v.height)
 		return childsHeight
 	}
+	/**
+	 * 获取所有子元素在 between 模式下间隙宽度
+	 */
 	getBetweenGapWidth(parentWidth){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length - 1)
 	}
+	/**
+	 * 获取所有子元素在 between 模式下间隙高度
+	 */
 	getBetweenGapHeight(parentHeight){
 		const childsHeight = this.getChildsHeight()
 		return (parentHeight - childsHeight) / (this.childs.length - 1)
 	}
+	/**
+	 * 获取所有子元素在 around 模式下间隙宽度
+	 */
 	getAroundGapWidth(parentWidth){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length)
 	}
+	/**
+	 * 获取所有子元素在 around 模式下间隙高度
+	 */
 	getAroundGapHeight(parentHeight){
 		const childsHeight = this.getChildsHeight()
 		return (parentHeight - childsHeight) / (this.childs.length)
 	}
+	/**
+	 * row 样式
+	 */
 	setRow(){
 		this.setJustifyContent()
 		this.setAlignItems()
 	}
+	/**
+	 * row 样式翻转
+	 */
 	setRowReverse(){
-		// 水平翻转
+		// 
 		this.setJustifyContent(true)
 		this.setAlignItems()
 	}
+	/**
+	 * 垂直对齐
+	 */
 	setAlignItems(){
 		const childs = this.childs
 		const parentHeight = this.height
@@ -134,6 +161,9 @@ export default class Container extends SimpleCss{
 			}
 		})
 	}
+	/**
+	 * 水平对齐
+	 */
 	setJustifyContent(isReverse){
 		const parentWidth = this.width
 		let childs = this.childs
@@ -203,6 +233,9 @@ export default class Container extends SimpleCss{
 			}
 		}
 	}
+	/**
+	 * column 模式(水平转垂直) 下的水平对齐，即垂直对齐
+	 */
 	setJustifyContentForColumn(isReverse){
 		const parentHeight = this.height
 		let childs = this.childs
@@ -272,6 +305,9 @@ export default class Container extends SimpleCss{
 			}
 		}
 	}
+	/**
+	 * column 模式(垂直转水平) 下的垂直对齐，即水平对齐
+	 */
 	setAlignItemsByColumn(){
 		const childs = this.childs
 		const parentWidth = this.width

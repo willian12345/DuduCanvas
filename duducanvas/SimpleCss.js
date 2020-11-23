@@ -5,7 +5,7 @@ import Shape from './Shape.js'
 const extendsClassDraw = Symbol('extendsClassDraw')
 
 /**
- * 解构圆角矩形值成  { tl: 0, tr: 0, br: 0, bl: 0 }
+ * 解构圆角矩形值生成:  { tl: 0, tr: 0, br: 0, bl: 0 }
  * @param {*} value 
  */
 function getChangedBorderRadiusValue(value){

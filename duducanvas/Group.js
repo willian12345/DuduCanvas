@@ -4,6 +4,10 @@ const _height = Symbol('height')
 const _display = Symbol('_display')
 const _alignItems = Symbol('_alignItems')
 const _justifyContent = Symbol('_justifyContent')
+/**
+ * Group 组
+ * 可添加多个显示对象进 Group 内，变成一个显示组，可集中对 Group 组操作
+ */
 export default class Group extends DisplayObject{
 	name = 'Group'
 	constructor(context){

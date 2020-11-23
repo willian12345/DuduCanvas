@@ -25,6 +25,11 @@ import LineCap from './LineCap'
 import LineJoin from './LineJoin'
 import LineWidth from './LineWidth'
 import SetLineDash from './SetLineDash'
+
+/**
+ * Graphics 绘制类
+ * 绘制命令，添加绘制命令集，最终在 draw 方法内集中绘制
+ */
 export default class Graphics{
   name = 'Graphics'
   constructor(){
@@ -38,6 +43,9 @@ export default class Graphics{
 			instruction.exec(ctx, this)
 		})
   }
+  /**
+   * 命令方法名与 w3c 一致
+   */
   graphics = {
     beginPath: () => {
       this[append](new BeginPath())

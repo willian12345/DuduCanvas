@@ -21,7 +21,7 @@ version alpha 1.0.0
   // 如果有图片先加载图片
   new ImgLoader([{
         id: 'avatar',
-        src: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK4ZVUCL6zw7Uia4gIG7bLrll0sD6AA96b8mzDd42UyoMYaxdl6icOOFQ6vTWeW3rU9ynB1q5uvnibcg/132'
+        src: '/image/132.jpeg'
       }
   ])
   .then((loader) => {

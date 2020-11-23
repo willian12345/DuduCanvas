@@ -1,7 +1,13 @@
 import DisplayObject from './DisplayObject.js'
 import { draw, createSelectorQuery, createCanvasContext } from './config'
 const render = Symbol('render')
-
+/**
+ * Stage
+ * 舞台对象
+ * 所有显示对象都在舞台对象下，舞台通过渲染函数 
+ * Stage 的 render 发起所有子元素的 draw 方法调用
+ * 子元素自身再递归调用子元素 draw 方法
+ */
 export default class Stage extends DisplayObject {
 	constructor(id, callback, PageInstance) {
 	  super()
@@ -33,9 +39,15 @@ export default class Stage extends DisplayObject {
 	}
 	name = 'Stage'
 	canvas = null
+	/**
+	 * 获取 canvas 上下文
+	 */
 	getContext(){
 		return this._context
 	}
+	/**
+	 * 重新渲染舞台
+	 */
 	update(){
 		this[render]()
 	}

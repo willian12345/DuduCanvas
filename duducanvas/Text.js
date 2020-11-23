@@ -18,6 +18,10 @@ const _writeMode = Symbol('_writeMode')
 
 const defaultFontSize = 10
 
+/**
+ * Text 文本类
+ * 显示文本，支持横、竖排文字，换行
+ */
 export default class Text extends DisplayObject {
 	name = 'Text'
 	// 多行文本时的行距
@@ -78,7 +82,10 @@ export default class Text extends DisplayObject {
 	set height(h){
 		this[_height] = h
 	}
-	// 竖排文字时可设置高度，超市高度则文本换行
+	/**
+	 * 限制文本框高度
+	 * 超过设置的高度则文本换行
+	 */
 	get wrapHeight(){
 		return this[_wrapHeight]
 	}
@@ -87,7 +94,10 @@ export default class Text extends DisplayObject {
 		this[_height] = v
 		this.initVerticalSize()
 	}
-	// 文本宽度，如果设置后文本超过此宽度，则文本换行
+	/**
+	 * 限制文本框宽度
+	 * 超过设置的宽度则文本换行
+	 */
 	get wrapWidth(){
 		return this[_wrapWidth]
 	}
@@ -96,6 +106,9 @@ export default class Text extends DisplayObject {
 		this[_width] = v
 		this[_height] = this.getHeightByWrapWidth()
 	}
+	/**
+	 * 设置字体大小
+	 */
 	get fontSize(){
 		return this[_fontSize]
 	}
@@ -104,6 +117,9 @@ export default class Text extends DisplayObject {
 		this[_width] = this.measureWidth(this.text, v)
 		this[_height] = v  + this.lineGap
 	}
+	/**
+	 * 文本横排与竖排模式
+	 */
 	get writeMode(){
 		return this[_writeMode]
 	}
@@ -113,6 +129,9 @@ export default class Text extends DisplayObject {
 			this.initVerticalSize()
 		}
 	}
+	/**
+	 * 整理文本状态
+	 */
 	collectStatus(){
 		if(this.fontSize){
 			this.font = `${this.fontSize}px sans-serif`
@@ -209,15 +228,28 @@ export default class Text extends DisplayObject {
 		this.lineGap = h
 		return this
 	}
+	/**
+	 * 设置文本框宽度
+	 * @param {*} w 
+	 */
 	setWrapWidth(w){
 		this.wrapWidth = w
 		this.width = w
 		return this
 	}
+	/**
+	 * 设置文本框高度
+	 * @param {*} h 
+	 */
 	setWrapHeight(h){
 		this.wrapHeight = h
 		return this
 	}
+	/**
+	 * 计算文本宽度
+	 * @param {*} text 
+	 * @param {*} fontSize 
+	 */
 	measureWidth(text, fontSize){
 		let w
 		if(this.writeMode.length){
@@ -298,7 +330,7 @@ export default class Text extends DisplayObject {
 			}
 			i++
 		}
-		// 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
+		// todo: 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
 		// 高度 = 文本行数 * 字体大小 + 行间距
 		return this.height = arr.length * fontSize + (arr.length * this.lineGap - this.lineGap)
 	}
