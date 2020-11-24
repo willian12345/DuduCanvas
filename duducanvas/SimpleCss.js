@@ -27,8 +27,8 @@ function getChangedBorderRadiusValue(value){
 	}else if(valueLength === 4){
 		roundCorner.tl = value[0]
 		roundCorner.tr = value[1]
-		roundCorner.br = value[3]
-		roundCorner.bl = value[4]
+		roundCorner.br = value[2]
+		roundCorner.bl = value[3]
 		borderRadiusValue = roundCorner
 	}
 	return borderRadiusValue
@@ -48,9 +48,18 @@ export default class SimpleCss extends DisplayObject {
 	borderRight = ''
 	borderBottom = ''
 	borderLeft = ''
+	/**
+	 * 左边显示成半圆
+	 */
+	borderLeftRound = false
+	/**
+	 * 右边显示成半圆
+	 */
+	borderRightRound = false
+
   borderRadiusValue = ''
 	/**
-	 * 1、borderRadius值设置请参与 css3 的 border-radius 属性;
+	 * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
 	 * eg1: 10
 	 * eg2: '10 20'
 	 * eg3: '10 20 10'
@@ -81,7 +90,7 @@ export default class SimpleCss extends DisplayObject {
   [draw](ctx){
 		
     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
-		if(this.borderRadiusValue){
+		if(this.borderRadiusValue || this.borderLeftRound || this.borderRightRound){
 			this.initBorderRadiusMask()
     }
 		
@@ -152,6 +161,28 @@ export default class SimpleCss extends DisplayObject {
 		.lineTo(radius, height)
 		return s
 	}
+	getLeftRoundRectPath(width, height){
+		const s = new Shape()
+		const radius = height * .5
+		s.graphics.beginPath()
+		// .fillStyle('#ff00ff')
+		.arc(radius, radius, radius, Math.PI * .5, Math.PI * 1.5)
+		.lineTo(width, 0)
+		.lineTo(width, height)
+		.lineTo(radius, height)
+		return s
+	}
+	getRightRoundRectPath(width, height){
+		const s = new Shape()
+		const radius = height * .5
+		s.graphics.beginPath()
+		// .fillStyle('#ff00ff')
+		.moveTo(0, 0)
+		.lineTo(width - radius, 0)
+		.arc(width - radius, radius, radius, Math.PI * 1.5, Math.PI * 2.5)
+		.lineTo(0, height)
+		return s
+	}
 	/**
 	 * 生成垂直半圆角矩形路径
 	 * 当 borderRadius 值超过元素宽度 width 时，表示上高显示成半圆
@@ -186,9 +217,11 @@ export default class SimpleCss extends DisplayObject {
 					const radius = this.width * .5
 					s.graphics.strokeCircle(radius, radius, radius)
 				}else if(this.borderRadius >= this.height){
+					// 提交简易方法生成左右两边半圆角路径
 					s = this.getHorizontalRoundRectPath(this.width, this.height)
 					s.graphics.stroke()
 				}else if(this.borderRadius >= this.width){
+					// 提交简易方法生成上下两边半圆角路径
 					s = this.getVerticalRoundRectPath(this.width, this.height)
 					s.graphics.stroke()
 				}else{
@@ -200,48 +233,76 @@ export default class SimpleCss extends DisplayObject {
 				this.graphics.strokeRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth)
 			}
 		} else {
+			// 单独单边设置
 			if(this.borderTop){
 				this.setBorderStyles(...this.getBorderAttr(this.borderTop))
 				this.graphics.moveTo(0, 0)
 				.lineTo(this.width, 0)
 				.stroke()
-			}else if(this.borderRight){
+			}
+			if(this.borderRight){
 				this.setBorderStyles(...this.getBorderAttr(this.borderRight))
-				this.graphics.moveTo(this.width, 0)
-				.lineTo(this.width, this.height)
-				.stroke()
-			}else if(this.borderBottom){
+				// 如果是右边半圆，则线也要显示成半圆
+				if(this.borderRightRound){
+					const radius = this.height * .5
+					this.graphics.arc(this.width - radius, radius, radius, Math.PI * 1.5, Math.PI * 2.5)
+				}else{
+					this.graphics.moveTo(this.width, 0)
+					.lineTo(this.width, this.height)
+				}
+				this.graphics.stroke()
+			}
+			if(this.borderBottom){
 				this.setBorderStyles(...this.getBorderAttr(this.borderBottom))
 				this.graphics.moveTo(0, this.height)
 				.lineTo(this.width, this.height)
 				.stroke()
-			}else if(this.borderLeft){
+			}
+			if(this.borderLeft){
 				this.setBorderStyles(...this.getBorderAttr(this.borderLeft))
-				this.graphics.moveTo(0, 0)
-				.lineTo(0, this.height)
-				.stroke()
+				// 如果是左边半圆，则线也要显示成半圆
+				if(this.borderLeftRound){
+					const radius = this.height * .5
+					this.graphics.arc(radius, radius, radius, Math.PI * .5, Math.PI * 1.5)
+				}else{
+					this.graphics.moveTo(0, 0)
+					.lineTo(0, this.height)
+				}
+				this.graphics.stroke()
 			}
 		}
 	}
 	/**
 	 * 初始化圆角
 	 * 为图像元素添加遮罩以实现 borderRadius 圆角
-	 */
+	*/
 	initBorderRadiusMask(){
 		let s
+		// 正圆形
 		if((this.borderRadiusValue === '100%' || this.borderRadiusValue === this.width) && (this.width === this.height)){
 			const radius = this.width * .5
 			s = new Shape()
 			s.graphics.fillCircle(radius,  radius, radius)
-		}else if(this.borderRadiusValue >= this.height){
+		}else if(this.borderRadiusValue >= this.height || (this.borderRightRadius && this.borderLeftRadius)){
+			// 两边半圆
 			s = this.getHorizontalRoundRectPath(this.width, this.height)
 			s.graphics.clip()
 			.fill()
 		}else if(this.borderRadiusValue >= this.width){
+			// 上下半圆
 			s = this.getVerticalRoundRectPath(this.width, this.height)
 			s.graphics.clip()
 			.fill()
+		}else if(this.borderLeftRound){
+			s = this.getLeftRoundRectPath(this.width, this.height)
+			s.graphics.clip()
+			.fill()
+		}else if(this.borderRightRound){
+			s = this.getRightRoundRectPath(this.width, this.height)
+			s.graphics.clip()
+			.fill()
 		}else{
+			console.log(this.borderRadiusValue, 333)
 			s = new Shape()
 			s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
 		}

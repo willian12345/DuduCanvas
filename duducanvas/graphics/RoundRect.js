@@ -43,7 +43,7 @@ export default class RoundRect{
 			fill = this.fill
 			stroke = this.stroke
 		}
-		// 该方法来自网络，相比于使用 arc 绘制各个角，此方法可以模拟 css 的 border-radius
+		// 该方法来自 stackoverflow
 		ctx.beginPath();
 		// ctx.fillStyle = '#ff0000'
 		ctx.moveTo(x + radius.tl, y);

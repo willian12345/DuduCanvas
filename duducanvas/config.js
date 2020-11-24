@@ -15,21 +15,21 @@ export const drawGraphics = Symbol('drawGraphics')
  * 兼容各小程序平台
  */
 function getPrefix(){
-  let suffix = ''
+  let prefix = ''
   if(typeof uni !== 'undefined'){
     // uniapp
-    suffix = uni
+    prefix = uni
   }else if(typeof wx  !== 'undefined'){
     // 微信小程序
-    suffix = wx
+    prefix = wx
   }else if(typeof my  !== 'undefined'){
     // 支付宝小程序
-    suffix = my
+    prefix = my
   }else if(typeof tt  !== 'undefined'){
     // 字节跳动
-    suffix = tt
+    prefix = tt
   }
-  return suffix
+  return prefix
 }
 
 
