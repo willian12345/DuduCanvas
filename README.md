@@ -1,13 +1,18 @@
 ## Duducanvas 小程序海报生成基础库
 version alpha 1.0.0
-##### todoList
-- [x] flex
-- [x] align-items
-- [x] justify-content
-- [x] align-self
-- [x] flex-direction
 
-#### 快速开始
+#### 目录说明
+整个目录可以用 “微信开发者工具” 直接打开
+—— duducanvas canvas 库所在目录
+———— color文件夹 颜色类
+———— graphics文件夹 绘制命令类
+———— text文件夹 文本命令类
+—— image 文件夹存放测试用图片
+—— pages 小程序页面目录
+
+
+
+### 快速开始
 
 ##### 页面内添加 canvas 标签
 ```
@@ -94,14 +99,15 @@ new Stage('#myCanvas', stage => {
 
 
 #### 类
-- ImgLoader
-- Stage
-- DisplayObject
-- Group
-- Image
-- Shape
-- Sprite
-- Text
+- ImgLoader 图片加载
+- Stage 舞台
+- DisplayObject 显示对象
+- Container 容器
+- Group 组
+- Image 图片
+- Shape 形状
+- Sprite 特殊图像
+- Text 文本
 
 #### 注意事项
 - Shape 类没有没有自动计算 width 与 height 属性，如有需要可自行主动设置
@@ -115,6 +121,12 @@ new Stage('#myCanvas', stage => {
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败
 - canvas 不能像h5中的canvas那样通过style来缩小，所以为了生成海报不模糊必须将 canvas 至少设置放大两倍，然后将canvas通过 css position 负值移到屏幕外，绘制后可以直接通过image标签来实现预览
 
+##### todoList
+- [x] flex
+- [x] align-items
+- [x] justify-content
+- [x] align-self
+- [x] flex-direction
 
 
 #### 资料参考
