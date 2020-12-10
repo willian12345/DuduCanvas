@@ -21,8 +21,6 @@ Page({
         container.width = 375
         container.height = 300
         container.backgroundColor = 'green'
-        // container.borderLeft = '10px solid blue'
-        
         const t1 = new Text()
         t1.fontSize = 20
         t1.text = '你好啊世界'

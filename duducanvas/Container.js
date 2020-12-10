@@ -1,4 +1,3 @@
-import DisplayObject from './DisplayObject.js'
 import SimpleCss from './SimpleCss.js'
 import { draw, drawGraphics } from './config'
 
@@ -151,7 +150,7 @@ export default class Container extends SimpleCss{
 			}
 		}
 		// align-self
-		childs.forEach((v)=>{
+		childs.forEach((v) => {
 			if(v.alignSelf === 'flex-start'){
 				v.y = 0
 			}else if(v.alignSelf === 'center'){

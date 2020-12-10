@@ -54,9 +54,9 @@ export function getMaxValue(arr){
 	return [minX, minY, maxX, maxY]
 }
 
-export function findNodes(node){
+// 递归找到所有子元素深度优先
+export function findNodes(node, arr = []){
 	const l = node.childs.length
-	const arr = []
 	if(l){
 		for(let i=0; i<l; i++){
 			if(node.childs[i].childs && node.childs[i].childs.length){
@@ -71,4 +71,29 @@ export function findNodes(node){
 		arr.push(node)
 	}
 	return arr
+}
+
+/**
+ * 类似 css margin,padding 等值的转换
+ * 将 value 转换成为 [top right bottom left] 个值
+ * @param {*} value 
+ */
+export function getTransformedFourValue(value){
+	// 如果是单个纯数字
+	if(typeof value === 'number' && !isNaN(value)){
+		return [value, value, value, value]
+	}else if(typeof value === 'string'){
+		value = value.split(' ')
+		value = value.map( v => parseFloat(v))
+		const l = value.length
+		if(l === 2){
+			return [value[0], value[1], value[0], value[1]]
+		}else if(l === 3){
+			return [value[0], value[1], value[2], value[1]]
+		}else{
+			return getTransformedFourValue(value[0])
+		}
+	}else{
+		return value
+	}
 }

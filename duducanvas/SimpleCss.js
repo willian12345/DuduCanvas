@@ -78,8 +78,8 @@ export default class SimpleCss extends DisplayObject {
 		}else{
 			this.borderRadiusValue = value
 		}
-  }
-  constructor(){
+	}
+  constructor () {
     super()
     this[extendsClassDraw] = super[draw]
 	}

@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/path/path",
     "pages/flex/flex",
+    "pages/path/path",
     "pages/image/image",
     "pages/text/text",
     "pages/async/async"
