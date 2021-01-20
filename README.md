@@ -113,6 +113,8 @@ new Stage('#myCanvas', stage => {
 #### 注意事项
 - Shape 类没有没有自动计算 width 与 height 属性，如有需要可自行主动设置
 - Group 类没有自动计算 width 与 height 属性，可通过实例方法 getBound 获取 {left, top, right, bottom}
+- flex 只实现了简单的布局功能，并未完全实现 flex 功能，写着写着觉得自己在写浏览器的感觉了，能力有限
+- Canvas 暂时还未使用 Canvas 2D（新接口）
 
 
 
@@ -129,6 +131,11 @@ new Stage('#myCanvas', stage => {
 - [x] align-self
 - [x] flex-direction
 
+### 关于添加 UI 事件的纠结
+一直在纠结要不要为这个库添加 ui 事件，纠结的理由：
+- 小程序框架js运行层与 view 渲染层完全分离的，用户操作行为触发事件需要通过中转才能到达 view 渲染层，一旦用到 touchmove 频繁操作 UI 的事件就会明显的性能下降顿挫
+- 添加上了事件不就完全成了小游戏了么，那干麻不直接用小游戏框架
+- 调研了一圈发现添加UI事件比较好的方案需要由 2 个 canvas 来实现，小程序不像 web 那样方便，新版canvas-2d 完全成熟了的话再考虑
 
 #### 资料参考
 - 小程序 canvas 开发文档 https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.html
