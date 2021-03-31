@@ -1,0 +1,16 @@
+{
+  "name": "duducanvas",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/willian12345/DuduCanvas.git",
+  "author": "sheldon.wong <willian12345@126.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
