@@ -9,9 +9,16 @@ const render = Symbol('render')
  * 子元素自身再递归调用子元素 draw 方法
  */
 export default class Stage extends DisplayObject {
-	constructor(id, callback, PageInstance) {
+	/**
+	 * 
+	 * @param {*} id canvas id
+	 * @param {*} callback 初始化舞台后的回调
+	 * @param {*} componentInstance 如果是在自定义组件内，则需要将组件实例 this 传进来
+	 */
+	constructor(id, callback, componentInstance) {
 	  super()
-		const query = createSelectorQuery()
+		const query = componentInstance ? createSelectorQuery().in(componentInstance) : createSelectorQuery()
+		
 		query.select(id)
 		.fields({node: true, size: true})
 		.exec(res => {
@@ -26,7 +33,7 @@ export default class Stage extends DisplayObject {
 					this._context = canvas.getContext('2d')
 				}else{
 					// 旧接口
-					this._context = createCanvasContext(id.slice(1), PageInstance)
+					this._context = createCanvasContext(id.slice(1), componentInstance)
 				}
 				DisplayObject.setContext(this._context)	
 				callback(this, this._context)

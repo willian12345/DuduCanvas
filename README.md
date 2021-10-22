@@ -25,6 +25,23 @@ version alpha 1.0.0
 ```
   <canvas id="myCanvas" canvas-id="myCanvas" style="width: 375px; height: 800px"></canvas>
 ```
+
+创建舞台
+
+```
+import { Stage } from '../../duducanvas/index.js'
+new Stage('#myCanvas', stage => {
+  // 此处开始逻辑写代码
+})
+```
+！！如果是在自定义组件内则需要传 this 组件实例
+```
+import { Stage } from '../../duducanvas/index.js'
+new Stage('#myCanvas', stage => {
+  // 此处开始逻辑写代码
+}, this)
+```
+
 ##### 添加图片
 ```
   // 从 duducanvas 引入使用到的类
