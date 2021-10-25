@@ -3,6 +3,7 @@
  * 使用 Symbol 对象作为私有方法名
  */
 export const draw = Symbol('draw')
+export const drawImage = Symbol('drawImage')
 export const getAlpha = Symbol('getAlpha')
 export const append = Symbol('append')
 export const instructions = Symbol('instructions')

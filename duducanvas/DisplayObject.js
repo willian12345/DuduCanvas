@@ -8,7 +8,7 @@ const id = Symbol('id')
 const scale = Symbol('scale')
 const mask = Symbol('mask')
 
-const getBounds = 'helloworld'
+
 const setShadow = Symbol('setShadow')
 
 
@@ -243,7 +243,7 @@ export default class DisplayObject  extends Graphics{
 	 * scale 形变不在 getBounds 计算之内
 	 * scale 形变后宽高可请自行乘上相应的 scale 倍数
 	 */
-	[getBounds](){
+	_getBounds(){
 		let [x, y] = this.getPosition()
 		let w = this.width
 		let h = this.height
@@ -274,14 +274,14 @@ export default class DisplayObject  extends Graphics{
 	// 寻找所有子元素的 bounds 边界宽高并存入数组
 	findNodesBounds(node){
 		return findNodes(node).map( v => {
-			return v[getBounds]()
+			return v._getBounds()
 		})
 	}
 	// 获取元素的绝对宽度
 	getBounds(){
 		// 如果没有子元素，则直接返回自身的宽度
 		if(this.childs.length === 0){
-			return this[getBounds]()
+			return this._getBounds()
 		}else{
 			if(this.childs){
 				let bounds = this.findNodesBounds(this)
@@ -312,7 +312,7 @@ export default class DisplayObject  extends Graphics{
 					rect.regX = this.regX
 					rect.regY = this.regY
 					rect.rotation = this.rotation
-					return this[getBounds].call(rect)
+					return this._getBounds.call(rect)
 				}else{
 					return {left, top, right, bottom, width: right - left, height: bottom - top}
 				}

@@ -25,7 +25,7 @@ export default class Sprite extends Group{
 	}
 	set sliceBounds(bounds){
 		// const { left, top, right, bottom } = bounds
-		this[setSlice](bounds)
+		this._setSlice(bounds)
 		this[_sliceBounds] = bounds
 	}
 	/**
@@ -229,7 +229,7 @@ export default class Sprite extends Group{
 	 * 供内部调用的九宫格边界
 	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
 	 */
-	[setSlice](sliceBound){
+	_setSlice(sliceBound){
 		this.sliced = true
 		this[left] = sliceBound.left
 		this[top] = sliceBound.top
@@ -242,7 +242,7 @@ export default class Sprite extends Group{
 	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
 	 */
 	setSlice(sliceBound){
-		return this[setSlice](sliceBound)
+		return this._setSlice(sliceBound)
 	}
 }
 
