@@ -58,8 +58,9 @@ export default class Text extends DisplayObject {
 		this.textAlign = 'left'
 		this.textBaseline = 'top'
 		this[_text] = ''
+		// 初始化就设置文本
 		if(text){
-			this[_text] = text
+			this.text = text
 		}
 	}
 	get text(){
@@ -67,7 +68,7 @@ export default class Text extends DisplayObject {
 	}
 	set text(t){
 		this[_text] = t
-		this[_width] = this.measureWidth(t, this.fontSize)
+		this.width = this.measureWidth(t, this.fontSize)
 		this.height = this.fontSize
 	}
 	get width(){
