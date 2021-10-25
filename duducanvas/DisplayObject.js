@@ -8,7 +8,7 @@ const id = Symbol('id')
 const scale = Symbol('scale')
 const mask = Symbol('mask')
 
-const getBounds = Symbol('getBounds')
+const getBounds = 'helloworld'
 const setShadow = Symbol('setShadow')
 
 

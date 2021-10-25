@@ -4,6 +4,7 @@ Page({
     tempPath: ''
   },
   onLoad: function () {
+    console.log
     new ImgLoader([
       {
         id: 'avatar',
@@ -45,7 +46,7 @@ Page({
         group.y = 220
         group.regX = avatar.width * .5
         group.addChild(avatar, name)
-        console.log(group.getBounds())
+        console.log(group, 111, group.getBounds())
         stage.addChild(t1, group)
         
       }, this)
