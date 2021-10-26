@@ -12,18 +12,7 @@ export default {
         babel({
             exclude: 'node_modules/**',
             presets: [
-                [
-                "@babel/preset-env",
-                    {
-                        "modules": false,
-                        // "shippedProposals": true,
-                        "useBuiltIns": "usage",
-                        "corejs": {
-                          "version": "3.10",
-                          "proposals": true
-                        },
-                    }
-                ]
+                [ "@babel/preset-env" ]
             ]
         }),
     ],

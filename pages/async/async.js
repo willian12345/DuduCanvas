@@ -1,7 +1,9 @@
-import DuduCanvas from '../../duducanvas/DuduCanvas.js'
-
+import { DuduCanvas } from '../../bundle'
+// import { DuduCanvas } from '../../duducanvas/index.js'
+let timer
 Page({
   onLoad: function () {
+    console.log(DuduCanvas)
     DuduCanvas.load([{
         id: 'avatar',
         src: '/image/132.jpeg'
@@ -24,13 +26,17 @@ Page({
         stage.addChild(avatar)
 
         // 异步更改属性后需要调用 stage.update() 方法
-        setInterval(() => {
+        timer = setInterval(() => {
           avatar.rotation += 2
           stage.update()
         }, 400)
 
       }, this)
     })
-    
+  },
+  onUnload(){
+    if(timer){
+      clearInterval(timer)
+    }
   }
 })
