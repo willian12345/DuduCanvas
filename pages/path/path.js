@@ -1,4 +1,4 @@
-import { Stage, Shape, CreateLinearGradient, CreateRadialGradient } from '../../duducanvas/index'
+import { Stage, Shape, CreateLinearGradient, CreateRadialGradient } from '../../src/index'
 
 Page({
   onLoad: function () {

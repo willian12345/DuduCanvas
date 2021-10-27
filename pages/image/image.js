@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Image, Sprite, Text } from '../../duducanvas/index'
+import { ImgLoader, Stage, Image, Sprite, Text } from '../../src/index'
 
 Page({
   onLoad: function () {

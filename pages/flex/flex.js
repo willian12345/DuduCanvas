@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Container, Image, Shape} from '../../duducanvas/index'
+import { ImgLoader, Stage, Text, Container, Image, Shape} from '../../src/index'
 Page({
   data:{
     tempPath: ''
