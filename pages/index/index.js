@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Group, Image} from '../../dist/duducanvas'
+import { ImgLoader, Stage, Text, Group, Image} from '../../src/index'
 Page({
   data:{
     tempPath: ''
@@ -16,7 +16,7 @@ Page({
 
         const t1 = new Text()
         t1.color = '#cda79f'
-        t1.text = 'DuduCanvas 示例'
+        t1.text = 'Dudu canvas 示例'
         t1.fontSize = 20
         t1.x = 40
         t1.y = 40

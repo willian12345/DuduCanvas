@@ -117,8 +117,8 @@ export default class Text extends DisplayObject {
 	}
 	set fontSize(v){
 		this[_fontSize] = v
-		this[_width] = this.measureWidth(this.text, v)
-		this[_height] = v  + this.lineGap
+		this.width = this.measureWidth(this.text, v)
+		this.height = v  + this.lineGap
 	}
 	/**
 	 * 文本横排与竖排模式
