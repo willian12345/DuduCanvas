@@ -9,7 +9,8 @@
     "@babel/core": "^7.15.8",
     "babel-preset-latest": "^6.24.1",
     "cz-conventional-changelog": "^3.3.0",
-    "rollup-plugin-commonjs": "^10.1.0"
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.4"
   },
   "config": {
     "commitizen": {
