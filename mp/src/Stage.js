@@ -26,17 +26,7 @@ export default class Stage extends DisplayObject {
 			if(data){
 				this.width = data.width
 				this.height = data.height
-
-				if(data.node){
-					const canvas = data.node
-					// canvas 新接口, 还处于公测阶段
-					this._context = canvas.getContext('2d')
-					console.log(1111)
-				}else{
-
-					// 旧接口
-					this._context = createCanvasContext(id.slice(1), componentInstance)
-				}
+				this._context = createCanvasContext(id.slice(1), componentInstance)
 				DisplayObject.setContext(this._context)	
 				callback(this, this._context)
 				// 自动调用一次渲染

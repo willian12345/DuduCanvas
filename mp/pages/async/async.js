@@ -22,11 +22,22 @@ Page({
         avatar.regY = 50
         avatar.borderRadius = '10 40 10'
 
-        stage.addChild(avatar)
+        const name = new DuduCanvas.Text()
+        name.color = '#6c5149'
+        name.text = '龙傲天'
+        name.textAlign = "center"
+        name.x = avatar.width * .5
+        name.y = 110
+
+        stage.addChild(avatar, name)
 
         // 异步更改属性后需要调用 stage.update() 方法
         timer = setInterval(() => {
           avatar.rotation += 2
+          // 文本由于bug无法清除
+          // 需要测试新的 canvs2d 是否解决了 bug 
+          // https://developers.weixin.qq.com/community/develop/article/doc/000242073903a04e082ab595b52013
+          name.text = '6000000000'
           stage.update()
         }, 400)
 
