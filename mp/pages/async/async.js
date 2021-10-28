@@ -1,5 +1,4 @@
-import { DuduCanvas } from '../../bundle'
-// import { DuduCanvas } from '../../duducanvas/index.js'
+import { DuduCanvas } from '../../src/index.js'
 let timer
 Page({
   onLoad: function () {
