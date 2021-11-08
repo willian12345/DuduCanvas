@@ -47,7 +47,6 @@ export default class Graphics{
   }
   // 绘制时执行所有当前文本
   [drawGraphics](ctx){
-    console.log(this[instructions])
     this[instructions].forEach((instruction) => {
 			instruction.exec(ctx, this)
 		})
@@ -97,6 +96,7 @@ export default class Graphics{
      从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
      */
     arc: (x, y, radius, startAngle, endAngle, anticlockwise = false)=> {
+			this[remove]('Arc')
       this[append](new Arc(x, y, radius, startAngle, endAngle, anticlockwise))
       return this.graphics
     },
@@ -104,6 +104,7 @@ export default class Graphics{
      根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点
      */
     arcTo: (x1, y1, x2, y2, radius)=> {
+			this[remove]('ArcTo')
       this[append](new ArcTo(x1, y1, x2, y2, radius))
       return this.graphics
     },

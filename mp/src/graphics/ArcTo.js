@@ -1,4 +1,5 @@
 export default class ArcTo {
+	name="ArcTo"
 	constructor(x1, y1, x2, y2, radius){
 		this.x1 = x1
 		this.y1 = y1

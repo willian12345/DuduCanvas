@@ -1,4 +1,5 @@
 export default class Arc {
+	name = 'Arc'
 	constructor(x, y, radius, startAngle, endAngle, anticlockwise){
 		this.x = x
 		this.y = y
