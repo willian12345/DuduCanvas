@@ -42,7 +42,7 @@
         "minifyWXML": true
     },
     "compileType": "miniprogram",
-    "libVersion": "2.10.4",
+    "libVersion": "2.20.1",
     "appid": "wxbdd6f116cceab972",
     "projectname": "DuduCanvas",
     "debugOptions": {

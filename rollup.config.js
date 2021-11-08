@@ -1,4 +1,4 @@
-// $ rollup -c rollup.config.js   
+// rollup -c rollup.config.js   
 import resolve from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
 import '@babel/polyfill'

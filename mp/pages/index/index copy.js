@@ -47,8 +47,6 @@ Page({
         group.regX = avatar.width * .5
         group.addChild(avatar, name)
         stage.addChild(t1, group)
-
-
         
       }, this)
     }) 

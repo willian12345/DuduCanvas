@@ -52,9 +52,8 @@ export default class Stage extends DisplayObject {
 	}
 	[render](){
 		this._context.clearRect(0, 0, this.width, this.height)
-		// 调用 draw 方法绘制自身级子级
-		this[draw]()
 		// 调用 canvas draw 方法渲染图像
+		this[draw]()
 		this._context.draw(false)
 	}
 }

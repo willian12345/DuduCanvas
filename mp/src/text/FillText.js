@@ -24,6 +24,7 @@ export function needRotation (char) {
  */
 export class FillText {
 	instance = null
+	name = 'FillText'
 	constructor (text, x, y) {
 		this.text = text
 		this.x  = x
@@ -46,6 +47,7 @@ export class FillText {
 				ctx.fillText(textArr[i], x, h)
 			}
 		}else{
+			console.log(this, this.text)
 			ctx.fillText(this.text, x, y)
 		}
 	}

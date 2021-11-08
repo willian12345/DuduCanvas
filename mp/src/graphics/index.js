@@ -1,4 +1,4 @@
-import { append, instructions,  drawGraphics } from '../config'
+import { append, remove, instructions,  drawGraphics } from '../config'
 
 // 路径
 import BeginPath from './BeginPath'
@@ -34,11 +34,20 @@ export default class Graphics{
   name = 'Graphics'
   constructor(){
     this[instructions] = []
-  }  	// 添加至指令集
+  }  	
+  // 添加至指令至指令集
 	[append](instructionsObject){
 		this[instructions].push(instructionsObject)
   }
+  // 移除指令
+  [remove](instructionName){
+    this[instructions] = this[instructions].filter( v => {
+      return v.name !== instructionName
+    })
+  }
+  // 绘制时执行所有当前文本
   [drawGraphics](ctx){
+    console.log(this[instructions])
     this[instructions].forEach((instruction) => {
 			instruction.exec(ctx, this)
 		})

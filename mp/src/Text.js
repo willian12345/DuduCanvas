@@ -1,7 +1,7 @@
 /**
  * 文本类
  */
-import { draw, append, drawGraphics } from './config'
+import { draw, append, remove, drawGraphics, instructions } from './config'
 import DisplayObject from './DisplayObject'
 import { FillText, needRotation } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
@@ -179,11 +179,11 @@ export default class Text extends DisplayObject {
 		this.x += x
 		this.y += y
 		this.width = this.measureWidth(this[_text], this.fontSize)
-
+		// 如果之前有fillText,则需要先清一下之前填文本的命令
+		this[remove]('FillText')
 		// !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
 		// !! 因为会错过画布更新
 		this[append](new FillText(text, this.x, this.y))	
-
 		return this
 	}
 	/**
