@@ -47,7 +47,6 @@ export class FillText {
 				ctx.fillText(textArr[i], x, h)
 			}
 		}else{
-			console.log(this, this.text)
 			ctx.fillText(this.text, x, y)
 		}
 	}

@@ -8,8 +8,6 @@
 				:score="score"
 			/>
 		</view>
-		<canvas id="testCanvas" canvas-id="testCanvas" style="width: 375px; height: 300px"></canvas>
-		<button @click="handleClick"> 增加分值 </button>
 	</view>
 </template>
 

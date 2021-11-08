@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
-/* 0 */,
-/* 1 */
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
+
+/***/ 1:
 /*!******************************************************************!*\
   !*** /Users/wangxiaodong/Documents/DuduCanvas/uniapp/pages.json ***!
   \******************************************************************/
@@ -10,12 +10,2077 @@
 
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
+
+/***/ 10:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 11:
+/*!*************************************************************!*\
+  !*** ./node_modules/@vue/shared/dist/shared.esm-bundler.js ***!
+  \*************************************************************/
+/*! exports provided: EMPTY_ARR, EMPTY_OBJ, NO, NOOP, PatchFlagNames, babelParserDefaultPlugins, camelize, capitalize, def, escapeHtml, escapeHtmlComment, extend, generateCodeFrame, getGlobalThis, hasChanged, hasOwn, hyphenate, includeBooleanAttr, invokeArrayFns, isArray, isBooleanAttr, isDate, isFunction, isGloballyWhitelisted, isHTMLTag, isIntegerKey, isKnownHtmlAttr, isKnownSvgAttr, isMap, isModelListener, isNoUnitNumericStyleProp, isObject, isOn, isPlainObject, isPromise, isReservedProp, isSSRSafeAttrName, isSVGTag, isSet, isSpecialBooleanAttr, isString, isSymbol, isVoidTag, looseEqual, looseIndexOf, makeMap, normalizeClass, normalizeProps, normalizeStyle, objectToString, parseStringStyle, propsToAttrMap, remove, slotFlagsText, stringifyStyle, toDisplayString, toHandlerKey, toNumber, toRawType, toTypeString */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_ARR", function() { return EMPTY_ARR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_OBJ", function() { return EMPTY_OBJ; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO", function() { return NO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOOP", function() { return NOOP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatchFlagNames", function() { return PatchFlagNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "babelParserDefaultPlugins", function() { return babelParserDefaultPlugins; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "camelize", function() { return camelize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalize", function() { return capitalize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "def", function() { return def; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "escapeHtml", function() { return escapeHtml; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "escapeHtmlComment", function() { return escapeHtmlComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extend", function() { return extend; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCodeFrame", function() { return generateCodeFrame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGlobalThis", function() { return getGlobalThis; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChanged", function() { return hasChanged; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasOwn", function() { return hasOwn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hyphenate", function() { return hyphenate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "includeBooleanAttr", function() { return includeBooleanAttr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "invokeArrayFns", function() { return invokeArrayFns; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBooleanAttr", function() { return isBooleanAttr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDate", function() { return isDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGloballyWhitelisted", function() { return isGloballyWhitelisted; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHTMLTag", function() { return isHTMLTag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isIntegerKey", function() { return isIntegerKey; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKnownHtmlAttr", function() { return isKnownHtmlAttr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKnownSvgAttr", function() { return isKnownSvgAttr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isMap", function() { return isMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isModelListener", function() { return isModelListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNoUnitNumericStyleProp", function() { return isNoUnitNumericStyleProp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOn", function() { return isOn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlainObject", function() { return isPlainObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPromise", function() { return isPromise; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isReservedProp", function() { return isReservedProp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSSRSafeAttrName", function() { return isSSRSafeAttrName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSVGTag", function() { return isSVGTag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSet", function() { return isSet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSpecialBooleanAttr", function() { return isSpecialBooleanAttr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSymbol", function() { return isSymbol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isVoidTag", function() { return isVoidTag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "looseEqual", function() { return looseEqual; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "looseIndexOf", function() { return looseIndexOf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeMap", function() { return makeMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeClass", function() { return normalizeClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeProps", function() { return normalizeProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeStyle", function() { return normalizeStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectToString", function() { return objectToString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseStringStyle", function() { return parseStringStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToAttrMap", function() { return propsToAttrMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "slotFlagsText", function() { return slotFlagsText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stringifyStyle", function() { return stringifyStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toDisplayString", function() { return toDisplayString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHandlerKey", function() { return toHandlerKey; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toRawType", function() { return toRawType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toTypeString", function() { return toTypeString; });
+/**
+ * Make a map and return a function for checking if a key
+ * is in that map.
+ * IMPORTANT: all calls of this function must be prefixed with
+ * \/\*#\_\_PURE\_\_\*\/
+ * So that rollup can tree-shake them if necessary.
+ */
+function makeMap(str, expectsLowerCase) {
+    const map = Object.create(null);
+    const list = str.split(',');
+    for (let i = 0; i < list.length; i++) {
+        map[list[i]] = true;
+    }
+    return expectsLowerCase ? val => !!map[val.toLowerCase()] : val => !!map[val];
+}
+
+/**
+ * dev only flag -> name mapping
+ */
+const PatchFlagNames = {
+    [1 /* TEXT */]: `TEXT`,
+    [2 /* CLASS */]: `CLASS`,
+    [4 /* STYLE */]: `STYLE`,
+    [8 /* PROPS */]: `PROPS`,
+    [16 /* FULL_PROPS */]: `FULL_PROPS`,
+    [32 /* HYDRATE_EVENTS */]: `HYDRATE_EVENTS`,
+    [64 /* STABLE_FRAGMENT */]: `STABLE_FRAGMENT`,
+    [128 /* KEYED_FRAGMENT */]: `KEYED_FRAGMENT`,
+    [256 /* UNKEYED_FRAGMENT */]: `UNKEYED_FRAGMENT`,
+    [512 /* NEED_PATCH */]: `NEED_PATCH`,
+    [1024 /* DYNAMIC_SLOTS */]: `DYNAMIC_SLOTS`,
+    [2048 /* DEV_ROOT_FRAGMENT */]: `DEV_ROOT_FRAGMENT`,
+    [-1 /* HOISTED */]: `HOISTED`,
+    [-2 /* BAIL */]: `BAIL`
+};
+
+/**
+ * Dev only
+ */
+const slotFlagsText = {
+    [1 /* STABLE */]: 'STABLE',
+    [2 /* DYNAMIC */]: 'DYNAMIC',
+    [3 /* FORWARDED */]: 'FORWARDED'
+};
+
+const GLOBALS_WHITE_LISTED = 'Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,' +
+    'decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,' +
+    'Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt';
+const isGloballyWhitelisted = /*#__PURE__*/ makeMap(GLOBALS_WHITE_LISTED);
+
+const range = 2;
+function generateCodeFrame(source, start = 0, end = source.length) {
+    // Split the content into individual lines but capture the newline sequence
+    // that separated each line. This is important because the actual sequence is
+    // needed to properly take into account the full line length for offset
+    // comparison
+    let lines = source.split(/(\r?\n)/);
+    // Separate the lines and newline sequences into separate arrays for easier referencing
+    const newlineSequences = lines.filter((_, idx) => idx % 2 === 1);
+    lines = lines.filter((_, idx) => idx % 2 === 0);
+    let count = 0;
+    const res = [];
+    for (let i = 0; i < lines.length; i++) {
+        count +=
+            lines[i].length +
+                ((newlineSequences[i] && newlineSequences[i].length) || 0);
+        if (count >= start) {
+            for (let j = i - range; j <= i + range || end > count; j++) {
+                if (j < 0 || j >= lines.length)
+                    continue;
+                const line = j + 1;
+                res.push(`${line}${' '.repeat(Math.max(3 - String(line).length, 0))}|  ${lines[j]}`);
+                const lineLength = lines[j].length;
+                const newLineSeqLength = (newlineSequences[j] && newlineSequences[j].length) || 0;
+                if (j === i) {
+                    // push underline
+                    const pad = start - (count - (lineLength + newLineSeqLength));
+                    const length = Math.max(1, end > count ? lineLength - pad : end - start);
+                    res.push(`   |  ` + ' '.repeat(pad) + '^'.repeat(length));
+                }
+                else if (j > i) {
+                    if (end > count) {
+                        const length = Math.max(Math.min(end - count, lineLength), 1);
+                        res.push(`   |  ` + '^'.repeat(length));
+                    }
+                    count += lineLength + newLineSeqLength;
+                }
+            }
+            break;
+        }
+    }
+    return res.join('\n');
+}
+
+/**
+ * On the client we only need to offer special cases for boolean attributes that
+ * have different names from their corresponding dom properties:
+ * - itemscope -> N/A
+ * - allowfullscreen -> allowFullscreen
+ * - formnovalidate -> formNoValidate
+ * - ismap -> isMap
+ * - nomodule -> noModule
+ * - novalidate -> noValidate
+ * - readonly -> readOnly
+ */
+const specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
+const isSpecialBooleanAttr = /*#__PURE__*/ makeMap(specialBooleanAttrs);
+/**
+ * The full list is needed during SSR to produce the correct initial markup.
+ */
+const isBooleanAttr = /*#__PURE__*/ makeMap(specialBooleanAttrs +
+    `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,` +
+    `loop,open,required,reversed,scoped,seamless,` +
+    `checked,muted,multiple,selected`);
+/**
+ * Boolean attributes should be included if the value is truthy or ''.
+ * e.g. <select multiple> compiles to { multiple: '' }
+ */
+function includeBooleanAttr(value) {
+    return !!value || value === '';
+}
+const unsafeAttrCharRE = /[>/="'\u0009\u000a\u000c\u0020]/;
+const attrValidationCache = {};
+function isSSRSafeAttrName(name) {
+    if (attrValidationCache.hasOwnProperty(name)) {
+        return attrValidationCache[name];
+    }
+    const isUnsafe = unsafeAttrCharRE.test(name);
+    if (isUnsafe) {
+        console.error(`unsafe attribute name: ${name}`);
+    }
+    return (attrValidationCache[name] = !isUnsafe);
+}
+const propsToAttrMap = {
+    acceptCharset: 'accept-charset',
+    className: 'class',
+    htmlFor: 'for',
+    httpEquiv: 'http-equiv'
+};
+/**
+ * CSS properties that accept plain numbers
+ */
+const isNoUnitNumericStyleProp = /*#__PURE__*/ makeMap(`animation-iteration-count,border-image-outset,border-image-slice,` +
+    `border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,` +
+    `columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,` +
+    `grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,` +
+    `grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,` +
+    `line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,` +
+    // SVG
+    `fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,` +
+    `stroke-miterlimit,stroke-opacity,stroke-width`);
+/**
+ * Known attributes, this is used for stringification of runtime static nodes
+ * so that we don't stringify bindings that cannot be set from HTML.
+ * Don't also forget to allow `data-*` and `aria-*`!
+ * Generated from https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
+ */
+const isKnownHtmlAttr = /*#__PURE__*/ makeMap(`accept,accept-charset,accesskey,action,align,allow,alt,async,` +
+    `autocapitalize,autocomplete,autofocus,autoplay,background,bgcolor,` +
+    `border,buffered,capture,challenge,charset,checked,cite,class,code,` +
+    `codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,` +
+    `coords,crossorigin,csp,data,datetime,decoding,default,defer,dir,dirname,` +
+    `disabled,download,draggable,dropzone,enctype,enterkeyhint,for,form,` +
+    `formaction,formenctype,formmethod,formnovalidate,formtarget,headers,` +
+    `height,hidden,high,href,hreflang,http-equiv,icon,id,importance,integrity,` +
+    `ismap,itemprop,keytype,kind,label,lang,language,loading,list,loop,low,` +
+    `manifest,max,maxlength,minlength,media,min,multiple,muted,name,novalidate,` +
+    `open,optimum,pattern,ping,placeholder,poster,preload,radiogroup,readonly,` +
+    `referrerpolicy,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,` +
+    `selected,shape,size,sizes,slot,span,spellcheck,src,srcdoc,srclang,srcset,` +
+    `start,step,style,summary,tabindex,target,title,translate,type,usemap,` +
+    `value,width,wrap`);
+/**
+ * Generated from https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
+ */
+const isKnownSvgAttr = /*#__PURE__*/ makeMap(`xmlns,accent-height,accumulate,additive,alignment-baseline,alphabetic,amplitude,` +
+    `arabic-form,ascent,attributeName,attributeType,azimuth,baseFrequency,` +
+    `baseline-shift,baseProfile,bbox,begin,bias,by,calcMode,cap-height,class,` +
+    `clip,clipPathUnits,clip-path,clip-rule,color,color-interpolation,` +
+    `color-interpolation-filters,color-profile,color-rendering,` +
+    `contentScriptType,contentStyleType,crossorigin,cursor,cx,cy,d,decelerate,` +
+    `descent,diffuseConstant,direction,display,divisor,dominant-baseline,dur,dx,` +
+    `dy,edgeMode,elevation,enable-background,end,exponent,fill,fill-opacity,` +
+    `fill-rule,filter,filterRes,filterUnits,flood-color,flood-opacity,` +
+    `font-family,font-size,font-size-adjust,font-stretch,font-style,` +
+    `font-variant,font-weight,format,from,fr,fx,fy,g1,g2,glyph-name,` +
+    `glyph-orientation-horizontal,glyph-orientation-vertical,glyphRef,` +
+    `gradientTransform,gradientUnits,hanging,height,href,hreflang,horiz-adv-x,` +
+    `horiz-origin-x,id,ideographic,image-rendering,in,in2,intercept,k,k1,k2,k3,` +
+    `k4,kernelMatrix,kernelUnitLength,kerning,keyPoints,keySplines,keyTimes,` +
+    `lang,lengthAdjust,letter-spacing,lighting-color,limitingConeAngle,local,` +
+    `marker-end,marker-mid,marker-start,markerHeight,markerUnits,markerWidth,` +
+    `mask,maskContentUnits,maskUnits,mathematical,max,media,method,min,mode,` +
+    `name,numOctaves,offset,opacity,operator,order,orient,orientation,origin,` +
+    `overflow,overline-position,overline-thickness,panose-1,paint-order,path,` +
+    `pathLength,patternContentUnits,patternTransform,patternUnits,ping,` +
+    `pointer-events,points,pointsAtX,pointsAtY,pointsAtZ,preserveAlpha,` +
+    `preserveAspectRatio,primitiveUnits,r,radius,referrerPolicy,refX,refY,rel,` +
+    `rendering-intent,repeatCount,repeatDur,requiredExtensions,requiredFeatures,` +
+    `restart,result,rotate,rx,ry,scale,seed,shape-rendering,slope,spacing,` +
+    `specularConstant,specularExponent,speed,spreadMethod,startOffset,` +
+    `stdDeviation,stemh,stemv,stitchTiles,stop-color,stop-opacity,` +
+    `strikethrough-position,strikethrough-thickness,string,stroke,` +
+    `stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,` +
+    `stroke-miterlimit,stroke-opacity,stroke-width,style,surfaceScale,` +
+    `systemLanguage,tabindex,tableValues,target,targetX,targetY,text-anchor,` +
+    `text-decoration,text-rendering,textLength,to,transform,transform-origin,` +
+    `type,u1,u2,underline-position,underline-thickness,unicode,unicode-bidi,` +
+    `unicode-range,units-per-em,v-alphabetic,v-hanging,v-ideographic,` +
+    `v-mathematical,values,vector-effect,version,vert-adv-y,vert-origin-x,` +
+    `vert-origin-y,viewBox,viewTarget,visibility,width,widths,word-spacing,` +
+    `writing-mode,x,x-height,x1,x2,xChannelSelector,xlink:actuate,xlink:arcrole,` +
+    `xlink:href,xlink:role,xlink:show,xlink:title,xlink:type,xml:base,xml:lang,` +
+    `xml:space,y,y1,y2,yChannelSelector,z,zoomAndPan`);
+
+function normalizeStyle(value) {
+    if (isArray(value)) {
+        const res = {};
+        for (let i = 0; i < value.length; i++) {
+            const item = value[i];
+            const normalized = isString(item)
+                ? parseStringStyle(item)
+                : normalizeStyle(item);
+            if (normalized) {
+                for (const key in normalized) {
+                    res[key] = normalized[key];
+                }
+            }
+        }
+        return res;
+    }
+    else if (isString(value)) {
+        return value;
+    }
+    else if (isObject(value)) {
+        return value;
+    }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:(.+)/;
+function parseStringStyle(cssText) {
+    const ret = {};
+    cssText.split(listDelimiterRE).forEach(item => {
+        if (item) {
+            const tmp = item.split(propertyDelimiterRE);
+            tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+        }
+    });
+    return ret;
+}
+function stringifyStyle(styles) {
+    let ret = '';
+    if (!styles || isString(styles)) {
+        return ret;
+    }
+    for (const key in styles) {
+        const value = styles[key];
+        const normalizedKey = key.startsWith(`--`) ? key : hyphenate(key);
+        if (isString(value) ||
+            (typeof value === 'number' && isNoUnitNumericStyleProp(normalizedKey))) {
+            // only render valid values
+            ret += `${normalizedKey}:${value};`;
+        }
+    }
+    return ret;
+}
+function normalizeClass(value) {
+    let res = '';
+    if (isString(value)) {
+        res = value;
+    }
+    else if (isArray(value)) {
+        for (let i = 0; i < value.length; i++) {
+            const normalized = normalizeClass(value[i]);
+            if (normalized) {
+                res += normalized + ' ';
+            }
+        }
+    }
+    else if (isObject(value)) {
+        for (const name in value) {
+            if (value[name]) {
+                res += name + ' ';
+            }
+        }
+    }
+    return res.trim();
+}
+function normalizeProps(props) {
+    if (!props)
+        return null;
+    let { class: klass, style } = props;
+    if (klass && !isString(klass)) {
+        props.class = normalizeClass(klass);
+    }
+    if (style) {
+        props.style = normalizeStyle(style);
+    }
+    return props;
+}
+
+// These tag configs are shared between compiler-dom and runtime-dom, so they
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+const HTML_TAGS = 'html,body,base,head,link,meta,style,title,address,article,aside,footer,' +
+    'header,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,' +
+    'figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,' +
+    'data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,' +
+    'time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,' +
+    'canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,' +
+    'th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,' +
+    'option,output,progress,select,textarea,details,dialog,menu,' +
+    'summary,template,blockquote,iframe,tfoot';
+// https://developer.mozilla.org/en-US/docs/Web/SVG/Element
+const SVG_TAGS = 'svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,' +
+    'defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,' +
+    'feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,' +
+    'feDistanceLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,' +
+    'feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,' +
+    'fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,' +
+    'foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,' +
+    'mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,' +
+    'polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,' +
+    'text,textPath,title,tspan,unknown,use,view';
+const VOID_TAGS = 'area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr';
+const isHTMLTag = /*#__PURE__*/ makeMap(HTML_TAGS);
+const isSVGTag = /*#__PURE__*/ makeMap(SVG_TAGS);
+const isVoidTag = /*#__PURE__*/ makeMap(VOID_TAGS);
+
+const escapeRE = /["'&<>]/;
+function escapeHtml(string) {
+    const str = '' + string;
+    const match = escapeRE.exec(str);
+    if (!match) {
+        return str;
+    }
+    let html = '';
+    let escaped;
+    let index;
+    let lastIndex = 0;
+    for (index = match.index; index < str.length; index++) {
+        switch (str.charCodeAt(index)) {
+            case 34: // "
+                escaped = '&quot;';
+                break;
+            case 38: // &
+                escaped = '&amp;';
+                break;
+            case 39: // '
+                escaped = '&#39;';
+                break;
+            case 60: // <
+                escaped = '&lt;';
+                break;
+            case 62: // >
+                escaped = '&gt;';
+                break;
+            default:
+                continue;
+        }
+        if (lastIndex !== index) {
+            html += str.substring(lastIndex, index);
+        }
+        lastIndex = index + 1;
+        html += escaped;
+    }
+    return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
+}
+// https://www.w3.org/TR/html52/syntax.html#comments
+const commentStripRE = /^-?>|<!--|-->|--!>|<!-$/g;
+function escapeHtmlComment(src) {
+    return src.replace(commentStripRE, '');
+}
+
+function looseCompareArrays(a, b) {
+    if (a.length !== b.length)
+        return false;
+    let equal = true;
+    for (let i = 0; equal && i < a.length; i++) {
+        equal = looseEqual(a[i], b[i]);
+    }
+    return equal;
+}
+function looseEqual(a, b) {
+    if (a === b)
+        return true;
+    let aValidType = isDate(a);
+    let bValidType = isDate(b);
+    if (aValidType || bValidType) {
+        return aValidType && bValidType ? a.getTime() === b.getTime() : false;
+    }
+    aValidType = isArray(a);
+    bValidType = isArray(b);
+    if (aValidType || bValidType) {
+        return aValidType && bValidType ? looseCompareArrays(a, b) : false;
+    }
+    aValidType = isObject(a);
+    bValidType = isObject(b);
+    if (aValidType || bValidType) {
+        /* istanbul ignore if: this if will probably never be called */
+        if (!aValidType || !bValidType) {
+            return false;
+        }
+        const aKeysCount = Object.keys(a).length;
+        const bKeysCount = Object.keys(b).length;
+        if (aKeysCount !== bKeysCount) {
+            return false;
+        }
+        for (const key in a) {
+            const aHasKey = a.hasOwnProperty(key);
+            const bHasKey = b.hasOwnProperty(key);
+            if ((aHasKey && !bHasKey) ||
+                (!aHasKey && bHasKey) ||
+                !looseEqual(a[key], b[key])) {
+                return false;
+            }
+        }
+    }
+    return String(a) === String(b);
+}
+function looseIndexOf(arr, val) {
+    return arr.findIndex(item => looseEqual(item, val));
+}
+
+/**
+ * For converting {{ interpolation }} values to displayed strings.
+ * @private
+ */
+const toDisplayString = (val) => {
+    return val == null
+        ? ''
+        : isArray(val) ||
+            (isObject(val) &&
+                (val.toString === objectToString || !isFunction(val.toString)))
+            ? JSON.stringify(val, replacer, 2)
+            : String(val);
+};
+const replacer = (_key, val) => {
+    // can't use isRef here since @vue/shared has no deps
+    if (val && val.__v_isRef) {
+        return replacer(_key, val.value);
+    }
+    else if (isMap(val)) {
+        return {
+            [`Map(${val.size})`]: [...val.entries()].reduce((entries, [key, val]) => {
+                entries[`${key} =>`] = val;
+                return entries;
+            }, {})
+        };
+    }
+    else if (isSet(val)) {
+        return {
+            [`Set(${val.size})`]: [...val.values()]
+        };
+    }
+    else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
+        return String(val);
+    }
+    return val;
+};
+
+/**
+ * List of @babel/parser plugins that are used for template expression
+ * transforms and SFC script transforms. By default we enable proposals slated
+ * for ES2020. This will need to be updated as the spec moves forward.
+ * Full list at https://babeljs.io/docs/en/next/babel-parser#plugins
+ */
+const babelParserDefaultPlugins = [
+    'bigInt',
+    'optionalChaining',
+    'nullishCoalescingOperator'
+];
+const EMPTY_OBJ = ( true)
+    ? Object.freeze({})
+    : undefined;
+const EMPTY_ARR = ( true) ? Object.freeze([]) : undefined;
+const NOOP = () => { };
+/**
+ * Always return false.
+ */
+const NO = () => false;
+const onRE = /^on[^a-z]/;
+const isOn = (key) => onRE.test(key);
+const isModelListener = (key) => key.startsWith('onUpdate:');
+const extend = Object.assign;
+const remove = (arr, el) => {
+    const i = arr.indexOf(el);
+    if (i > -1) {
+        arr.splice(i, 1);
+    }
+};
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+const hasOwn = (val, key) => hasOwnProperty.call(val, key);
+const isArray = Array.isArray;
+const isMap = (val) => toTypeString(val) === '[object Map]';
+const isSet = (val) => toTypeString(val) === '[object Set]';
+const isDate = (val) => val instanceof Date;
+const isFunction = (val) => typeof val === 'function';
+const isString = (val) => typeof val === 'string';
+const isSymbol = (val) => typeof val === 'symbol';
+const isObject = (val) => val !== null && typeof val === 'object';
+const isPromise = (val) => {
+    return isObject(val) && isFunction(val.then) && isFunction(val.catch);
+};
+const objectToString = Object.prototype.toString;
+const toTypeString = (value) => objectToString.call(value);
+const toRawType = (value) => {
+    // extract "RawType" from strings like "[object RawType]"
+    return toTypeString(value).slice(8, -1);
+};
+const isPlainObject = (val) => toTypeString(val) === '[object Object]';
+const isIntegerKey = (key) => isString(key) &&
+    key !== 'NaN' &&
+    key[0] !== '-' &&
+    '' + parseInt(key, 10) === key;
+const isReservedProp = /*#__PURE__*/ makeMap(
+// the leading comma is intentional so empty string "" is also included
+',key,ref,' +
+    'onVnodeBeforeMount,onVnodeMounted,' +
+    'onVnodeBeforeUpdate,onVnodeUpdated,' +
+    'onVnodeBeforeUnmount,onVnodeUnmounted');
+const cacheStringFunction = (fn) => {
+    const cache = Object.create(null);
+    return ((str) => {
+        const hit = cache[str];
+        return hit || (cache[str] = fn(str));
+    });
+};
+const camelizeRE = /-(\w)/g;
+/**
+ * @private
+ */
+const camelize = cacheStringFunction((str) => {
+    return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
+});
+const hyphenateRE = /\B([A-Z])/g;
+/**
+ * @private
+ */
+const hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, '-$1').toLowerCase());
+/**
+ * @private
+ */
+const capitalize = cacheStringFunction((str) => str.charAt(0).toUpperCase() + str.slice(1));
+/**
+ * @private
+ */
+const toHandlerKey = cacheStringFunction((str) => str ? `on${capitalize(str)}` : ``);
+// compare whether a value has changed, accounting for NaN.
+const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
+const invokeArrayFns = (fns, arg) => {
+    for (let i = 0; i < fns.length; i++) {
+        fns[i](arg);
+    }
+};
+const def = (obj, key, value) => {
+    Object.defineProperty(obj, key, {
+        configurable: true,
+        enumerable: false,
+        value
+    });
+};
+const toNumber = (val) => {
+    const n = parseFloat(val);
+    return isNaN(n) ? val : n;
+};
+let _globalThis;
+const getGlobalThis = () => {
+    return (_globalThis ||
+        (_globalThis =
+            typeof globalThis !== 'undefined'
+                ? globalThis
+                : typeof self !== 'undefined'
+                    ? self
+                    : typeof window !== 'undefined'
+                        ? window
+                        : typeof global !== 'undefined'
+                            ? global
+                            : {}));
+};
+
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 10)))
+
+/***/ }),
+
+/***/ 12:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/uni.mp.esm.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.createPage = exports.createComponent = exports.createApp = void 0;var _shared = __webpack_require__(/*! @vue/shared */ 11);
+var _vue = __webpack_require__(/*! vue */ 8);
+
+var encode = encodeURIComponent;
+function stringifyQuery(obj) {var encodeStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : encode;
+  var res = obj ?
+  Object.keys(obj).
+  map(function (key) {
+    var val = obj[key];
+    if (typeof val === undefined || val === null) {
+      val = '';
+    } else
+    if ((0, _shared.isPlainObject)(val)) {
+      val = JSON.stringify(val);
+    }
+    return encodeStr(key) + '=' + encodeStr(val);
+  }).
+  filter(function (x) {return x.length > 0;}).
+  join('&') :
+  null;
+  return res ? "?".concat(res) : '';
+}
+
+function cache(fn) {
+  var cache = Object.create(null);
+  return function (str) {
+    var hit = cache[str];
+    return hit || (cache[str] = fn(str));
+  };
+}
+var invokeArrayFns = function invokeArrayFns(fns, arg) {
+  var ret;
+  for (var i = 0; i < fns.length; i++) {
+    ret = fns[i](arg);
+  }
+  return ret;
+};
+// lifecycle
+// App and Page
+var ON_SHOW = 'onShow';
+var ON_HIDE = 'onHide';
+//App
+var ON_LAUNCH = 'onLaunch';
+var ON_ERROR = 'onError';
+var ON_THEME_CHANGE = 'onThemeChange';
+var ON_PAGE_NOT_FOUND = 'onPageNotFound';
+var ON_UNHANDLE_REJECTION = 'onUnhandledRejection';
+//Page
+var ON_LOAD = 'onLoad';
+var ON_READY = 'onReady';
+var ON_UNLOAD = 'onUnload';
+var ON_RESIZE = 'onResize';
+var ON_TAB_ITEM_TAP = 'onTabItemTap';
+var ON_REACH_BOTTOM = 'onReachBottom';
+var ON_PULL_DOWN_REFRESH = 'onPullDownRefresh';
+var ON_ADD_TO_FAVORITES = 'onAddToFavorites';
+
+var eventChannels = {};
+var eventChannelStack = [];
+function getEventChannel(id) {
+  if (id) {
+    var eventChannel = eventChannels[id];
+    delete eventChannels[id];
+    return eventChannel;
+  }
+  return eventChannelStack.shift();
+}
+
+function initBehavior(options) {
+  return Behavior(options);
+}
+function initVueIds(vueIds, mpInstance) {
+  if (!vueIds) {
+    return;
+  }
+  var ids = vueIds.split(',');
+  var len = ids.length;
+  if (len === 1) {
+    mpInstance._$vueId = ids[0];
+  } else
+  if (len === 2) {
+    mpInstance._$vueId = ids[0];
+    mpInstance._$vuePid = ids[1];
+  }
+}
+var EXTRAS = ['externalClasses'];
+function initExtraOptions(miniProgramComponentOptions, vueOptions) {
+  EXTRAS.forEach(function (name) {
+    if ((0, _shared.hasOwn)(vueOptions, name)) {
+      miniProgramComponentOptions[name] = vueOptions[name];
+    }
+  });
+}
+function initWxsCallMethods(methods, wxsCallMethods) {
+  if (!(0, _shared.isArray)(wxsCallMethods)) {
+    return;
+  }
+  wxsCallMethods.forEach(function (callMethod) {
+    methods[callMethod] = function (args) {
+      return this.$vm[callMethod](args);
+    };
+  });
+}
+function selectAllComponents(mpInstance, selector, $refs) {
+  var components = mpInstance.selectAllComponents(selector);
+  components.forEach(function (component) {
+    var ref = component.dataset.ref;
+    $refs[ref] = component.$vm || component;
+    {
+      if (component.dataset.vueGeneric === 'scoped') {
+        component.
+        selectAllComponents('.scoped-ref').
+        forEach(function (scopedComponent) {
+          selectAllComponents(scopedComponent, selector, $refs);
+        });
+      }
+    }
+  });
+}
+function initRefs(instance, mpInstance) {
+  Object.defineProperty(instance, 'refs', {
+    get: function get() {
+      var $refs = {};
+      selectAllComponents(mpInstance, '.vue-ref', $refs);
+      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
+      forComponents.forEach(function (component) {
+        var ref = component.dataset.ref;
+        if (!$refs[ref]) {
+          $refs[ref] = [];
+        }
+        $refs[ref].push(component.$vm || component);
+      });
+      return $refs;
+    } });
+
+}
+function findVmByVueId(instance, vuePid) {
+  // 标准 vue3 中 没有 $children，定制了内核
+  var $children = instance.$children;
+  // 优先查找直属(反向查找:https://github.com/dcloudio/uni-app/issues/1200)
+  for (var i = $children.length - 1; i >= 0; i--) {
+    var childVm = $children[i];
+    if (childVm.$scope._$vueId === vuePid) {
+      return childVm;
+    }
+  }
+  // 反向递归查找
+  var parentVm;
+  for (var _i = $children.length - 1; _i >= 0; _i--) {
+    parentVm = findVmByVueId($children[_i], vuePid);
+    if (parentVm) {
+      return parentVm;
+    }
+  }
+}
+function getTarget(obj, path) {
+  var parts = path.split('.');
+  var key = parts[0];
+  if (key.indexOf('__$n') === 0) {
+    //number index
+    key = parseInt(key.replace('__$n', ''));
+  }
+  if (!obj) {
+    obj = {};
+  }
+  if (parts.length === 1) {
+    return obj[key];
+  }
+  return getTarget(obj[key], parts.slice(1).join('.'));
+}
+
+function getValue(dataPath, target) {
+  return getTarget(target || this, dataPath);
+}
+function getClass(dynamicClass, staticClass) {
+  return renderClass(staticClass, dynamicClass);
+}
+function getStyle(dynamicStyle, staticStyle) {
+  if (!dynamicStyle && !staticStyle) {
+    return '';
+  }
+  var dynamicStyleObj = normalizeStyleBinding(dynamicStyle);
+  var styleObj = staticStyle ?
+  (0, _shared.extend)(staticStyle, dynamicStyleObj) :
+  dynamicStyleObj;
+  return Object.keys(styleObj).
+  map(function (name) {
+    return (0, _shared.hyphenate)(name) + ':' + styleObj[name];
+  }).
+  join(';');
+}
+function toObject(arr) {
+  var res = {};
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      (0, _shared.extend)(res, arr[i]);
+    }
+  }
+  return res;
+}
+function normalizeStyleBinding(bindingStyle) {
+  if (Array.isArray(bindingStyle)) {
+    return toObject(bindingStyle);
+  }
+  if (typeof bindingStyle === 'string') {
+    return parseStyleText(bindingStyle);
+  }
+  return bindingStyle;
+}
+var parseStyleText = cache(function parseStyleText(cssText) {
+  var res = {};
+  var listDelimiter = /;(?![^(]*\))/g;
+  var propertyDelimiter = /:(.+)/;
+  cssText.split(listDelimiter).forEach(function (item) {
+    if (item) {
+      var tmp = item.split(propertyDelimiter);
+      tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim());
+    }
+  });
+  return res;
+});
+function isDef(v) {
+  return v !== undefined && v !== null;
+}
+function renderClass(staticClass, dynamicClass) {
+  if (isDef(staticClass) || isDef(dynamicClass)) {
+    return concat(staticClass, stringifyClass(dynamicClass));
+  }
+  /* istanbul ignore next */
+  return '';
+}
+function concat(a, b) {
+  return a ? b ? a + ' ' + b : a : b || '';
+}
+function stringifyClass(value) {
+  if (Array.isArray(value)) {
+    return stringifyArray(value);
+  }
+  if ((0, _shared.isObject)(value)) {
+    return stringifyObject(value);
+  }
+  if (typeof value === 'string') {
+    return value;
+  }
+  /* istanbul ignore next */
+  return '';
+}
+function stringifyArray(value) {
+  var res = '';
+  var stringified;
+  for (var i = 0, l = value.length; i < l; i++) {
+    if (isDef(stringified = stringifyClass(value[i])) && stringified !== '') {
+      if (res) {
+        res += ' ';
+      }
+      res += stringified;
+    }
+  }
+  return res;
+}
+function stringifyObject(value) {
+  var res = '';
+  for (var key in value) {
+    if (value[key]) {
+      if (res) {
+        res += ' ';
+      }
+      res += key;
+    }
+  }
+  return res;
+}
+
+function setModel(target, key, value, modifiers) {
+  if ((0, _shared.isArray)(modifiers)) {
+    if (modifiers.indexOf('trim') !== -1) {
+      value = value.trim();
+    }
+    if (modifiers.indexOf('number') !== -1) {
+      value = (0, _shared.toNumber)(value);
+    }
+  }
+  if (!target) {
+    target = this;
+  }
+  target[key] = value;
+}
+function setSync(target, key, value) {
+  if (!target) {
+    target = this;
+  }
+  target[key] = value;
+}
+function getOrig(data) {
+  if ((0, _shared.isPlainObject)(data)) {
+    return data.$orig || data;
+  }
+  return data;
+}
+function map(val, iteratee) {
+  var ret, i, l, keys, key;
+  if ((0, _shared.isArray)(val)) {
+    ret = new Array(val.length);
+    for (i = 0, l = val.length; i < l; i++) {
+      ret[i] = iteratee(val[i], i);
+    }
+    return ret;
+  } else
+  if ((0, _shared.isObject)(val)) {
+    keys = Object.keys(val);
+    ret = Object.create(null);
+    for (i = 0, l = keys.length; i < l; i++) {
+      key = keys[i];
+      ret[key] = iteratee(val[key], key, i);
+    }
+    return ret;
+  }
+  return [];
+}
+var MP_METHODS = [
+'createSelectorQuery',
+'createIntersectionObserver',
+'selectAllComponents',
+'selectComponent'];
+
+function createEmitFn(oldEmit, ctx) {
+  return function emit(event) {for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {args[_key - 1] = arguments[_key];}
+    if (ctx.$scope && event) {
+      ctx.$scope.triggerEvent(event, { __args__: args });
+    }
+    return oldEmit.apply(this, [event].concat(args));
+  };
+}
+function initBaseInstance(instance, options) {
+  var ctx = instance.ctx;
+  // mp
+  ctx.mpType = options.mpType; // @deprecated
+  ctx.$mpType = options.mpType;
+  ctx.$scope = options.mpInstance;
+  // TODO @deprecated
+  ctx.$mp = {};
+  if (true) {
+    ctx._self = {};
+  }
+  // $vm
+  ctx.$scope.$vm = instance.proxy;
+  // slots
+  {
+    instance.slots = {};
+    if ((0, _shared.isArray)(options.slots) && options.slots.length) {
+      options.slots.forEach(function (name) {
+        instance.slots[name] = true;
+      });
+    }
+  }
+  ctx.getOpenerEventChannel = function () {
+    // 微信小程序使用自身getOpenerEventChannel
+    {
+      return options.mpInstance.getOpenerEventChannel();
+    }
+  };
+  ctx.$hasHook = hasHook;
+  ctx.$callHook = callHook;
+  // $emit
+  instance.emit = createEmitFn(instance.emit, ctx);
+}
+function initComponentInstance(instance, options) {
+  initBaseInstance(instance, options);
+  {
+    initScopedSlotsParams(instance);
+  }
+  var ctx = instance.ctx;
+  MP_METHODS.forEach(function (method) {
+    ctx[method] = function () {
+      var mpInstance = ctx.$scope;
+      if (mpInstance && mpInstance[method]) {for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {args[_key2] = arguments[_key2];}
+        return mpInstance[method].apply(mpInstance, args);
+      }
+    };
+  });
+  // TODO other
+  ctx.__set_model = setModel;
+  ctx.__set_sync = setSync;
+  ctx.__get_orig = getOrig;
+  // TODO
+  ctx.__get_value = getValue;
+  ctx.__get_class = getClass;
+  ctx.__get_style = getStyle;
+  ctx.__map = map;
+}
+function initMocks(instance, mpInstance, mocks) {
+  var ctx = instance.ctx;
+  mocks.forEach(function (mock) {
+    if ((0, _shared.hasOwn)(mpInstance, mock)) {
+      ctx[mock] = mpInstance[mock];
+    }
+  });
+}
+function hasHook(name) {
+  var hooks = this.$[name];
+  if (hooks && hooks.length) {
+    return true;
+  }
+  return false;
+}
+function callHook(name, args) {
+  if (name === 'mounted') {
+    callHook.call(this, 'bm'); // beforeMount
+    this.$.isMounted = true;
+    name = 'm';
+  } else
+  if (name === 'onLoad' && args && args.__id__) {
+    this.__eventChannel__ = getEventChannel(args.__id__);
+    delete args.__id__;
+  }
+  var hooks = this.$[name];
+  return hooks && invokeArrayFns(hooks, args);
+}
+var center = {};
+var parents = {};
+function initScopedSlotsParams(instance) {
+  var ctx = instance.ctx;
+  ctx.$hasScopedSlotsParams = function (vueId) {
+    var has = center[vueId];
+    if (!has) {
+      parents[vueId] = this;
+      (0, _vue.onUnmounted)(function () {
+        delete parents[vueId];
+      }, instance);
+    }
+    return has;
+  };
+  ctx.$getScopedSlotsParams = function (vueId, name, key) {
+    var data = center[vueId];
+    if (data) {
+      var object = data[name] || {};
+      return key ? object[key] : object;
+    } else
+    {
+      parents[vueId] = this;
+      (0, _vue.onUnmounted)(function () {
+        delete parents[vueId];
+      }, instance);
+    }
+  };
+  ctx.$setScopedSlotsParams = function (name, value) {
+    var vueIds = instance.attrs.vueId;
+    if (vueIds) {
+      var vueId = vueIds.split(',')[0];
+      var object = center[vueId] = center[vueId] || {};
+      object[name] = value;
+      if (parents[vueId]) {
+        parents[vueId].$forceUpdate();
+      }
+    }
+  };
+  (0, _vue.onUnmounted)(function () {
+    var propsData = instance.attrs;
+    var vueId = propsData && propsData.vueId;
+    if (vueId) {
+      delete center[vueId];
+      delete parents[vueId];
+    }
+  }, instance);
+}
+
+var PAGE_HOOKS = [
+ON_LOAD,
+ON_SHOW,
+ON_HIDE,
+ON_UNLOAD,
+ON_RESIZE,
+ON_TAB_ITEM_TAP,
+ON_REACH_BOTTOM,
+ON_PULL_DOWN_REFRESH,
+ON_ADD_TO_FAVORITES
+// 'onReady', // lifetimes.ready
+// 'onPageScroll', // 影响性能，开发者手动注册
+// 'onShareTimeline', // 右上角菜单，开发者手动注册
+// 'onShareAppMessage' // 右上角菜单，开发者手动注册
+];
+function findHooks(vueOptions) {var hooks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Set();
+  if (vueOptions) {
+    Object.keys(vueOptions).forEach(function (name) {
+      if (name.indexOf('on') === 0 && (0, _shared.isFunction)(vueOptions[name])) {
+        hooks.add(name);
+      }
+    });
+    if (true) {var
+      extendsOptions = vueOptions.extends,mixins = vueOptions.mixins;
+      if (mixins) {
+        mixins.forEach(function (mixin) {return findHooks(mixin, hooks);});
+      }
+      if (extendsOptions) {
+        findHooks(extendsOptions, hooks);
+      }
+    }
+  }
+  return hooks;
+}
+function initHook$1(mpOptions, hook, excludes) {
+  if (excludes.indexOf(hook) === -1 && !(0, _shared.hasOwn)(mpOptions, hook)) {
+    mpOptions[hook] = function (args) {
+      return this.$vm && this.$vm.$callHook(hook, args);
+    };
+  }
+}
+var EXCLUDE_HOOKS = [ON_READY];
+function initHooks(mpOptions, hooks) {var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EXCLUDE_HOOKS;
+  hooks.forEach(function (hook) {return initHook$1(mpOptions, hook, excludes);});
+}
+function initUnknownHooks(mpOptions, vueOptions) {var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EXCLUDE_HOOKS;
+  findHooks(vueOptions).forEach(function (hook) {return initHook$1(mpOptions, hook, excludes);});
+}
+
+wx.appLaunchHooks = [];
+function injectAppLaunchHooks(appInstance) {
+  wx.appLaunchHooks.forEach(function (hook) {
+    (0, _vue.injectHook)(ON_LAUNCH, hook, appInstance);
+  });
+}
+
+var HOOKS = [
+ON_SHOW,
+ON_HIDE,
+ON_ERROR,
+ON_THEME_CHANGE,
+ON_PAGE_NOT_FOUND,
+ON_UNHANDLE_REJECTION];
+
+function parseApp(instance, parseAppOptions) {
+  var internalInstance = instance.$;
+  var appOptions = {
+    globalData: instance.$options && instance.$options.globalData || {},
+    $vm: instance,
+    onLaunch: function onLaunch(options) {
+      var ctx = internalInstance.ctx;
+      if (this.$vm && ctx.$scope) {
+        // 已经初始化过了，主要是为了百度，百度 onShow 在 onLaunch 之前
+        return;
+      }
+      initBaseInstance(internalInstance, {
+        mpType: 'app',
+        mpInstance: this,
+        slots: [] });
+
+      injectAppLaunchHooks(internalInstance);
+      ctx.globalData = this.globalData;
+      instance.$callHook(ON_LAUNCH, (0, _shared.extend)({ app: this }, options));
+    } };
+
+  initLocale(instance);
+  var vueOptions = instance.$.type;
+  initHooks(appOptions, HOOKS);
+  initUnknownHooks(appOptions, vueOptions);
+  if (true) {
+    var methods = vueOptions.methods;
+    methods && (0, _shared.extend)(appOptions, methods);
+  }
+  if (parseAppOptions) {
+    parseAppOptions.parse(appOptions);
+  }
+  return appOptions;
+}
+function initCreateApp(parseAppOptions) {
+  return function createApp(vm) {
+    return App(parseApp(vm, parseAppOptions));
+  };
+}
+function initLocale(appVm) {
+  var locale = (0, _vue.ref)(wx.getSystemInfoSync().language || 'zh-Hans');
+  Object.defineProperty(appVm, '$locale', {
+    get: function get() {
+      return locale.value;
+    },
+    set: function set(v) {
+      locale.value = v;
+    } });
+
+}
+
+var PROP_TYPES = [String, Number, Boolean, Object, Array, null];
+function createObserver(name) {
+  return function observer(newVal) {
+    if (this.$vm) {
+      this.$vm.$.props[name] = newVal; // 为了触发其他非 render watcher
+    }
+  };
+}
+function parsePropType(key, type, defaultValue) {
+  // [String]=>String
+  if ((0, _shared.isArray)(type) && type.length === 1) {
+    return type[0];
+  }
+  return type;
+}
+function initDefaultProps() {var isBehavior = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var properties = {};
+  if (!isBehavior) {
+    properties.vueId = {
+      type: String,
+      value: '' };
+
+    // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
+    properties.vueSlots = {
+      type: null,
+      value: [],
+      observer: function observer(newVal) {
+        var $slots = Object.create(null);
+        newVal.forEach(function (slotName) {
+          $slots[slotName] = true;
+        });
+        this.setData({
+          $slots: $slots });
+
+      } };
+
+  }
+  return properties;
+}
+function createProperty(key, prop) {
+  prop.observer = createObserver(key);
+  return prop;
+}
+function initProps(mpComponentOptions, rawProps) {var isBehavior = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var properties = initDefaultProps(isBehavior);
+  if ((0, _shared.isArray)(rawProps)) {
+    rawProps.forEach(function (key) {
+      properties[key] = createProperty(key, {
+        type: null });
+
+    });
+  } else
+  if ((0, _shared.isPlainObject)(rawProps)) {
+    Object.keys(rawProps).forEach(function (key) {
+      var opts = rawProps[key];
+      if ((0, _shared.isPlainObject)(opts)) {
+        // title:{type:String,default:''}
+        var value = opts.default;
+        if ((0, _shared.isFunction)(value)) {
+          value = value();
+        }
+        var type = opts.type;
+        opts.type = parsePropType(key, type);
+        properties[key] = createProperty(key, {
+          type: PROP_TYPES.indexOf(type) !== -1 ? type : null,
+          value: value });
+
+      } else
+      {
+        // content:String
+        var _type = parsePropType(key, opts);
+        properties[key] = createProperty(key, {
+          type: PROP_TYPES.indexOf(_type) !== -1 ? _type : null });
+
+      }
+    });
+  }
+  mpComponentOptions.properties = properties;
+}
+
+function initData(vueOptions) {
+  var data = vueOptions.data || {};
+  if (typeof data === 'function') {
+    try {
+      var appConfig = getApp().$vm.$.appContext.config;
+      data = data.call(appConfig.globalProperties);
+    }
+    catch (e) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"duducanvas-uniapp-demo","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data, e);
+      }
+    }
+  } else
+  {
+    try {
+      // 对 data 格式化
+      data = JSON.parse(JSON.stringify(data));
+    }
+    catch (e) {}
+  }
+  if (!(0, _shared.isPlainObject)(data)) {
+    data = {};
+  }
+  return data;
+}
+function initBehaviors(vueOptions, initBehavior) {
+  var vueBehaviors = vueOptions.behaviors;
+  var vueExtends = vueOptions.extends;
+  var vueMixins = vueOptions.mixins;
+  var vueProps = vueOptions.props;
+  if (!vueProps) {
+    vueOptions.props = vueProps = [];
+  }
+  var behaviors = [];
+  if ((0, _shared.isArray)(vueBehaviors)) {
+    vueBehaviors.forEach(function (behavior) {
+      behaviors.push(behavior.replace('uni://', "".concat(__PLATFORM_PREFIX__, "://")));
+      if (behavior === 'uni://form-field') {
+        if ((0, _shared.isArray)(vueProps)) {
+          vueProps.push('name');
+          vueProps.push('value');
+        } else
+        {
+          vueProps.name = {
+            type: String,
+            default: '' };
+
+          vueProps.value = {
+            type: [String, Number, Boolean, Array, Object, Date],
+            default: '' };
+
+        }
+      }
+    });
+  }
+  if (vueExtends && vueExtends.props) {
+    var behavior = {};
+    initProps(behavior, vueExtends.props, true);
+    behaviors.push(initBehavior(behavior));
+  }
+  if ((0, _shared.isArray)(vueMixins)) {
+    vueMixins.forEach(function (vueMixin) {
+      if (vueMixin.props) {
+        var _behavior = {};
+        initProps(_behavior, vueMixin.props, true);
+        behaviors.push(initBehavior(_behavior));
+      }
+    });
+  }
+  return behaviors;
+}
+function applyOptions(componentOptions, vueOptions, initBehavior) {
+  componentOptions.data = initData(vueOptions);
+  componentOptions.behaviors = initBehaviors(vueOptions, initBehavior);
+}
+
+function getExtraValue(instance, dataPathsArray) {
+  var context = instance;
+  dataPathsArray.forEach(function (dataPathArray) {
+    var dataPath = dataPathArray[0];
+    var value = dataPathArray[2];
+    if (dataPath || typeof value !== 'undefined') {
+      // ['','',index,'disable']
+      var propPath = dataPathArray[1];
+      var valuePath = dataPathArray[3];
+      var vFor;
+      if (Number.isInteger(dataPath)) {
+        vFor = dataPath;
+      } else
+      if (!dataPath) {
+        vFor = context;
+      } else
+      if (typeof dataPath === 'string' && dataPath) {
+        if (dataPath.indexOf('#s#') === 0) {
+          vFor = dataPath.substr(3);
+        } else
+        {
+          vFor = getTarget(context, dataPath);
+        }
+      }
+      if (Number.isInteger(vFor)) {
+        context = value;
+      } else
+      if (!propPath) {
+        context = vFor[value];
+      } else
+      {
+        if ((0, _shared.isArray)(vFor)) {
+          context = vFor.find(function (vForItem) {
+            return getTarget(vForItem, propPath) === value;
+          });
+        } else
+        if ((0, _shared.isPlainObject)(vFor)) {
+          context = Object.keys(vFor).find(function (vForKey) {
+            return getTarget(vFor[vForKey], propPath) === value;
+          });
+        } else
+        {
+          console.error('v-for 暂不支持循环数据：', vFor);
+        }
+      }
+      if (valuePath) {
+        context = getTarget(context, valuePath);
+      }
+    }
+  });
+  return context;
+}
+function processEventExtra(instance, extra, event) {
+  var extraObj = {};
+  if ((0, _shared.isArray)(extra) && extra.length) {
+    /**
+                                                     *[
+                                                     *    ['data.items', 'data.id', item.data.id],
+                                                     *    ['metas', 'id', meta.id]
+                                                     *],
+                                                     *[
+                                                     *    ['data.items', 'data.id', item.data.id],
+                                                     *    ['metas', 'id', meta.id]
+                                                     *],
+                                                     *'test'
+                                                     */
+    extra.forEach(function (dataPath, index) {
+      if (typeof dataPath === 'string') {
+        if (!dataPath) {
+          // model,prop.sync
+          extraObj['$' + index] = instance;
+        } else
+        {
+          if (dataPath === '$event') {
+            // $event
+            extraObj['$' + index] = event;
+          } else
+          if (dataPath === 'arguments') {
+            if (event.detail && event.detail.__args__) {
+              extraObj['$' + index] = event.detail.__args__;
+            } else
+            {
+              extraObj['$' + index] = [event];
+            }
+          } else
+          if (dataPath.indexOf('$event.') === 0) {
+            // $event.target.value
+            extraObj['$' + index] = getTarget(event, dataPath.replace('$event.', ''));
+          } else
+          {
+            extraObj['$' + index] = getTarget(instance, dataPath);
+          }
+        }
+      } else
+      {
+        extraObj['$' + index] = getExtraValue(instance, dataPath);
+      }
+    });
+  }
+  return extraObj;
+}
+function getObjByArray(arr) {
+  var obj = {};
+  for (var i = 1; i < arr.length; i++) {
+    var element = arr[i];
+    obj[element[0]] = element[1];
+  }
+  return obj;
+}
+function processEventArgs(instance, event) {var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];var extra = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];var isCustom = arguments.length > 4 ? arguments[4] : undefined;var methodName = arguments.length > 5 ? arguments[5] : undefined;
+  var isCustomMPEvent = false; // wxcomponent 组件，传递原始 event 对象
+  if (isCustom) {
+    // 自定义事件
+    isCustomMPEvent =
+    event.currentTarget &&
+    event.currentTarget.dataset &&
+    event.currentTarget.dataset.comType === 'wx';
+    if (!args.length) {
+      // 无参数，直接传入 event 或 detail 数组
+      if (isCustomMPEvent) {
+        return [event];
+      }
+      return event.detail.__args__ || event.detail;
+    }
+  }
+  var extraObj = processEventExtra(instance, extra, event);
+  var ret = [];
+  args.forEach(function (arg) {
+    if (arg === '$event') {
+      if (methodName === '__set_model' && !isCustom) {
+        // input v-model value
+        ret.push(event.target.value);
+      } else
+      {
+        if (isCustom && !isCustomMPEvent) {
+          ret.push(event.detail.__args__[0]);
+        } else
+        {
+          // wxcomponent 组件或内置组件
+          ret.push(event);
+        }
+      }
+    } else
+    {
+      if ((0, _shared.isArray)(arg) && arg[0] === 'o') {
+        ret.push(getObjByArray(arg));
+      } else
+      if (typeof arg === 'string' && (0, _shared.hasOwn)(extraObj, arg)) {
+        ret.push(extraObj[arg]);
+      } else
+      {
+        ret.push(arg);
+      }
+    }
+  });
+  return ret;
+}
+function wrapper(event) {
+  event.stopPropagation = _shared.NOOP;
+  event.preventDefault = _shared.NOOP;
+  event.target = event.target || {};
+  if (!(0, _shared.hasOwn)(event, 'detail')) {
+    event.detail = {};
+  }
+  if ((0, _shared.hasOwn)(event, 'markerId')) {
+    event.detail = typeof event.detail === 'object' ? event.detail : {};
+    event.detail.markerId = event.markerId;
+  }
+  if ((0, _shared.isPlainObject)(event.detail)) {
+    event.target = (0, _shared.extend)({}, event.target, event.detail);
+  }
+  return event;
+}
+var ONCE = '~';
+var CUSTOM = '^';
+function matchEventType(eventType, optType) {
+  return eventType === optType ||
+  optType === 'regionchange' && (
+  eventType === 'begin' || eventType === 'end');
+}
+function handleEvent(event) {var _this = this;
+  event = wrapper(event);
+  // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
+  var dataset = (event.currentTarget || event.target).dataset;
+  if (!dataset) {
+    return console.warn('事件信息不存在');
+  }
+  var eventOpts = dataset.eventOpts ||
+  dataset['event-opts']; // 支付宝 web-view 组件 dataset 非驼峰
+  if (!eventOpts) {
+    return console.warn('事件信息不存在');
+  }
+  // [['handle',[1,2,a]],['handle1',[1,2,a]]]
+  var eventType = event.type;
+  var ret = [];
+  eventOpts.forEach(function (eventOpt) {
+    var type = eventOpt[0];
+    var eventsArray = eventOpt[1];
+    var isCustom = type.charAt(0) === CUSTOM;
+    type = isCustom ? type.slice(1) : type;
+    var isOnce = type.charAt(0) === ONCE;
+    type = isOnce ? type.slice(1) : type;
+    if (eventsArray && matchEventType(eventType, type)) {
+      eventsArray.forEach(function (eventArray) {
+        var methodName = eventArray[0];
+        if (methodName) {
+          var handlerCtx = _this.$vm;
+          if (handlerCtx.$options.generic &&
+          handlerCtx.$parent &&
+          handlerCtx.$parent.$parent) {
+            // mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
+            handlerCtx = handlerCtx.$parent.$parent;
+          }
+          if (methodName === '$emit') {
+            handlerCtx.$emit.apply(handlerCtx, processEventArgs(_this.$vm, event, eventArray[1], eventArray[2], isCustom, methodName));
+            return;
+          }
+          var handler = handlerCtx[methodName];
+          if (!(0, _shared.isFunction)(handler)) {
+            throw new Error(" _vm.".concat(methodName, " is not a function"));
+          }
+          if (isOnce) {
+            if (handler.once) {
+              return;
+            }
+            handler.once = true;
+          }
+          var params = processEventArgs(_this.$vm, event, eventArray[1], eventArray[2], isCustom, methodName);
+          params = Array.isArray(params) ? params : [];
+          // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
+          if (/=\s*\S+\.eventParams\s*\|\|\s*\S+\[['"]event-params['"]\]/.test(handler.toString())) {
+            // eslint-disable-next-line no-sparse-arrays
+            params = params.concat([,,,,,,,,,, event]);
+          }
+          ret.push(handler.apply(handlerCtx, params));
+        }
+      });
+    }
+  });
+  if (eventType === 'input' &&
+  ret.length === 1 &&
+  typeof ret[0] !== 'undefined') {
+    return ret[0];
+  }
+}
+
+function parseComponent(vueOptions, _ref) {var parse = _ref.parse,mocks = _ref.mocks,isPage = _ref.isPage,initRelation = _ref.initRelation,handleLink = _ref.handleLink,initLifetimes = _ref.initLifetimes;
+  vueOptions = vueOptions.default || vueOptions;
+  var options = {
+    multipleSlots: true,
+    addGlobalClass: true };
+
+  if (vueOptions.options) {
+    (0, _shared.extend)(options, vueOptions.options);
+  }
+  var mpComponentOptions = {
+    options: options,
+    lifetimes: initLifetimes({ mocks: mocks, isPage: isPage, initRelation: initRelation, vueOptions: vueOptions }),
+    pageLifetimes: {
+      show: function show() {
+        this.$vm && this.$vm.$callHook('onPageShow');
+      },
+      hide: function hide() {
+        this.$vm && this.$vm.$callHook('onPageHide');
+      },
+      resize: function resize(size) {
+        this.$vm && this.$vm.$callHook('onPageResize', size);
+      } },
+
+    methods: {
+      __l: handleLink,
+      __e: handleEvent } };
+
+
+  if (true) {
+    applyOptions(mpComponentOptions, vueOptions, initBehavior);
+  }
+  initProps(mpComponentOptions, vueOptions.props, false);
+  initExtraOptions(mpComponentOptions, vueOptions);
+  initWxsCallMethods(mpComponentOptions.methods, vueOptions.wxsCallMethods);
+  if (parse) {
+    parse(mpComponentOptions, { handleLink: handleLink });
+  }
+  return mpComponentOptions;
+}
+function initCreateComponent(parseOptions) {
+  return function createComponent(vueComponentOptions) {
+    return Component(parseComponent(vueComponentOptions, parseOptions));
+  };
+}
+var $createComponentFn;
+var $destroyComponentFn;
+function $createComponent(initialVNode, options) {
+  if (!$createComponentFn) {
+    $createComponentFn = getApp().$vm.$createComponent;
+  }
+  return $createComponentFn(initialVNode, options);
+}
+function $destroyComponent(instance) {
+  if (!$destroyComponentFn) {
+    $destroyComponentFn = getApp().$vm.$destroyComponent;
+  }
+  return $destroyComponentFn(instance);
+}
+
+function parsePage(vueOptions, parseOptions) {var
+  parse = parseOptions.parse,mocks = parseOptions.mocks,isPage = parseOptions.isPage,initRelation = parseOptions.initRelation,handleLink = parseOptions.handleLink,initLifetimes = parseOptions.initLifetimes;
+  var miniProgramPageOptions = parseComponent(vueOptions, {
+    mocks: mocks,
+    isPage: isPage,
+    initRelation: initRelation,
+    handleLink: handleLink,
+    initLifetimes: initLifetimes });
+
+  var methods = miniProgramPageOptions.methods;
+  methods.onLoad = function (query) {
+    this.options = query;
+    this.$page = {
+      fullPath: '/' + this.route + stringifyQuery(query) };
+
+    return this.$vm && this.$vm.$callHook(ON_LOAD, query);
+  };
+  initHooks(methods, PAGE_HOOKS);
+  initUnknownHooks(methods, vueOptions);
+  parse && parse(miniProgramPageOptions, { handleLink: handleLink });
+  return miniProgramPageOptions;
+}
+function initCreatePage(parseOptions) {
+  return function createPage(vuePageOptions) {
+    return Component(parsePage(vuePageOptions, parseOptions));
+  };
+}
+
+var MPPage = Page;
+var MPComponent = Component;
+var customizeRE = /:/g;
+function customize(str) {
+  return (0, _shared.camelize)(str.replace(customizeRE, '-'));
+}
+function initTriggerEvent(mpInstance) {
+  var oldTriggerEvent = mpInstance.triggerEvent;
+  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
+    return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
+  };
+}
+function initHook(name, options) {
+  var oldHook = options[name];
+  if (!oldHook) {
+    options[name] = function () {
+      initTriggerEvent(this);
+    };
+  } else
+  {
+    options[name] = function () {
+      initTriggerEvent(this);for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
+      return oldHook.apply(this, args);
+    };
+  }
+}
+Page = function Page(options) {
+  initHook(ON_LOAD, options);
+  return MPPage(options);
+};
+Component = function Component(options) {
+  initHook('created', options);
+  return MPComponent(options);
+};
+
+function initLifetimes(_ref2) {var mocks = _ref2.mocks,isPage = _ref2.isPage,initRelation = _ref2.initRelation,vueOptions = _ref2.vueOptions;
+  return {
+    attached: function attached() {
+      var properties = this.properties;
+      initVueIds(properties.vueId, this);
+      var relationOptions = {
+        vuePid: this._$vuePid };
+
+      // 处理父子关系
+      initRelation(this, relationOptions);
+      // 初始化 vue 实例
+      var mpInstance = this;
+      this.$vm = $createComponent({
+        type: vueOptions,
+        props: properties },
+      {
+        mpType: isPage(mpInstance) ? 'page' : 'component',
+        mpInstance: mpInstance,
+        slots: properties.vueSlots,
+        parentComponent: relationOptions.parent && relationOptions.parent.$,
+        onBeforeSetup: function onBeforeSetup(instance, options) {
+          initRefs(instance, mpInstance);
+          initMocks(instance, mpInstance, mocks);
+          initComponentInstance(instance, options);
+        } });
+
+    },
+    ready: function ready() {
+      // 当组件 props 默认值为 true，初始化时传入 false 会导致 created,ready 触发, 但 attached 不触发
+      // https://developers.weixin.qq.com/community/develop/doc/00066ae2844cc0f8eb883e2a557800
+      if (this.$vm) {
+        this.$vm.$callHook('mounted');
+        this.$vm.$callHook(ON_READY);
+      }
+    },
+    detached: function detached() {
+      this.$vm && $destroyComponent(this.$vm);
+    } };
+
+}
+
+var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
+function isPage(mpInstance) {
+  return !!mpInstance.route;
+}
+function initRelation(mpInstance, detail) {
+  mpInstance.triggerEvent('__l', detail);
+}
+function handleLink(event) {
+  // detail 是微信,value 是百度(dipatch)
+  var detail = event.detail ||
+  event.value;
+  var vuePid = detail.vuePid;
+  var parentVm;
+  if (vuePid) {
+    parentVm = findVmByVueId(this.$vm, vuePid);
+  }
+  if (!parentVm) {
+    parentVm = this.$vm;
+  }
+  detail.parent = parentVm;
+}
+
+var parseOptions = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  mocks: mocks,
+  isPage: isPage,
+  initRelation: initRelation,
+  handleLink: handleLink,
+  initLifetimes: initLifetimes });
+
+
+var createApp = initCreateApp();exports.createApp = createApp;
+var createPage = initCreatePage(parseOptions);exports.createPage = createPage;
+var createComponent = initCreateComponent(parseOptions);exports.createComponent = createComponent;
+wx.createApp = createApp;
+wx.createPage = createPage;
+wx.createComponent = createComponent;
+
+/***/ }),
+
+/***/ 19:
+/*!********************************************************************************!*\
+  !*** /Users/wangxiaodong/Documents/DuduCanvas/uniapp/duducanvas/duducanvas.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.Text = exports.Stage = exports.Sprite = exports.Shape = exports.ImgLoader = exports.Image = exports.Group = exports.DuduCanvas = exports.CreateRadialGradient = exports.CreateLinearGradient = exports.Container = void 0;function ownKeys(e, t) {var i,r = Object.keys(e);return Object.getOwnPropertySymbols && (i = Object.getOwnPropertySymbols(e), t && (i = i.filter(function (t) {return Object.getOwnPropertyDescriptor(e, t).enumerable;})), r.push.apply(r, i)), r;}function _objectSpread2(e) {for (var t = 1; t < arguments.length; t++) {var i = null != arguments[t] ? arguments[t] : {};t % 2 ? ownKeys(Object(i), !0).forEach(function (t) {_defineProperty(e, t, i[t]);}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(i)) : ownKeys(Object(i)).forEach(function (t) {Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(i, t));});}return e;}function _classCallCheck(t, e) {if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");}function _defineProperties(t, e) {for (var i = 0; i < e.length; i++) {var r = e[i];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);}}function _createClass(t, e, i) {return e && _defineProperties(t.prototype, e), i && _defineProperties(t, i), t;}function _defineProperty(t, e, i) {return e in t ? Object.defineProperty(t, e, { value: i, enumerable: !0, configurable: !0, writable: !0 }) : t[e] = i, t;}function _inherits(t, e) {if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), e && _setPrototypeOf(t, e);}function _getPrototypeOf(t) {return (_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {return t.__proto__ || Object.getPrototypeOf(t);})(t);}function _setPrototypeOf(t, e) {return (_setPrototypeOf = Object.setPrototypeOf || function (t, e) {return t.__proto__ = e, t;})(t, e);}function _isNativeReflectConstruct() {if ("undefined" == typeof Reflect || !Reflect.construct) return !1;if (Reflect.construct.sham) return !1;if ("function" == typeof Proxy) return !0;try {return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;} catch (t) {return !1;}}function _construct(t, e, i) {return (_construct = _isNativeReflectConstruct() ? Reflect.construct : function (t, e, i) {var r = [null];r.push.apply(r, e);r = new (Function.bind.apply(t, r))();return i && _setPrototypeOf(r, i.prototype), r;}).apply(null, arguments);}function _assertThisInitialized(t) {if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t;}function _possibleConstructorReturn(t, e) {if (e && ("object" == typeof e || "function" == typeof e)) return e;if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");return _assertThisInitialized(t);}function _createSuper(i) {var r = _isNativeReflectConstruct();return function () {var t,e = _getPrototypeOf(i);return _possibleConstructorReturn(this, r ? (t = _getPrototypeOf(this).constructor, Reflect.construct(e, arguments, t)) : e.apply(this, arguments));};}function _superPropBase(t, e) {for (; !Object.prototype.hasOwnProperty.call(t, e) && null !== (t = _getPrototypeOf(t));) {;}return t;}function _get(t, e, i) {return (_get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get : function (t, e, i) {t = _superPropBase(t, e);if (t) {e = Object.getOwnPropertyDescriptor(t, e);return e.get ? e.get.call(i) : e.value;}})(t, e, i || t);}function _slicedToArray(t, e) {return _arrayWithHoles(t) || _iterableToArrayLimit(t, e) || _unsupportedIterableToArray(t, e) || _nonIterableRest();}function _toConsumableArray(t) {return _arrayWithoutHoles(t) || _iterableToArray(t) || _unsupportedIterableToArray(t) || _nonIterableSpread();}function _arrayWithoutHoles(t) {if (Array.isArray(t)) return _arrayLikeToArray(t);}function _arrayWithHoles(t) {if (Array.isArray(t)) return t;}function _iterableToArray(t) {if ("undefined" != typeof Symbol && null != t[Symbol.iterator] || null != t["@@iterator"]) return Array.from(t);}function _iterableToArrayLimit(t, e) {var i = null == t ? null : "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];if (null != i) {var r,n,s = [],a = !0,h = !1;try {for (i = i.call(t); !(a = (r = i.next()).done) && (s.push(r.value), !e || s.length !== e); a = !0) {;}} catch (t) {h = !0, n = t;} finally {try {a || null == i.return || i.return();} finally {if (h) throw n;}}return s;}}function _unsupportedIterableToArray(t, e) {if (t) {if ("string" == typeof t) return _arrayLikeToArray(t, e);var i = Object.prototype.toString.call(t).slice(8, -1);return "Map" === (i = "Object" === i && t.constructor ? t.constructor.name : i) || "Set" === i ? Array.from(t) : "Arguments" === i || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i) ? _arrayLikeToArray(t, e) : void 0;}}function _arrayLikeToArray(t, e) {(null == e || e > t.length) && (e = t.length);for (var i = 0, r = new Array(e); i < e; i++) {r[i] = t[i];}return r;}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _createForOfIteratorHelper(t, e) {var i = "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];if (!i) {if (Array.isArray(t) || (i = _unsupportedIterableToArray(t)) || e && t && "number" == typeof t.length) {i && (t = i);var r = 0,e = function e() {};return { s: e, n: function n() {return r >= t.length ? { done: !0 } : { done: !1, value: t[r++] };}, e: function e(t) {throw t;}, f: e };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var n,s = !0,a = !1;return { s: function s() {i = i.call(t);}, n: function n() {var t = i.next();return s = t.done, t;}, e: function e(t) {a = !0, n = t;}, f: function f() {try {s || null == i.return || i.return();} finally {if (a) throw n;}} };}var draw = Symbol("draw"),drawImage$1 = Symbol("drawImage"),getAlpha = Symbol("getAlpha"),append = Symbol("append"),remove = Symbol("remove"),instructions = Symbol("instructions"),drawGraphics = Symbol("drawGraphics");function getPrefix() {var t = "";return "undefined" != typeof uni ? t = uni : "undefined" != typeof wx ? t = wx : "undefined" != typeof my ? t = my : "undefined" != typeof tt && (t = tt), t;}var prefix = getPrefix(),getImageInfo = prefix.getImageInfo,createSelectorQuery = prefix.createSelectorQuery,createCanvasContext = prefix.createCanvasContext,total = Symbol("total"),loaded = Symbol("loaded"),load = Symbol("load"),loadProgressCallback = Symbol("loadProgressCallback"),imageMap = Symbol("imageMap"),PATH_REG = /^http*/,ImgLoader = function () {function r(e, t) {var i = this;return _classCallCheck(this, r), this[total] = e.length, this[loaded] = 0, this[t] = t, this[imageMap] = new Map(), new Promise(function (t) {i[load](e, t);});}return _createClass(r, [{ key: "get", value: function value(t) {return this[imageMap].get(t);} }, { key: load, value: function value(t, i) {var r = this;return t.forEach(function (e) {getImageInfo({ src: e.src, success: function success(t) {PATH_REG.test(e.src) || (t.path = "/" + t.path), r[imageMap].set(e.id, { path: t.path, width: t.width, height: t.height }), r[loaded]++, r[loadProgressCallback] && r[loadProgressCallback](p), 1 <= r[loaded] / r[total] && i(r);} });}), this;} }]), r;}();exports.ImgLoader = ImgLoader;function getPosAfterRotation(t, e, i) {t *= Math.PI / 180;return { x: Math.cos(t) * e - Math.sin(t) * i, y: Math.cos(t) * i + Math.sin(t) * e };}function getMaxValue(t) {for (var e = t[0].x, i = t[0].x, r = t[0].y, n = t[0].y, s = 1, a = t.length; s < a; s++) {e > t[s].x && (e = t[s].x), t[s].x > i && (i = t[s].x), r > t[s].y && (r = t[s].y), t[s].y > n && (n = t[s].y);}return [e, r, i, n];}function findNodes(t) {var e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : [],i = t.childs.length;if (i) for (var r = 0; r < i; r++) {if (t.childs[r].childs && t.childs[r].childs.length) {var n = findNodes(t.childs[r]);return e.push(t.childs[r]), e.concat(n);}e.push(t.childs[r]);} else e.push(t);return e;}var BeginPath = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.beginPath();} }]), t;}(),MoveTo = function () {function i(t, e) {_classCallCheck(this, i), this.x = t, this.y = e;}return _createClass(i, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.moveTo(this.x + e, this.y + i);} }]), i;}(),LineTo = function () {function i(t, e) {_classCallCheck(this, i), this.x = t, this.y = e;}return _createClass(i, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.lineTo(this.x + e, this.y + i);} }]), i;}(),Arc = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), _defineProperty(this, "name", "Arc"), this.x = t, this.y = e, this.radius = i, this.startAngle = r, this.endAngle = n, this.anticlockwise = s;}return _createClass(a, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.arc(this.x + e, this.y + i, this.radius, this.startAngle, this.endAngle, this.anticlockwise);} }]), a;}(),ArcTo = function () {function s(t, e, i, r, n) {_classCallCheck(this, s), _defineProperty(this, "name", "ArcTo"), this.x1 = t, this.y1 = e, this.x2 = i, this.y2 = r, this.radius = n;}return _createClass(s, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.arcTo(this.x1 + e, this.y1 + i, this.x2 + e, this.y2 + i, this.radius);} }]), s;}(),Stroke = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.stroke();} }]), t;}(),Fill = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.fill();} }]), t;}(),SetFillStyle$1 = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {"CreateLinearGradient" === this.style.name || "CreateRadialGradient" === this.style.name ? t.fillStyle = this.style.exec(t, e) : t.fillStyle = this.style;} }]), e;}(),SetStrokeStyle = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.strokeStyle = this.style;} }]), e;}(),Clip = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.clip();} }]), t;}(),QuadraticCurveTo = function () {function n(t, e, i, r) {_classCallCheck(this, n), this.cpx = t, this.cpy = e, this.x = i, this.y = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.quadraticCurveTo(this.cpx + e, this.cpy + i, this.x + e, this.y + i);} }]), n;}(),BezierCurveTo = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), this.cp1x = t, this.cp1y = e, this.cp2x = i, this.cp2y = r, this.x = n, this.y = s;}return _createClass(a, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.bezierCurveTo(this.cp1x + e, this.cp1y + i, this.cp2x + e, this.cp2y + i, this.x + e, this.y + i);} }]), a;}(),DrawCircle = function () {function n(t, e, i) {var r = 3 < arguments.length && void 0 !== arguments[3] && arguments[3];_classCallCheck(this, n), this.x = t, this.y = e, this.radius = i, this.fill = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),r = i[0],i = i[1];t.beginPath(), t.arc(this.x + r, this.y + i, this.radius, 0, 2 * Math.PI), e.isMask ? t.clip() : this.fill && t.fill();} }]), n;}(),Rect = function () {function s(t, e, i, r) {var n = 4 < arguments.length && void 0 !== arguments[4] && arguments[4];_classCallCheck(this, s), this.x = t, this.y = e, this.w = i, this.h = r, this.isStroke = n;}return _createClass(s, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),r = i[0],i = i[1],r = this.x + r,i = this.y + i;t.beginPath(), e.isMask ? (t.rect(r, i, this.w, this.h), t.clip()) : this.isStroke ? t.strokeRect(r, i, this.w, this.h) : t.fillRect(r, i, this.w, this.h);} }]), s;}(),RoundRect = function () {function l(t, e, i, r, n, s, a) {_classCallCheck(this, l), this.stroke = void 0 === a || a, void 0 === n && (n = 5), this.x = t, this.y = e, this.width = i, this.height = r, this.fill = s;var h,o = n = "number" == typeof n ? { tl: n, tr: n, br: n, bl: n } : n;for (h in this.radius = {}, o) {this.radius[h] = this.radius[h] || o[h];}}return _createClass(l, [{ key: "exec", value: function value(t, e) {var i,r = _slicedToArray(e.getPosition(), 2),n = r[0],s = r[1],a = n + this.x,h = s + this.y,o = this.radius,r = this.width,n = this.height,s = e.masked ? i = !1 : (i = this.fill, this.stroke);t.beginPath(), t.moveTo(a + o.tl, h), t.lineTo(a + r - o.tr, h), t.quadraticCurveTo(a + r, h, a + r, h + o.tr), t.lineTo(a + r, h + n - o.br), t.quadraticCurveTo(a + r, h + n, a + r - o.br, h + n), t.lineTo(a + o.bl, h + n), t.quadraticCurveTo(a, h + n, a, h + n - o.bl), t.lineTo(a, h + o.tl), t.quadraticCurveTo(a, h, a + o.tl, h), t.closePath(), e.isMask ? t.clip() : (i && t.fill(), s && t.stroke());} }]), l;}(),ClearRect = function () {function n(t, e, i, r) {_classCallCheck(this, n), this.x = t, this.y = e, this.w = i, this.h = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.clearRect(this.x + e, this.y + i, this.w, this.h);} }]), n;}(),LineCap = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "butt";_classCallCheck(this, e), this.lineCap = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.lineCap = this.lineCap;} }]), e;}(),LineJoin = function () {function i() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "bevel",e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 10;_classCallCheck(this, i), this.lineJoin = t, this.miterLimit = e;}return _createClass(i, [{ key: "exec", value: function value(t) {10 != this.miterLimit && "bevel" === this.style && (t.miterLimit = this.miterLimit), t.lineJoin = this.lineJoin;} }]), i;}(),LineWidth = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 1;_classCallCheck(this, e), this.lineWidth = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.lineWidth = this.lineWidth;} }]), e;}(),SetLineDash = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : [];_classCallCheck(this, e), this.lineDash = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.setLineDash(this.lineDash);} }]), e;}(),Graphics = function () {function t() {var a = this;_classCallCheck(this, t), _defineProperty(this, "name", "Graphics"), _defineProperty(this, "graphics", { beginPath: function beginPath() {return a[append](new BeginPath()), a.graphics;}, moveTo: function moveTo(t, e) {return a[append](new MoveTo(t, e)), a.graphics;}, setLineDash: function setLineDash(t) {return a[append](new SetLineDash(t)), a.graphics;}, lineWidth: function lineWidth(t) {return a[append](new LineWidth(t)), a.graphics;}, lineCap: function lineCap(t) {return a[append](new LineCap(t)), a.graphics;}, lineJoin: function lineJoin(t) {return a[append](new LineJoin(t)), a.graphics;}, lineTo: function lineTo(t, e) {return a[append](new LineTo(t, e)), a.graphics;}, quadraticCurveTo: function quadraticCurveTo(t, e, i, r) {return a[append](new QuadraticCurveTo(t, e, i, r)), a.graphics;}, bezierCurveTo: function bezierCurveTo(t, e, i, r, n, s) {return a[append](new BezierCurveTo(t, e, i, r, n, s)), a.graphics;}, arc: function arc(t, e, i, r, n) {var s = 5 < arguments.length && void 0 !== arguments[5] && arguments[5];return a[remove]("Arc"), a[append](new Arc(t, e, i, r, n, s)), a.graphics;}, arcTo: function arcTo(t, e, i, r, n) {return a[remove]("ArcTo"), a[append](new ArcTo(t, e, i, r, n)), a.graphics;}, stroke: function stroke() {return a[append](new Stroke()), a.graphics;}, fill: function fill() {return a[append](new Fill()), a.graphics;}, fillStyle: function fillStyle(t) {return a[append](new SetFillStyle$1(t)), a.graphics;}, strokeStyle: function strokeStyle(t) {return a[append](new SetStrokeStyle(t)), a.graphics;}, fillCircle: function fillCircle() {return a[append](new DrawCircle(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 20, !0)), a.graphics;}, strokeCircle: function strokeCircle() {return a[append](new DrawCircle(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 20)), a[append](new Stroke()), a.graphics;}, fillRect: function fillRect() {return a[append](new Rect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 20)), a.graphics;}, strokeRect: function strokeRect() {return a[append](new Rect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 20, !0)), a[append](new Stroke()), a.graphics;}, fillRoundRect: function fillRoundRect() {return a[append](new RoundRect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 10, 4 < arguments.length && void 0 !== arguments[4] ? arguments[4] : 8, 5 < arguments.length ? arguments[5] : void 0, 6 < arguments.length ? arguments[6] : void 0)), a.graphics;}, strokeRoundRect: function strokeRoundRect(t, e, i, r, n) {return a[append](new RoundRect(t, e, i, r, n, !1, !0)), a[append](new Stroke()), a.graphics;}, clearRect: function clearRect(t, e, i, r) {return a[append](new ClearRect(t, e, i, r)), a.graphics;}, clip: function clip() {return a[append](new Clip()), a.graphics;} }), this[instructions] = [];}return _createClass(t, [{ key: append, value: function value(t) {this[instructions].push(t);} }, { key: remove, value: function value(e) {this[instructions] = this[instructions].filter(function (t) {return t.name !== e;});} }, { key: drawGraphics, value: function value(e) {var i = this;this[instructions].forEach(function (t) {t.exec(e, i);});} }]), t;}(),context = null,displayObjectId = 0,id = Symbol("id"),scale = Symbol("scale"),mask = Symbol("mask"),setShadow = Symbol("setShadow"),DisplayObject = function () {_inherits(l, Graphics);var i = _createSuper(l);function l() {var t, e;return _classCallCheck(this, l), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "DisplayObject"), _defineProperty(_assertThisInitialized(e), "x", 0), _defineProperty(_assertThisInitialized(e), "y", 0), _defineProperty(_assertThisInitialized(e), "width", 0), _defineProperty(_assertThisInitialized(e), "height", 0), _defineProperty(_assertThisInitialized(e), "alpha", 1), _defineProperty(_assertThisInitialized(e), "regX", 0), _defineProperty(_assertThisInitialized(e), "regY", 0), _defineProperty(_assertThisInitialized(e), "scaleX", 1), _defineProperty(_assertThisInitialized(e), "scaleY", 1), _defineProperty(_assertThisInitialized(e), "rotation", 0), _defineProperty(_assertThisInitialized(e), "parent", null), _defineProperty(_assertThisInitialized(e), "childs", []), _defineProperty(_assertThisInitialized(e), "shadow", ""), e[drawGraphics] = _get((t = _assertThisInitialized(e), _getPrototypeOf(l.prototype)), drawGraphics, t), e[scale] = 1, e[id] = displayObjectId++, e;}return _createClass(l, [{ key: "mask", get: function get() {return this[mask];}, set: function set(t) {if ("Shape" !== t.name) throw new Error("遮罩必须是 Shape 对象");t.isMask = !0, this[mask] = t;} }, { key: "scale", get: function get() {return this[scale];}, set: function set(t) {this.scaleX = t, this.scaleY = t, this[scale] = t;} }, { key: "addChild", value: function value() {for (var i = this, t = arguments.length, e = new Array(t), r = 0; r < t; r++) {e[r] = arguments[r];}var n = e.map(function (t, e) {if (t[id] === i[id]) throw new Error("不能自己添加自己为 child :".concat(t.name));if (t.isMask) throw new Error("已被设置成 mask 遮罩 不能 addChild 到其它父级内:".concat(t.name));return t.mask && (t.mask.parent = i), t.parent = i, t.zIndex = e, t;});this.childs = this.childs.concat(n);} }, { key: "removeChild", value: function value(e) {this.childs = this.childs.filter(function (t) {return t[id] != e[id];});} }, { key: draw, value: function value() {var e = this;this[drawGraphics](context), this.childs.forEach(function (t) {context.save(), e.transform(t, context), t.shadow.length && e[setShadow](t), context.globalAlpha = e[getAlpha](), context.rotate(0), t[draw](context), context.restore();});} }, { key: setShadow, value: function value(t) {var e = t.shadow.split(" ");if ("Sprite" === t.name || "Group" === t.name) throw new Error("Sprite 或 Group 组件对象不允许设置 shadow");if (e.length < 4) throw new Error('shadow 需要 4 个值 eg: "10 10 10 black"');context.shadowOffsetX = e[0], context.shadowOffsetY = e[1], context.shadowBlur = e[2], context.shadowColor = e[3];} }, { key: getAlpha, value: function value() {for (var t = this.parent, e = this.alpha; t && "Stage" != t.name;) {e *= t.alpha, t = t.parent;}return e;} }, { key: "getPosition", value: function value() {for (var t = this.masked || this.parent, e = this.x - this.regX, i = this.y - this.regY; t && "Stage" != t.name;) {e += t.x - t.regX, i += t.y - t.regY, t = t.parent;}return [e, i];} }, { key: "getRotation", value: function value() {return this.rotation;} }, { key: "getScale", value: function value() {for (var t = this.parent, e = this.scaleX, i = this.scaleY; t && "Stage" != t.name;) {e += t.scaleX, i += t.scaleY, t = t.parent;}return [e, i];} }, { key: "transform", value: function value(t, e) {if ("Stage" !== t.name) {var i = e,r = _slicedToArray(t.getPosition(), 2),n = r[0],s = r[1],a = t.getRotation(),e = [t.scaleX, t.scaleY],r = e[0],e = e[1],n = n + t.regX,t = s + t.regY;return i.translate(n, t), i.scale(r, e), i.rotate(a * Math.PI / 180), i.translate(-n, -t), this;}} }, { key: "getRectangleRotatedPosition", value: function value(t, e, i, r, n) {return [getPosAfterRotation(t, -r, -n), getPosAfterRotation(t, e - r, -n), getPosAfterRotation(t, e - r, i - n), getPosAfterRotation(t, -r, i - n)];} }, { key: "_getBounds", value: function value() {var t,e,i = _slicedToArray(this.getPosition(), 2),r = i[0],n = i[1],s = this.width,a = this.height,h = this.regX,o = this.regY;return 0 !== this.rotation && ((e = this.getRectangleRotatedPosition(this.rotation, s, a, h, o)).map(function (t) {return _objectSpread2(_objectSpread2({}, t), {}, { x: t.x + r + h, y: t.y + n + o });}), i = (t = _slicedToArray(getMaxValue(e), 4))[0], e = t[1], s = t[2] - i, a = t[3] - e, r = i, n = e), { left: r, top: n, right: r + s, bottom: n + a, width: s, height: a };} }, { key: "findNodesBounds", value: function value(t) {return findNodes(t).map(function (t) {return t._getBounds();});} }, { key: "getBounds", value: function value() {if (0 === this.childs.length) return this._getBounds();if (this.childs) {var t = this.findNodesBounds(this),e = [],i = [],r = [],n = [];t.forEach(function (t) {e.push(t.left), i.push(t.right), r.push(t.top), n.push(t.bottom);});var s = Math.min.apply(Math, e),a = Math.max.apply(Math, i),h = Math.min.apply(Math, r),o = Math.max.apply(Math, n);if ("Group" !== this.name) return { left: s, top: h, right: a, bottom: o, width: a - s, height: o - h };t = new l();return t.width = a - s, t.height = o - h, t.x = this.x, t.y = this.y, t.regX = this.regX, t.regY = this.regY, t.rotation = this.rotation, this._getBounds.call(t);}} }], [{ key: "setContext", value: function value(t) {context = t;} }, { key: "getContext", value: function value() {return context;} }]), l;}(),_width$2 = Symbol("width"),_height$2 = Symbol("height"),_display = Symbol("_display"),_alignItems$1 = Symbol("_alignItems"),_justifyContent$1 = Symbol("_justifyContent"),_Group = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r(t) {var e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "Group"), e;}return _createClass(r, [{ key: "width", get: function get() {return this[_width$2];}, set: function set(t) {this[_width$2] = t;} }, { key: "height", get: function get() {return this[_height$2];}, set: function set(t) {this[_height$2] = t;} }, { key: "display", get: function get() {return this[_display];}, set: function set(t) {this[_display] = t;} }, { key: "alignItems", get: function get() {return this[_alignItems$1];}, set: function set(t) {this[_alignItems$1] = t;} }, { key: "justifyContent", get: function get() {return this[_justifyContent$1];}, set: function set(t) {this[_justifyContent$1] = t;} }]), r;}(),render = Symbol("render"),_Stage = function () {_inherits(s, DisplayObject);var t = _createSuper(s);function s(e, i, r) {var n;return _classCallCheck(this, s), _defineProperty(_assertThisInitialized(n = t.call(this)), "name", "Stage"), _defineProperty(_assertThisInitialized(n), "canvas", null), (r ? createSelectorQuery().in(r) : createSelectorQuery()).select(e).fields({ node: !0, size: !0 }).exec(function (t) {t = t[0];if (!t) throw new Error("无法找到 canvas ");n.width = t.width, n.height = t.height, n._context = createCanvasContext(e.slice(1), r), DisplayObject.setContext(n._context), i(_assertThisInitialized(n), n._context), n[render]();}), n;}return _createClass(s, [{ key: "getContext", value: function value() {return this._context;} }, { key: "update", value: function value() {this[render]();} }, { key: render, value: function value() {this._context.clearRect(0, 0, this.width, this.height), this[draw](), this._context.draw(!1);} }]), s;}(),ROTATE_90DEG = 1.5707963267948966,NO_ROTATION_RANGE = [[11904, 12271], [12352, 40959], [44032, 55295], [63744, 64255], [119552, 119647], [131072, 195103]];exports.Stage = _Stage;exports.Group = _Group;function needRotation(t) {var e,i = t.codePointAt(0),r = _createForOfIteratorHelper(NO_ROTATION_RANGE);try {for (r.s(); !(e = r.n()).done;) {var n = _slicedToArray(e.value, 2),s = n[0],a = n[1];if (s <= i && i <= a) return !1;}} catch (t) {r.e(t);} finally {r.f();}return !0;}var FillText = function () {function r(t, e, i) {_classCallCheck(this, r), _defineProperty(this, "instance", null), _defineProperty(this, "name", "FillText"), this.text = t, this.x = e, this.y = i;}return _createClass(r, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray((this.instance = e).getPosition(), 2),r = i[0],n = i[1];if (t.font = e.font, "vertical-rl" === e.writeMode || "vertical-lr" === e.writeMode) this.vertical(t, r, n);else if (-1 < e.wrapWidth) for (var s, a = this.getTextArr(t, e, this.text), h = 0, o = a.length; h < o; h++) {s = n + h * (e.fontSize + e.lineGap), t.fillText(a[h], r, s);} else t.fillText(this.text, r, n);} }, { key: "getTextArr", value: function value(t, e, i) {for (var r, n = e.wrapWidth, s = 0, a = 0, h = 0, o = []; r = i[s];) {(h += t.measureText(r).width) <= n ? o[a] ? o[a] += i[s] : o[a] = i[s] : (h = 0, a++), s++;}return o;} }, { key: "vertical", value: function value(r, n, s) {var t = this.text.split(""),e = this.instance.fontSize + this.instance.lineGap,a = "vertical-rl" === this.instance.writeMode ? -e : e,h = this.instance.fontSize,o = .5 * h,l = 0,c = 0,u = this.instance.wrapHeight;t.map(function (t) {var e, i;needRotation(t) ? (-1 < u && u + s < l + s + o && (c += a, l = 0), e = n + c + o, i = s + l + o, r.save(), r.translate(e, i), r.rotate(ROTATE_90DEG), r.translate(-e, -i), r.fillText(t, n + c, s + l), l += o, r.restore()) : (-1 < u && u + s < l + s + h && (c += a, l = 0), r.fillText(t, n + c, s + l), l += h);});} }]), r;}(),SetFillStyle = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.fillStyle = this.style;} }]), e;}(),SetTextAlign = function () {function e(t) {_classCallCheck(this, e), this.textAlign = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.textAlign = this.textAlign;} }]), e;}(),SetTextBaseline = function () {function e(t) {_classCallCheck(this, e), this.textBaseline = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.textBaseline = this.textBaseline;} }]), e;}(),_text = Symbol("_text"),_width$1 = Symbol("_width"),_height$1 = Symbol("_height"),_fontSize = Symbol("_fontSize"),_wrapWidth = Symbol("_wrapWidth"),_wrapHeight = Symbol("_wrapHeight"),_writeMode = Symbol("_writeMode"),defaultFontSize = 10,_Text = function () {_inherits(n, DisplayObject);var r = _createSuper(n);function n(t) {var e, i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Text"), _defineProperty(_assertThisInitialized(i), "lineGap", 0), _defineProperty(_assertThisInitialized(i), "font", "".concat(defaultFontSize, "px sans-serif")), i[drawGraphics] = _get((e = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), drawGraphics, e), i.init(t), i;}return _createClass(n, [{ key: "init", value: function value() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {},e = t.text,i = t.font,r = t.color,t = t.fontSize;this[_writeMode] = "", !i || (i = (this.font = i).match(/\d+/)[0]) && (this.fontSize = parseInt(i), this[_height$1] = this.fontSize + this.lineGap), t && (this.font = "".concat(t, "px sans-serif"), this.fontSize = parseInt(t), this[_height$1] = t + this.lineGap), this.fontSize || (this.fontSize = defaultFontSize), r && (this.color = r), this.textAlign = "left", this.textBaseline = "top", this[_text] = "", e && (this.text = e);} }, { key: "text", get: function get() {return this[_text];}, set: function set(t) {t = String(t), this[_text] = t, this.width = this.measureWidth(t, this.fontSize), this.height = this.fontSize;} }, { key: "width", get: function get() {return this[_width$1];}, set: function set(t) {this[_width$1] = t;} }, { key: "height", get: function get() {return this[_height$1];}, set: function set(t) {this[_height$1] = t;} }, { key: "wrapHeight", get: function get() {return this[_wrapHeight];}, set: function set(t) {this[_wrapHeight] = t, this[_height$1] = t, this.initVerticalSize();} }, { key: "wrapWidth", get: function get() {return this[_wrapWidth];}, set: function set(t) {this[_wrapWidth] = t, this[_width$1] = t, this[_height$1] = this.getHeightByWrapWidth();} }, { key: "fontSize", get: function get() {return this[_fontSize];}, set: function set(t) {this[_fontSize] = t, this.width = this.measureWidth(this.text, t), this.height = t + this.lineGap;} }, { key: "writeMode", get: function get() {return this[_writeMode];}, set: function set(t) {0 < (this[_writeMode] = t).length && this.initVerticalSize();} }, { key: "collectStatus", value: function value() {this.fontSize && (this.font = "".concat(this.fontSize, "px sans-serif"), this[_height$1] = this.fontSize + this.lineGap), this.setTextAlign(this.textAlign), this.setTextBaseline(this.textBaseline), this.setFillStyle(this.color), this.fillText(this[_text]);} }, { key: draw, value: function value(t) {this.collectStatus(), this[drawGraphics](t), this.mask && "Shape" === this.mask.name && (this.mask.masked = this).mask[draw](t, !0);} }, { key: "setFillStyle", value: function value() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "black";return this.color = t, this[append](new SetFillStyle(t)), this;} }, { key: "fillStyle", value: function value(t) {return this.setFillStyle(t);} }, { key: "fillText", value: function value(t) {var e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0,i = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;return this[_text] = t, this.x += e, this.y += i, this.width = this.measureWidth(this[_text], this.fontSize), this[remove]("FillText"), this[append](new FillText(t, this.x, this.y)), this;} }, { key: "setFont", value: function value(t) {return this.font = t, this;} }, { key: "setFontSize", value: function value(t) {return this.fontSize = t, this.font = this.font.replace(/\d+/, t), this;} }, { key: "setTextBaseline", value: function value(t) {return this.textBaseline = t, this[append](new SetTextBaseline(t)), this;} }, { key: "setTextAlign", value: function value(t) {return this.textAlign = t, this[append](new SetTextAlign(t)), this;} }, { key: "setlineGap", value: function value(t) {return this.lineGap = t, this;} }, { key: "setWrapWidth", value: function value(t) {return this.wrapWidth = t, this.width = t, this;} }, { key: "setWrapHeight", value: function value(t) {return this.wrapHeight = t, this;} }, { key: "measureWidth", value: function value(t, e) {return this.writeMode.length ? e : DisplayObject.getContext().measureText(t).width * (e / defaultFontSize);} }, { key: "initVerticalSize", value: function value() {var t, e;this.text.length && (t = (e = this.getVerticalSize()).width, e = e.height, this[_width$1] = t, this[_height$1] = e);} }, { key: "getVerticalSize", value: function value() {var i = this.fontSize,r = this.lineGap,n = this.wrapHeight,s = .5 * i,a = 0,t = 0,e = 0,h = 0,o = [],l = 0;return this.text.split("").map(function (t) {var e = 0,e = needRotation(t) ? s + r : i + r;a += e, n < (h += e) && (l++, h = 0), o[l] = o[l] || [], o[l].push({ text: t, height: e });}), n ? (t = n, e = o.length * i + (o.length * r - r)) : (e = i, t = a), { width: e, height: t };} }, { key: "getHeightByWrapWidth", value: function value() {for (var t, e = DisplayObject.getContext(), i = this.wrapWidth, r = this.fontSize, n = this.text, s = 0, a = 0, h = 0, o = []; t = n[s];) {(h += e.measureText(t).width * (r / defaultFontSize)) <= i ? o[a] ? o[a] += n[s] : o[a] = n[s] : (h = 0, a++), s++;}return this.height = o.length * r + (o.length * this.lineGap - this.lineGap);} }, { key: "addChild", value: function value() {throw new Error("不能给 Text 类添加子元素");} }]), n;}(),_Shape = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r() {var t, e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "Shape"), _defineProperty(_assertThisInitialized(e), "isMask", !1), _defineProperty(_assertThisInitialized(e), "width", 0), _defineProperty(_assertThisInitialized(e), "height", 0), e[drawGraphics] = _get((t = _assertThisInitialized(e), _getPrototypeOf(r.prototype)), drawGraphics, t), e.graphics.beginPath(), e;}return _createClass(r, [{ key: draw, value: function value(t, e) {this.isMask = !!e, t.globalAlpha = this[getAlpha](), this[drawGraphics](t);} }, { key: "getBounds", value: function value() {return console.error("Shape 不提供getBounds方法"), null;} }]), r;}(),extendsClassDraw$2 = Symbol("extendsClassDraw");exports.Shape = _Shape;exports.Text = _Text;function getChangedBorderRadiusValue(t) {var e,i = { tl: 0, tr: 0, br: 0, bl: 0 },r = (t = String(t).split(" ").map(function (t) {return parseFloat(t);})).length;return 1 === r ? e = t[0] : 2 === r ? (i.tl = i.br = t[0], i.tr = i.bl = t[1], e = i) : 3 === r ? (i.tl = t[0], i.br = t[2], i.tr = i.bl = t[1], e = i) : 4 === r && (i.tl = t[0], i.tr = t[1], i.br = t[2], i.bl = t[3], e = i), e;}var BORDER_STYLES = ["solid", "dashed"],SimpleCss = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r() {var t, e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "backgroundColor", ""), _defineProperty(_assertThisInitialized(e), "border", ""), _defineProperty(_assertThisInitialized(e), "borderTop", ""), _defineProperty(_assertThisInitialized(e), "borderRight", ""), _defineProperty(_assertThisInitialized(e), "borderBottom", ""), _defineProperty(_assertThisInitialized(e), "borderLeft", ""), _defineProperty(_assertThisInitialized(e), "borderLeftRound", !1), _defineProperty(_assertThisInitialized(e), "borderRightRound", !1), _defineProperty(_assertThisInitialized(e), "borderRadiusValue", ""), e[extendsClassDraw$2] = _get((t = _assertThisInitialized(e), _getPrototypeOf(r.prototype)), draw, t), e;}return _createClass(r, [{ key: "borderRadius", get: function get() {return this.borderRadiusValue;}, set: function set(t) {t && (this.borderRadiusValue = "100%" != t ? getChangedBorderRadiusValue(t) : t);} }, { key: draw, value: function value(t) {(this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) && this.initBorderRadiusMask(), this.backgroundColor && this.initBackgroundColor(), (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) && this.initBorder(), this.mask && "Shape" === this.mask.name && (this.mask.masked = this).mask[draw](t, !0), this[extendsClassDraw$2](t);} }, { key: "getBorderAttr", value: function value(t) {var e = _slicedToArray(t.split(" "), 3),i = e[0],t = e[1],e = e[2],i = parseFloat(i);return BORDER_STYLES.indexOf(t) < 0 && console.warn("不支持的边框样式"), [i, t, e];} }, { key: "setBorderStyles", value: function value(t, e, i) {this.graphics.beginPath(), "dashed" === e && this.graphics.setLineDash([t, t]), this.graphics.lineWidth(t).strokeStyle(i);} }, { key: "getHorizontalRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().fillStyle("#ff00ff").arc(r, r, r, .5 * Math.PI, 1.5 * Math.PI).lineTo(t - r, 0).arc(t - r, r, r, 1.5 * Math.PI, 2.5 * Math.PI).lineTo(r, e), i;} }, { key: "getLeftRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().arc(r, r, r, .5 * Math.PI, 1.5 * Math.PI).lineTo(t, 0).lineTo(t, e).lineTo(r, e), i;} }, { key: "getRightRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().moveTo(0, 0).lineTo(t - r, 0).arc(t - r, r, r, 1.5 * Math.PI, 2.5 * Math.PI).lineTo(0, e), i;} }, { key: "getVerticalRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * t;return i.graphics.beginPath().arc(r, r, r, Math.PI, 2 * Math.PI).lineTo(t, e - r).arc(r, e - r, r, 0, Math.PI).lineTo(0, r), i;} }, { key: "initBorder", value: function value() {var t, e, i, r, n;this.border ? (t = (r = _slicedToArray(this.getBorderAttr(this.border), 3))[0], e = r[1], r = r[2], this.setBorderStyles(t, e, r), e = .5 * t, this.borderRadius ? ("100%" !== this.borderRadius && this.borderRadius !== this.width || this.width !== this.height ? this.borderRadius >= this.height ? (i = this.getHorizontalRoundRectPath(this.width, this.height)).graphics.stroke() : this.borderRadius >= this.width ? (i = this.getVerticalRoundRectPath(this.width, this.height)).graphics.stroke() : (i = new _Shape()).graphics.strokeRoundRect(0, 0, this.width, this.height, this.borderRadius) : (i = new _Shape(), r = .5 * this.width, i.graphics.strokeCircle(r, r, r)), this.addChild(i)) : this.graphics.strokeRect(e, e, this.width - t, this.height - t)) : (this.borderTop && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderTop))), this.graphics.moveTo(0, 0).lineTo(this.width, 0).stroke()), this.borderRight && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderRight))), this.borderRightRound ? (n = .5 * this.height, this.graphics.arc(this.width - n, n, n, 1.5 * Math.PI, 2.5 * Math.PI)) : this.graphics.moveTo(this.width, 0).lineTo(this.width, this.height), this.graphics.stroke()), this.borderBottom && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderBottom))), this.graphics.moveTo(0, this.height).lineTo(this.width, this.height).stroke()), this.borderLeft && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderLeft))), this.borderLeftRound ? (n = .5 * this.height, this.graphics.arc(n, n, n, .5 * Math.PI, 1.5 * Math.PI)) : this.graphics.moveTo(0, 0).lineTo(0, this.height), this.graphics.stroke()));} }, { key: "initBorderRadiusMask", value: function value() {var t, e;"100%" !== this.borderRadiusValue && this.borderRadiusValue !== this.width || this.width !== this.height ? this.borderRadiusValue >= this.height || this.borderRightRadius && this.borderLeftRadius ? (e = this.getHorizontalRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderRadiusValue >= this.width ? (e = this.getVerticalRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderLeftRound ? (e = this.getLeftRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderRightRound ? (e = this.getRightRoundRectPath(this.width, this.height)).graphics.clip().fill() : (console.log(this.borderRadiusValue, 333), (e = new _Shape()).graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)) : (t = .5 * this.width, (e = new _Shape()).graphics.fillCircle(t, t, t)), this.mask = e;} }, { key: "initBackgroundColor", value: function value() {this.graphics.beginPath().fillStyle(this.backgroundColor).fillRect(0, 0, this.width, this.height);} }]), r;}(),extendsClassDraw$1 = Symbol("extendsClassDraw"),_Image = function () {_inherits(s, SimpleCss);var n = _createSuper(s);function s(t) {var e, i, r;for (r in _classCallCheck(this, s), _defineProperty(_assertThisInitialized(i = n.call(this)), "name", "Image"), _defineProperty(_assertThisInitialized(i), "image", null), _defineProperty(_assertThisInitialized(i), "path", ""), _defineProperty(_assertThisInitialized(i), "sx", void 0), _defineProperty(_assertThisInitialized(i), "sy", void 0), _defineProperty(_assertThisInitialized(i), "sWidth", void 0), _defineProperty(_assertThisInitialized(i), "sHeight", void 0), _defineProperty(_assertThisInitialized(i), "dx", 0), _defineProperty(_assertThisInitialized(i), "dy", 0), _defineProperty(_assertThisInitialized(i), "dWidth", void 0), _defineProperty(_assertThisInitialized(i), "dHeight", void 0), i[extendsClassDraw$1] = _get((e = _assertThisInitialized(i), _getPrototypeOf(s.prototype)), draw, e), t) {i[r] = t[r];}return i.path = i.image.path, i.width ? i.dWidth = i.width : i.width = i.dWidth, i.height ? i.dHeight = i.height : i.height = i.dHeight, i;}return _createClass(s, [{ key: drawImage$1, value: function value(t, e, i) {t.globalAlpha = this[getAlpha](), null != this.sx ? t.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, e, i, this.dWidth, this.dHeight) : null != this.dWidth ? t.drawImage(this.path, e, i, this.dWidth, this.dHeight) : t.drawImage(this.path, e, i);} }, { key: draw, value: function value(e) {var t = _slicedToArray(this.getPosition(), 2),i = t[0],t = t[1],i = this.dx + i,t = this.dy + t;this[extendsClassDraw$1](e), this[drawImage$1](e, i, t), this.childs.forEach(function (t) {t[draw](e);});} }]), s;}(),drawImage = Symbol("drawImage"),drawSliced = Symbol("drawSliced"),left = Symbol("left"),top = Symbol("top"),right = Symbol("right"),bottom = Symbol("bottom"),setSlice = Symbol("setSlice"),_sliceBounds = Symbol("_sliceBounds"),_Sprite = function () {_inherits(n, _Group);var r = _createSuper(n);function n(t, e) {var i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Sprite"), _defineProperty(_assertThisInitialized(i), "img", null), _defineProperty(_assertThisInitialized(i), "sliced", !1), t && (i.img = t), i.parentDraw = _get((t = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), draw, t), e && i[setSlice](e), i;}return _createClass(n, [{ key: "sliceBounds", get: function get() {return this[_sliceBounds];}, set: function set(t) {this._setSlice(t), this[_sliceBounds] = t;} }, { key: draw, value: function value(e) {var i = this,t = _slicedToArray(this.getPosition(), 2),r = t[0],t = t[1];this.wRatio = this.width / this.img.width, this.hRatio = this.height / this.img.height, this.enableWidth = (this.width - this[left] - this[right]) * this.scaleX, this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY, this[instructions].forEach(function (t) {t.exec(e, i);}), this.sliced ? this[drawSliced](e, r, t, this[getAlpha]()) : this[drawImage](e, r, t), this.childs.forEach(function (t) {t[draw](e);});} }, { key: drawImage, value: function value(t, e, i) {new _Image({ image: this.img, dx: e, dy: i, dWidth: this.width, dHeight: this.height })[draw](t);} }, { key: drawSliced, value: function value(e, t, i, r) {var n = { image: this.img, sx: 0, sy: 0, sWidth: this[left], sHeight: this[top], dWidth: this[left] * this.scaleX, dHeight: this[top] * this.scaleY, dx: t, dy: i },s = { image: this.img, sx: this[left], sy: 0, sWidth: this.img.width - this[right] - this[left], sHeight: this[top], dWidth: this.enableWidth, dHeight: this[top] * this.scaleY, dx: this[left] * this.scaleX + t, dy: i },a = { image: this.img, sx: this.img.width - this[right], sy: 0, sWidth: this[right], sHeight: this[top], dWidth: this[right] * this.scaleX, dHeight: this[top] * this.scaleY, dx: this[left] * this.scaleX + s.dWidth + t, dy: i },h = { image: this.img, sx: this.img.width - this[right], sy: this[top], sWidth: this[right], sHeight: this.img.height - this[bottom] - this[top], dWidth: this[right] * this.scaleX, dHeight: this.enableHeight, dx: a.dx, dy: a.dy + this[top] * this.scaleY },o = { image: this.img, sx: this.img.width - this[right], sy: this.img.height - this[bottom], sWidth: this[right], sHeight: this[bottom], dWidth: this[right] * this.scaleX, dHeight: this[bottom] * this.scaleY, dx: a.dx - .3, dy: h.dy + h.dHeight },l = { image: this.img, sx: this[left], sy: this.img.height - this[bottom], sWidth: this.img.width - this[left] - this[right], sHeight: this[bottom], dWidth: this.enableWidth, dHeight: this[bottom] * this.scaleY, dx: s.dx, dy: h.dy + h.dHeight },t = { image: this.img, sx: 0, sy: this.img.height - this[bottom], sWidth: this[left], sHeight: this[bottom], dWidth: this[left] * this.scaleX, dHeight: this[bottom] * this.scaleX, dx: n.dx, dy: h.dy + h.dHeight },i = { image: this.img, sx: 0, sy: this[top], sWidth: this[left], sHeight: this.img.height - this[top] - this[bottom], dWidth: this[left] * this.scaleX, dHeight: this.enableHeight, dx: n.dx, dy: h.dy },n = [n, s, a, h, o, l, t, i, { image: this.img, sx: n.sWidth, sy: n.sHeight, sWidth: s.sWidth, sHeight: i.sHeight, dWidth: this.enableWidth, dHeight: this.enableHeight, dx: n.dx + n.dWidth, dy: n.dy + n.dHeight }];return 0 != this.rotation && console.error("Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复"), n.forEach(function (t) {t = new _Image(t);t.alpha = r, t[draw](e);}), this;} }, { key: "_setSlice", value: function value(t) {return this.sliced = !0, this[left] = t.left, this[top] = t.top, this[right] = t.right, this[bottom] = t.bottom, this;} }, { key: "setSlice", value: function value(t) {return this._setSlice(t);} }]), n;}(),_width = Symbol("width"),_height = Symbol("height"),_alignItems = Symbol("_alignItems"),_justifyContent = Symbol("_justifyContent"),_direction = Symbol("_direction"),_flex = Symbol("_flex"),extendsClassDraw = Symbol("extendsClassDraw"),Container = function () {_inherits(n, SimpleCss);var r = _createSuper(n);function n(t) {var e, i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Container"), i[extendsClassDraw] = _get((e = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), draw, e), i.direction = "row", i.justifyContent = "center", i.alignItems = "center", i;}return _createClass(n, [{ key: "width", get: function get() {return this[_width];}, set: function set(t) {this[_width] = t;} }, { key: "height", get: function get() {return this[_height];}, set: function set(t) {this[_height] = t;} }, { key: "flex", get: function get() {return this[_flex];}, set: function set(t) {this[_flex] = t;} }, { key: "direction", get: function get() {return this[_direction];}, set: function set(t) {this[_direction] = t;} }, { key: "alignItems", get: function get() {return this[_alignItems];}, set: function set(t) {this[_alignItems] = t;} }, { key: "justifyContent", get: function get() {return this[_justifyContent];}, set: function set(t) {this[_justifyContent] = t;} }, { key: "getChildsWidth", value: function value() {var e = 0;return this.childs.forEach(function (t) {return e += t.width;}), e;} }, { key: "getChildsHeight", value: function value() {var e = 0;return this.childs.forEach(function (t) {return e += t.height;}), e;} }, { key: "getBetweenGapWidth", value: function value(t) {return (t - this.getChildsWidth()) / (this.childs.length - 1);} }, { key: "getBetweenGapHeight", value: function value(t) {return (t - this.getChildsHeight()) / (this.childs.length - 1);} }, { key: "getAroundGapWidth", value: function value(t) {return (t - this.getChildsWidth()) / this.childs.length;} }, { key: "getAroundGapHeight", value: function value(t) {return (t - this.getChildsHeight()) / this.childs.length;} }, { key: "setRow", value: function value() {this.setJustifyContent(), this.setAlignItems();} }, { key: "setRowReverse", value: function value() {this.setJustifyContent(!0), this.setAlignItems();} }, { key: "setAlignItems", value: function value() {var t = this.childs,e = this.height;if ("center" === this.alignItems) for (var i = 0, r = t.length; i < r; i++) {var n = t[i];n.y += .5 * e - .5 * n.height;} else if ("flex-start" === this.alignItems) for (var s = 0, a = t.length; s < a; s++) {t[s].y = 0;} else if ("flex-end" === this.alignItems) for (var h = 0, o = t.length; h < o; h++) {var l = t[h];l.y += e - l.height;}t.forEach(function (t) {"flex-start" === t.alignSelf ? t.y = 0 : "center" === t.alignSelf ? t.y = .5 * e - .5 * t.height : "flex-end" === t.alignSelf && (t.y = e - t.height);});} }, { key: "setJustifyContent", value: function value(t) {var e = this.width,i = this.childs,r = this.justifyContent;if (t && (i = this.childs.reverse(), "flex-start" === r ? r = "flex-end" : "flex-end" === r && (r = "flex-start")), "flex-start" === r) for (var n = 0; n < i.length; n++) {var s = i[n];0 < n ? s.x += i[n - 1].x + i[n - 1].width : s.x = 0;} else if ("flex-end" === r) for (var a = this.getChildsWidth(), h = 0; h < i.length; h++) {var o = i[h];o.x += 0 < h ? i[h - 1].x + i[h - 1].width : e - a;} else if ("center" === r) for (var l = this.getChildsWidth(), c = 0; c < i.length; c++) {var u = i[c];u.x += 0 < c ? i[c - 1].x + i[c - 1].width : .5 * (e - l);} else if ("space-between" === r) for (var d = this.getBetweenGapWidth(e), f = 0, g = i.length; f < g; f++) {var p = i[f];p.x += 0 < f ? i[f - 1].x + i[f - 1].width + d : 0;} else if ("space-around" === r) for (var y = this.getAroundGapWidth(e), _ = 0, v = i.length; _ < v; _++) {var w = i[_];w.x += 0 < _ ? i[_ - 1].x + i[_ - 1].width + y : .5 * y;}} }, { key: "setJustifyContentForColumn", value: function value(t) {var e = this.height,i = this.childs,r = this.justifyContent;if (t && (i = this.childs.reverse(), "flex-start" === r ? r = "flex-end" : "flex-end" === r && (r = "flex-start")), "flex-start" === r) for (var n = 0; n < i.length; n++) {var s = i[n];s.y += 0 < n ? i[n - 1].y + i[n - 1].height : 0;} else if ("flex-end" === r) for (var a = this.getChildsHeight(), h = 0; h < i.length; h++) {var o = i[h];o.y += 0 < h ? i[h - 1].y + i[h - 1].height : e - a;} else if ("center" === r) for (var l = this.getChildsHeight(), c = 0; c < i.length; c++) {var u = i[c];0 < c ? u.y += i[c - 1].y + i[c - 1].height : u.y = .5 * (e - l);} else if ("space-between" === r) for (var d = this.getBetweenGapHeight(e), f = 0, g = i.length; f < g; f++) {var p = i[f];p.y += 0 < f ? i[f - 1].y + i[f - 1].height + d : 0;} else if ("space-around" === r) for (var y = this.getAroundGapHeight(e), _ = 0, v = i.length; _ < v; _++) {var w = i[_];w.y += 0 < _ ? i[_ - 1].y + i[_ - 1].height + y : .5 * y;}} }, { key: "setAlignItemsByColumn", value: function value() {var t = this.childs,e = this.width;if ("center" === this.alignItems) for (var i = 0, r = t.length; i < r; i++) {var n = t[i];n.x += .5 * e - .5 * n.width;} else if ("flex-start" === this.alignItems) for (var s = 0, a = t.length; s < a; s++) {t[s].x = 0;} else if ("flex-end" === this.alignItems) for (var h = 0, o = t.length; h < o; h++) {var l = t[h];l.x += e - l.width;}t.forEach(function (t) {"flex-start" === t.alignSelf ? t.x = 0 : "center" === t.alignSelf ? t.x = .5 * e - .5 * t.width : "flex-end" === t.alignSelf && (t.x = e - t.width);});} }, { key: "setColumn", value: function value() {this.setJustifyContentForColumn(), this.setAlignItemsByColumn();} }, { key: "setColumnReverse", value: function value() {this.setJustifyContentForColumn(!0), this.setAlignItemsByColumn();} }, { key: draw, value: function value(t) {var e = this.direction;"row" === e ? this.setRow() : "row-reverse" === e ? this.setRowReverse() : "column" === e ? this.setColumn() : "column-reverse" === e && this.setColumnReverse(), this[extendsClassDraw](t);} }]), n;}(),CreateLinearGradient = function () {function n(t, e, i, r) {_classCallCheck(this, n), _defineProperty(this, "name", "CreateLinearGradient"), _defineProperty(this, "colorStops", []), this.x0 = t, this.y0 = e, this.x1 = i, this.y1 = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1],r = t.createLinearGradient(this.x0 + e, this.y0 + i, this.x1 + e, this.y1 + i);return this.colorStops.map(function (t) {return r.addColorStop(t[0], t[1]);}), r;} }, { key: "addColorStop", value: function value(t, e) {this.colorStops.push([t, e]);} }]), n;}(),CreateRadialGradient = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), _defineProperty(this, "name", "CreateRadialGradient"), _defineProperty(this, "colorStops", []), this.x0 = t, this.y0 = e, this.r0 = i, this.x1 = r, this.y1 = n, this.r1 = s;}return _createClass(a, [{ key: "create", value: function value(t) {for (var e = arguments.length, i = new Array(1 < e ? e - 1 : 0), r = 1; r < e; r++) {i[r - 1] = arguments[r];}return t.createRadialGradient ? t.createRadialGradient.apply(this, i) : (console.warn("小程序不支持传6个参数，请查阅: createCircularGradient 对应文档"), t.createCircularGradient.apply(this, i));} }, { key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1],r = this.create(t, this.x0 + e, this.y0 + i, this.r0, this.x1 + e, this.y1 + i, this.r1);return this.colorStops.map(function (t) {return r.addColorStop(t[0], t[1]);}), r;} }, { key: "addColorStop", value: function value(t, e) {this.colorStops.push([t, e]);} }]), a;}(),DuduCanvas = { load: function load(t) {return new ImgLoader(t);}, Stage: function Stage(t, e, i) {return new _Stage(t, function () {e.apply(void 0, arguments);}, i);}, Shape: function Shape() {return new _Shape();}, Group: function Group() {return new _Group();}, Text: function Text(t) {return new _Text(t);}, Image: function Image(t) {return new _Image(t);}, Sprite: function Sprite() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(_Sprite, e);}, color: { createLinearGradient: function createLinearGradient() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(CreateLinearGradient, e);}, createRadialGradient: function createRadialGradient() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(CreateRadialGradient, e);} } };exports.DuduCanvas = DuduCanvas;exports.CreateRadialGradient = CreateRadialGradient;exports.CreateLinearGradient = CreateLinearGradient;exports.Container = Container;exports.Sprite = _Sprite;exports.Image = _Image;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
+
+/***/ }),
+
+/***/ 35:
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-app/dist/uni-app.cjs.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var vue = __webpack_require__(/*! vue */ 8);
+var shared = __webpack_require__(/*! @vue/shared */ 11);
+
+var sanitise = function sanitise(val) {return val && JSON.parse(JSON.stringify(val)) || val;};
+var UNI_SSR = '__uniSSR';
+var UNI_SSR_DATA = 'data';
+// lifecycle
+// App and Page
+var ON_SHOW = 'onShow';
+var ON_HIDE = 'onHide';
+//App
+var ON_LAUNCH = 'onLaunch';
+var ON_ERROR = 'onError';
+var ON_THEME_CHANGE = 'onThemeChange';
+var ON_PAGE_NOT_FOUND = 'onPageNotFound';
+var ON_UNHANDLE_REJECTION = 'onUnhandledRejection';
+var ON_READY = 'onReady';
+var ON_UNLOAD = 'onUnload';
+var ON_RESIZE = 'onResize';
+var ON_BACK_PRESS = 'onBackPress';
+var ON_PAGE_SCROLL = 'onPageScroll';
+var ON_TAB_ITEM_TAP = 'onTabItemTap';
+var ON_REACH_BOTTOM = 'onReachBottom';
+var ON_PULL_DOWN_REFRESH = 'onPullDownRefresh';
+var ON_SHARE_TIMELINE = 'onShareTimeline';
+var ON_ADD_TO_FAVORITES = 'onAddToFavorites';
+var ON_SHARE_APP_MESSAGE = 'onShareAppMessage';
+// navigationBar
+var ON_NAVIGATION_BAR_BUTTON_TAP = 'onNavigationBarButtonTap';
+var ON_NAVIGATION_BAR_SEARCH_INPUT_CLICKED = 'onNavigationBarSearchInputClicked';
+var ON_NAVIGATION_BAR_SEARCH_INPUT_CHANGED = 'onNavigationBarSearchInputChanged';
+var ON_NAVIGATION_BAR_SEARCH_INPUT_CONFIRMED = 'onNavigationBarSearchInputConfirmed';
+var ON_NAVIGATION_BAR_SEARCH_INPUT_FOCUS_CHANGED = 'onNavigationBarSearchInputFocusChanged';
+
+function assertKey(key) {var shallow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  if (!key) {
+    throw new Error("".concat(shallow ? 'shallowSsrRef' : 'ssrRef', ": You must provide a key."));
+  }
+}
+function proxy(target, track, trigger) {
+  return new Proxy(target, {
+    get: function get(target, prop) {
+      track();
+      if (shared.isObject(target[prop])) {
+        return proxy(target[prop], track, trigger);
+      }
+      return Reflect.get(target, prop);
+    },
+    set: function set(obj, prop, newVal) {
+      var result = Reflect.set(obj, prop, newVal);
+      trigger();
+      return result;
+    } });
+
+}
+var globalData = {};
+var ssrServerRef = function ssrServerRef(value, key) {var shallow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  assertKey(key, shallow);
+  var ctx = vue.getCurrentInstance() && vue.useSSRContext();
+  var state;
+  if (ctx) {
+    var __uniSSR = ctx[UNI_SSR] || (ctx[UNI_SSR] = {});
+    state = __uniSSR[UNI_SSR_DATA] || (__uniSSR[UNI_SSR_DATA] = {});
+  } else
+  {
+    state = globalData;
+  }
+  state[key] = sanitise(value);
+  // SSR 模式下 watchEffect 不生效 https://github.com/vuejs/vue-next/blob/master/packages/runtime-core/src/apiWatch.ts#L253
+  // 故自定义ref
+  return vue.customRef(function (track, trigger) {
+    var customTrigger = function customTrigger() {return trigger(), state[key] = sanitise(value);};
+    return {
+      get: function get() {
+        track();
+        if (!shallow && shared.isObject(value)) {
+          return proxy(value, track, customTrigger);
+        }
+        return value;
+      },
+      set: function set(v) {
+        value = v;
+        customTrigger();
+      } };
+
+  });
+};
+var ssrRef = function ssrRef(value, key) {
+  {
+    return ssrServerRef(value, key);
+  }
+};
+var shallowSsrRef = function shallowSsrRef(value, key) {
+  {
+    return ssrServerRef(value, key, true);
+  }
+};
+function getSsrGlobalData() {
+  return sanitise(globalData);
+}
+
+function resolveEasycom(component, easycom) {
+  return shared.isString(component) ? easycom : component;
+}
+
+// @ts-ignore
+var createHook = function createHook(lifecycle) {return function (hook) {var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : vue.getCurrentInstance();return (
+      // post-create lifecycle registrations are noops during SSR
+      !vue.isInSSRComponentSetup && vue.injectHook(lifecycle, hook, target));};};
+var onShow = /*#__PURE__*/createHook(ON_SHOW);
+var onHide = /*#__PURE__*/createHook(ON_HIDE);
+var onLaunch = /*#__PURE__*/createHook(ON_LAUNCH);
+var onError = /*#__PURE__*/createHook(ON_ERROR);
+var onThemeChange = /*#__PURE__*/createHook(ON_THEME_CHANGE);
+var onPageNotFound = /*#__PURE__*/createHook(ON_PAGE_NOT_FOUND);
+var onUnhandledRejection = /*#__PURE__*/createHook(ON_UNHANDLE_REJECTION);
+
+var onReady = /*#__PURE__*/createHook(ON_READY);
+var onUnload = /*#__PURE__*/createHook(ON_UNLOAD);
+var onResize = /*#__PURE__*/createHook(ON_RESIZE);
+var onBackPress = /*#__PURE__*/createHook(ON_BACK_PRESS);
+var onPageScroll = /*#__PURE__*/createHook(ON_PAGE_SCROLL);
+var onTabItemTap = /*#__PURE__*/createHook(ON_TAB_ITEM_TAP);
+var onReachBottom = /*#__PURE__*/createHook(ON_REACH_BOTTOM);
+var onPullDownRefresh = /*#__PURE__*/createHook(ON_PULL_DOWN_REFRESH);
+var onShareTimeline = /*#__PURE__*/createHook(ON_SHARE_TIMELINE);
+var onAddToFavorites = /*#__PURE__*/createHook(ON_ADD_TO_FAVORITES);
+var onShareAppMessage = /*#__PURE__*/createHook(ON_SHARE_APP_MESSAGE);
+var onNavigationBarButtonTap = /*#__PURE__*/createHook(ON_NAVIGATION_BAR_BUTTON_TAP);
+var onNavigationBarSearchInputChanged = /*#__PURE__*/createHook(ON_NAVIGATION_BAR_SEARCH_INPUT_CHANGED);
+var onNavigationBarSearchInputClicked = /*#__PURE__*/createHook(ON_NAVIGATION_BAR_SEARCH_INPUT_CLICKED);
+var onNavigationBarSearchInputConfirmed = /*#__PURE__*/createHook(ON_NAVIGATION_BAR_SEARCH_INPUT_CONFIRMED);
+var onNavigationBarSearchInputFocusChanged = /*#__PURE__*/createHook(ON_NAVIGATION_BAR_SEARCH_INPUT_FOCUS_CHANGED);
+
+exports.getSsrGlobalData = getSsrGlobalData;
+exports.onAddToFavorites = onAddToFavorites;
+exports.onBackPress = onBackPress;
+exports.onError = onError;
+exports.onHide = onHide;
+exports.onLaunch = onLaunch;
+exports.onNavigationBarButtonTap = onNavigationBarButtonTap;
+exports.onNavigationBarSearchInputChanged = onNavigationBarSearchInputChanged;
+exports.onNavigationBarSearchInputClicked = onNavigationBarSearchInputClicked;
+exports.onNavigationBarSearchInputConfirmed = onNavigationBarSearchInputConfirmed;
+exports.onNavigationBarSearchInputFocusChanged = onNavigationBarSearchInputFocusChanged;
+exports.onPageNotFound = onPageNotFound;
+exports.onPageScroll = onPageScroll;
+exports.onPullDownRefresh = onPullDownRefresh;
+exports.onReachBottom = onReachBottom;
+exports.onReady = onReady;
+exports.onResize = onResize;
+exports.onShareAppMessage = onShareAppMessage;
+exports.onShareTimeline = onShareTimeline;
+exports.onShow = onShow;
+exports.onTabItemTap = onTabItemTap;
+exports.onThemeChange = onThemeChange;
+exports.onUnhandledRejection = onUnhandledRejection;
+exports.onUnload = onUnload;
+exports.resolveEasycom = resolveEasycom;
+exports.shallowSsrRef = shallowSsrRef;
+exports.ssrRef = ssrRef;
+
+/***/ }),
+
+/***/ 7:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -143,7 +2208,8 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 8 */
+
+/***/ 8:
 /*!*******************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-vue/dist/vue.runtime.esm.js ***!
   \*******************************************************************/
@@ -152,7 +2218,7 @@ function normalizeComponent (
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(uni, createMiniProgramApp) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EffectScope", function() { return EffectScope; });
+/* WEBPACK VAR INJECTION */(function(uni, global, createMiniProgramApp) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EffectScope", function() { return EffectScope; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReactiveEffect", function() { return ReactiveEffect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "callWithAsyncErrorHandling", function() { return callWithAsyncErrorHandling; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "callWithErrorHandling", function() { return callWithErrorHandling; });
@@ -228,7 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withDirectives", function() { return withDirectives; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withModifiers", function() { return withModifiers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withScopeId", function() { return withScopeId; });
-/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/shared */ 10);
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/shared */ 11);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "camelize", function() { return _vue_shared__WEBPACK_IMPORTED_MODULE_0__["camelize"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "normalizeClass", function() { return _vue_shared__WEBPACK_IMPORTED_MODULE_0__["normalizeClass"]; });
@@ -2786,7 +4852,7 @@ function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false
         // local registration
         // check instance[type] first which is resolved for options API
         resolve(instance[type] || Component[type], name) ||
-            // window registration
+            // global registration
             resolve(instance.appContext[type], name);
         if (!res && maybeSelfReference) {
             // fallback to implicit self-reference
@@ -3273,7 +5339,7 @@ const PublicInstanceProxyHandlers = {
             return ctx[key];
         }
         else if (
-        // window properties
+        // global properties
         ((globalProperties = appContext.config.globalProperties),
             Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["hasOwn"])(globalProperties, key))) {
             {
@@ -3615,6 +5681,11 @@ let compile;
 const isRuntimeOnly = () => !compile;
 function finishComponentSetup(instance, isSSR, skipOptions) {
     const Component = instance.type;
+    // template / render function normalization
+    // could be already set when returned from setup()
+    if (!instance.render) {
+        instance.render = (Component.render || _vue_shared__WEBPACK_IMPORTED_MODULE_0__["NOOP"]);
+    }
     // support for 2.x options
     if (true) {
         setCurrentInstance(instance);
@@ -4482,15 +6553,21 @@ function getContext() {
  * only.
  * @internal
  */
-function mergeDefaults(
-// the base props is compiler-generated and guaranteed to be in this shape.
-props, defaults) {
+function mergeDefaults(raw, defaults) {
+    const props = Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["isArray"])(raw)
+        ? raw.reduce((normalized, p) => ((normalized[p] = {}), normalized), {})
+        : raw;
     for (const key in defaults) {
-        const val = props[key];
-        if (val) {
-            val.default = defaults[key];
+        const opt = props[key];
+        if (opt) {
+            if (Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["isArray"])(opt) || Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["isFunction"])(opt)) {
+                props[key] = { type: opt, default: defaults[key] };
+            }
+            else {
+                opt.default = defaults[key];
+            }
         }
-        else if (val === null) {
+        else if (opt === null) {
             props[key] = { default: defaults[key] };
         }
         else if ((true)) {
@@ -4547,7 +6624,7 @@ const useSSRContext = () => {
 };
 
 // Core API ------------------------------------------------------------------
-const version = "3.2.19";
+const version = "3.2.20";
 /**
  * @internal only exposed in compat builds
  */
@@ -4870,10 +6947,48 @@ function mountComponent(initialVNode, options) {
     }
     return instance.proxy;
 }
+const getFunctionalFallthrough = (attrs) => {
+    let res;
+    for (const key in attrs) {
+        if (key === 'class' || key === 'style' || Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["isOn"])(key)) {
+            (res || (res = {}))[key] = attrs[key];
+        }
+    }
+    return res;
+};
+function renderComponentRoot(instance) {
+    const { type: Component, vnode, proxy, withProxy, props, slots, attrs, emit, render, renderCache, data, setupState, ctx } = instance;
+    let result;
+    const prev = setCurrentRenderingInstance(instance);
+    try {
+        if (vnode.shapeFlag & 4 /* STATEFUL_COMPONENT */) {
+            // withProxy is a proxy with a different `has` trap only for
+            // runtime-compiled render functions using `with` block.
+            const proxyToUse = withProxy || proxy;
+            result = render.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx);
+        }
+        else {
+            // functional
+            const render = Component;
+            result =
+                render.length > 1
+                    ? render(props, { attrs, slots, emit })
+                    : render(props, null /* we know it doesn't need it */)
+                        ? attrs
+                        : getFunctionalFallthrough(attrs);
+        }
+    }
+    catch (err) {
+        handleError(err, instance, 1 /* RENDER_FUNCTION */);
+        result = false;
+    }
+    setCurrentRenderingInstance(prev);
+    return result;
+}
 function setupRenderEffect(instance) {
     const componentUpdateFn = () => {
         if (!instance.isMounted) {
-            instance.render && instance.render.call(instance.proxy);
+            renderComponentRoot(instance);
             patch(instance);
         }
         else {
@@ -4886,6 +7001,7 @@ function setupRenderEffect(instance) {
                 Object(_vue_shared__WEBPACK_IMPORTED_MODULE_0__["invokeArrayFns"])(bu);
             }
             effect.allowRecurse = true;
+            renderComponentRoot(instance);
             patch(instance);
             // updated hook
             if (u) {
@@ -5024,8 +7140,44 @@ function initOptionMergeStrategies(optionMergeStrategies) {
     });
 }
 
+let realAtob;
+const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+const b64re = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
+if (typeof atob !== 'function') {
+    realAtob = function (str) {
+        str = String(str).replace(/[\t\n\f\r ]+/g, '');
+        if (!b64re.test(str)) {
+            throw new Error("Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.");
+        }
+        // Adding the padding if missing, for semplicity
+        str += '=='.slice(2 - (str.length & 3));
+        var bitmap;
+        var result = '';
+        var r1;
+        var r2;
+        var i = 0;
+        for (; i < str.length;) {
+            bitmap =
+                (b64.indexOf(str.charAt(i++)) << 18) |
+                    (b64.indexOf(str.charAt(i++)) << 12) |
+                    ((r1 = b64.indexOf(str.charAt(i++))) << 6) |
+                    (r2 = b64.indexOf(str.charAt(i++)));
+            result +=
+                r1 === 64
+                    ? String.fromCharCode((bitmap >> 16) & 255)
+                    : r2 === 64
+                        ? String.fromCharCode((bitmap >> 16) & 255, (bitmap >> 8) & 255)
+                        : String.fromCharCode((bitmap >> 16) & 255, (bitmap >> 8) & 255, bitmap & 255);
+        }
+        return result;
+    };
+}
+else {
+    // 注意atob只能在全局对象上调用，例如：`const Base64 = {atob};Base64.atob('xxxx')`是错误的用法
+    realAtob = atob;
+}
 function b64DecodeUnicode(str) {
-    return decodeURIComponent(atob(str)
+    return decodeURIComponent(realAtob(str)
         .split('')
         .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
@@ -5089,11 +7241,21 @@ function initApp(app) {
 var plugin = {
     install(app) {
         initApp(app);
+        // TODO 旧编译器使用了$createElement 导致告警
+        app.config.globalProperties.$createElement = () => { };
         const oldMount = app.mount;
         app.mount = function mount(rootContainer) {
             const instance = oldMount.call(app, rootContainer);
-            // @ts-ignore
-            createMiniProgramApp(instance);
+            if (global.createApp) {
+                global.createApp(instance);
+            }
+            else {
+                // @ts-ignore 旧编译器
+                if (typeof createMiniProgramApp !== 'undefined') {
+                    // @ts-ignore
+                    createMiniProgramApp(instance);
+                }
+            }
             return instance;
         };
     },
@@ -5107,10 +7269,11 @@ const createSSRApp = createApp;
 
 
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/uni.mp.esm.js */ 12)["createApp"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 10), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/uni.mp.esm.js */ 12)["createApp"]))
 
 /***/ }),
-/* 9 */
+
+/***/ 9:
 /*!******************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/uni.api.esm.js ***!
   \******************************************************************/
@@ -5118,7 +7281,7 @@ const createSSRApp = createApp;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _shared = __webpack_require__(/*! @vue/shared */ 10);
+/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _shared = __webpack_require__(/*! @vue/shared */ 11);
 var _vue = __webpack_require__(/*! vue */ 8);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 //App
@@ -5552,6 +7715,7 @@ var removeInterceptor = defineSyncApi(API_REMOVE_INTERCEPTOR, function (method, 
     removeInterceptorHook(globalInterceptors, method);
   }
 }, RemoveInterceptorProtocol);
+var interceptors = {};
 
 var API_ON = '$on';
 var OnProtocol = [
@@ -5811,7 +7975,7 @@ var getLocale = function getLocale() {
   if (app && app.$vm) {
     return app.$vm.$locale;
   }
-  return uni.getSystemInfoSync().language || 'zh-Hans';
+  return wx.getSystemInfoSync().language || 'zh-Hans';
 };
 var setLocale = function setLocale(locale) {
   var app = getApp();
@@ -5832,6 +7996,9 @@ var onLocaleChange = function onLocaleChange(fn) {
     onLocaleChangeCallbacks.push(fn);
   }
 };
+if (typeof global !== 'undefined') {
+  global.getLocale = getLocale;
+}
 
 var baseApis = {
   $on: $on,
@@ -5839,6 +8006,7 @@ var baseApis = {
   $once: $once,
   $emit: $emit,
   upx2px: upx2px,
+  interceptors: interceptors,
   addInterceptor: addInterceptor,
   removeInterceptor: removeInterceptor,
   onAppLaunch: onAppLaunch,
@@ -5963,1904 +8131,9 @@ var protocols = /*#__PURE__*/Object.freeze({
 
 
 var index = initUni(shims, protocols);exports.default = index;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
-
-/***/ }),
-/* 10 */
-/*!*************************************************************!*\
-  !*** ./node_modules/@vue/shared/dist/shared.esm-bundler.js ***!
-  \*************************************************************/
-/*! exports provided: EMPTY_ARR, EMPTY_OBJ, NO, NOOP, PatchFlagNames, babelParserDefaultPlugins, camelize, capitalize, def, escapeHtml, escapeHtmlComment, extend, generateCodeFrame, getGlobalThis, hasChanged, hasOwn, hyphenate, includeBooleanAttr, invokeArrayFns, isArray, isBooleanAttr, isDate, isFunction, isGloballyWhitelisted, isHTMLTag, isIntegerKey, isKnownHtmlAttr, isKnownSvgAttr, isMap, isModelListener, isNoUnitNumericStyleProp, isObject, isOn, isPlainObject, isPromise, isReservedProp, isSSRSafeAttrName, isSVGTag, isSet, isSpecialBooleanAttr, isString, isSymbol, isVoidTag, looseEqual, looseIndexOf, makeMap, normalizeClass, normalizeProps, normalizeStyle, objectToString, parseStringStyle, propsToAttrMap, remove, slotFlagsText, stringifyStyle, toDisplayString, toHandlerKey, toNumber, toRawType, toTypeString */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_ARR", function() { return EMPTY_ARR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_OBJ", function() { return EMPTY_OBJ; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO", function() { return NO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOOP", function() { return NOOP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatchFlagNames", function() { return PatchFlagNames; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "babelParserDefaultPlugins", function() { return babelParserDefaultPlugins; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "camelize", function() { return camelize; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalize", function() { return capitalize; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "def", function() { return def; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "escapeHtml", function() { return escapeHtml; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "escapeHtmlComment", function() { return escapeHtmlComment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extend", function() { return extend; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCodeFrame", function() { return generateCodeFrame; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGlobalThis", function() { return getGlobalThis; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChanged", function() { return hasChanged; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasOwn", function() { return hasOwn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hyphenate", function() { return hyphenate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "includeBooleanAttr", function() { return includeBooleanAttr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "invokeArrayFns", function() { return invokeArrayFns; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBooleanAttr", function() { return isBooleanAttr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDate", function() { return isDate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGloballyWhitelisted", function() { return isGloballyWhitelisted; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHTMLTag", function() { return isHTMLTag; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isIntegerKey", function() { return isIntegerKey; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKnownHtmlAttr", function() { return isKnownHtmlAttr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKnownSvgAttr", function() { return isKnownSvgAttr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isMap", function() { return isMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isModelListener", function() { return isModelListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNoUnitNumericStyleProp", function() { return isNoUnitNumericStyleProp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOn", function() { return isOn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlainObject", function() { return isPlainObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPromise", function() { return isPromise; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isReservedProp", function() { return isReservedProp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSSRSafeAttrName", function() { return isSSRSafeAttrName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSVGTag", function() { return isSVGTag; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSet", function() { return isSet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSpecialBooleanAttr", function() { return isSpecialBooleanAttr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSymbol", function() { return isSymbol; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isVoidTag", function() { return isVoidTag; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "looseEqual", function() { return looseEqual; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "looseIndexOf", function() { return looseIndexOf; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeMap", function() { return makeMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeClass", function() { return normalizeClass; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeProps", function() { return normalizeProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeStyle", function() { return normalizeStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectToString", function() { return objectToString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseStringStyle", function() { return parseStringStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propsToAttrMap", function() { return propsToAttrMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "slotFlagsText", function() { return slotFlagsText; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stringifyStyle", function() { return stringifyStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toDisplayString", function() { return toDisplayString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHandlerKey", function() { return toHandlerKey; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toRawType", function() { return toRawType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toTypeString", function() { return toTypeString; });
-/**
- * Make a map and return a function for checking if a key
- * is in that map.
- * IMPORTANT: all calls of this function must be prefixed with
- * \/\*#\_\_PURE\_\_\*\/
- * So that rollup can tree-shake them if necessary.
- */
-function makeMap(str, expectsLowerCase) {
-    const map = Object.create(null);
-    const list = str.split(',');
-    for (let i = 0; i < list.length; i++) {
-        map[list[i]] = true;
-    }
-    return expectsLowerCase ? val => !!map[val.toLowerCase()] : val => !!map[val];
-}
-
-/**
- * dev only flag -> name mapping
- */
-const PatchFlagNames = {
-    [1 /* TEXT */]: `TEXT`,
-    [2 /* CLASS */]: `CLASS`,
-    [4 /* STYLE */]: `STYLE`,
-    [8 /* PROPS */]: `PROPS`,
-    [16 /* FULL_PROPS */]: `FULL_PROPS`,
-    [32 /* HYDRATE_EVENTS */]: `HYDRATE_EVENTS`,
-    [64 /* STABLE_FRAGMENT */]: `STABLE_FRAGMENT`,
-    [128 /* KEYED_FRAGMENT */]: `KEYED_FRAGMENT`,
-    [256 /* UNKEYED_FRAGMENT */]: `UNKEYED_FRAGMENT`,
-    [512 /* NEED_PATCH */]: `NEED_PATCH`,
-    [1024 /* DYNAMIC_SLOTS */]: `DYNAMIC_SLOTS`,
-    [2048 /* DEV_ROOT_FRAGMENT */]: `DEV_ROOT_FRAGMENT`,
-    [-1 /* HOISTED */]: `HOISTED`,
-    [-2 /* BAIL */]: `BAIL`
-};
-
-/**
- * Dev only
- */
-const slotFlagsText = {
-    [1 /* STABLE */]: 'STABLE',
-    [2 /* DYNAMIC */]: 'DYNAMIC',
-    [3 /* FORWARDED */]: 'FORWARDED'
-};
-
-const GLOBALS_WHITE_LISTED = 'Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,' +
-    'decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,' +
-    'Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt';
-const isGloballyWhitelisted = /*#__PURE__*/ makeMap(GLOBALS_WHITE_LISTED);
-
-const range = 2;
-function generateCodeFrame(source, start = 0, end = source.length) {
-    // Split the content into individual lines but capture the newline sequence
-    // that separated each line. This is important because the actual sequence is
-    // needed to properly take into account the full line length for offset
-    // comparison
-    let lines = source.split(/(\r?\n)/);
-    // Separate the lines and newline sequences into separate arrays for easier referencing
-    const newlineSequences = lines.filter((_, idx) => idx % 2 === 1);
-    lines = lines.filter((_, idx) => idx % 2 === 0);
-    let count = 0;
-    const res = [];
-    for (let i = 0; i < lines.length; i++) {
-        count +=
-            lines[i].length +
-                ((newlineSequences[i] && newlineSequences[i].length) || 0);
-        if (count >= start) {
-            for (let j = i - range; j <= i + range || end > count; j++) {
-                if (j < 0 || j >= lines.length)
-                    continue;
-                const line = j + 1;
-                res.push(`${line}${' '.repeat(Math.max(3 - String(line).length, 0))}|  ${lines[j]}`);
-                const lineLength = lines[j].length;
-                const newLineSeqLength = (newlineSequences[j] && newlineSequences[j].length) || 0;
-                if (j === i) {
-                    // push underline
-                    const pad = start - (count - (lineLength + newLineSeqLength));
-                    const length = Math.max(1, end > count ? lineLength - pad : end - start);
-                    res.push(`   |  ` + ' '.repeat(pad) + '^'.repeat(length));
-                }
-                else if (j > i) {
-                    if (end > count) {
-                        const length = Math.max(Math.min(end - count, lineLength), 1);
-                        res.push(`   |  ` + '^'.repeat(length));
-                    }
-                    count += lineLength + newLineSeqLength;
-                }
-            }
-            break;
-        }
-    }
-    return res.join('\n');
-}
-
-/**
- * On the client we only need to offer special cases for boolean attributes that
- * have different names from their corresponding dom properties:
- * - itemscope -> N/A
- * - allowfullscreen -> allowFullscreen
- * - formnovalidate -> formNoValidate
- * - ismap -> isMap
- * - nomodule -> noModule
- * - novalidate -> noValidate
- * - readonly -> readOnly
- */
-const specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
-const isSpecialBooleanAttr = /*#__PURE__*/ makeMap(specialBooleanAttrs);
-/**
- * The full list is needed during SSR to produce the correct initial markup.
- */
-const isBooleanAttr = /*#__PURE__*/ makeMap(specialBooleanAttrs +
-    `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,` +
-    `loop,open,required,reversed,scoped,seamless,` +
-    `checked,muted,multiple,selected`);
-/**
- * Boolean attributes should be included if the value is truthy or ''.
- * e.g. <select multiple> compiles to { multiple: '' }
- */
-function includeBooleanAttr(value) {
-    return !!value || value === '';
-}
-const unsafeAttrCharRE = /[>/="'\u0009\u000a\u000c\u0020]/;
-const attrValidationCache = {};
-function isSSRSafeAttrName(name) {
-    if (attrValidationCache.hasOwnProperty(name)) {
-        return attrValidationCache[name];
-    }
-    const isUnsafe = unsafeAttrCharRE.test(name);
-    if (isUnsafe) {
-        console.error(`unsafe attribute name: ${name}`);
-    }
-    return (attrValidationCache[name] = !isUnsafe);
-}
-const propsToAttrMap = {
-    acceptCharset: 'accept-charset',
-    className: 'class',
-    htmlFor: 'for',
-    httpEquiv: 'http-equiv'
-};
-/**
- * CSS properties that accept plain numbers
- */
-const isNoUnitNumericStyleProp = /*#__PURE__*/ makeMap(`animation-iteration-count,border-image-outset,border-image-slice,` +
-    `border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,` +
-    `columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,` +
-    `grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,` +
-    `grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,` +
-    `line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,` +
-    // SVG
-    `fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,` +
-    `stroke-miterlimit,stroke-opacity,stroke-width`);
-/**
- * Known attributes, this is used for stringification of runtime static nodes
- * so that we don't stringify bindings that cannot be set from HTML.
- * Don't also forget to allow `data-*` and `aria-*`!
- * Generated from https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
- */
-const isKnownHtmlAttr = /*#__PURE__*/ makeMap(`accept,accept-charset,accesskey,action,align,allow,alt,async,` +
-    `autocapitalize,autocomplete,autofocus,autoplay,background,bgcolor,` +
-    `border,buffered,capture,challenge,charset,checked,cite,class,code,` +
-    `codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,` +
-    `coords,crossorigin,csp,data,datetime,decoding,default,defer,dir,dirname,` +
-    `disabled,download,draggable,dropzone,enctype,enterkeyhint,for,form,` +
-    `formaction,formenctype,formmethod,formnovalidate,formtarget,headers,` +
-    `height,hidden,high,href,hreflang,http-equiv,icon,id,importance,integrity,` +
-    `ismap,itemprop,keytype,kind,label,lang,language,loading,list,loop,low,` +
-    `manifest,max,maxlength,minlength,media,min,multiple,muted,name,novalidate,` +
-    `open,optimum,pattern,ping,placeholder,poster,preload,radiogroup,readonly,` +
-    `referrerpolicy,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,` +
-    `selected,shape,size,sizes,slot,span,spellcheck,src,srcdoc,srclang,srcset,` +
-    `start,step,style,summary,tabindex,target,title,translate,type,usemap,` +
-    `value,width,wrap`);
-/**
- * Generated from https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
- */
-const isKnownSvgAttr = /*#__PURE__*/ makeMap(`xmlns,accent-height,accumulate,additive,alignment-baseline,alphabetic,amplitude,` +
-    `arabic-form,ascent,attributeName,attributeType,azimuth,baseFrequency,` +
-    `baseline-shift,baseProfile,bbox,begin,bias,by,calcMode,cap-height,class,` +
-    `clip,clipPathUnits,clip-path,clip-rule,color,color-interpolation,` +
-    `color-interpolation-filters,color-profile,color-rendering,` +
-    `contentScriptType,contentStyleType,crossorigin,cursor,cx,cy,d,decelerate,` +
-    `descent,diffuseConstant,direction,display,divisor,dominant-baseline,dur,dx,` +
-    `dy,edgeMode,elevation,enable-background,end,exponent,fill,fill-opacity,` +
-    `fill-rule,filter,filterRes,filterUnits,flood-color,flood-opacity,` +
-    `font-family,font-size,font-size-adjust,font-stretch,font-style,` +
-    `font-variant,font-weight,format,from,fr,fx,fy,g1,g2,glyph-name,` +
-    `glyph-orientation-horizontal,glyph-orientation-vertical,glyphRef,` +
-    `gradientTransform,gradientUnits,hanging,height,href,hreflang,horiz-adv-x,` +
-    `horiz-origin-x,id,ideographic,image-rendering,in,in2,intercept,k,k1,k2,k3,` +
-    `k4,kernelMatrix,kernelUnitLength,kerning,keyPoints,keySplines,keyTimes,` +
-    `lang,lengthAdjust,letter-spacing,lighting-color,limitingConeAngle,local,` +
-    `marker-end,marker-mid,marker-start,markerHeight,markerUnits,markerWidth,` +
-    `mask,maskContentUnits,maskUnits,mathematical,max,media,method,min,mode,` +
-    `name,numOctaves,offset,opacity,operator,order,orient,orientation,origin,` +
-    `overflow,overline-position,overline-thickness,panose-1,paint-order,path,` +
-    `pathLength,patternContentUnits,patternTransform,patternUnits,ping,` +
-    `pointer-events,points,pointsAtX,pointsAtY,pointsAtZ,preserveAlpha,` +
-    `preserveAspectRatio,primitiveUnits,r,radius,referrerPolicy,refX,refY,rel,` +
-    `rendering-intent,repeatCount,repeatDur,requiredExtensions,requiredFeatures,` +
-    `restart,result,rotate,rx,ry,scale,seed,shape-rendering,slope,spacing,` +
-    `specularConstant,specularExponent,speed,spreadMethod,startOffset,` +
-    `stdDeviation,stemh,stemv,stitchTiles,stop-color,stop-opacity,` +
-    `strikethrough-position,strikethrough-thickness,string,stroke,` +
-    `stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,` +
-    `stroke-miterlimit,stroke-opacity,stroke-width,style,surfaceScale,` +
-    `systemLanguage,tabindex,tableValues,target,targetX,targetY,text-anchor,` +
-    `text-decoration,text-rendering,textLength,to,transform,transform-origin,` +
-    `type,u1,u2,underline-position,underline-thickness,unicode,unicode-bidi,` +
-    `unicode-range,units-per-em,v-alphabetic,v-hanging,v-ideographic,` +
-    `v-mathematical,values,vector-effect,version,vert-adv-y,vert-origin-x,` +
-    `vert-origin-y,viewBox,viewTarget,visibility,width,widths,word-spacing,` +
-    `writing-mode,x,x-height,x1,x2,xChannelSelector,xlink:actuate,xlink:arcrole,` +
-    `xlink:href,xlink:role,xlink:show,xlink:title,xlink:type,xml:base,xml:lang,` +
-    `xml:space,y,y1,y2,yChannelSelector,z,zoomAndPan`);
-
-function normalizeStyle(value) {
-    if (isArray(value)) {
-        const res = {};
-        for (let i = 0; i < value.length; i++) {
-            const item = value[i];
-            const normalized = isString(item)
-                ? parseStringStyle(item)
-                : normalizeStyle(item);
-            if (normalized) {
-                for (const key in normalized) {
-                    res[key] = normalized[key];
-                }
-            }
-        }
-        return res;
-    }
-    else if (isString(value)) {
-        return value;
-    }
-    else if (isObject(value)) {
-        return value;
-    }
-}
-const listDelimiterRE = /;(?![^(]*\))/g;
-const propertyDelimiterRE = /:(.+)/;
-function parseStringStyle(cssText) {
-    const ret = {};
-    cssText.split(listDelimiterRE).forEach(item => {
-        if (item) {
-            const tmp = item.split(propertyDelimiterRE);
-            tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
-        }
-    });
-    return ret;
-}
-function stringifyStyle(styles) {
-    let ret = '';
-    if (!styles || isString(styles)) {
-        return ret;
-    }
-    for (const key in styles) {
-        const value = styles[key];
-        const normalizedKey = key.startsWith(`--`) ? key : hyphenate(key);
-        if (isString(value) ||
-            (typeof value === 'number' && isNoUnitNumericStyleProp(normalizedKey))) {
-            // only render valid values
-            ret += `${normalizedKey}:${value};`;
-        }
-    }
-    return ret;
-}
-function normalizeClass(value) {
-    let res = '';
-    if (isString(value)) {
-        res = value;
-    }
-    else if (isArray(value)) {
-        for (let i = 0; i < value.length; i++) {
-            const normalized = normalizeClass(value[i]);
-            if (normalized) {
-                res += normalized + ' ';
-            }
-        }
-    }
-    else if (isObject(value)) {
-        for (const name in value) {
-            if (value[name]) {
-                res += name + ' ';
-            }
-        }
-    }
-    return res.trim();
-}
-function normalizeProps(props) {
-    if (!props)
-        return null;
-    let { class: klass, style } = props;
-    if (klass && !isString(klass)) {
-        props.class = normalizeClass(klass);
-    }
-    if (style) {
-        props.style = normalizeStyle(style);
-    }
-    return props;
-}
-
-// These tag configs are shared between compiler-dom and runtime-dom, so they
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element
-const HTML_TAGS = 'html,body,base,head,link,meta,style,title,address,article,aside,footer,' +
-    'header,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,' +
-    'figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,' +
-    'data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,' +
-    'time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,' +
-    'canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,' +
-    'th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,' +
-    'option,output,progress,select,textarea,details,dialog,menu,' +
-    'summary,template,blockquote,iframe,tfoot';
-// https://developer.mozilla.org/en-US/docs/Web/SVG/Element
-const SVG_TAGS = 'svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,' +
-    'defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,' +
-    'feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,' +
-    'feDistanceLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,' +
-    'feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,' +
-    'fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,' +
-    'foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,' +
-    'mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,' +
-    'polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,' +
-    'text,textPath,title,tspan,unknown,use,view';
-const VOID_TAGS = 'area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr';
-const isHTMLTag = /*#__PURE__*/ makeMap(HTML_TAGS);
-const isSVGTag = /*#__PURE__*/ makeMap(SVG_TAGS);
-const isVoidTag = /*#__PURE__*/ makeMap(VOID_TAGS);
-
-const escapeRE = /["'&<>]/;
-function escapeHtml(string) {
-    const str = '' + string;
-    const match = escapeRE.exec(str);
-    if (!match) {
-        return str;
-    }
-    let html = '';
-    let escaped;
-    let index;
-    let lastIndex = 0;
-    for (index = match.index; index < str.length; index++) {
-        switch (str.charCodeAt(index)) {
-            case 34: // "
-                escaped = '&quot;';
-                break;
-            case 38: // &
-                escaped = '&amp;';
-                break;
-            case 39: // '
-                escaped = '&#39;';
-                break;
-            case 60: // <
-                escaped = '&lt;';
-                break;
-            case 62: // >
-                escaped = '&gt;';
-                break;
-            default:
-                continue;
-        }
-        if (lastIndex !== index) {
-            html += str.substring(lastIndex, index);
-        }
-        lastIndex = index + 1;
-        html += escaped;
-    }
-    return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
-}
-// https://www.w3.org/TR/html52/syntax.html#comments
-const commentStripRE = /^-?>|<!--|-->|--!>|<!-$/g;
-function escapeHtmlComment(src) {
-    return src.replace(commentStripRE, '');
-}
-
-function looseCompareArrays(a, b) {
-    if (a.length !== b.length)
-        return false;
-    let equal = true;
-    for (let i = 0; equal && i < a.length; i++) {
-        equal = looseEqual(a[i], b[i]);
-    }
-    return equal;
-}
-function looseEqual(a, b) {
-    if (a === b)
-        return true;
-    let aValidType = isDate(a);
-    let bValidType = isDate(b);
-    if (aValidType || bValidType) {
-        return aValidType && bValidType ? a.getTime() === b.getTime() : false;
-    }
-    aValidType = isArray(a);
-    bValidType = isArray(b);
-    if (aValidType || bValidType) {
-        return aValidType && bValidType ? looseCompareArrays(a, b) : false;
-    }
-    aValidType = isObject(a);
-    bValidType = isObject(b);
-    if (aValidType || bValidType) {
-        /* istanbul ignore if: this if will probably never be called */
-        if (!aValidType || !bValidType) {
-            return false;
-        }
-        const aKeysCount = Object.keys(a).length;
-        const bKeysCount = Object.keys(b).length;
-        if (aKeysCount !== bKeysCount) {
-            return false;
-        }
-        for (const key in a) {
-            const aHasKey = a.hasOwnProperty(key);
-            const bHasKey = b.hasOwnProperty(key);
-            if ((aHasKey && !bHasKey) ||
-                (!aHasKey && bHasKey) ||
-                !looseEqual(a[key], b[key])) {
-                return false;
-            }
-        }
-    }
-    return String(a) === String(b);
-}
-function looseIndexOf(arr, val) {
-    return arr.findIndex(item => looseEqual(item, val));
-}
-
-/**
- * For converting {{ interpolation }} values to displayed strings.
- * @private
- */
-const toDisplayString = (val) => {
-    return val == null
-        ? ''
-        : isArray(val) ||
-            (isObject(val) &&
-                (val.toString === objectToString || !isFunction(val.toString)))
-            ? JSON.stringify(val, replacer, 2)
-            : String(val);
-};
-const replacer = (_key, val) => {
-    // can't use isRef here since @vue/shared has no deps
-    if (val && val.__v_isRef) {
-        return replacer(_key, val.value);
-    }
-    else if (isMap(val)) {
-        return {
-            [`Map(${val.size})`]: [...val.entries()].reduce((entries, [key, val]) => {
-                entries[`${key} =>`] = val;
-                return entries;
-            }, {})
-        };
-    }
-    else if (isSet(val)) {
-        return {
-            [`Set(${val.size})`]: [...val.values()]
-        };
-    }
-    else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
-        return String(val);
-    }
-    return val;
-};
-
-/**
- * List of @babel/parser plugins that are used for template expression
- * transforms and SFC script transforms. By default we enable proposals slated
- * for ES2020. This will need to be updated as the spec moves forward.
- * Full list at https://babeljs.io/docs/en/next/babel-parser#plugins
- */
-const babelParserDefaultPlugins = [
-    'bigInt',
-    'optionalChaining',
-    'nullishCoalescingOperator'
-];
-const EMPTY_OBJ = ( true)
-    ? Object.freeze({})
-    : undefined;
-const EMPTY_ARR = ( true) ? Object.freeze([]) : undefined;
-const NOOP = () => { };
-/**
- * Always return false.
- */
-const NO = () => false;
-const onRE = /^on[^a-z]/;
-const isOn = (key) => onRE.test(key);
-const isModelListener = (key) => key.startsWith('onUpdate:');
-const extend = Object.assign;
-const remove = (arr, el) => {
-    const i = arr.indexOf(el);
-    if (i > -1) {
-        arr.splice(i, 1);
-    }
-};
-const hasOwnProperty = Object.prototype.hasOwnProperty;
-const hasOwn = (val, key) => hasOwnProperty.call(val, key);
-const isArray = Array.isArray;
-const isMap = (val) => toTypeString(val) === '[object Map]';
-const isSet = (val) => toTypeString(val) === '[object Set]';
-const isDate = (val) => val instanceof Date;
-const isFunction = (val) => typeof val === 'function';
-const isString = (val) => typeof val === 'string';
-const isSymbol = (val) => typeof val === 'symbol';
-const isObject = (val) => val !== null && typeof val === 'object';
-const isPromise = (val) => {
-    return isObject(val) && isFunction(val.then) && isFunction(val.catch);
-};
-const objectToString = Object.prototype.toString;
-const toTypeString = (value) => objectToString.call(value);
-const toRawType = (value) => {
-    // extract "RawType" from strings like "[object RawType]"
-    return toTypeString(value).slice(8, -1);
-};
-const isPlainObject = (val) => toTypeString(val) === '[object Object]';
-const isIntegerKey = (key) => isString(key) &&
-    key !== 'NaN' &&
-    key[0] !== '-' &&
-    '' + parseInt(key, 10) === key;
-const isReservedProp = /*#__PURE__*/ makeMap(
-// the leading comma is intentional so empty string "" is also included
-',key,ref,' +
-    'onVnodeBeforeMount,onVnodeMounted,' +
-    'onVnodeBeforeUpdate,onVnodeUpdated,' +
-    'onVnodeBeforeUnmount,onVnodeUnmounted');
-const cacheStringFunction = (fn) => {
-    const cache = Object.create(null);
-    return ((str) => {
-        const hit = cache[str];
-        return hit || (cache[str] = fn(str));
-    });
-};
-const camelizeRE = /-(\w)/g;
-/**
- * @private
- */
-const camelize = cacheStringFunction((str) => {
-    return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
-});
-const hyphenateRE = /\B([A-Z])/g;
-/**
- * @private
- */
-const hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, '-$1').toLowerCase());
-/**
- * @private
- */
-const capitalize = cacheStringFunction((str) => str.charAt(0).toUpperCase() + str.slice(1));
-/**
- * @private
- */
-const toHandlerKey = cacheStringFunction((str) => str ? `on${capitalize(str)}` : ``);
-// compare whether a value has changed, accounting for NaN.
-const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
-const invokeArrayFns = (fns, arg) => {
-    for (let i = 0; i < fns.length; i++) {
-        fns[i](arg);
-    }
-};
-const def = (obj, key, value) => {
-    Object.defineProperty(obj, key, {
-        configurable: true,
-        enumerable: false,
-        value
-    });
-};
-const toNumber = (val) => {
-    const n = parseFloat(val);
-    return isNaN(n) ? val : n;
-};
-let _globalThis;
-const getGlobalThis = () => {
-    return (_globalThis ||
-        (_globalThis =
-            typeof globalThis !== 'undefined'
-                ? globalThis
-                : typeof self !== 'undefined'
-                    ? self
-                    : typeof window !== 'undefined'
-                        ? window
-                        : typeof global !== 'undefined'
-                            ? global
-                            : {}));
-};
-
-
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 11)))
-
-/***/ }),
-/* 11 */
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 12 */
-/*!*****************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/uni.mp.esm.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.createPage = exports.createComponent = exports.createApp = void 0;var _shared = __webpack_require__(/*! @vue/shared */ 10);
-var _vue = __webpack_require__(/*! vue */ 8);
-
-var encode = encodeURIComponent;
-function stringifyQuery(obj) {var encodeStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : encode;
-  var res = obj ?
-  Object.keys(obj).
-  map(function (key) {
-    var val = obj[key];
-    if (typeof val === undefined || val === null) {
-      val = '';
-    } else
-    if ((0, _shared.isPlainObject)(val)) {
-      val = JSON.stringify(val);
-    }
-    return encodeStr(key) + '=' + encodeStr(val);
-  }).
-  filter(function (x) {return x.length > 0;}).
-  join('&') :
-  null;
-  return res ? "?".concat(res) : '';
-}
-
-function cache(fn) {
-  var cache = Object.create(null);
-  return function (str) {
-    var hit = cache[str];
-    return hit || (cache[str] = fn(str));
-  };
-}
-var invokeArrayFns = function invokeArrayFns(fns, arg) {
-  var ret;
-  for (var i = 0; i < fns.length; i++) {
-    ret = fns[i](arg);
-  }
-  return ret;
-};
-// lifecycle
-// App and Page
-var ON_SHOW = 'onShow';
-var ON_HIDE = 'onHide';
-//App
-var ON_LAUNCH = 'onLaunch';
-var ON_ERROR = 'onError';
-var ON_THEME_CHANGE = 'onThemeChange';
-var ON_PAGE_NOT_FOUND = 'onPageNotFound';
-var ON_UNHANDLE_REJECTION = 'onUnhandledRejection';
-//Page
-var ON_LOAD = 'onLoad';
-var ON_READY = 'onReady';
-var ON_UNLOAD = 'onUnload';
-var ON_RESIZE = 'onResize';
-var ON_TAB_ITEM_TAP = 'onTabItemTap';
-var ON_REACH_BOTTOM = 'onReachBottom';
-var ON_PULL_DOWN_REFRESH = 'onPullDownRefresh';
-var ON_ADD_TO_FAVORITES = 'onAddToFavorites';
-
-var eventChannels = {};
-var eventChannelStack = [];
-function getEventChannel(id) {
-  if (id) {
-    var eventChannel = eventChannels[id];
-    delete eventChannels[id];
-    return eventChannel;
-  }
-  return eventChannelStack.shift();
-}
-
-function initBehavior(options) {
-  return Behavior(options);
-}
-function initVueIds(vueIds, mpInstance) {
-  if (!vueIds) {
-    return;
-  }
-  var ids = vueIds.split(',');
-  var len = ids.length;
-  if (len === 1) {
-    mpInstance._$vueId = ids[0];
-  } else
-  if (len === 2) {
-    mpInstance._$vueId = ids[0];
-    mpInstance._$vuePid = ids[1];
-  }
-}
-var EXTRAS = ['externalClasses'];
-function initExtraOptions(miniProgramComponentOptions, vueOptions) {
-  EXTRAS.forEach(function (name) {
-    if ((0, _shared.hasOwn)(vueOptions, name)) {
-      miniProgramComponentOptions[name] = vueOptions[name];
-    }
-  });
-}
-function initWxsCallMethods(methods, wxsCallMethods) {
-  if (!(0, _shared.isArray)(wxsCallMethods)) {
-    return;
-  }
-  wxsCallMethods.forEach(function (callMethod) {
-    methods[callMethod] = function (args) {
-      return this.$vm[callMethod](args);
-    };
-  });
-}
-function selectAllComponents(mpInstance, selector, $refs) {
-  var components = mpInstance.selectAllComponents(selector);
-  components.forEach(function (component) {
-    var ref = component.dataset.ref;
-    $refs[ref] = component.$vm || component;
-    {
-      if (component.dataset.vueGeneric === 'scoped') {
-        component.
-        selectAllComponents('.scoped-ref').
-        forEach(function (scopedComponent) {
-          selectAllComponents(scopedComponent, selector, $refs);
-        });
-      }
-    }
-  });
-}
-function initRefs(instance, mpInstance) {
-  Object.defineProperty(instance, 'refs', {
-    get: function get() {
-      var $refs = {};
-      selectAllComponents(mpInstance, '.vue-ref', $refs);
-      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
-      forComponents.forEach(function (component) {
-        var ref = component.dataset.ref;
-        if (!$refs[ref]) {
-          $refs[ref] = [];
-        }
-        $refs[ref].push(component.$vm || component);
-      });
-      return $refs;
-    } });
-
-}
-function findVmByVueId(instance, vuePid) {
-  // 标准 vue3 中 没有 $children，定制了内核
-  var $children = instance.$children;
-  // 优先查找直属(反向查找:https://github.com/dcloudio/uni-app/issues/1200)
-  for (var i = $children.length - 1; i >= 0; i--) {
-    var childVm = $children[i];
-    if (childVm.$scope._$vueId === vuePid) {
-      return childVm;
-    }
-  }
-  // 反向递归查找
-  var parentVm;
-  for (var _i = $children.length - 1; _i >= 0; _i--) {
-    parentVm = findVmByVueId($children[_i], vuePid);
-    if (parentVm) {
-      return parentVm;
-    }
-  }
-}
-function getTarget(obj, path) {
-  var parts = path.split('.');
-  var key = parts[0];
-  if (key.indexOf('__$n') === 0) {
-    //number index
-    key = parseInt(key.replace('__$n', ''));
-  }
-  if (!obj) {
-    obj = {};
-  }
-  if (parts.length === 1) {
-    return obj[key];
-  }
-  return getTarget(obj[key], parts.slice(1).join('.'));
-}
-
-function getValue(dataPath, target) {
-  return getTarget(target || this, dataPath);
-}
-function getClass(dynamicClass, staticClass) {
-  return renderClass(staticClass, dynamicClass);
-}
-function getStyle(dynamicStyle, staticStyle) {
-  if (!dynamicStyle && !staticStyle) {
-    return '';
-  }
-  var dynamicStyleObj = normalizeStyleBinding(dynamicStyle);
-  var styleObj = staticStyle ?
-  (0, _shared.extend)(staticStyle, dynamicStyleObj) :
-  dynamicStyleObj;
-  return Object.keys(styleObj).
-  map(function (name) {
-    return (0, _shared.hyphenate)(name) + ':' + styleObj[name];
-  }).
-  join(';');
-}
-function toObject(arr) {
-  var res = {};
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      (0, _shared.extend)(res, arr[i]);
-    }
-  }
-  return res;
-}
-function normalizeStyleBinding(bindingStyle) {
-  if (Array.isArray(bindingStyle)) {
-    return toObject(bindingStyle);
-  }
-  if (typeof bindingStyle === 'string') {
-    return parseStyleText(bindingStyle);
-  }
-  return bindingStyle;
-}
-var parseStyleText = cache(function parseStyleText(cssText) {
-  var res = {};
-  var listDelimiter = /;(?![^(]*\))/g;
-  var propertyDelimiter = /:(.+)/;
-  cssText.split(listDelimiter).forEach(function (item) {
-    if (item) {
-      var tmp = item.split(propertyDelimiter);
-      tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim());
-    }
-  });
-  return res;
-});
-function isDef(v) {
-  return v !== undefined && v !== null;
-}
-function renderClass(staticClass, dynamicClass) {
-  if (isDef(staticClass) || isDef(dynamicClass)) {
-    return concat(staticClass, stringifyClass(dynamicClass));
-  }
-  /* istanbul ignore next */
-  return '';
-}
-function concat(a, b) {
-  return a ? b ? a + ' ' + b : a : b || '';
-}
-function stringifyClass(value) {
-  if (Array.isArray(value)) {
-    return stringifyArray(value);
-  }
-  if ((0, _shared.isObject)(value)) {
-    return stringifyObject(value);
-  }
-  if (typeof value === 'string') {
-    return value;
-  }
-  /* istanbul ignore next */
-  return '';
-}
-function stringifyArray(value) {
-  var res = '';
-  var stringified;
-  for (var i = 0, l = value.length; i < l; i++) {
-    if (isDef(stringified = stringifyClass(value[i])) && stringified !== '') {
-      if (res) {
-        res += ' ';
-      }
-      res += stringified;
-    }
-  }
-  return res;
-}
-function stringifyObject(value) {
-  var res = '';
-  for (var key in value) {
-    if (value[key]) {
-      if (res) {
-        res += ' ';
-      }
-      res += key;
-    }
-  }
-  return res;
-}
-
-function setModel(target, key, value, modifiers) {
-  if ((0, _shared.isArray)(modifiers)) {
-    if (modifiers.indexOf('trim') !== -1) {
-      value = value.trim();
-    }
-    if (modifiers.indexOf('number') !== -1) {
-      value = (0, _shared.toNumber)(value);
-    }
-  }
-  if (!target) {
-    target = this;
-  }
-  target[key] = value;
-}
-function setSync(target, key, value) {
-  if (!target) {
-    target = this;
-  }
-  target[key] = value;
-}
-function getOrig(data) {
-  if ((0, _shared.isPlainObject)(data)) {
-    return data.$orig || data;
-  }
-  return data;
-}
-function map(val, iteratee) {
-  var ret, i, l, keys, key;
-  if ((0, _shared.isArray)(val)) {
-    ret = new Array(val.length);
-    for (i = 0, l = val.length; i < l; i++) {
-      ret[i] = iteratee(val[i], i);
-    }
-    return ret;
-  } else
-  if ((0, _shared.isObject)(val)) {
-    keys = Object.keys(val);
-    ret = Object.create(null);
-    for (i = 0, l = keys.length; i < l; i++) {
-      key = keys[i];
-      ret[key] = iteratee(val[key], key, i);
-    }
-    return ret;
-  }
-  return [];
-}
-var MP_METHODS = [
-'createSelectorQuery',
-'createIntersectionObserver',
-'selectAllComponents',
-'selectComponent'];
-
-function createEmitFn(oldEmit, ctx) {
-  return function emit(event) {for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {args[_key - 1] = arguments[_key];}
-    if (ctx.$scope && event) {
-      ctx.$scope.triggerEvent(event, { __args__: args });
-    }
-    return oldEmit.apply(this, [event].concat(args));
-  };
-}
-function initBaseInstance(instance, options) {
-  var ctx = instance.ctx;
-  // mp
-  ctx.mpType = options.mpType; // @deprecated
-  ctx.$mpType = options.mpType;
-  ctx.$scope = options.mpInstance;
-  // TODO @deprecated
-  ctx.$mp = {};
-  if (true) {
-    ctx._self = {};
-  }
-  // $vm
-  ctx.$scope.$vm = instance.proxy;
-  // slots
-  {
-    instance.slots = {};
-    if ((0, _shared.isArray)(options.slots) && options.slots.length) {
-      options.slots.forEach(function (name) {
-        instance.slots[name] = true;
-      });
-    }
-  }
-  ctx.getOpenerEventChannel = function () {
-    // 微信小程序使用自身getOpenerEventChannel
-    {
-      return options.mpInstance.getOpenerEventChannel();
-    }
-  };
-  ctx.$hasHook = hasHook;
-  ctx.$callHook = callHook;
-  // $emit
-  instance.emit = createEmitFn(instance.emit, ctx);
-}
-function initComponentInstance(instance, options) {
-  initBaseInstance(instance, options);
-  {
-    initScopedSlotsParams(instance);
-  }
-  var ctx = instance.ctx;
-  MP_METHODS.forEach(function (method) {
-    ctx[method] = function () {
-      var mpInstance = ctx.$scope;
-      if (mpInstance && mpInstance[method]) {for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {args[_key2] = arguments[_key2];}
-        return mpInstance[method].apply(mpInstance, args);
-      }
-    };
-  });
-  // TODO other
-  ctx.__set_model = setModel;
-  ctx.__set_sync = setSync;
-  ctx.__get_orig = getOrig;
-  // TODO
-  ctx.__get_value = getValue;
-  ctx.__get_class = getClass;
-  ctx.__get_style = getStyle;
-  ctx.__map = map;
-}
-function initMocks(instance, mpInstance, mocks) {
-  var ctx = instance.ctx;
-  mocks.forEach(function (mock) {
-    if ((0, _shared.hasOwn)(mpInstance, mock)) {
-      ctx[mock] = mpInstance[mock];
-    }
-  });
-}
-function hasHook(name) {
-  var hooks = this.$[name];
-  if (hooks && hooks.length) {
-    return true;
-  }
-  return false;
-}
-function callHook(name, args) {
-  if (name === 'mounted') {
-    callHook.call(this, 'bm'); // beforeMount
-    this.$.isMounted = true;
-    name = 'm';
-  } else
-  if (name === 'onLoad' && args && args.__id__) {
-    this.__eventChannel__ = getEventChannel(args.__id__);
-    delete args.__id__;
-  }
-  var hooks = this.$[name];
-  return hooks && invokeArrayFns(hooks, args);
-}
-var center = {};
-var parents = {};
-function initScopedSlotsParams(instance) {
-  var ctx = instance.ctx;
-  ctx.$hasScopedSlotsParams = function (vueId) {
-    var has = center[vueId];
-    if (!has) {
-      parents[vueId] = this;
-      (0, _vue.onUnmounted)(function () {
-        delete parents[vueId];
-      }, instance);
-    }
-    return has;
-  };
-  ctx.$getScopedSlotsParams = function (vueId, name, key) {
-    var data = center[vueId];
-    if (data) {
-      var object = data[name] || {};
-      return key ? object[key] : object;
-    } else
-    {
-      parents[vueId] = this;
-      (0, _vue.onUnmounted)(function () {
-        delete parents[vueId];
-      }, instance);
-    }
-  };
-  ctx.$setScopedSlotsParams = function (name, value) {
-    var vueIds = instance.attrs.vueId;
-    if (vueIds) {
-      var vueId = vueIds.split(',')[0];
-      var object = center[vueId] = center[vueId] || {};
-      object[name] = value;
-      if (parents[vueId]) {
-        parents[vueId].$forceUpdate();
-      }
-    }
-  };
-  (0, _vue.onUnmounted)(function () {
-    var propsData = instance.attrs;
-    var vueId = propsData && propsData.vueId;
-    if (vueId) {
-      delete center[vueId];
-      delete parents[vueId];
-    }
-  }, instance);
-}
-
-var PAGE_HOOKS = [
-ON_LOAD,
-ON_SHOW,
-ON_HIDE,
-ON_UNLOAD,
-ON_RESIZE,
-ON_TAB_ITEM_TAP,
-ON_REACH_BOTTOM,
-ON_PULL_DOWN_REFRESH,
-ON_ADD_TO_FAVORITES
-// 'onReady', // lifetimes.ready
-// 'onPageScroll', // 影响性能，开发者手动注册
-// 'onShareTimeline', // 右上角菜单，开发者手动注册
-// 'onShareAppMessage' // 右上角菜单，开发者手动注册
-];
-function findHooks(vueOptions) {var hooks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Set();
-  if (vueOptions) {
-    Object.keys(vueOptions).forEach(function (name) {
-      if (name.indexOf('on') === 0 && (0, _shared.isFunction)(vueOptions[name])) {
-        hooks.add(name);
-      }
-    });
-    if (true) {var
-      extendsOptions = vueOptions.extends,mixins = vueOptions.mixins;
-      if (mixins) {
-        mixins.forEach(function (mixin) {return findHooks(mixin, hooks);});
-      }
-      if (extendsOptions) {
-        findHooks(extendsOptions, hooks);
-      }
-    }
-  }
-  return hooks;
-}
-function initHook$1(mpOptions, hook, excludes) {
-  if (excludes.indexOf(hook) === -1 && !(0, _shared.hasOwn)(mpOptions, hook)) {
-    mpOptions[hook] = function (args) {
-      return this.$vm && this.$vm.$callHook(hook, args);
-    };
-  }
-}
-var EXCLUDE_HOOKS = [ON_READY];
-function initHooks(mpOptions, hooks) {var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EXCLUDE_HOOKS;
-  hooks.forEach(function (hook) {return initHook$1(mpOptions, hook, excludes);});
-}
-function initUnknownHooks(mpOptions, vueOptions) {var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EXCLUDE_HOOKS;
-  findHooks(vueOptions).forEach(function (hook) {return initHook$1(mpOptions, hook, excludes);});
-}
-
-wx.appLaunchHooks = [];
-function injectAppLaunchHooks(appInstance) {
-  wx.appLaunchHooks.forEach(function (hook) {
-    (0, _vue.injectHook)(ON_LAUNCH, hook, appInstance);
-  });
-}
-
-var HOOKS = [
-ON_SHOW,
-ON_HIDE,
-ON_ERROR,
-ON_THEME_CHANGE,
-ON_PAGE_NOT_FOUND,
-ON_UNHANDLE_REJECTION];
-
-function parseApp(instance, parseAppOptions) {
-  var internalInstance = instance.$;
-  var appOptions = {
-    globalData: instance.$options && instance.$options.globalData || {},
-    $vm: instance,
-    onLaunch: function onLaunch(options) {
-      var ctx = internalInstance.ctx;
-      if (this.$vm && ctx.$scope) {
-        // 已经初始化过了，主要是为了百度，百度 onShow 在 onLaunch 之前
-        return;
-      }
-      initBaseInstance(internalInstance, {
-        mpType: 'app',
-        mpInstance: this,
-        slots: [] });
-
-      injectAppLaunchHooks(internalInstance);
-      ctx.globalData = this.globalData;
-      instance.$callHook(ON_LAUNCH, (0, _shared.extend)({ app: this }, options));
-    } };
-
-  initLocale(instance);
-  var vueOptions = instance.$.type;
-  initHooks(appOptions, HOOKS);
-  initUnknownHooks(appOptions, vueOptions);
-  if (true) {
-    var methods = vueOptions.methods;
-    methods && (0, _shared.extend)(appOptions, methods);
-  }
-  if (parseAppOptions) {
-    parseAppOptions.parse(appOptions);
-  }
-  return appOptions;
-}
-function initCreateApp(parseAppOptions) {
-  return function createApp(vm) {
-    return App(parseApp(vm, parseAppOptions));
-  };
-}
-function initLocale(appVm) {
-  var locale = (0, _vue.ref)(uni.getSystemInfoSync().language || 'zh-Hans');
-  Object.defineProperty(appVm, '$locale', {
-    get: function get() {
-      return locale.value;
-    },
-    set: function set(v) {
-      locale.value = v;
-    } });
-
-}
-
-var PROP_TYPES = [String, Number, Boolean, Object, Array, null];
-function createObserver(name) {
-  return function observer(newVal) {
-    if (this.$vm) {
-      this.$vm.$.props[name] = newVal; // 为了触发其他非 render watcher
-    }
-  };
-}
-function parsePropType(key, type, defaultValue) {
-  // [String]=>String
-  if ((0, _shared.isArray)(type) && type.length === 1) {
-    return type[0];
-  }
-  return type;
-}
-function initDefaultProps() {var isBehavior = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  var properties = {};
-  if (!isBehavior) {
-    properties.vueId = {
-      type: String,
-      value: '' };
-
-    // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
-    properties.vueSlots = {
-      type: null,
-      value: [],
-      observer: function observer(newVal) {
-        var $slots = Object.create(null);
-        newVal.forEach(function (slotName) {
-          $slots[slotName] = true;
-        });
-        this.setData({
-          $slots: $slots });
-
-      } };
-
-  }
-  return properties;
-}
-function createProperty(key, prop) {
-  prop.observer = createObserver(key);
-  return prop;
-}
-function initProps(mpComponentOptions, rawProps) {var isBehavior = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  var properties = initDefaultProps(isBehavior);
-  if ((0, _shared.isArray)(rawProps)) {
-    rawProps.forEach(function (key) {
-      properties[key] = createProperty(key, {
-        type: null });
-
-    });
-  } else
-  if ((0, _shared.isPlainObject)(rawProps)) {
-    Object.keys(rawProps).forEach(function (key) {
-      var opts = rawProps[key];
-      if ((0, _shared.isPlainObject)(opts)) {
-        // title:{type:String,default:''}
-        var value = opts.default;
-        if ((0, _shared.isFunction)(value)) {
-          value = value();
-        }
-        var type = opts.type;
-        opts.type = parsePropType(key, type);
-        properties[key] = createProperty(key, {
-          type: PROP_TYPES.indexOf(type) !== -1 ? type : null,
-          value: value });
-
-      } else
-      {
-        // content:String
-        var _type = parsePropType(key, opts);
-        properties[key] = createProperty(key, {
-          type: PROP_TYPES.indexOf(_type) !== -1 ? _type : null });
-
-      }
-    });
-  }
-  mpComponentOptions.properties = properties;
-}
-
-function initData(vueOptions) {
-  var data = vueOptions.data || {};
-  if (typeof data === 'function') {
-    try {
-      var appConfig = getApp().$vm.$.appContext.config;
-      data = data.call(appConfig.globalProperties);
-    }
-    catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"duducanvas-uniapp-demo","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
-        console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data, e);
-      }
-    }
-  } else
-  {
-    try {
-      // 对 data 格式化
-      data = JSON.parse(JSON.stringify(data));
-    }
-    catch (e) {}
-  }
-  if (!(0, _shared.isPlainObject)(data)) {
-    data = {};
-  }
-  return data;
-}
-function initBehaviors(vueOptions, initBehavior) {
-  var vueBehaviors = vueOptions.behaviors;
-  var vueExtends = vueOptions.extends;
-  var vueMixins = vueOptions.mixins;
-  var vueProps = vueOptions.props;
-  if (!vueProps) {
-    vueOptions.props = vueProps = [];
-  }
-  var behaviors = [];
-  if ((0, _shared.isArray)(vueBehaviors)) {
-    vueBehaviors.forEach(function (behavior) {
-      behaviors.push(behavior.replace('uni://', "".concat(__PLATFORM_PREFIX__, "://")));
-      if (behavior === 'uni://form-field') {
-        if ((0, _shared.isArray)(vueProps)) {
-          vueProps.push('name');
-          vueProps.push('value');
-        } else
-        {
-          vueProps.name = {
-            type: String,
-            default: '' };
-
-          vueProps.value = {
-            type: [String, Number, Boolean, Array, Object, Date],
-            default: '' };
-
-        }
-      }
-    });
-  }
-  if (vueExtends && vueExtends.props) {
-    var behavior = {};
-    initProps(behavior, vueExtends.props, true);
-    behaviors.push(initBehavior(behavior));
-  }
-  if ((0, _shared.isArray)(vueMixins)) {
-    vueMixins.forEach(function (vueMixin) {
-      if (vueMixin.props) {
-        var _behavior = {};
-        initProps(_behavior, vueMixin.props, true);
-        behaviors.push(initBehavior(_behavior));
-      }
-    });
-  }
-  return behaviors;
-}
-function applyOptions(componentOptions, vueOptions, initBehavior) {
-  componentOptions.data = initData(vueOptions);
-  componentOptions.behaviors = initBehaviors(vueOptions, initBehavior);
-}
-
-function getExtraValue(instance, dataPathsArray) {
-  var context = instance;
-  dataPathsArray.forEach(function (dataPathArray) {
-    var dataPath = dataPathArray[0];
-    var value = dataPathArray[2];
-    if (dataPath || typeof value !== 'undefined') {
-      // ['','',index,'disable']
-      var propPath = dataPathArray[1];
-      var valuePath = dataPathArray[3];
-      var vFor;
-      if (Number.isInteger(dataPath)) {
-        vFor = dataPath;
-      } else
-      if (!dataPath) {
-        vFor = context;
-      } else
-      if (typeof dataPath === 'string' && dataPath) {
-        if (dataPath.indexOf('#s#') === 0) {
-          vFor = dataPath.substr(3);
-        } else
-        {
-          vFor = getTarget(context, dataPath);
-        }
-      }
-      if (Number.isInteger(vFor)) {
-        context = value;
-      } else
-      if (!propPath) {
-        context = vFor[value];
-      } else
-      {
-        if ((0, _shared.isArray)(vFor)) {
-          context = vFor.find(function (vForItem) {
-            return getTarget(vForItem, propPath) === value;
-          });
-        } else
-        if ((0, _shared.isPlainObject)(vFor)) {
-          context = Object.keys(vFor).find(function (vForKey) {
-            return getTarget(vFor[vForKey], propPath) === value;
-          });
-        } else
-        {
-          console.error('v-for 暂不支持循环数据：', vFor);
-        }
-      }
-      if (valuePath) {
-        context = getTarget(context, valuePath);
-      }
-    }
-  });
-  return context;
-}
-function processEventExtra(instance, extra, event) {
-  var extraObj = {};
-  if ((0, _shared.isArray)(extra) && extra.length) {
-    /**
-                                                     *[
-                                                     *    ['data.items', 'data.id', item.data.id],
-                                                     *    ['metas', 'id', meta.id]
-                                                     *],
-                                                     *[
-                                                     *    ['data.items', 'data.id', item.data.id],
-                                                     *    ['metas', 'id', meta.id]
-                                                     *],
-                                                     *'test'
-                                                     */
-    extra.forEach(function (dataPath, index) {
-      if (typeof dataPath === 'string') {
-        if (!dataPath) {
-          // model,prop.sync
-          extraObj['$' + index] = instance;
-        } else
-        {
-          if (dataPath === '$event') {
-            // $event
-            extraObj['$' + index] = event;
-          } else
-          if (dataPath === 'arguments') {
-            if (event.detail && event.detail.__args__) {
-              extraObj['$' + index] = event.detail.__args__;
-            } else
-            {
-              extraObj['$' + index] = [event];
-            }
-          } else
-          if (dataPath.indexOf('$event.') === 0) {
-            // $event.target.value
-            extraObj['$' + index] = getTarget(event, dataPath.replace('$event.', ''));
-          } else
-          {
-            extraObj['$' + index] = getTarget(instance, dataPath);
-          }
-        }
-      } else
-      {
-        extraObj['$' + index] = getExtraValue(instance, dataPath);
-      }
-    });
-  }
-  return extraObj;
-}
-function getObjByArray(arr) {
-  var obj = {};
-  for (var i = 1; i < arr.length; i++) {
-    var element = arr[i];
-    obj[element[0]] = element[1];
-  }
-  return obj;
-}
-function processEventArgs(instance, event) {var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];var extra = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];var isCustom = arguments.length > 4 ? arguments[4] : undefined;var methodName = arguments.length > 5 ? arguments[5] : undefined;
-  var isCustomMPEvent = false; // wxcomponent 组件，传递原始 event 对象
-  if (isCustom) {
-    // 自定义事件
-    isCustomMPEvent =
-    event.currentTarget &&
-    event.currentTarget.dataset &&
-    event.currentTarget.dataset.comType === 'wx';
-    if (!args.length) {
-      // 无参数，直接传入 event 或 detail 数组
-      if (isCustomMPEvent) {
-        return [event];
-      }
-      return event.detail.__args__ || event.detail;
-    }
-  }
-  var extraObj = processEventExtra(instance, extra, event);
-  var ret = [];
-  args.forEach(function (arg) {
-    if (arg === '$event') {
-      if (methodName === '__set_model' && !isCustom) {
-        // input v-model value
-        ret.push(event.target.value);
-      } else
-      {
-        if (isCustom && !isCustomMPEvent) {
-          ret.push(event.detail.__args__[0]);
-        } else
-        {
-          // wxcomponent 组件或内置组件
-          ret.push(event);
-        }
-      }
-    } else
-    {
-      if ((0, _shared.isArray)(arg) && arg[0] === 'o') {
-        ret.push(getObjByArray(arg));
-      } else
-      if (typeof arg === 'string' && (0, _shared.hasOwn)(extraObj, arg)) {
-        ret.push(extraObj[arg]);
-      } else
-      {
-        ret.push(arg);
-      }
-    }
-  });
-  return ret;
-}
-function wrapper(event) {
-  event.stopPropagation = _shared.NOOP;
-  event.preventDefault = _shared.NOOP;
-  event.target = event.target || {};
-  if (!(0, _shared.hasOwn)(event, 'detail')) {
-    event.detail = {};
-  }
-  if ((0, _shared.hasOwn)(event, 'markerId')) {
-    event.detail = typeof event.detail === 'object' ? event.detail : {};
-    event.detail.markerId = event.markerId;
-  }
-  if ((0, _shared.isPlainObject)(event.detail)) {
-    event.target = (0, _shared.extend)({}, event.target, event.detail);
-  }
-  return event;
-}
-var ONCE = '~';
-var CUSTOM = '^';
-function matchEventType(eventType, optType) {
-  return eventType === optType ||
-  optType === 'regionchange' && (
-  eventType === 'begin' || eventType === 'end');
-}
-function handleEvent(event) {var _this = this;
-  event = wrapper(event);
-  // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
-  var dataset = (event.currentTarget || event.target).dataset;
-  if (!dataset) {
-    return console.warn('事件信息不存在');
-  }
-  var eventOpts = dataset.eventOpts ||
-  dataset['event-opts']; // 支付宝 web-view 组件 dataset 非驼峰
-  if (!eventOpts) {
-    return console.warn('事件信息不存在');
-  }
-  // [['handle',[1,2,a]],['handle1',[1,2,a]]]
-  var eventType = event.type;
-  var ret = [];
-  eventOpts.forEach(function (eventOpt) {
-    var type = eventOpt[0];
-    var eventsArray = eventOpt[1];
-    var isCustom = type.charAt(0) === CUSTOM;
-    type = isCustom ? type.slice(1) : type;
-    var isOnce = type.charAt(0) === ONCE;
-    type = isOnce ? type.slice(1) : type;
-    if (eventsArray && matchEventType(eventType, type)) {
-      eventsArray.forEach(function (eventArray) {
-        var methodName = eventArray[0];
-        if (methodName) {
-          var handlerCtx = _this.$vm;
-          if (handlerCtx.$options.generic &&
-          handlerCtx.$parent &&
-          handlerCtx.$parent.$parent) {
-            // mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
-            handlerCtx = handlerCtx.$parent.$parent;
-          }
-          if (methodName === '$emit') {
-            handlerCtx.$emit.apply(handlerCtx, processEventArgs(_this.$vm, event, eventArray[1], eventArray[2], isCustom, methodName));
-            return;
-          }
-          var handler = handlerCtx[methodName];
-          if (!(0, _shared.isFunction)(handler)) {
-            throw new Error(" _vm.".concat(methodName, " is not a function"));
-          }
-          if (isOnce) {
-            if (handler.once) {
-              return;
-            }
-            handler.once = true;
-          }
-          var params = processEventArgs(_this.$vm, event, eventArray[1], eventArray[2], isCustom, methodName);
-          params = Array.isArray(params) ? params : [];
-          // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
-          if (/=\s*\S+\.eventParams\s*\|\|\s*\S+\[['"]event-params['"]\]/.test(handler.toString())) {
-            // eslint-disable-next-line no-sparse-arrays
-            params = params.concat([,,,,,,,,,, event]);
-          }
-          ret.push(handler.apply(handlerCtx, params));
-        }
-      });
-    }
-  });
-  if (eventType === 'input' &&
-  ret.length === 1 &&
-  typeof ret[0] !== 'undefined') {
-    return ret[0];
-  }
-}
-
-function parseComponent(vueOptions, _ref) {var parse = _ref.parse,mocks = _ref.mocks,isPage = _ref.isPage,initRelation = _ref.initRelation,handleLink = _ref.handleLink,initLifetimes = _ref.initLifetimes;
-  vueOptions = vueOptions.default || vueOptions;
-  var options = {
-    multipleSlots: true,
-    addGlobalClass: true };
-
-  if (vueOptions.options) {
-    (0, _shared.extend)(options, vueOptions.options);
-  }
-  var mpComponentOptions = {
-    options: options,
-    lifetimes: initLifetimes({ mocks: mocks, isPage: isPage, initRelation: initRelation, vueOptions: vueOptions }),
-    pageLifetimes: {
-      show: function show() {
-        this.$vm && this.$vm.$callHook('onPageShow');
-      },
-      hide: function hide() {
-        this.$vm && this.$vm.$callHook('onPageHide');
-      },
-      resize: function resize(size) {
-        this.$vm && this.$vm.$callHook('onPageResize', size);
-      } },
-
-    methods: {
-      __l: handleLink,
-      __e: handleEvent } };
-
-
-  if (true) {
-    applyOptions(mpComponentOptions, vueOptions, initBehavior);
-  }
-  initProps(mpComponentOptions, vueOptions.props, false);
-  initExtraOptions(mpComponentOptions, vueOptions);
-  initWxsCallMethods(mpComponentOptions.methods, vueOptions.wxsCallMethods);
-  if (parse) {
-    parse(mpComponentOptions, { handleLink: handleLink });
-  }
-  return mpComponentOptions;
-}
-function initCreateComponent(parseOptions) {
-  return function createComponent(vueComponentOptions) {
-    return Component(parseComponent(vueComponentOptions, parseOptions));
-  };
-}
-var $createComponentFn;
-var $destroyComponentFn;
-function $createComponent(initialVNode, options) {
-  if (!$createComponentFn) {
-    $createComponentFn = getApp().$vm.$createComponent;
-  }
-  return $createComponentFn(initialVNode, options);
-}
-function $destroyComponent(instance) {
-  if (!$destroyComponentFn) {
-    $destroyComponentFn = getApp().$vm.$destroyComponent;
-  }
-  return $destroyComponentFn(instance);
-}
-
-function parsePage(vueOptions, parseOptions) {var
-  parse = parseOptions.parse,mocks = parseOptions.mocks,isPage = parseOptions.isPage,initRelation = parseOptions.initRelation,handleLink = parseOptions.handleLink,initLifetimes = parseOptions.initLifetimes;
-  var miniProgramPageOptions = parseComponent(vueOptions, {
-    mocks: mocks,
-    isPage: isPage,
-    initRelation: initRelation,
-    handleLink: handleLink,
-    initLifetimes: initLifetimes });
-
-  var methods = miniProgramPageOptions.methods;
-  methods.onLoad = function (query) {
-    this.options = query;
-    this.$page = {
-      fullPath: '/' + this.route + stringifyQuery(query) };
-
-    return this.$vm && this.$vm.$callHook(ON_LOAD, query);
-  };
-  initHooks(methods, PAGE_HOOKS);
-  initUnknownHooks(methods, vueOptions);
-  parse && parse(miniProgramPageOptions, { handleLink: handleLink });
-  return miniProgramPageOptions;
-}
-function initCreatePage(parseOptions) {
-  return function createPage(vuePageOptions) {
-    return Component(parsePage(vuePageOptions, parseOptions));
-  };
-}
-
-var MPPage = Page;
-var MPComponent = Component;
-var customizeRE = /:/g;
-function customize(str) {
-  return (0, _shared.camelize)(str.replace(customizeRE, '-'));
-}
-function initTriggerEvent(mpInstance) {
-  var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
-    return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
-  };
-}
-function initHook(name, options) {
-  var oldHook = options[name];
-  if (!oldHook) {
-    options[name] = function () {
-      initTriggerEvent(this);
-    };
-  } else
-  {
-    options[name] = function () {
-      initTriggerEvent(this);for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
-      return oldHook.apply(this, args);
-    };
-  }
-}
-Page = function Page(options) {
-  initHook(ON_LOAD, options);
-  return MPPage(options);
-};
-Component = function Component(options) {
-  initHook('created', options);
-  return MPComponent(options);
-};
-
-function initLifetimes(_ref2) {var mocks = _ref2.mocks,isPage = _ref2.isPage,initRelation = _ref2.initRelation,vueOptions = _ref2.vueOptions;
-  return {
-    attached: function attached() {
-      var properties = this.properties;
-      initVueIds(properties.vueId, this);
-      var relationOptions = {
-        vuePid: this._$vuePid };
-
-      // 处理父子关系
-      initRelation(this, relationOptions);
-      // 初始化 vue 实例
-      var mpInstance = this;
-      this.$vm = $createComponent({
-        type: vueOptions,
-        props: properties },
-      {
-        mpType: isPage(mpInstance) ? 'page' : 'component',
-        mpInstance: mpInstance,
-        slots: properties.vueSlots,
-        parentComponent: relationOptions.parent && relationOptions.parent.$,
-        onBeforeSetup: function onBeforeSetup(instance, options) {
-          initRefs(instance, mpInstance);
-          initMocks(instance, mpInstance, mocks);
-          initComponentInstance(instance, options);
-        } });
-
-    },
-    ready: function ready() {
-      // 当组件 props 默认值为 true，初始化时传入 false 会导致 created,ready 触发, 但 attached 不触发
-      // https://developers.weixin.qq.com/community/develop/doc/00066ae2844cc0f8eb883e2a557800
-      if (this.$vm) {
-        this.$vm.$callHook('mounted');
-        this.$vm.$callHook(ON_READY);
-      }
-    },
-    detached: function detached() {
-      this.$vm && $destroyComponent(this.$vm);
-    } };
-
-}
-
-var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
-function isPage(mpInstance) {
-  return !!mpInstance.route;
-}
-function initRelation(mpInstance, detail) {
-  mpInstance.triggerEvent('__l', detail);
-}
-function handleLink(event) {
-  // detail 是微信,value 是百度(dipatch)
-  var detail = event.detail ||
-  event.value;
-  var vuePid = detail.vuePid;
-  var parentVm;
-  if (vuePid) {
-    parentVm = findVmByVueId(this.$vm, vuePid);
-  }
-  if (!parentVm) {
-    parentVm = this.$vm;
-  }
-  detail.parent = parentVm;
-}
-
-var parseOptions = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  mocks: mocks,
-  isPage: isPage,
-  initRelation: initRelation,
-  handleLink: handleLink,
-  initLifetimes: initLifetimes });
-
-
-var createApp = initCreateApp();exports.createApp = createApp;
-var createPage = initCreatePage(parseOptions);exports.createPage = createPage;
-var createComponent = initCreateComponent(parseOptions);exports.createComponent = createComponent;
-wx.createApp = createApp;
-wx.createPage = createPage;
-wx.createComponent = createComponent;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
-
-/***/ }),
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
-/*!********************************************************************************!*\
-  !*** /Users/wangxiaodong/Documents/DuduCanvas/uniapp/duducanvas/duducanvas.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.Text = exports.Stage = exports.Sprite = exports.Shape = exports.ImgLoader = exports.Image = exports.Group = exports.DuduCanvas = exports.CreateRadialGradient = exports.CreateLinearGradient = exports.Container = void 0;function ownKeys(e, t) {var i,r = Object.keys(e);return Object.getOwnPropertySymbols && (i = Object.getOwnPropertySymbols(e), t && (i = i.filter(function (t) {return Object.getOwnPropertyDescriptor(e, t).enumerable;})), r.push.apply(r, i)), r;}function _objectSpread2(e) {for (var t = 1; t < arguments.length; t++) {var i = null != arguments[t] ? arguments[t] : {};t % 2 ? ownKeys(Object(i), !0).forEach(function (t) {_defineProperty(e, t, i[t]);}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(i)) : ownKeys(Object(i)).forEach(function (t) {Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(i, t));});}return e;}function _classCallCheck(t, e) {if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");}function _defineProperties(t, e) {for (var i = 0; i < e.length; i++) {var r = e[i];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);}}function _createClass(t, e, i) {return e && _defineProperties(t.prototype, e), i && _defineProperties(t, i), t;}function _defineProperty(t, e, i) {return e in t ? Object.defineProperty(t, e, { value: i, enumerable: !0, configurable: !0, writable: !0 }) : t[e] = i, t;}function _inherits(t, e) {if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), e && _setPrototypeOf(t, e);}function _getPrototypeOf(t) {return (_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {return t.__proto__ || Object.getPrototypeOf(t);})(t);}function _setPrototypeOf(t, e) {return (_setPrototypeOf = Object.setPrototypeOf || function (t, e) {return t.__proto__ = e, t;})(t, e);}function _isNativeReflectConstruct() {if ("undefined" == typeof Reflect || !Reflect.construct) return !1;if (Reflect.construct.sham) return !1;if ("function" == typeof Proxy) return !0;try {return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;} catch (t) {return !1;}}function _construct(t, e, i) {return (_construct = _isNativeReflectConstruct() ? Reflect.construct : function (t, e, i) {var r = [null];r.push.apply(r, e);r = new (Function.bind.apply(t, r))();return i && _setPrototypeOf(r, i.prototype), r;}).apply(null, arguments);}function _assertThisInitialized(t) {if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t;}function _possibleConstructorReturn(t, e) {if (e && ("object" == typeof e || "function" == typeof e)) return e;if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");return _assertThisInitialized(t);}function _createSuper(i) {var r = _isNativeReflectConstruct();return function () {var t,e = _getPrototypeOf(i);return _possibleConstructorReturn(this, r ? (t = _getPrototypeOf(this).constructor, Reflect.construct(e, arguments, t)) : e.apply(this, arguments));};}function _superPropBase(t, e) {for (; !Object.prototype.hasOwnProperty.call(t, e) && null !== (t = _getPrototypeOf(t));) {;}return t;}function _get(t, e, i) {return (_get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get : function (t, e, i) {t = _superPropBase(t, e);if (t) {e = Object.getOwnPropertyDescriptor(t, e);return e.get ? e.get.call(i) : e.value;}})(t, e, i || t);}function _slicedToArray(t, e) {return _arrayWithHoles(t) || _iterableToArrayLimit(t, e) || _unsupportedIterableToArray(t, e) || _nonIterableRest();}function _toConsumableArray(t) {return _arrayWithoutHoles(t) || _iterableToArray(t) || _unsupportedIterableToArray(t) || _nonIterableSpread();}function _arrayWithoutHoles(t) {if (Array.isArray(t)) return _arrayLikeToArray(t);}function _arrayWithHoles(t) {if (Array.isArray(t)) return t;}function _iterableToArray(t) {if ("undefined" != typeof Symbol && null != t[Symbol.iterator] || null != t["@@iterator"]) return Array.from(t);}function _iterableToArrayLimit(t, e) {var i = null == t ? null : "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];if (null != i) {var r,n,s = [],a = !0,h = !1;try {for (i = i.call(t); !(a = (r = i.next()).done) && (s.push(r.value), !e || s.length !== e); a = !0) {;}} catch (t) {h = !0, n = t;} finally {try {a || null == i.return || i.return();} finally {if (h) throw n;}}return s;}}function _unsupportedIterableToArray(t, e) {if (t) {if ("string" == typeof t) return _arrayLikeToArray(t, e);var i = Object.prototype.toString.call(t).slice(8, -1);return "Map" === (i = "Object" === i && t.constructor ? t.constructor.name : i) || "Set" === i ? Array.from(t) : "Arguments" === i || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i) ? _arrayLikeToArray(t, e) : void 0;}}function _arrayLikeToArray(t, e) {(null == e || e > t.length) && (e = t.length);for (var i = 0, r = new Array(e); i < e; i++) {r[i] = t[i];}return r;}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _createForOfIteratorHelper(t, e) {var i = "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];if (!i) {if (Array.isArray(t) || (i = _unsupportedIterableToArray(t)) || e && t && "number" == typeof t.length) {i && (t = i);var r = 0,e = function e() {};return { s: e, n: function n() {return r >= t.length ? { done: !0 } : { done: !1, value: t[r++] };}, e: function e(t) {throw t;}, f: e };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var n,s = !0,a = !1;return { s: function s() {i = i.call(t);}, n: function n() {var t = i.next();return s = t.done, t;}, e: function e(t) {a = !0, n = t;}, f: function f() {try {s || null == i.return || i.return();} finally {if (a) throw n;}} };}var draw = Symbol("draw"),drawImage$1 = Symbol("drawImage"),getAlpha = Symbol("getAlpha"),append = Symbol("append"),instructions = Symbol("instructions"),drawGraphics = Symbol("drawGraphics");function getPrefix() {var t = "";return "undefined" != typeof uni ? t = uni : "undefined" != typeof wx ? t = wx : "undefined" != typeof my ? t = my : "undefined" != typeof tt && (t = tt), t;}var prefix = getPrefix(),getImageInfo = prefix.getImageInfo,createSelectorQuery = prefix.createSelectorQuery,createCanvasContext = prefix.createCanvasContext,total = Symbol("total"),loaded = Symbol("loaded"),load = Symbol("load"),loadProgressCallback = Symbol("loadProgressCallback"),imageMap = Symbol("imageMap"),PATH_REG = /^http*/,ImgLoader = function () {function r(e, t) {var i = this;return _classCallCheck(this, r), this[total] = e.length, this[loaded] = 0, this[t] = t, this[imageMap] = new Map(), new Promise(function (t) {i[load](e, t);});}return _createClass(r, [{ key: "get", value: function value(t) {return this[imageMap].get(t);} }, { key: load, value: function value(t, i) {var r = this;return t.forEach(function (e) {getImageInfo({ src: e.src, success: function success(t) {PATH_REG.test(e.src) || (t.path = "/" + t.path), r[imageMap].set(e.id, { path: t.path, width: t.width, height: t.height }), r[loaded]++, r[loadProgressCallback] && r[loadProgressCallback](p), 1 <= r[loaded] / r[total] && i(r);} });}), this;} }]), r;}();exports.ImgLoader = ImgLoader;function getPosAfterRotation(t, e, i) {t *= Math.PI / 180;return { x: Math.cos(t) * e - Math.sin(t) * i, y: Math.cos(t) * i + Math.sin(t) * e };}function getMaxValue(t) {for (var e = t[0].x, i = t[0].x, r = t[0].y, n = t[0].y, s = 1, a = t.length; s < a; s++) {e > t[s].x && (e = t[s].x), t[s].x > i && (i = t[s].x), r > t[s].y && (r = t[s].y), t[s].y > n && (n = t[s].y);}return [e, r, i, n];}function findNodes(t) {var e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : [],i = t.childs.length;if (i) for (var r = 0; r < i; r++) {if (t.childs[r].childs && t.childs[r].childs.length) {var n = findNodes(t.childs[r]);return e.push(t.childs[r]), e.concat(n);}e.push(t.childs[r]);} else e.push(t);return e;}var BeginPath = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.beginPath();} }]), t;}(),MoveTo = function () {function i(t, e) {_classCallCheck(this, i), this.x = t, this.y = e;}return _createClass(i, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.moveTo(this.x + e, this.y + i);} }]), i;}(),LineTo = function () {function i(t, e) {_classCallCheck(this, i), this.x = t, this.y = e;}return _createClass(i, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.lineTo(this.x + e, this.y + i);} }]), i;}(),Arc = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), this.x = t, this.y = e, this.radius = i, this.startAngle = r, this.endAngle = n, this.anticlockwise = s;}return _createClass(a, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.arc(this.x + e, this.y + i, this.radius, this.startAngle, this.endAngle, this.anticlockwise);} }]), a;}(),ArcTo = function () {function s(t, e, i, r, n) {_classCallCheck(this, s), this.x1 = t, this.y1 = e, this.x2 = i, this.y2 = r, this.radius = n;}return _createClass(s, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.arcTo(this.x1 + e, this.y1 + i, this.x2 + e, this.y2 + i, this.radius);} }]), s;}(),Stroke = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.stroke();} }]), t;}(),Fill = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.fill();} }]), t;}(),SetFillStyle$1 = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {"CreateLinearGradient" === this.style.name || "CreateRadialGradient" === this.style.name ? t.fillStyle = this.style.exec(t, e) : t.fillStyle = this.style;} }]), e;}(),SetStrokeStyle = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.strokeStyle = this.style;} }]), e;}(),Clip = function () {function t() {_classCallCheck(this, t);}return _createClass(t, [{ key: "exec", value: function value(t) {t.clip();} }]), t;}(),QuadraticCurveTo = function () {function n(t, e, i, r) {_classCallCheck(this, n), this.cpx = t, this.cpy = e, this.x = i, this.y = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.quadraticCurveTo(this.cpx + e, this.cpy + i, this.x + e, this.y + i);} }]), n;}(),BezierCurveTo = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), this.cp1x = t, this.cp1y = e, this.cp2x = i, this.cp2y = r, this.x = n, this.y = s;}return _createClass(a, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.bezierCurveTo(this.cp1x + e, this.cp1y + i, this.cp2x + e, this.cp2y + i, this.x + e, this.y + i);} }]), a;}(),DrawCircle = function () {function n(t, e, i) {var r = 3 < arguments.length && void 0 !== arguments[3] && arguments[3];_classCallCheck(this, n), this.x = t, this.y = e, this.radius = i, this.fill = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),r = i[0],i = i[1];t.beginPath(), t.arc(this.x + r, this.y + i, this.radius, 0, 2 * Math.PI), e.isMask ? t.clip() : this.fill && t.fill();} }]), n;}(),Rect = function () {function s(t, e, i, r) {var n = 4 < arguments.length && void 0 !== arguments[4] && arguments[4];_classCallCheck(this, s), this.x = t, this.y = e, this.w = i, this.h = r, this.isStroke = n;}return _createClass(s, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),r = i[0],i = i[1],r = this.x + r,i = this.y + i;t.beginPath(), e.isMask ? (t.rect(r, i, this.w, this.h), t.clip()) : this.isStroke ? t.strokeRect(r, i, this.w, this.h) : t.fillRect(r, i, this.w, this.h);} }]), s;}(),RoundRect = function () {function l(t, e, i, r, n, s, a) {_classCallCheck(this, l), this.stroke = void 0 === a || a, void 0 === n && (n = 5), this.x = t, this.y = e, this.width = i, this.height = r, this.fill = s;var h,o = n = "number" == typeof n ? { tl: n, tr: n, br: n, bl: n } : n;for (h in this.radius = {}, o) {this.radius[h] = this.radius[h] || o[h];}}return _createClass(l, [{ key: "exec", value: function value(t, e) {var i,r = _slicedToArray(e.getPosition(), 2),n = r[0],s = r[1],a = n + this.x,h = s + this.y,o = this.radius,r = this.width,n = this.height,s = e.masked ? i = !1 : (i = this.fill, this.stroke);t.beginPath(), t.moveTo(a + o.tl, h), t.lineTo(a + r - o.tr, h), t.quadraticCurveTo(a + r, h, a + r, h + o.tr), t.lineTo(a + r, h + n - o.br), t.quadraticCurveTo(a + r, h + n, a + r - o.br, h + n), t.lineTo(a + o.bl, h + n), t.quadraticCurveTo(a, h + n, a, h + n - o.bl), t.lineTo(a, h + o.tl), t.quadraticCurveTo(a, h, a + o.tl, h), t.closePath(), e.isMask ? t.clip() : (i && t.fill(), s && t.stroke());} }]), l;}(),ClearRect = function () {function n(t, e, i, r) {_classCallCheck(this, n), this.x = t, this.y = e, this.w = i, this.h = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1];t.clearRect(this.x + e, this.y + i, this.w, this.h);} }]), n;}(),LineCap = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "butt";_classCallCheck(this, e), this.lineCap = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.lineCap = this.lineCap;} }]), e;}(),LineJoin = function () {function i() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "bevel",e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 10;_classCallCheck(this, i), this.lineJoin = t, this.miterLimit = e;}return _createClass(i, [{ key: "exec", value: function value(t) {10 != this.miterLimit && "bevel" === this.style && (t.miterLimit = this.miterLimit), t.lineJoin = this.lineJoin;} }]), i;}(),LineWidth = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 1;_classCallCheck(this, e), this.lineWidth = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.lineWidth = this.lineWidth;} }]), e;}(),SetLineDash = function () {function e() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : [];_classCallCheck(this, e), this.lineDash = t;}return _createClass(e, [{ key: "exec", value: function value(t, e) {t.setLineDash(this.lineDash);} }]), e;}(),Graphics = function () {function t() {var a = this;_classCallCheck(this, t), _defineProperty(this, "name", "Graphics"), _defineProperty(this, "graphics", { beginPath: function beginPath() {return a[append](new BeginPath()), a.graphics;}, moveTo: function moveTo(t, e) {return a[append](new MoveTo(t, e)), a.graphics;}, setLineDash: function setLineDash(t) {return a[append](new SetLineDash(t)), a.graphics;}, lineWidth: function lineWidth(t) {return a[append](new LineWidth(t)), a.graphics;}, lineCap: function lineCap(t) {return a[append](new LineCap(t)), a.graphics;}, lineJoin: function lineJoin(t) {return a[append](new LineJoin(t)), a.graphics;}, lineTo: function lineTo(t, e) {return a[append](new LineTo(t, e)), a.graphics;}, quadraticCurveTo: function quadraticCurveTo(t, e, i, r) {return a[append](new QuadraticCurveTo(t, e, i, r)), a.graphics;}, bezierCurveTo: function bezierCurveTo(t, e, i, r, n, s) {return a[append](new BezierCurveTo(t, e, i, r, n, s)), a.graphics;}, arc: function arc(t, e, i, r, n) {return a[append](new Arc(t, e, i, r, n, 5 < arguments.length && void 0 !== arguments[5] && arguments[5])), a.graphics;}, arcTo: function arcTo(t, e, i, r, n) {return a[append](new ArcTo(t, e, i, r, n)), a.graphics;}, stroke: function stroke() {return a[append](new Stroke()), a.graphics;}, fill: function fill() {return a[append](new Fill()), a.graphics;}, fillStyle: function fillStyle(t) {return a[append](new SetFillStyle$1(t)), a.graphics;}, strokeStyle: function strokeStyle(t) {return a[append](new SetStrokeStyle(t)), a.graphics;}, fillCircle: function fillCircle() {return a[append](new DrawCircle(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 20, !0)), a.graphics;}, strokeCircle: function strokeCircle() {return a[append](new DrawCircle(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 20)), a[append](new Stroke()), a.graphics;}, fillRect: function fillRect() {return a[append](new Rect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 20)), a.graphics;}, strokeRect: function strokeRect() {return a[append](new Rect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 20, !0)), a[append](new Stroke()), a.graphics;}, fillRoundRect: function fillRoundRect() {return a[append](new RoundRect(0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : 0, 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0, 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 10, 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : 10, 4 < arguments.length && void 0 !== arguments[4] ? arguments[4] : 8, 5 < arguments.length ? arguments[5] : void 0, 6 < arguments.length ? arguments[6] : void 0)), a.graphics;}, strokeRoundRect: function strokeRoundRect(t, e, i, r, n) {return a[append](new RoundRect(t, e, i, r, n, !1, !0)), a[append](new Stroke()), a.graphics;}, clearRect: function clearRect(t, e, i, r) {return a[append](new ClearRect(t, e, i, r)), a.graphics;}, clip: function clip() {return a[append](new Clip()), a.graphics;} }), this[instructions] = [];}return _createClass(t, [{ key: append, value: function value(t) {this[instructions].push(t);} }, { key: drawGraphics, value: function value(e) {var i = this;this[instructions].forEach(function (t) {t.exec(e, i);});} }]), t;}(),context = null,displayObjectId = 0,id = Symbol("id"),scale = Symbol("scale"),mask = Symbol("mask"),setShadow = Symbol("setShadow"),DisplayObject = function () {_inherits(l, Graphics);var i = _createSuper(l);function l() {var t, e;return _classCallCheck(this, l), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "DisplayObject"), _defineProperty(_assertThisInitialized(e), "x", 0), _defineProperty(_assertThisInitialized(e), "y", 0), _defineProperty(_assertThisInitialized(e), "width", 0), _defineProperty(_assertThisInitialized(e), "height", 0), _defineProperty(_assertThisInitialized(e), "alpha", 1), _defineProperty(_assertThisInitialized(e), "regX", 0), _defineProperty(_assertThisInitialized(e), "regY", 0), _defineProperty(_assertThisInitialized(e), "scaleX", 1), _defineProperty(_assertThisInitialized(e), "scaleY", 1), _defineProperty(_assertThisInitialized(e), "rotation", 0), _defineProperty(_assertThisInitialized(e), "parent", null), _defineProperty(_assertThisInitialized(e), "childs", []), _defineProperty(_assertThisInitialized(e), "shadow", ""), e[drawGraphics] = _get((t = _assertThisInitialized(e), _getPrototypeOf(l.prototype)), drawGraphics, t), e[scale] = 1, e[id] = displayObjectId++, e;}return _createClass(l, [{ key: "mask", get: function get() {return this[mask];}, set: function set(t) {if ("Shape" !== t.name) throw new Error("遮罩必须是 Shape 对象");t.isMask = !0, this[mask] = t;} }, { key: "scale", get: function get() {return this[scale];}, set: function set(t) {this.scaleX = t, this.scaleY = t, this[scale] = t;} }, { key: "addChild", value: function value() {for (var i = this, t = arguments.length, e = new Array(t), r = 0; r < t; r++) {e[r] = arguments[r];}var n = e.map(function (t, e) {if (t[id] === i[id]) throw new Error("不能自己添加自己为 child :".concat(t.name));if (t.isMask) throw new Error("已被设置成 mask 遮罩 不能 addChild 到其它父级内:".concat(t.name));return t.mask && (t.mask.parent = i), t.parent = i, t.zIndex = e, t;});this.childs = this.childs.concat(n);} }, { key: "removeChild", value: function value(e) {this.childs = this.childs.filter(function (t) {return t[id] != e[id];});} }, { key: draw, value: function value() {var e = this;this[drawGraphics](context), this.childs.forEach(function (t) {context.save(), e.transform(t, context), t.shadow.length && e[setShadow](t), context.globalAlpha = e[getAlpha](), context.rotate(0), t[draw](context), context.restore();});} }, { key: setShadow, value: function value(t) {var e = t.shadow.split(" ");if ("Sprite" === t.name || "Group" === t.name) throw new Error("Sprite 或 Group 组件对象不允许设置 shadow");if (e.length < 4) throw new Error('shadow 需要 4 个值 eg: "10 10 10 black"');context.shadowOffsetX = e[0], context.shadowOffsetY = e[1], context.shadowBlur = e[2], context.shadowColor = e[3];} }, { key: getAlpha, value: function value() {for (var t = this.parent, e = this.alpha; t && "Stage" != t.name;) {e *= t.alpha, t = t.parent;}return e;} }, { key: "getPosition", value: function value() {for (var t = this.masked || this.parent, e = this.x - this.regX, i = this.y - this.regY; t && "Stage" != t.name;) {e += t.x - t.regX, i += t.y - t.regY, t = t.parent;}return [e, i];} }, { key: "getRotation", value: function value() {return this.rotation;} }, { key: "getScale", value: function value() {for (var t = this.parent, e = this.scaleX, i = this.scaleY; t && "Stage" != t.name;) {e += t.scaleX, i += t.scaleY, t = t.parent;}return [e, i];} }, { key: "transform", value: function value(t, e) {if ("Stage" !== t.name) {var i = e,r = _slicedToArray(t.getPosition(), 2),n = r[0],s = r[1],a = t.getRotation(),e = [t.scaleX, t.scaleY],r = e[0],e = e[1],n = n + t.regX,t = s + t.regY;return i.translate(n, t), i.scale(r, e), i.rotate(a * Math.PI / 180), i.translate(-n, -t), this;}} }, { key: "getRectangleRotatedPosition", value: function value(t, e, i, r, n) {return [getPosAfterRotation(t, -r, -n), getPosAfterRotation(t, e - r, -n), getPosAfterRotation(t, e - r, i - n), getPosAfterRotation(t, -r, i - n)];} }, { key: "_getBounds", value: function value() {var t,e,i = _slicedToArray(this.getPosition(), 2),r = i[0],n = i[1],s = this.width,a = this.height,h = this.regX,o = this.regY;return 0 !== this.rotation && ((e = this.getRectangleRotatedPosition(this.rotation, s, a, h, o)).map(function (t) {return _objectSpread2(_objectSpread2({}, t), {}, { x: t.x + r + h, y: t.y + n + o });}), i = (t = _slicedToArray(getMaxValue(e), 4))[0], e = t[1], s = t[2] - i, a = t[3] - e, r = i, n = e), { left: r, top: n, right: r + s, bottom: n + a, width: s, height: a };} }, { key: "findNodesBounds", value: function value(t) {return findNodes(t).map(function (t) {return t._getBounds();});} }, { key: "getBounds", value: function value() {if (0 === this.childs.length) return this._getBounds();if (this.childs) {var t = this.findNodesBounds(this),e = [],i = [],r = [],n = [];t.forEach(function (t) {e.push(t.left), i.push(t.right), r.push(t.top), n.push(t.bottom);});var s = Math.min.apply(Math, e),a = Math.max.apply(Math, i),h = Math.min.apply(Math, r),o = Math.max.apply(Math, n);if ("Group" !== this.name) return { left: s, top: h, right: a, bottom: o, width: a - s, height: o - h };t = new l();return t.width = a - s, t.height = o - h, t.x = this.x, t.y = this.y, t.regX = this.regX, t.regY = this.regY, t.rotation = this.rotation, this._getBounds.call(t);}} }], [{ key: "setContext", value: function value(t) {context = t;} }, { key: "getContext", value: function value() {return context;} }]), l;}(),_width$2 = Symbol("width"),_height$2 = Symbol("height"),_display = Symbol("_display"),_alignItems$1 = Symbol("_alignItems"),_justifyContent$1 = Symbol("_justifyContent"),_Group = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r(t) {var e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "Group"), e;}return _createClass(r, [{ key: "width", get: function get() {return this[_width$2];}, set: function set(t) {this[_width$2] = t;} }, { key: "height", get: function get() {return this[_height$2];}, set: function set(t) {this[_height$2] = t;} }, { key: "display", get: function get() {return this[_display];}, set: function set(t) {this[_display] = t;} }, { key: "alignItems", get: function get() {return this[_alignItems$1];}, set: function set(t) {this[_alignItems$1] = t;} }, { key: "justifyContent", get: function get() {return this[_justifyContent$1];}, set: function set(t) {this[_justifyContent$1] = t;} }]), r;}(),render = Symbol("render"),_Stage = function () {_inherits(s, DisplayObject);var t = _createSuper(s);function s(e, i, r) {var n;return _classCallCheck(this, s), _defineProperty(_assertThisInitialized(n = t.call(this)), "name", "Stage"), _defineProperty(_assertThisInitialized(n), "canvas", null), (r ? createSelectorQuery().in(r) : createSelectorQuery()).select(e).fields({ node: !0, size: !0 }).exec(function (t) {t = t[0];if (!t) throw new Error("无法找到 canvas ");n.width = t.width, n.height = t.height, t.node ? (t = t.node, n._context = t.getContext("2d"), console.log(1111)) : n._context = createCanvasContext(e.slice(1), r), DisplayObject.setContext(n._context), i(_assertThisInitialized(n), n._context), n[render]();}), n;}return _createClass(s, [{ key: "getContext", value: function value() {return this._context;} }, { key: "update", value: function value() {this[render]();} }, { key: render, value: function value() {this._context.clearRect(0, 0, this.width, this.height), this[draw](), this._context.draw(!1);} }]), s;}(),ROTATE_90DEG = 1.5707963267948966,NO_ROTATION_RANGE = [[11904, 12271], [12352, 40959], [44032, 55295], [63744, 64255], [119552, 119647], [131072, 195103]];exports.Stage = _Stage;exports.Group = _Group;function needRotation(t) {var e,i = t.codePointAt(0),r = _createForOfIteratorHelper(NO_ROTATION_RANGE);try {for (r.s(); !(e = r.n()).done;) {var n = _slicedToArray(e.value, 2),s = n[0],a = n[1];if (s <= i && i <= a) return !1;}} catch (t) {r.e(t);} finally {r.f();}return !0;}var FillText = function () {function r(t, e, i) {_classCallCheck(this, r), _defineProperty(this, "instance", null), this.text = t, this.x = e, this.y = i;}return _createClass(r, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray((this.instance = e).getPosition(), 2),r = i[0],n = i[1];if (t.font = e.font, "vertical-rl" === e.writeMode || "vertical-lr" === e.writeMode) this.vertical(t, r, n);else if (-1 < e.wrapWidth) for (var s, a = this.getTextArr(t, e, this.text), h = 0, o = a.length; h < o; h++) {s = n + h * (e.fontSize + e.lineGap), t.fillText(a[h], r, s);} else t.fillText(this.text, r, n);} }, { key: "getTextArr", value: function value(t, e, i) {for (var r, n = e.wrapWidth, s = 0, a = 0, h = 0, o = []; r = i[s];) {(h += t.measureText(r).width) <= n ? o[a] ? o[a] += i[s] : o[a] = i[s] : (h = 0, a++), s++;}return o;} }, { key: "vertical", value: function value(r, n, s) {var t = this.text.split(""),e = this.instance.fontSize + this.instance.lineGap,a = "vertical-rl" === this.instance.writeMode ? -e : e,h = this.instance.fontSize,o = .5 * h,l = 0,c = 0,u = this.instance.wrapHeight;t.map(function (t) {var e, i;needRotation(t) ? (-1 < u && u + s < l + s + o && (c += a, l = 0), e = n + c + o, i = s + l + o, r.save(), r.translate(e, i), r.rotate(ROTATE_90DEG), r.translate(-e, -i), r.fillText(t, n + c, s + l), l += o, r.restore()) : (-1 < u && u + s < l + s + h && (c += a, l = 0), r.fillText(t, n + c, s + l), l += h);});} }]), r;}(),SetFillStyle = function () {function e(t) {_classCallCheck(this, e), this.style = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.fillStyle = this.style;} }]), e;}(),SetTextAlign = function () {function e(t) {_classCallCheck(this, e), this.textAlign = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.textAlign = this.textAlign;} }]), e;}(),SetTextBaseline = function () {function e(t) {_classCallCheck(this, e), this.textBaseline = t;}return _createClass(e, [{ key: "exec", value: function value(t) {t.textBaseline = this.textBaseline;} }]), e;}(),_text = Symbol("_text"),_width$1 = Symbol("_width"),_height$1 = Symbol("_height"),_fontSize = Symbol("_fontSize"),_wrapWidth = Symbol("_wrapWidth"),_wrapHeight = Symbol("_wrapHeight"),_writeMode = Symbol("_writeMode"),defaultFontSize = 10,_Text = function () {_inherits(n, DisplayObject);var r = _createSuper(n);function n(t) {var e, i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Text"), _defineProperty(_assertThisInitialized(i), "lineGap", 0), _defineProperty(_assertThisInitialized(i), "font", "".concat(defaultFontSize, "px sans-serif")), i[drawGraphics] = _get((e = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), drawGraphics, e), i.init(t), i;}return _createClass(n, [{ key: "init", value: function value() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {},e = t.text,i = t.font,r = t.color,t = t.fontSize;this[_writeMode] = "", !i || (i = (this.font = i).match(/\d+/)[0]) && (this.fontSize = parseInt(i), this[_height$1] = this.fontSize + this.lineGap), t && (this.font = "".concat(t, "px sans-serif"), this.fontSize = parseInt(t), this[_height$1] = t + this.lineGap), this.fontSize || (this.fontSize = defaultFontSize), r && (this.color = r), this.textAlign = "left", this.textBaseline = "top", this[_text] = "", e && (this.text = e);} }, { key: "text", get: function get() {return this[_text];}, set: function set(t) {t = String(t), this[_text] = t, this.width = this.measureWidth(t, this.fontSize), this.height = this.fontSize;} }, { key: "width", get: function get() {return this[_width$1];}, set: function set(t) {this[_width$1] = t;} }, { key: "height", get: function get() {return this[_height$1];}, set: function set(t) {this[_height$1] = t;} }, { key: "wrapHeight", get: function get() {return this[_wrapHeight];}, set: function set(t) {this[_wrapHeight] = t, this[_height$1] = t, this.initVerticalSize();} }, { key: "wrapWidth", get: function get() {return this[_wrapWidth];}, set: function set(t) {this[_wrapWidth] = t, this[_width$1] = t, this[_height$1] = this.getHeightByWrapWidth();} }, { key: "fontSize", get: function get() {return this[_fontSize];}, set: function set(t) {this[_fontSize] = t, this.width = this.measureWidth(this.text, t), this.height = t + this.lineGap;} }, { key: "writeMode", get: function get() {return this[_writeMode];}, set: function set(t) {0 < (this[_writeMode] = t).length && this.initVerticalSize();} }, { key: "collectStatus", value: function value() {this.fontSize && (this.font = "".concat(this.fontSize, "px sans-serif"), this[_height$1] = this.fontSize + this.lineGap), this.setTextAlign(this.textAlign), this.setTextBaseline(this.textBaseline), this.setFillStyle(this.color), this.fillText(this[_text]);} }, { key: draw, value: function value(t) {this.collectStatus(), this[drawGraphics](t), this.mask && "Shape" === this.mask.name && (this.mask.masked = this).mask[draw](t, !0);} }, { key: "setFillStyle", value: function value() {var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "black";return this.color = t, this[append](new SetFillStyle(t)), this;} }, { key: "fillStyle", value: function value(t) {return this.setFillStyle(t);} }, { key: "fillText", value: function value(t) {var e = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : 0,i = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;return this[_text] = t, this.x += e, this.y += i, this.width = this.measureWidth(this[_text], this.fontSize), this[append](new FillText(t, this.x, this.y)), this;} }, { key: "setFont", value: function value(t) {return this.font = t, this;} }, { key: "setFontSize", value: function value(t) {return this.fontSize = t, this.font = this.font.replace(/\d+/, t), this;} }, { key: "setTextBaseline", value: function value(t) {return this.textBaseline = t, this[append](new SetTextBaseline(t)), this;} }, { key: "setTextAlign", value: function value(t) {return this.textAlign = t, this[append](new SetTextAlign(t)), this;} }, { key: "setlineGap", value: function value(t) {return this.lineGap = t, this;} }, { key: "setWrapWidth", value: function value(t) {return this.wrapWidth = t, this.width = t, this;} }, { key: "setWrapHeight", value: function value(t) {return this.wrapHeight = t, this;} }, { key: "measureWidth", value: function value(t, e) {return this.writeMode.length ? e : DisplayObject.getContext().measureText(t).width * (e / defaultFontSize);} }, { key: "initVerticalSize", value: function value() {var t, e;this.text.length && (t = (e = this.getVerticalSize()).width, e = e.height, this[_width$1] = t, this[_height$1] = e);} }, { key: "getVerticalSize", value: function value() {var i = this.fontSize,r = this.lineGap,n = this.wrapHeight,s = .5 * i,a = 0,t = 0,e = 0,h = 0,o = [],l = 0;return this.text.split("").map(function (t) {var e = 0,e = needRotation(t) ? s + r : i + r;a += e, n < (h += e) && (l++, h = 0), o[l] = o[l] || [], o[l].push({ text: t, height: e });}), n ? (t = n, e = o.length * i + (o.length * r - r)) : (e = i, t = a), { width: e, height: t };} }, { key: "getHeightByWrapWidth", value: function value() {for (var t, e = DisplayObject.getContext(), i = this.wrapWidth, r = this.fontSize, n = this.text, s = 0, a = 0, h = 0, o = []; t = n[s];) {(h += e.measureText(t).width * (r / defaultFontSize)) <= i ? o[a] ? o[a] += n[s] : o[a] = n[s] : (h = 0, a++), s++;}return this.height = o.length * r + (o.length * this.lineGap - this.lineGap);} }, { key: "addChild", value: function value() {throw new Error("不能给 Text 类添加子元素");} }]), n;}(),_Shape = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r() {var t, e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "name", "Shape"), _defineProperty(_assertThisInitialized(e), "isMask", !1), _defineProperty(_assertThisInitialized(e), "width", 0), _defineProperty(_assertThisInitialized(e), "height", 0), e[drawGraphics] = _get((t = _assertThisInitialized(e), _getPrototypeOf(r.prototype)), drawGraphics, t), e.graphics.beginPath(), e;}return _createClass(r, [{ key: draw, value: function value(t, e) {this.isMask = !!e, t.globalAlpha = this[getAlpha](), this[drawGraphics](t);} }, { key: "getBounds", value: function value() {return console.error("Shape 不提供getBounds方法"), null;} }]), r;}(),extendsClassDraw$2 = Symbol("extendsClassDraw");exports.Shape = _Shape;exports.Text = _Text;function getChangedBorderRadiusValue(t) {var e,i = { tl: 0, tr: 0, br: 0, bl: 0 },r = (t = String(t).split(" ").map(function (t) {return parseFloat(t);})).length;return 1 === r ? e = t[0] : 2 === r ? (i.tl = i.br = t[0], i.tr = i.bl = t[1], e = i) : 3 === r ? (i.tl = t[0], i.br = t[2], i.tr = i.bl = t[1], e = i) : 4 === r && (i.tl = t[0], i.tr = t[1], i.br = t[2], i.bl = t[3], e = i), e;}var BORDER_STYLES = ["solid", "dashed"],SimpleCss = function () {_inherits(r, DisplayObject);var i = _createSuper(r);function r() {var t, e;return _classCallCheck(this, r), _defineProperty(_assertThisInitialized(e = i.call(this)), "backgroundColor", ""), _defineProperty(_assertThisInitialized(e), "border", ""), _defineProperty(_assertThisInitialized(e), "borderTop", ""), _defineProperty(_assertThisInitialized(e), "borderRight", ""), _defineProperty(_assertThisInitialized(e), "borderBottom", ""), _defineProperty(_assertThisInitialized(e), "borderLeft", ""), _defineProperty(_assertThisInitialized(e), "borderLeftRound", !1), _defineProperty(_assertThisInitialized(e), "borderRightRound", !1), _defineProperty(_assertThisInitialized(e), "borderRadiusValue", ""), e[extendsClassDraw$2] = _get((t = _assertThisInitialized(e), _getPrototypeOf(r.prototype)), draw, t), e;}return _createClass(r, [{ key: "borderRadius", get: function get() {return this.borderRadiusValue;}, set: function set(t) {t && (this.borderRadiusValue = "100%" != t ? getChangedBorderRadiusValue(t) : t);} }, { key: draw, value: function value(t) {(this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) && this.initBorderRadiusMask(), this.backgroundColor && this.initBackgroundColor(), (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) && this.initBorder(), this.mask && "Shape" === this.mask.name && (this.mask.masked = this).mask[draw](t, !0), this[extendsClassDraw$2](t);} }, { key: "getBorderAttr", value: function value(t) {var e = _slicedToArray(t.split(" "), 3),i = e[0],t = e[1],e = e[2],i = parseFloat(i);return BORDER_STYLES.indexOf(t) < 0 && console.warn("不支持的边框样式"), [i, t, e];} }, { key: "setBorderStyles", value: function value(t, e, i) {this.graphics.beginPath(), "dashed" === e && this.graphics.setLineDash([t, t]), this.graphics.lineWidth(t).strokeStyle(i);} }, { key: "getHorizontalRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().fillStyle("#ff00ff").arc(r, r, r, .5 * Math.PI, 1.5 * Math.PI).lineTo(t - r, 0).arc(t - r, r, r, 1.5 * Math.PI, 2.5 * Math.PI).lineTo(r, e), i;} }, { key: "getLeftRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().arc(r, r, r, .5 * Math.PI, 1.5 * Math.PI).lineTo(t, 0).lineTo(t, e).lineTo(r, e), i;} }, { key: "getRightRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * e;return i.graphics.beginPath().moveTo(0, 0).lineTo(t - r, 0).arc(t - r, r, r, 1.5 * Math.PI, 2.5 * Math.PI).lineTo(0, e), i;} }, { key: "getVerticalRoundRectPath", value: function value(t, e) {var i = new _Shape(),r = .5 * t;return i.graphics.beginPath().arc(r, r, r, Math.PI, 2 * Math.PI).lineTo(t, e - r).arc(r, e - r, r, 0, Math.PI).lineTo(0, r), i;} }, { key: "initBorder", value: function value() {var t, e, i, r, n;this.border ? (t = (r = _slicedToArray(this.getBorderAttr(this.border), 3))[0], e = r[1], r = r[2], this.setBorderStyles(t, e, r), e = .5 * t, this.borderRadius ? ("100%" !== this.borderRadius && this.borderRadius !== this.width || this.width !== this.height ? this.borderRadius >= this.height ? (i = this.getHorizontalRoundRectPath(this.width, this.height)).graphics.stroke() : this.borderRadius >= this.width ? (i = this.getVerticalRoundRectPath(this.width, this.height)).graphics.stroke() : (i = new _Shape()).graphics.strokeRoundRect(0, 0, this.width, this.height, this.borderRadius) : (i = new _Shape(), r = .5 * this.width, i.graphics.strokeCircle(r, r, r)), this.addChild(i)) : this.graphics.strokeRect(e, e, this.width - t, this.height - t)) : (this.borderTop && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderTop))), this.graphics.moveTo(0, 0).lineTo(this.width, 0).stroke()), this.borderRight && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderRight))), this.borderRightRound ? (n = .5 * this.height, this.graphics.arc(this.width - n, n, n, 1.5 * Math.PI, 2.5 * Math.PI)) : this.graphics.moveTo(this.width, 0).lineTo(this.width, this.height), this.graphics.stroke()), this.borderBottom && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderBottom))), this.graphics.moveTo(0, this.height).lineTo(this.width, this.height).stroke()), this.borderLeft && (this.setBorderStyles.apply(this, _toConsumableArray(this.getBorderAttr(this.borderLeft))), this.borderLeftRound ? (n = .5 * this.height, this.graphics.arc(n, n, n, .5 * Math.PI, 1.5 * Math.PI)) : this.graphics.moveTo(0, 0).lineTo(0, this.height), this.graphics.stroke()));} }, { key: "initBorderRadiusMask", value: function value() {var t, e;"100%" !== this.borderRadiusValue && this.borderRadiusValue !== this.width || this.width !== this.height ? this.borderRadiusValue >= this.height || this.borderRightRadius && this.borderLeftRadius ? (e = this.getHorizontalRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderRadiusValue >= this.width ? (e = this.getVerticalRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderLeftRound ? (e = this.getLeftRoundRectPath(this.width, this.height)).graphics.clip().fill() : this.borderRightRound ? (e = this.getRightRoundRectPath(this.width, this.height)).graphics.clip().fill() : (console.log(this.borderRadiusValue, 333), (e = new _Shape()).graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)) : (t = .5 * this.width, (e = new _Shape()).graphics.fillCircle(t, t, t)), this.mask = e;} }, { key: "initBackgroundColor", value: function value() {this.graphics.beginPath().fillStyle(this.backgroundColor).fillRect(0, 0, this.width, this.height);} }]), r;}(),extendsClassDraw$1 = Symbol("extendsClassDraw"),_Image = function () {_inherits(s, SimpleCss);var n = _createSuper(s);function s(t) {var e, i, r;for (r in _classCallCheck(this, s), _defineProperty(_assertThisInitialized(i = n.call(this)), "name", "Image"), _defineProperty(_assertThisInitialized(i), "image", null), _defineProperty(_assertThisInitialized(i), "path", ""), _defineProperty(_assertThisInitialized(i), "sx", void 0), _defineProperty(_assertThisInitialized(i), "sy", void 0), _defineProperty(_assertThisInitialized(i), "sWidth", void 0), _defineProperty(_assertThisInitialized(i), "sHeight", void 0), _defineProperty(_assertThisInitialized(i), "dx", 0), _defineProperty(_assertThisInitialized(i), "dy", 0), _defineProperty(_assertThisInitialized(i), "dWidth", void 0), _defineProperty(_assertThisInitialized(i), "dHeight", void 0), i[extendsClassDraw$1] = _get((e = _assertThisInitialized(i), _getPrototypeOf(s.prototype)), draw, e), t) {i[r] = t[r];}return i.path = i.image.path, i.width ? i.dWidth = i.width : i.width = i.dWidth, i.height ? i.dHeight = i.height : i.height = i.dHeight, i;}return _createClass(s, [{ key: drawImage$1, value: function value(t, e, i) {t.globalAlpha = this[getAlpha](), null != this.sx ? t.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, e, i, this.dWidth, this.dHeight) : null != this.dWidth ? t.drawImage(this.path, e, i, this.dWidth, this.dHeight) : t.drawImage(this.path, e, i);} }, { key: draw, value: function value(e) {var t = _slicedToArray(this.getPosition(), 2),i = t[0],t = t[1],i = this.dx + i,t = this.dy + t;this[extendsClassDraw$1](e), this[drawImage$1](e, i, t), this.childs.forEach(function (t) {t[draw](e);});} }]), s;}(),drawImage = Symbol("drawImage"),drawSliced = Symbol("drawSliced"),left = Symbol("left"),top = Symbol("top"),right = Symbol("right"),bottom = Symbol("bottom"),setSlice = Symbol("setSlice"),_sliceBounds = Symbol("_sliceBounds"),_Sprite = function () {_inherits(n, _Group);var r = _createSuper(n);function n(t, e) {var i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Sprite"), _defineProperty(_assertThisInitialized(i), "img", null), _defineProperty(_assertThisInitialized(i), "sliced", !1), t && (i.img = t), i.parentDraw = _get((t = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), draw, t), e && i[setSlice](e), i;}return _createClass(n, [{ key: "sliceBounds", get: function get() {return this[_sliceBounds];}, set: function set(t) {this._setSlice(t), this[_sliceBounds] = t;} }, { key: draw, value: function value(e) {var i = this,t = _slicedToArray(this.getPosition(), 2),r = t[0],t = t[1];this.wRatio = this.width / this.img.width, this.hRatio = this.height / this.img.height, this.enableWidth = (this.width - this[left] - this[right]) * this.scaleX, this.enableHeight = (this.height - this[top] - this[bottom]) * this.scaleY, this[instructions].forEach(function (t) {t.exec(e, i);}), this.sliced ? this[drawSliced](e, r, t, this[getAlpha]()) : this[drawImage](e, r, t), this.childs.forEach(function (t) {t[draw](e);});} }, { key: drawImage, value: function value(t, e, i) {new _Image({ image: this.img, dx: e, dy: i, dWidth: this.width, dHeight: this.height })[draw](t);} }, { key: drawSliced, value: function value(e, t, i, r) {var n = { image: this.img, sx: 0, sy: 0, sWidth: this[left], sHeight: this[top], dWidth: this[left] * this.scaleX, dHeight: this[top] * this.scaleY, dx: t, dy: i },s = { image: this.img, sx: this[left], sy: 0, sWidth: this.img.width - this[right] - this[left], sHeight: this[top], dWidth: this.enableWidth, dHeight: this[top] * this.scaleY, dx: this[left] * this.scaleX + t, dy: i },a = { image: this.img, sx: this.img.width - this[right], sy: 0, sWidth: this[right], sHeight: this[top], dWidth: this[right] * this.scaleX, dHeight: this[top] * this.scaleY, dx: this[left] * this.scaleX + s.dWidth + t, dy: i },h = { image: this.img, sx: this.img.width - this[right], sy: this[top], sWidth: this[right], sHeight: this.img.height - this[bottom] - this[top], dWidth: this[right] * this.scaleX, dHeight: this.enableHeight, dx: a.dx, dy: a.dy + this[top] * this.scaleY },o = { image: this.img, sx: this.img.width - this[right], sy: this.img.height - this[bottom], sWidth: this[right], sHeight: this[bottom], dWidth: this[right] * this.scaleX, dHeight: this[bottom] * this.scaleY, dx: a.dx - .3, dy: h.dy + h.dHeight },l = { image: this.img, sx: this[left], sy: this.img.height - this[bottom], sWidth: this.img.width - this[left] - this[right], sHeight: this[bottom], dWidth: this.enableWidth, dHeight: this[bottom] * this.scaleY, dx: s.dx, dy: h.dy + h.dHeight },t = { image: this.img, sx: 0, sy: this.img.height - this[bottom], sWidth: this[left], sHeight: this[bottom], dWidth: this[left] * this.scaleX, dHeight: this[bottom] * this.scaleX, dx: n.dx, dy: h.dy + h.dHeight },i = { image: this.img, sx: 0, sy: this[top], sWidth: this[left], sHeight: this.img.height - this[top] - this[bottom], dWidth: this[left] * this.scaleX, dHeight: this.enableHeight, dx: n.dx, dy: h.dy },n = [n, s, a, h, o, l, t, i, { image: this.img, sx: n.sWidth, sy: n.sHeight, sWidth: s.sWidth, sHeight: i.sHeight, dWidth: this.enableWidth, dHeight: this.enableHeight, dx: n.dx + n.dWidth, dy: n.dy + n.dHeight }];return 0 != this.rotation && console.error("Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复"), n.forEach(function (t) {t = new _Image(t);t.alpha = r, t[draw](e);}), this;} }, { key: "_setSlice", value: function value(t) {return this.sliced = !0, this[left] = t.left, this[top] = t.top, this[right] = t.right, this[bottom] = t.bottom, this;} }, { key: "setSlice", value: function value(t) {return this._setSlice(t);} }]), n;}(),_width = Symbol("width"),_height = Symbol("height"),_alignItems = Symbol("_alignItems"),_justifyContent = Symbol("_justifyContent"),_direction = Symbol("_direction"),_flex = Symbol("_flex"),extendsClassDraw = Symbol("extendsClassDraw"),Container = function () {_inherits(n, SimpleCss);var r = _createSuper(n);function n(t) {var e, i;return _classCallCheck(this, n), _defineProperty(_assertThisInitialized(i = r.call(this)), "name", "Container"), i[extendsClassDraw] = _get((e = _assertThisInitialized(i), _getPrototypeOf(n.prototype)), draw, e), i.direction = "row", i.justifyContent = "center", i.alignItems = "center", i;}return _createClass(n, [{ key: "width", get: function get() {return this[_width];}, set: function set(t) {this[_width] = t;} }, { key: "height", get: function get() {return this[_height];}, set: function set(t) {this[_height] = t;} }, { key: "flex", get: function get() {return this[_flex];}, set: function set(t) {this[_flex] = t;} }, { key: "direction", get: function get() {return this[_direction];}, set: function set(t) {this[_direction] = t;} }, { key: "alignItems", get: function get() {return this[_alignItems];}, set: function set(t) {this[_alignItems] = t;} }, { key: "justifyContent", get: function get() {return this[_justifyContent];}, set: function set(t) {this[_justifyContent] = t;} }, { key: "getChildsWidth", value: function value() {var e = 0;return this.childs.forEach(function (t) {return e += t.width;}), e;} }, { key: "getChildsHeight", value: function value() {var e = 0;return this.childs.forEach(function (t) {return e += t.height;}), e;} }, { key: "getBetweenGapWidth", value: function value(t) {return (t - this.getChildsWidth()) / (this.childs.length - 1);} }, { key: "getBetweenGapHeight", value: function value(t) {return (t - this.getChildsHeight()) / (this.childs.length - 1);} }, { key: "getAroundGapWidth", value: function value(t) {return (t - this.getChildsWidth()) / this.childs.length;} }, { key: "getAroundGapHeight", value: function value(t) {return (t - this.getChildsHeight()) / this.childs.length;} }, { key: "setRow", value: function value() {this.setJustifyContent(), this.setAlignItems();} }, { key: "setRowReverse", value: function value() {this.setJustifyContent(!0), this.setAlignItems();} }, { key: "setAlignItems", value: function value() {var t = this.childs,e = this.height;if ("center" === this.alignItems) for (var i = 0, r = t.length; i < r; i++) {var n = t[i];n.y += .5 * e - .5 * n.height;} else if ("flex-start" === this.alignItems) for (var s = 0, a = t.length; s < a; s++) {t[s].y = 0;} else if ("flex-end" === this.alignItems) for (var h = 0, o = t.length; h < o; h++) {var l = t[h];l.y += e - l.height;}t.forEach(function (t) {"flex-start" === t.alignSelf ? t.y = 0 : "center" === t.alignSelf ? t.y = .5 * e - .5 * t.height : "flex-end" === t.alignSelf && (t.y = e - t.height);});} }, { key: "setJustifyContent", value: function value(t) {var e = this.width,i = this.childs,r = this.justifyContent;if (t && (i = this.childs.reverse(), "flex-start" === r ? r = "flex-end" : "flex-end" === r && (r = "flex-start")), "flex-start" === r) for (var n = 0; n < i.length; n++) {var s = i[n];0 < n ? s.x += i[n - 1].x + i[n - 1].width : s.x = 0;} else if ("flex-end" === r) for (var a = this.getChildsWidth(), h = 0; h < i.length; h++) {var o = i[h];o.x += 0 < h ? i[h - 1].x + i[h - 1].width : e - a;} else if ("center" === r) for (var l = this.getChildsWidth(), c = 0; c < i.length; c++) {var u = i[c];u.x += 0 < c ? i[c - 1].x + i[c - 1].width : .5 * (e - l);} else if ("space-between" === r) for (var d = this.getBetweenGapWidth(e), f = 0, g = i.length; f < g; f++) {var p = i[f];p.x += 0 < f ? i[f - 1].x + i[f - 1].width + d : 0;} else if ("space-around" === r) for (var y = this.getAroundGapWidth(e), _ = 0, v = i.length; _ < v; _++) {var w = i[_];w.x += 0 < _ ? i[_ - 1].x + i[_ - 1].width + y : .5 * y;}} }, { key: "setJustifyContentForColumn", value: function value(t) {var e = this.height,i = this.childs,r = this.justifyContent;if (t && (i = this.childs.reverse(), "flex-start" === r ? r = "flex-end" : "flex-end" === r && (r = "flex-start")), "flex-start" === r) for (var n = 0; n < i.length; n++) {var s = i[n];s.y += 0 < n ? i[n - 1].y + i[n - 1].height : 0;} else if ("flex-end" === r) for (var a = this.getChildsHeight(), h = 0; h < i.length; h++) {var o = i[h];o.y += 0 < h ? i[h - 1].y + i[h - 1].height : e - a;} else if ("center" === r) for (var l = this.getChildsHeight(), c = 0; c < i.length; c++) {var u = i[c];0 < c ? u.y += i[c - 1].y + i[c - 1].height : u.y = .5 * (e - l);} else if ("space-between" === r) for (var d = this.getBetweenGapHeight(e), f = 0, g = i.length; f < g; f++) {var p = i[f];p.y += 0 < f ? i[f - 1].y + i[f - 1].height + d : 0;} else if ("space-around" === r) for (var y = this.getAroundGapHeight(e), _ = 0, v = i.length; _ < v; _++) {var w = i[_];w.y += 0 < _ ? i[_ - 1].y + i[_ - 1].height + y : .5 * y;}} }, { key: "setAlignItemsByColumn", value: function value() {var t = this.childs,e = this.width;if ("center" === this.alignItems) for (var i = 0, r = t.length; i < r; i++) {var n = t[i];n.x += .5 * e - .5 * n.width;} else if ("flex-start" === this.alignItems) for (var s = 0, a = t.length; s < a; s++) {t[s].x = 0;} else if ("flex-end" === this.alignItems) for (var h = 0, o = t.length; h < o; h++) {var l = t[h];l.x += e - l.width;}t.forEach(function (t) {"flex-start" === t.alignSelf ? t.x = 0 : "center" === t.alignSelf ? t.x = .5 * e - .5 * t.width : "flex-end" === t.alignSelf && (t.x = e - t.width);});} }, { key: "setColumn", value: function value() {this.setJustifyContentForColumn(), this.setAlignItemsByColumn();} }, { key: "setColumnReverse", value: function value() {this.setJustifyContentForColumn(!0), this.setAlignItemsByColumn();} }, { key: draw, value: function value(t) {var e = this.direction;"row" === e ? this.setRow() : "row-reverse" === e ? this.setRowReverse() : "column" === e ? this.setColumn() : "column-reverse" === e && this.setColumnReverse(), this[extendsClassDraw](t);} }]), n;}(),CreateLinearGradient = function () {function n(t, e, i, r) {_classCallCheck(this, n), _defineProperty(this, "name", "CreateLinearGradient"), _defineProperty(this, "colorStops", []), this.x0 = t, this.y0 = e, this.x1 = i, this.y1 = r;}return _createClass(n, [{ key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1],r = t.createLinearGradient(this.x0 + e, this.y0 + i, this.x1 + e, this.y1 + i);return this.colorStops.map(function (t) {return r.addColorStop(t[0], t[1]);}), r;} }, { key: "addColorStop", value: function value(t, e) {this.colorStops.push([t, e]);} }]), n;}(),CreateRadialGradient = function () {function a(t, e, i, r, n, s) {_classCallCheck(this, a), _defineProperty(this, "name", "CreateRadialGradient"), _defineProperty(this, "colorStops", []), this.x0 = t, this.y0 = e, this.r0 = i, this.x1 = r, this.y1 = n, this.r1 = s;}return _createClass(a, [{ key: "create", value: function value(t) {for (var e = arguments.length, i = new Array(1 < e ? e - 1 : 0), r = 1; r < e; r++) {i[r - 1] = arguments[r];}return t.createRadialGradient ? t.createRadialGradient.apply(this, i) : (console.warn("小程序不支持传6个参数，请查阅: createCircularGradient 对应文档"), t.createCircularGradient.apply(this, i));} }, { key: "exec", value: function value(t, e) {var i = _slicedToArray(e.getPosition(), 2),e = i[0],i = i[1],r = this.create(t, this.x0 + e, this.y0 + i, this.r0, this.x1 + e, this.y1 + i, this.r1);return this.colorStops.map(function (t) {return r.addColorStop(t[0], t[1]);}), r;} }, { key: "addColorStop", value: function value(t, e) {this.colorStops.push([t, e]);} }]), a;}(),DuduCanvas = { load: function load(t) {return new ImgLoader(t);}, Stage: function Stage(t, e, i) {return new _Stage(t, function () {e.apply(void 0, arguments);}, i);}, Shape: function Shape() {return new _Shape();}, Group: function Group() {return new _Group();}, Text: function Text(t) {return new _Text(t);}, Image: function Image(t) {return new _Image(t);}, Sprite: function Sprite() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(_Sprite, e);}, color: { createLinearGradient: function createLinearGradient() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(CreateLinearGradient, e);}, createRadialGradient: function createRadialGradient() {for (var t = arguments.length, e = new Array(t), i = 0; i < t; i++) {e[i] = arguments[i];}return _construct(CreateRadialGradient, e);} } };exports.DuduCanvas = DuduCanvas;exports.CreateRadialGradient = CreateRadialGradient;exports.CreateLinearGradient = CreateLinearGradient;exports.Container = Container;exports.Sprite = _Sprite;exports.Image = _Image;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! @dcloudio/uni-mp-weixin/dist/uni.api.esm.js */ 9)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 10)))
 
 /***/ })
-]]);
+
+}]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

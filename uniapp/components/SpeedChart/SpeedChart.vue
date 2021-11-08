@@ -3,7 +3,8 @@
 </template>
 
 <script>
-	import { watch, onMounted, getCurrentInstance } from 'vue'
+	import { onMounted, onUnmounted, getCurrentInstance } from 'vue'
+	import { onUnload } from '@dcloudio/uni-app'
 	import { Stage, Text, Shape } from '../../duducanvas/duducanvas.js'
 	const START_DEGREE = 135 // 起始角度（左下角）
 	const END_DEGREE = 405 // 终点角度（右下角）
@@ -40,9 +41,17 @@
 			},
 		},
 		setup(props) {
+			let animationTimer
+			// 清除动画
+			onUnmounted(()=>{
+				if(animationTimer){
+					clearTimeout(animationTimer)
+				}
+			})
+			
 			onMounted(() => {
 				const { ctx } = getCurrentInstance()
-				new Stage('#myCanvas', stage => {
+				new Stage('#myCanvas', (stage, ctx) => {
 					const centerX = stage.width / 2 // x 坐标值
 					const centerY = stage.height / 2 // y 坐标值
 					const step = (DEGREE_RANGE * Math.PI) / 180 / LINE_COUNT // 弧度间隔，每根线间隔多少弧度
@@ -86,19 +95,20 @@
 					const pointerCircle = new Shape()
 					const pointerCircleDegree = (props.score / 100 * DEGREE_RANGE) + START_DEGREE // 根据百分制得出得分比算出指示圆位置角度
 					const pointerCircleAngle = pointerCircleDegree * Math.PI / 180 // 算出对应孤度
-					const endX = centerX + Math.cos(pointerCircleAngle) * outCircleRadius
-					const endY = centerY + Math.sin(pointerCircleAngle) * outCircleRadius
+					const startX = centerX + Math.cos(startAngle) * outCircleRadius
+					const startY = centerY + Math.sin(startAngle) * outCircleRadius
 					pointerCircle.graphics
 					.beginPath()
 					.fillStyle('white')
-					.fillCircle(endX, endY, 8)
-					// 圆线顺时钟进度
+					.fillCircle(0, 0, 8)
+					pointerCircle.x = startX
+					pointerCircle.y = startY
+					
+					// 得分圆弧 圆线顺时钟进度
 					const arcLine = new Shape()
-					arcLine.graphics.beginPath()
+					arcLine.graphics
 					.lineWidth(3)
 					.strokeStyle('white')
-					.arc(centerX, centerY, outCircleRadius, startAngle, pointerCircleAngle, false)
-					.stroke()
 					stage.addChild(arcLine, pointerCircle)
 					
 					// 文本显示
@@ -124,11 +134,12 @@
 					text100.y = endPointY
 					
 					// 得分
+					const textScoreFontSize = 56 * props.ratio
 					const textScore = new Text({
-						font: `normal bold ${56 * props.ratio}px PingFang-SC`,
-						text: props.score,
+						font: `normal bold ${textScoreFontSize}px PingFang-SC`,
 						color: 'white',
 					})
+					textScore.text = '0'
 					stage.addChild(textScore)
 					textScore.x = centerX - (textScore.width * .5)
 					textScore.y = centerY - (textScore.height * .5)
@@ -140,13 +151,61 @@
 					})
 					textTips.x = centerX - 30
 					textTips.y = centerY + 76
-					// 将4个文本添加至舞台
+					//将4个文本添加至舞台
 					stage.addChild(text0, text100, textScore, textTips)
 					
-					// 当外部分值变化时更新 textScore
-					// watch(()=> props.score, (score) => {
-						
-					// })
+					// 动画显示分值
+					const animateChart = () => {
+						const endScore = props.score
+						let currentScore = 0
+						let currentAngle = startAngle
+						// 0 - 目标分数之间的每一格弧度距离
+						let perAngle =  (pointerCircleAngle - currentAngle) / endScore
+						const tick = () => {
+							if(currentScore < endScore){
+								animationTimer = setTimeout(() => {
+									currentScore += 1
+									textScore.text = currentScore
+									let textScoreWidth = textScoreFontSize
+									
+									// 判断分数位数以x轴上做负向偏
+									if(currentScore / 10 >= 10){
+										// 3位数
+										textScoreWidth = textScoreFontSize * 1.5
+										textScore.x = centerX -  (textScoreWidth * .5)
+									}else if(currentScore / 10 >= 1){
+										// 2位数
+										textScoreWidth = textScoreFontSize * 1
+										textScore.x = centerX -  (textScoreWidth * .5)
+									}
+									
+									
+									// 指示圆点的当前弧度
+									currentAngle += perAngle
+									if(currentAngle < pointerCircleAngle){
+										const endX = centerX + Math.cos(currentAngle) * outCircleRadius
+										const endY = centerY + Math.sin(currentAngle) * outCircleRadius
+										pointerCircle.x = endX
+										pointerCircle.y = endY
+									}
+									// 得分圆弧进度
+									arcLine.graphics
+									.beginPath()
+									.arc(centerX, centerY, outCircleRadius, startAngle, currentAngle, false)
+									.stroke()
+									
+									// 更新画布舞台
+									stage.update()
+									// 循环调用
+									tick()
+								}, 16.7)
+							}
+						}
+						tick()
+					}
+					
+					animateChart()
+					
 				}, ctx)
 			})
 		}
