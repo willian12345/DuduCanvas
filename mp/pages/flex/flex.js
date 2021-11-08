@@ -48,7 +48,7 @@ Page({
         const subContainer = new Container()
         subContainer.width = 120
         subContainer.height = 40
-        subContainer.borderRadius = 60
+        subContainer.borderRadius = 20
         subContainer.border = '2 solid red'
         subContainer.backgroundColor = '#999'
         subContainer.addChild(t2)
