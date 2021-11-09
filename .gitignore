@@ -20,3 +20,5 @@ yarn-error.log*
 *.sw?
 jsconfig.json
 *.code-workspace
+
+uniapp/unpackage/*
