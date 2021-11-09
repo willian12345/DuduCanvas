@@ -29,14 +29,9 @@
 				score: 100,
 				ratio: ratio,
 			})
-			
-			const handleClick = () => {
-				state.score++
-			}
-			
+		
 			return {
 				...toRefs(state),
-				handleClick,
 			}
 		}
 	}
