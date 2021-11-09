@@ -56,6 +56,8 @@ Page({
         container.addChild(subContainer)
 
         stage.addChild(container)
+
+        
       }, this)
     }) 
   }

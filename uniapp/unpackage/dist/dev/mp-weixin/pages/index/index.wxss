@@ -1,7 +1,0 @@
-
-.speed-chart-bg{
-	width: 750rpx;
-	height: 720rpx;
-	background: radial-gradient(130% 300.26% at -10% -100%, #11AAFF 10%, #796AFF 100%);
-}
-

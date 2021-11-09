@@ -255,11 +255,18 @@ export default class Text extends DisplayObject {
 	 */
 	measureWidth(text, fontSize){
 		let w
+		if(!text){
+			return 0
+		}
+		let textLength = text.length
 		if(this.writeMode.length){
 			w = fontSize
 		}else{
 			const ctx = DisplayObject.getContext()
-			w = ctx.measureText(text).width * (fontSize / defaultFontSize)
+			console.log()
+			// 测宽度前必须先设置字体大小
+			ctx.font = this.font
+			w = ctx.measureText(text).width
 		}
 		return w
 	}
@@ -323,7 +330,7 @@ export default class Text extends DisplayObject {
 		let arr = []
 		
 		while(t=text[i]){
-			// 根据每个单字计算字符宽度
+			// 根据每个单字计算字符宽度 !! 需要优化
 			lineWidth += ctx.measureText(t).width * (fontSize / defaultFontSize)
 			if(lineWidth <= wrapWidth){
 				arr[j] ? arr[j] += text[i] : arr[j] = text[i]

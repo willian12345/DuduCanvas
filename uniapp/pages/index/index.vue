@@ -26,7 +26,7 @@
 			const state = reactive({
 				width: 375,
 				height: 360,
-				score: 10,
+				score: 100,
 				ratio: ratio,
 			})
 			

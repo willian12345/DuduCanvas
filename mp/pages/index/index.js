@@ -3,8 +3,13 @@ Page({
   data:{
     tempPath: ''
   },
+  onUnload: function () {
+    if(this.timer){
+      clearInterval(this.timer)
+    }
+  },
   onLoad: function () {
-    console.log
+    this.timer
     new ImgLoader([
       {
         id: 'avatar',
@@ -13,7 +18,6 @@ Page({
     ])
     .then( loader => {
       new Stage('#myCanvas', stage => {
-
         const t1 = new Text()
         t1.color = '#cda79f'
         t1.text = 'Dudu canvas 示例'
@@ -48,8 +52,22 @@ Page({
         group.addChild(avatar, name)
         stage.addChild(t1, group)
 
-
-        
+        const centerX = stage.width * .5
+        let score = 0
+        const textScore = new Text({
+          font: `normal bold 56px PingFang-SC`,
+          color: 'black',
+        })
+        textScore.text = score
+        textScore.x = (centerX - (textScore.width * .5))
+        textScore.y = 100
+        stage.addChild(textScore)
+        this.timer = setInterval(()=>{
+          score++
+          textScore.text = score
+          textScore.x = (centerX - (textScore.width * .5))
+          stage.update()
+        }, 1000)
       }, this)
     }) 
   },

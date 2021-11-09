@@ -166,18 +166,8 @@
 								animationTimer = setTimeout(() => {
 									currentScore += 1
 									textScore.text = currentScore
-									let textScoreWidth = textScoreFontSize
-									
 									// 判断分数位数以x轴上做负向偏
-									if(currentScore / 10 >= 10){
-										// 3位数
-										textScoreWidth = textScoreFontSize * 1.5
-										textScore.x = centerX -  (textScoreWidth * .5)
-									}else if(currentScore / 10 >= 1){
-										// 2位数
-										textScoreWidth = textScoreFontSize * 1
-										textScore.x = centerX -  (textScoreWidth * .5)
-									}
+									textScore.x = centerX -  (textScore.width * .5)
 									
 									
 									// 指示圆点的当前弧度
