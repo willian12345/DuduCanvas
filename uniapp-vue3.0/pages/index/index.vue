@@ -1,6 +1,7 @@
 <template>
 	<view class="content">
 		<view class="speed-chart-bg">
+			<view class="title">duducanvas vue3.0 Composition API 写法应用</view>
 			<SpeedChart
 				:width="width"
 				:height="height"
@@ -38,6 +39,10 @@
 </script>
 
 <style>
+	.title{
+		padding: 20upx;
+		color: white;
+	}
 	.speed-chart-bg{
 		width: 750upx;
 		height: 720upx;

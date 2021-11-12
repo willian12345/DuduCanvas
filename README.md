@@ -4,7 +4,8 @@ Duducanvas 小程序canvas对象化封装, 微信小程序海报生成
 ```
 —— 根目录
 ———— mp 微信小程序目录
-———— uniapp demo 目录
+———— uniapp-vue3.0 demo 目录
+———— uniapp-vue2.0 demo 目录
 ———— dist Duducanvas 编译后文件
 ```
 ==================================================

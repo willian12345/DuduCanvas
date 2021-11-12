@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "vue3.0-uniapp-demo",
+  "usingComponents": {
+    "speed-chart": "/components/SpeedChart/SpeedChart"
+  }
+}

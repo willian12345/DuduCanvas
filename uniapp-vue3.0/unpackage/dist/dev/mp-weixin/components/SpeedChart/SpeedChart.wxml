@@ -1,0 +1,1 @@
+<canvas style="{{'width:'+(width*ratio+'px')+';'+('height:'+(height*ratio+'px')+';')}}" id="myCanvas" canvas-id="myCanvas"></canvas>

@@ -15,9 +15,13 @@ export default {
             format: 'es'
         },
         {
-            file: 'uniapp/duducanvas/duducanvas.js',
+            file: 'uniapp-vue2.0/duducanvas/duducanvas.js',
             format: 'es'
-        }
+        },
+        {
+            file: 'uniapp-vue3.0/duducanvas/duducanvas.js',
+            format: 'es'
+        },
     ],
     plugins: [
         resolve(),
