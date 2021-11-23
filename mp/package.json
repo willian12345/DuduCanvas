@@ -7,6 +7,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@types/ali-app": "^1.0.3",
+    "@types/uni-app": "^1.4.4",
     "babel-preset-latest": "^6.24.1",
     "cz-conventional-changelog": "^3.3.0",
     "rollup-plugin-commonjs": "^10.1.0",

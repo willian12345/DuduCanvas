@@ -1,0 +1,21 @@
+{
+  "name": "duducanvas",
+  "version": "1.0.0",
+  "description": "Duducanvas 小程序canvas对象化封装, 微信小程序海报生成",
+  "main": "dist/duducanvas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willian12345/DuduCanvas.git"
+  },
+  "keywords": ["小程序canvas", "小程序海报", "小程序图形操作"],
+  "author": "willian12345@126.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willian12345/DuduCanvas/issues"
+  },
+  "homepage": "https://github.com/willian12345/DuduCanvas#readme"
+}
