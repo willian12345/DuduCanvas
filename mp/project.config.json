@@ -31,18 +31,18 @@
             "outputPath": ""
         },
         "enableEngineNative": false,
-        "useIsolateContext": false,
+        "useIsolateContext": true,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
         "minifyWXSS": false,
         "disableUseStrict": false,
+        "minifyWXML": true,
         "showES6CompileOption": false,
-        "useCompilerPlugins": false,
-        "minifyWXML": true
+        "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.20.1",
+    "libVersion": "2.19.6",
     "appid": "wxbdd6f116cceab972",
     "projectname": "DuduCanvas",
     "debugOptions": {

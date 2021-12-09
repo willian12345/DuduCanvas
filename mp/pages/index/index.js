@@ -20,14 +20,14 @@ Page({
       new Stage('#myCanvas', stage => {
         const t1 = new Text()
         t1.color = '#cda79f'
-        t1.text = 'Dudu canvas 示例'
         t1.fontSize = 20
+        t1.text = 'Dudu canvas 示例'
         t1.x = 40
         t1.y = 40
         // 给文本加个底色
         t1.graphics.fillStyle('yellow')
         .fillRect(0, 0, t1.width, t1.height)        
-
+        stage.addChild(t1)
         const avatar = new Image({
           image: loader.get('avatar'),
           width: 100, 

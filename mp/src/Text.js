@@ -70,8 +70,8 @@ export default class Text extends DisplayObject {
 	set text(t){
 		t = String(t)
 		this[_text] = t
-		this.width = this.measureWidth(t, this.fontSize)
-		this.height = this.fontSize
+		this[_width] = this.measureWidth(t, this.fontSize)
+		this[_height] = this.fontSize
 	}
 	get width(){
 		return this[_width]
@@ -117,8 +117,9 @@ export default class Text extends DisplayObject {
 	}
 	set fontSize(v){
 		this[_fontSize] = v
-		this.width = this.measureWidth(this.text, v)
-		this.height = v  + this.lineGap
+		this.font = `${this[_fontSize]}px sans-serif`
+		this[_width] = this.measureWidth(this.text, v)
+		this[_height] = v  + this.lineGap
 	}
 	/**
 	 * 文本横排与竖排模式
@@ -140,7 +141,6 @@ export default class Text extends DisplayObject {
 			this.font = `${this.fontSize}px sans-serif`
 			this[_height] = this.fontSize  + this.lineGap
 		}
-
 		this.setTextAlign(this.textAlign)
 		this.setTextBaseline(this.textBaseline)
 		this.setFillStyle(this.color)
@@ -178,7 +178,7 @@ export default class Text extends DisplayObject {
 		this[_text] = text
 		this.x += x
 		this.y += y
-		this.width = this.measureWidth(this[_text], this.fontSize)
+		this[_width] = this.measureWidth(this[_text], this.fontSize)
 		// 如果之前有fillText,则需要先清一下之前填文本的命令
 		this[remove]('FillText')
 		// !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
@@ -203,6 +203,10 @@ export default class Text extends DisplayObject {
 	setFontSize(size) {
 		this.fontSize = size
 		this.font = this.font.replace(/\d+/, size)
+		if(this.fontSize){
+			this.font = `${this.fontSize}px sans-serif`
+			this[_height] = this.fontSize  + this.lineGap
+		}
 		return this
 	}
 	/**
@@ -237,7 +241,7 @@ export default class Text extends DisplayObject {
 	 */
 	setWrapWidth(w){
 		this.wrapWidth = w
-		this.width = w
+		this[_width] = w
 		return this
 	}
 	/**
@@ -263,7 +267,6 @@ export default class Text extends DisplayObject {
 			w = fontSize
 		}else{
 			const ctx = DisplayObject.getContext()
-			console.log()
 			// 测宽度前必须先设置字体大小
 			ctx.font = this.font
 			w = ctx.measureText(text).width
