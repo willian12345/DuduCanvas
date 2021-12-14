@@ -1,5 +1,25 @@
 Duducanvas 小程序canvas对象化封装, 微信小程序海报生成
 ==================================================
+----
+举个栗子
+----
+![image](screenshot/WX20211214-192038.png)
+
+![image](screenshot/WX20211214-192114.png)
+
+![image](screenshot/WX20211214-192132.png)
+
+![image](screenshot/WX20211214-192145.png)
+
+----
+uniapp vue2.0
+
+![image](screenshot/WX20211214-192348.png)
+----
+uniapp vue3.0
+
+![image](screenshot/WX20211214-192419.png)
+
 整个目录可以用 “微信开发者工具” 直接打开
 ```
 —— 根目录
