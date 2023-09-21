@@ -1,6 +1,11 @@
 {
     "pages": [
-        "pages/index/index"
+        "pages/index/index",
+        "pages/text/text",
+        "pages/path/path",
+        "pages/image/image",
+        "pages/async/async",
+        "pages/flex/flex"
     ],
     "window": {
         "backgroundTextStyle": "light",
