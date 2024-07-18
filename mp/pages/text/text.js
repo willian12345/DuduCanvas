@@ -4,10 +4,9 @@
 import { Stage, Text, Group } from '../../src/index'
 
 Page({
-  onLoad: function () {
-    new Stage('#myCanvas', (stage, ctx) => {
-
-      const t0 = new Text({font: 'italic 18px sans-serif'})
+  onLoad: async function () {
+    const stage = await new Stage('#myCanvas', {width: 375, height: 400}, this)
+    const t0 = new Text({font: 'italic 18px sans-serif'})
       t0.color = 'red'
       t0.lineGap = 10 // 行间距
       t0.writeMode = 'vertical-lr'
@@ -22,6 +21,6 @@ Page({
       console.log(t1.height)
 
       stage.addChild(t0, t1)
-    }, this)
+      stage.update();
   }
 })

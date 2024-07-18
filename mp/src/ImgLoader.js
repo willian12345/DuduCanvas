@@ -13,7 +13,8 @@ const PATH_REG = /^http*/
  * 
  */
 export default class ImgLoader {
-	constructor(imgArr, loadProgressCallback){
+	constructor(canvas, imgArr, loadProgressCallback){
+    this.canvas = canvas;
 		this[total] = imgArr.length
 		this[loaded] = 0
 		this[loadProgressCallback] = loadProgressCallback
@@ -29,28 +30,45 @@ export default class ImgLoader {
 	}
 	[load](imgArr, resolve){
 		imgArr.forEach( v => {
-			getImageInfo({
-        src: v.src,
-        success: res => {
-					// 为本地图片地址最前主动加上 '/' , 以符合绘图接口的路径规则
-          if(!PATH_REG.test(v.src)){
-          	res.path = '/' + res.path
-          }
-          this[imageMap].set(v.id, {
-          	path: res.path,
-          	width: res.width,
-          	height: res.height,
-
-          })
-					this[loaded]++
+      const image = this.canvas.createImage();
+      image.onload = () => {
+        this[imageMap].set(v.id, {
+          path: v.src,
+          width: image.width,
+          height: image.height,
+          image
+        })
+        this[loaded]++
 					if(this[loadProgressCallback]){
 						this[loadProgressCallback](p)
 					}
           if((this[loaded] / this[total]) >= 1){
 						resolve(this)
           }
-        }
-      })
+      }
+      image.src = v.src;
+			// getImageInfo({
+      //   src: v.src,
+      //   success: res => {
+			// 		// 为本地图片地址最前主动加上 '/' , 以符合绘图接口的路径规则
+      //     if(!PATH_REG.test(v.src)){
+      //     	res.path = '/' + res.path
+      //     }
+      //     this[imageMap].set(v.id, {
+      //     	path: res.path,
+      //     	width: res.width,
+      //     	height: res.height,
+
+      //     })
+			// 		this[loaded]++
+			// 		if(this[loadProgressCallback]){
+			// 			this[loadProgressCallback](p)
+			// 		}
+      //     if((this[loaded] / this[total]) >= 1){
+			// 			resolve(this)
+      //     }
+      //   }
+      // })
 		})
 		return this
 	}

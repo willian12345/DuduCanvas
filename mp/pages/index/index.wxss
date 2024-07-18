@@ -17,3 +17,7 @@ page{
   font-size: 10px;
   word-wrap: break-word;
 }
+.container{
+  padding: 0;
+  margin: 0;
+}

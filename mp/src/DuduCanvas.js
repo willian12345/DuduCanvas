@@ -17,13 +17,11 @@ import CreateRadialGradient from './color/CreateRadialGradient'
 
 
 export default {
-	load: imgArr => {
-		return new ImgLoader(imgArr)
+	load: (canvas, imgArr) => {
+		return new ImgLoader(canvas, imgArr)
 	},
-	Stage: (id, callback, page) => {
-		return new Stage(id, (...args)=>{
-			callback(...args)
-		}, page)
+	Stage: (id, params, page) => {
+		return new Stage(id, 	params, page)
 	},
 	Shape: () => {
 		return new Shape()

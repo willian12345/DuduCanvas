@@ -2,13 +2,12 @@ export default class CreateRadialGradient {
   name = 'CreateRadialGradient'
   colorStops = []
   /**
-   * x0	渐变的开始圆的 x 坐标
-   * y0	渐变的开始圆的 y 坐标
-   * r0	开始圆的半径
-   * 注意：小程序不支持后面这三个参数
-   * x1	渐变的结束圆的 x 坐标
-   * y1	渐变的结束圆的 y 坐标
-   * r1	结束圆的半径
+   * x0 开始圆形的 x 轴坐标。
+   * y0 开始圆形的 y 轴坐标。
+   * r0 开始圆形的半径。
+   * x1 结束圆形的 x 轴坐标。
+   * y1 结束圆形的 y 轴坐标。
+   * r1 结束圆形的半径。
    */
   constructor(x0, y0, r0, x1, y1, r1){
     this.x0 = x0
@@ -18,13 +17,9 @@ export default class CreateRadialGradient {
     this.y1 = y1
     this.r1 = r1
   }
-  create(ctx, ...args){
-    if(ctx.createRadialGradient){
-      return ctx.createRadialGradient.apply(this, args)
-    }else{
-      console.warn('小程序不支持传6个参数，请查阅: createCircularGradient 对应文档')
-      return ctx.createCircularGradient.apply(this, args)
-    }
+  create(ctx, x0, y0, r0, x1, y1, r1){
+    console.log(x0, y0, r0, x1, y1, r1)
+    return ctx.createRadialGradient(x0, y0, r0, x1, y1, r1)
   }
   exec(ctx, instance){
     const [_x, _y] = instance.getPosition()

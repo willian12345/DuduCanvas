@@ -1,5 +1,5 @@
 import SimpleCss from './SimpleCss.js'
-import { draw, getAlpha, drawGraphics, drawImage } from './config'
+import { draw, getAlpha, drawImage } from './config'
 
 const extendsClassDraw = Symbol('extendsClassDraw')
 
@@ -22,13 +22,12 @@ export default class Image extends SimpleCss {
 	
 	constructor(args){
 		super()
-		this[extendsClassDraw] = super[draw]
+    this[extendsClassDraw] = super[draw]
 		for(let v in args){
 			this[v] = args[v]
 		}
 		// 图片地址路径 远程/本地
-		this.path = this.image.path
-
+		this.path = this.image
 		// 如果设置了 width 则认 width 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
 		if(!this.width){
 			this.width = this.dWidth
@@ -52,20 +51,20 @@ export default class Image extends SimpleCss {
 		 */
 		
 		 ctx.globalAlpha = this[getAlpha]()
-
+    
 		if(this.sx != undefined){
 			// 如果传了原始图起点，则说明要填完整所有参数
 			ctx.drawImage(this.path, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)
 		}else if(this.dWidth != undefined){
 			// 如果传了绘制目标宽，则认为不管原图，只管绘制目标位置与宽高
-			ctx.drawImage(this.path, x, y, this.dWidth, this.dHeight)
+      ctx.drawImage(this.path, x, y, this.dWidth, this.dHeight)
 		}else{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.path, x, y)
 		}
 	}
 	[draw](ctx){
-		let [x, y] = this.getPosition()
+    let [x, y] = this.getPosition()
 		x = this.dx + x
 		y = this.dy + y
 		// 调用 extends class 的 draw 方法，因为有可能需要设置样式
