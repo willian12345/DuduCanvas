@@ -15,7 +15,6 @@
 <script>
 	import { reactive, toRefs, onMounted, getCurrentInstance } from 'vue'
 	import SpeedChart from '@/components/SpeedChart/SpeedChart.vue'
-	import { Stage, Text } from '../../src/index.js'
 	export default {
 		components: {
 			SpeedChart,

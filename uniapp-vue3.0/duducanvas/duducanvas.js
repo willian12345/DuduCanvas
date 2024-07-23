@@ -684,8 +684,8 @@ class DisplayObject  extends Graphics{
 	name = 'DisplayObject'
 	x = 0
 	y = 0
-	width = 0
-	height = 0
+	// width = 0
+	// height = 0
 	alpha = 1
 	regX = 0
 	regY = 0
@@ -1304,7 +1304,6 @@ class Text extends DisplayObject {
 		this[_height$1] = this.fontSize;
 	}
 	get width(){
-		console.log(this[_width$1], 6666);
 		return this[_width$1]
 	}
 	set width(w){

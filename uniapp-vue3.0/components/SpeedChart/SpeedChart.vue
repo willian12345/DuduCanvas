@@ -4,8 +4,7 @@
 
 <script>
 	import { onMounted, onUnmounted, getCurrentInstance } from 'vue'
-	import { onUnload } from '@dcloudio/uni-app'
-	import { Stage, Text, Shape } from '../../duducanvas/duducanvas.js.js'
+	import { Stage, Text, Shape } from '../../duducanvas/duducanvas.js'
 	const START_DEGREE = 135 // 起始角度（左下角）
 	const END_DEGREE = 405 // 终点角度（右下角）
 	const DEGREE_RANGE = END_DEGREE - START_DEGREE // 角度区间
@@ -116,23 +115,23 @@
 				// 左下角显示字符 0
 				const startPointX = centerX + Math.cos(startAngle) * outCircleRadius
 				const startPointY = centerY + Math.sin(startAngle) * outCircleRadius
-				// const text0 = new Text({
-				// 	text: '0',
-				// 	fontSize: 16,
-				// 	color: 'rgba(255,255,255, .5)'
-				// })
-				// text0.x = startPointX - 20
-				// text0.y = startPointY
-				// // 右下角显示字符 100
-				// const endPointX = centerX + Math.cos(endAngle) * outCircleRadius
-				// const endPointY = centerY + Math.sin(endAngle) * outCircleRadius
-				// const text100 = new Text({
-				// 	fontSize: 16,
-				// 	text: '100',
-				// 	color: 'rgba(255,255,255, .5)'
-				// })
-				// text100.x = endPointX + 6
-				// text100.y = endPointY
+				const text0 = new Text({
+					text: '0',
+					fontSize: 16,
+					color: 'rgba(255,255,255, .5)'
+				})
+				text0.x = startPointX - 20
+				text0.y = startPointY
+				// 右下角显示字符 100
+				const endPointX = centerX + Math.cos(endAngle) * outCircleRadius
+				const endPointY = centerY + Math.sin(endAngle) * outCircleRadius
+				const text100 = new Text({
+					fontSize: 16,
+					text: '100',
+					color: 'rgba(255,255,255, .5)'
+				})
+				text100.x = endPointX + 6
+				text100.y = endPointY
 				
 				// 得分
 				const textScoreFontSize = 56 * props.ratio
@@ -143,62 +142,59 @@
 				textScore.text = '100'
 				textScore.x = centerX - (textScore.width * .5)
 				textScore.y = centerY - (textScore.height * .5)
-				console.log(textScore.width, textScore.height)
+				// 综合得分
+				const textTips = new Text({
+					font: `normal bold ${16 * props.ratio}px PingFang-SC`,
+					text: '综合得分',
+					color: 'white'
+				})
+				textTips.x = centerX - 30
+				textTips.y = centerY + 76
+				// 将4个文本添加至舞台
 				stage.addChild(textScore)
 				stage.update();
-				// 综合得分
-				// const textTips = new Text({
-				// 	font: `normal bold ${16 * props.ratio}px PingFang-SC`,
-				// 	text: '综合得分',
-				// 	color: 'white'
-				// })
-				// textTips.x = centerX - 30
-				// textTips.y = centerY + 76
-				//将4个文本添加至舞台
-				// stage.addChild(textScore)
-				// stage.update();
-				// console.log(centerX, textScore.width)
+				console.log(centerX, textScore.width)
 				// 动画显示分值
-				// const animateChart = () => {
-				// 	const endScore = props.score
-				// 	let currentScore = 0
-				// 	let currentAngle = startAngle
-				// 	// 0 - 目标分数之间的每一格弧度距离
-				// 	let perAngle =  (pointerCircleAngle - currentAngle) / endScore
-				// 	const tick = () => {
-				// 		if(currentScore < endScore){
-				// 			animationTimer = setTimeout(() => {
-				// 				currentScore += 1
-				// 				textScore.text = currentScore
-				// 				// 判断分数位数以x轴上做负向偏
-				// 				textScore.x = centerX -  (textScore.width * .5)
+				const animateChart = () => {
+					const endScore = props.score
+					let currentScore = 0
+					let currentAngle = startAngle
+					// 0 - 目标分数之间的每一格弧度距离
+					let perAngle =  (pointerCircleAngle - currentAngle) / endScore
+					const tick = () => {
+						if(currentScore < endScore){
+							animationTimer = setTimeout(() => {
+								currentScore += 1
+								textScore.text = currentScore
+								// 判断分数位数以x轴上做负向偏
+								textScore.x = centerX -  (textScore.width * .5)
 								
 								
-				// 				// 指示圆点的当前弧度
-				// 				currentAngle += perAngle
-				// 				if(currentAngle < pointerCircleAngle){
-				// 					const endX = centerX + Math.cos(currentAngle) * outCircleRadius
-				// 					const endY = centerY + Math.sin(currentAngle) * outCircleRadius
-				// 					pointerCircle.x = endX
-				// 					pointerCircle.y = endY
-				// 				}
-				// 				// 得分圆弧进度
-				// 				arcLine.graphics
-				// 				.beginPath()
-				// 				.arc(centerX, centerY, outCircleRadius, startAngle, currentAngle, false)
-				// 				.stroke()
+								// 指示圆点的当前弧度
+								currentAngle += perAngle
+								if(currentAngle < pointerCircleAngle){
+									const endX = centerX + Math.cos(currentAngle) * outCircleRadius
+									const endY = centerY + Math.sin(currentAngle) * outCircleRadius
+									pointerCircle.x = endX
+									pointerCircle.y = endY
+								}
+								// 得分圆弧进度
+								arcLine.graphics
+								.beginPath()
+								.arc(centerX, centerY, outCircleRadius, startAngle, currentAngle, false)
+								.stroke()
 								
-				// 				// 更新画布舞台
-				// 				stage.update()
-				// 				// 循环调用
-				// 				tick()
-				// 			}, 16.7)
-				// 		}
-				// 	}
-				// 	tick()
-				// }
+								// 更新画布舞台
+								stage.update()
+								// 循环调用
+								tick()
+							}, 16.7)
+						}
+					}
+					tick()
+				}
 				
-				// animateChart()
+				animateChart()
 				
 			})
 		}
