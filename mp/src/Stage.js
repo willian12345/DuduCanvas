@@ -19,6 +19,7 @@ export default class Stage extends DisplayObject {
 	  super()
     return new Promise((resolve) => {
       const query = componentInstance ? createSelectorQuery().in(componentInstance) : createSelectorQuery()
+			
       query.select(id) 
       .node(async ({node}) => {
         const canvas = node;
@@ -31,7 +32,6 @@ export default class Stage extends DisplayObject {
           this.height = canvasHeight
           this.context = context
           this.canvas = canvas;
-          
           DisplayObject.setContext(this.context)	
           // await callback(this, canvas, this.context)
           // // 自动调用一次渲染

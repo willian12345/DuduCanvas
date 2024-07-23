@@ -5,17 +5,7 @@
 			"style": {
 				"navigationBarTitleText": "vue3.0-uniapp-demo"
 			}
-		},
-		{
-		      "path" : "pages/test/test",
-		      "style" :                                                                                    
-		      {
-		          "navigationBarTitleText": "",
-		          "enablePullDownRefresh": false
-		      }
-		      
-		  }
-	    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -4,7 +4,10 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
-			}
+			},
+			 "usingComponents": {
+			   "SpeedChart": "/components/SpeedChart/SpeedChart"
+			 }
 		}
 	],
 	"globalStyle": {

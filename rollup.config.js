@@ -1,8 +1,8 @@
 // rollup -c rollup.config.js   
 import resolve from '@rollup/plugin-node-resolve';
-import { babel } from '@rollup/plugin-babel';
-import '@babel/polyfill'
-import { uglify } from "rollup-plugin-uglify";
+// import { babel } from '@rollup/plugin-babel';
+// import '@babel/polyfill'
+// import { uglify } from "rollup-plugin-uglify";
 export default {
     input: 'mp/src/index.js',
     output: [
@@ -25,14 +25,14 @@ export default {
     ],
     plugins: [
         resolve(),
-        babel({
-            exclude: 'node_modules/**',
-            presets: [
-                [
-                  "@babel/env",
-                ]
-            ]
-        }),
-        uglify(),
+        // babel({
+        //     exclude: 'node_modules/**',
+        //     presets: [
+        //         [
+        //           "@babel/env",
+        //         ]
+        //     ]
+        // }),
+        // uglify(),
     ],
 }

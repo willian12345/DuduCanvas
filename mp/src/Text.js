@@ -38,7 +38,7 @@ export default class Text extends DisplayObject {
 		this[_writeMode] = ''
 		if(font){
 			this.font = font
-			let fontSize = font.match(/\d+/)[0]
+			let fontSize = font.match(/\d+/)?.[0]
 			if(fontSize){
 				this.fontSize = parseInt(fontSize)
 				this[_height] = this.fontSize + this.lineGap
@@ -58,7 +58,6 @@ export default class Text extends DisplayObject {
 		this.textAlign = 'left'
 		this.textBaseline = 'top'
 		this[_text] = ''
-		// console.log(text)
 		// 初始化就设置文本
 		if(text){
 			this.text = text
@@ -120,6 +119,7 @@ export default class Text extends DisplayObject {
 		this.font = `${this[_fontSize]}px sans-serif`
 		this[_width] = this.measureWidth(this.text, v)
 		this[_height] = v  + this.lineGap
+		console.log(44444, this.font, this[_width])
 	}
 	/**
 	 * 文本横排与竖排模式

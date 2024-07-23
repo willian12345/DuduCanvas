@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-uniapp/unpackage
 # local env files
 .env.local
 .env.*.local
@@ -21,4 +20,5 @@ yarn-error.log*
 jsconfig.json
 *.code-workspace
 
-uniapp/unpackage/*
+uniapp-vue2.0/unpackage/
+uniapp-vue3.0/unpackage/

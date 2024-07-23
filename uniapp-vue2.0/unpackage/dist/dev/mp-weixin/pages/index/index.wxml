@@ -1,1 +1,0 @@
-<view class="content"><view class="speed-chart-bg"><view class="title">duducanvas vue2.0 写法应用</view><speed-chart vue-id="8dd740cc-1" width="{{width}}" height="{{height}}" ratio="{{ratio}}" score="{{score}}" bind:__l="__l"></speed-chart></view></view>

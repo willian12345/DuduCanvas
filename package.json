@@ -11,11 +11,22 @@
     "type": "git",
     "url": "https://github.com/willian12345/DuduCanvas.git"
   },
-  "keywords": ["小程序canvas", "小程序海报", "小程序图形操作"],
+  "keywords": [
+    "小程序canvas",
+    "小程序海报",
+    "小程序图形操作"
+  ],
   "author": "willian12345@126.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/willian12345/DuduCanvas/issues"
   },
-  "homepage": "https://github.com/willian12345/DuduCanvas#readme"
+  "homepage": "https://github.com/willian12345/DuduCanvas#readme",
+  "devDependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.24.8",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup-plugin-uglify": "^6.0.4"
+  }
 }

@@ -20,8 +20,8 @@ export default class DisplayObject  extends Graphics{
 	name = 'DisplayObject'
 	x = 0
 	y = 0
-	width = 0
-	height = 0
+	// width = 0
+	// height = 0
 	alpha = 1
 	regX = 0
 	regY = 0

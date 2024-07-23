@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {
-    "speed-chart": "/components/SpeedChart/SpeedChart"
-  }
-}
