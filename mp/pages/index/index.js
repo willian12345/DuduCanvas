@@ -18,6 +18,7 @@ Page({
   onLoad: async function () {
     this.timer
     const stage = await new Stage('#myCanvas', {width: 375, height: 400}, this)
+    console.log(stage)
     this.canvas = stage.canvas;
     const loader = await new ImgLoader(stage.canvas, [
       {
