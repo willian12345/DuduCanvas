@@ -227,14 +227,34 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 
 还有一个就是小程序新的 glass-easel 组件框架，和 Skyline 渲染器 组合就成了跨平台框架，理论上是这样 !^_^
 
+
+### rollup 构建 
+==================================================
+
+源码在 `/mp/src` 目录下，修改后如果想在 uniapp 内使用，需要再编译构建
+
+rollup版本 v2.58.1
+
+```
+rollup -c rollup.config.js
+```
+
+
+
+
+
 ### 以前的纠结
 --------------------------------------
 
 以前纠结要不要为这个库添加 ui 事件
 
 - 小程序框架js运行层与 view 渲染层完全分离的，用户操作行为触发事件需要通过中转才能到达 view 渲染层，一旦用到 touchmove 频繁操作 UI 的事件就会明显的性能下降顿挫
+
 - 添加上了事件不就完全成了小游戏了么，那干麻不直接用小游戏框架
-- 调研了一圈发现添加UI事件比较好的方案需要由 2 个 canvas 来实现，小程序不像 web 那样方便，新版canvas-2d 完全成熟了的话再考虑
+
+看过了 EaseJS 和 PixiJS 的源码后，我感觉对于事件实现也不是特别复杂，但小程序的 canvas bug 还是比较多的... 到现在 OffscreenCanvas 都没办法融合到 canvas-2d 上，无语了...
+
+算了再等等吧
 
 ### 资料参考
 - 小程序 canvas 开发文档 https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.html
@@ -242,11 +262,4 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 - canvas 参考手册  https://www.w3school.com.cn/tags/html_ref_canvas.asp
 - canvas API https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API
 
-
-rollup 构建 
-==================================================
-rollup版本 v2.58.1
-```
-rollup -c rollup.config.js
-```
 
