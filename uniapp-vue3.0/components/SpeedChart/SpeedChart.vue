@@ -151,7 +151,7 @@
 				textTips.x = centerX - 30
 				textTips.y = centerY + 76
 				// 将4个文本添加至舞台
-				stage.addChild(textScore)
+				stage.addChild(textScore, text0, text100)
 				stage.update();
 				console.log(centerX, textScore.width)
 				// 动画显示分值

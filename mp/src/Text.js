@@ -119,7 +119,6 @@ export default class Text extends DisplayObject {
 		this.font = `${this[_fontSize]}px sans-serif`
 		this[_width] = this.measureWidth(this.text, v)
 		this[_height] = v  + this.lineGap
-		console.log(44444, this.font, this[_width])
 	}
 	/**
 	 * 文本横排与竖排模式

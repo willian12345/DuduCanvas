@@ -14,8 +14,6 @@
 
 <script>
 	import SpeedChart from '@/components/SpeedChart/SpeedChart.vue'
-	import { Stage, Text } from '../../duducanvas/duducanvas.js'
-	
 	export default {
 		components: {
 			SpeedChart,
