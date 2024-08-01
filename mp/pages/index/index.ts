@@ -1,4 +1,4 @@
-import { ImgLoader, Stage, Text, Group, Image} from '../../dist/duducanvas'
+import {Application, ImgLoader, Stage, Text, Group, Image} from '../../src/index'
 Page({
   data:{
     tempPath: ''
@@ -16,8 +16,10 @@ Page({
     }
   },
   onLoad: async function () {
-    this.timer
-    const stage = await new Stage('#myCanvas', {width: 375, height: 400}, this)
+    this.timer;
+    const app = new Application('#myCanvas', {width: 375, height: 400}, this);
+    const stage = await app.init();
+    
     console.log(stage)
     this.canvas = stage.canvas;
     const loader = await new ImgLoader(stage.canvas, [

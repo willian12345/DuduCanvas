@@ -11,7 +11,10 @@ export const instructions = Symbol('instructions')
 export const drawGraphics = Symbol('drawGraphics')
 
 
-
+// 全局变量类型声明
+declare const uni: any;
+declare const my: any;
+declare const tt: any;
 
 /**
  * 兼容各小程序平台
@@ -28,10 +31,10 @@ function getPrefix(){
     // 支付宝小程序
     prefix = my
   }
-//   else if(typeof tt  !== 'undefined'){
-//     // 字节跳动
-//     prefix = tt
-//   }
+  else if(typeof tt  !== 'undefined'){
+    // 字节跳动
+    prefix = tt
+  }
   return prefix
 }
 

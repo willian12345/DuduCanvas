@@ -39,7 +39,9 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false,
+    "useCompilerPlugins": [
+      "typescript"
+    ],
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",

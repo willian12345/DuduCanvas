@@ -13,3 +13,4 @@ export { default as Container } from './Container.js';
 export { default as CreateLinearGradient } from './color/CreateLinearGradient'
 export { default as CreateRadialGradient } from './color/CreateRadialGradient'
 export { default as DuduCanvas } from './DuduCanvas'
+export { default as Application } from './Application'
