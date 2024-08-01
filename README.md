@@ -58,7 +58,7 @@ Duducanvas 1.3.0 已对接 小程序的  Canvas 2D 接口
 ### 快速开始
 --------------------------------------
 
-直接下载 duducanvas.js 文件引入 或通过 [npm 包安装](###微信小程序开发工具内 npm 包如何安装)
+直接下载 duducanvas.js 文件引入 或通过 [npm 包安装](#npmPackage)
 
 ### 页面内添加 canvas 标签
 
@@ -227,6 +227,7 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 
 还有一个就是小程序新的 glass-easel 组件框架，和 Skyline 渲染器 组合就成了跨平台框架，理论上是这样 !^_^
 
+<a name="npmPackage"></a>
 ### 微信小程序开发工具内 npm 包如何安装
 
 以 pnpm 工具举例
