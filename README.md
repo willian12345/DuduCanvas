@@ -55,9 +55,10 @@ Duducanvas 1.3.0 已对接 小程序的  Canvas 2D 接口
 > canvas 接口有哪些变化 可参考 旧版 Canvas 迁移指南 https://developers.weixin.qq.com/miniprogram/dev/framework/ability/canvas-legacy-migration.html
 
 
-
 ### 快速开始
 --------------------------------------
+
+直接下载 duducanvas.js 文件引入 或通过 [npm 包安装](###微信小程序开发工具内 npm 包如何安装)
 
 ### 页面内添加 canvas 标签
 
@@ -204,7 +205,6 @@ stage 实例属性内有 canvas 和 context 属性
 - flex 只实现了简单的布局功能，并未完全实现 flex 功能，flex完全体非常复杂，用都还没用明白
 
 
-
 ### 小程序 canvas 海报生成注意事项
 --------------------------------------
 
@@ -227,11 +227,27 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 
 还有一个就是小程序新的 glass-easel 组件框架，和 Skyline 渲染器 组合就成了跨平台框架，理论上是这样 !^_^
 
+### 微信小程序开发工具内 npm 包如何安装
 
-### rollup 构建 
+以 pnpm 工具举例
+
+1. 小程序项目根目录 `pnpm init` 生成 package.json 文件
+
+2. 安装 `pnpm add duducanvas`
+
+3. 在微信开发者工具中，点击菜单栏的“工具” -> “构建 npm ”
+
+4. 在小程序页面的 js 内引入  `import  { Text, Stage } from 'duducanvas'`
+
+5. 如果引入不成功可试试  `import  { Text, Stage } from '../../miniprogram_npm/duducanvas/index'`
+
+具体可参考微信小程序官方网站 npm 支持 https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html
+
+
+### 源码 rollup 构建 
 ==================================================
 
-源码在 `/mp/src` 目录下，修改后如果想在 uniapp 内使用，需要再编译构建
+源码在 `/mp/src` 目录下，修改后构建成功生成 `dist/duducanvas.js`
 
 rollup版本 v2.58.1
 
@@ -255,6 +271,11 @@ rollup -c rollup.config.js
 看过了 EaseJS 和 PixiJS 的源码后，我感觉对于事件实现也不是特别复杂，但小程序的 canvas bug 还是比较多的... 到现在 OffscreenCanvas 都没办法融合到 canvas-2d 上，无语了...
 
 算了再等等吧
+
+### todo
+
+- typescript
+- Matrix 属性计算
 
 ### 资料参考
 - 小程序 canvas 开发文档 https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.html
