@@ -244,6 +244,10 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 
 具体可参考微信小程序官方网站 npm 支持 https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html
 
+uniapp 内引入 npm 包也类似操作，只是不需要构建 npm
+
+具体可参考 https://uniapp.dcloud.net.cn/tutorial/page-script.html#npm支持
+
 
 ### 源码 rollup 构建 
 ==================================================
