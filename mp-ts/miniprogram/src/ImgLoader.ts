@@ -2,12 +2,13 @@
  * 预加载图片
  * 
  */
-export type TImageMap = Map<string, {
+export type ImageTexture = {
   path: string,
   width: number,
   height: number,
   image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource,
-}>
+}
+export type TImageMap = Map<string, ImageTexture>
 export type TImgArr = {id: string, src: string}[];
 export default class ImgLoader {
   canvas: WechatMiniprogram.Canvas

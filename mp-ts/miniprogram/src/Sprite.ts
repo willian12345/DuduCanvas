@@ -1,9 +1,6 @@
 import Group from './Group.js'
 import Image from './Image.js'
-import { draw, getAlpha,instructions } from './config'
-
-const drawImage = Symbol('drawImage')
-const drawSliced = Symbol('drawSliced')
+import type {ImageTexture} from './ImgLoader'
 
 // const rotation = Symbol('rotation')
 /**
@@ -13,7 +10,7 @@ const drawSliced = Symbol('drawSliced')
 export type TBound = { left: number, top: number, right: number, bottom: number }
 export default class Sprite extends Group{	
 	name = 'Sprite'
-	img!: Image
+	img!: ImageTexture
   sliced = false
   _sliceBounds: TBound = { left: 0, top: 0, right: 0, bottom: 0 }
   _left = 0
@@ -27,10 +24,10 @@ export default class Sprite extends Group{
   enableWidth = 0
   enableHeight = 0
 
-	get abc(){
+	get sliceBounds(){
 		return this._sliceBounds
 	}
-	set abc(bounds){
+	set sliceBounds(bounds){
     // const { left, top, right, bottom } = bounds
 		this._setSlice(bounds)
 		this._sliceBounds = bounds
@@ -40,7 +37,7 @@ export default class Sprite extends Group{
 	 * @param {*} img Image 对象
 	 * @param {*} sliceBound 九宫格图 {left: 0, top: 0, right: 0, bottom: 0}
 	 */
-	constructor(img: Image, sliceBound?: TBound){
+	constructor(img: ImageTexture, sliceBound?: TBound){
 		super()
 		if(img){
 			this.img = img	
@@ -61,7 +58,7 @@ export default class Sprite extends Group{
 	// 		this[rotation] = r
 	// 	}
 	// }
-	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+	protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
 		const [x, y] = this.getPosition()
 		
 		this.wRatio = this.width / this.img.width
@@ -89,7 +86,7 @@ export default class Sprite extends Group{
 		})
 		
 	}
-	_drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
+	private _drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
     const yoyo = this.img.image
 		const img = new Image({
 			image: yoyo,
@@ -98,11 +95,11 @@ export default class Sprite extends Group{
 			dWidth: this.width,
 			dHeight: this.height
 		})
-    img._draw(ctx)
+    img.draw(ctx)
     console.log(img, yoyo)
 	}
 	// 绘制九宫格图像
-	_drawSliced(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number, alpha: number){
+	private _drawSliced(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number, alpha: number){
 		// 计算九宫格每块位置信息
 		// 上左
 		const ltParams = {
@@ -220,20 +217,17 @@ export default class Sprite extends Group{
 			dx: ltParams.dx + ltParams.dWidth,
 			dy: ltParams.dy + ltParams.dHeight,
 		}
-		// const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
-		const peices = [ltParams]
+		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
 		// 用离屏渲染成整张图再绘制到主canvas中解决接触缝隙问题以及性能问题
 		// const offScreen = wx.createOffscreenCanvas(375, 375)
 		// var offScreenCtx = offScreen.getContext("2d")		
 		if(this.rotation != 0){
 			console.error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
     }
-    console.log(444)
 		peices.forEach( v => {
-      console.log(v,333333333)
 			const i = new Image(v)
       i.alpha = alpha
-			i._draw(ctx)
+			i.draw(ctx)
 		})
 
 		return this
@@ -242,8 +236,7 @@ export default class Sprite extends Group{
 	 * 供内部调用的九宫格边界
 	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
 	 */
-	_setSlice(sliceBound: TBound){
-    console.log(3333)
+	private _setSlice(sliceBound: TBound){
 		this.sliced = true
 		this._left = sliceBound.left
 		this._top = sliceBound.top
@@ -251,14 +244,6 @@ export default class Sprite extends Group{
 		this._bottom = sliceBound.bottom
 		return this
 	}
-	/**
-	 * 九宫格边界
-	 * @param {*} sliceBound: {left: 0, top: 0, right: 0, bottom: 0}
-	 */
-	// setSlice(sliceBound: TBound){
-  //   console.log(sliceBound,11111111111)
-	// 	return this._setSlice(sliceBound)
-	// }
 }
 
  

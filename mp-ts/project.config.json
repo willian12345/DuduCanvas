@@ -34,5 +34,6 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx4fe412552a759b0e"
+  "appid": "wx4fe412552a759b0e",
+  "projectname": "duducanvas-ts"
 }

@@ -1,7 +1,4 @@
 import SimpleCss from './SimpleCss.js'
-import { draw, drawImage } from './config'
-
-const extendsClassDraw = Symbol('extendsClassDraw')
 
 /**
  * Image 图片显示类
@@ -13,12 +10,12 @@ export default class Image extends SimpleCss {
 	path = null
 	sx?: number
   sy?: number
-	sWidth?: number
-	sHeight?: number
-	dx = 0
-	dy = 0
-	dWidth?: number
-	dHeight?: number
+	sWidth: number
+	sHeight: number
+	dx: number
+	dy: number
+	dWidth: number
+	dHeight: number
 	
 	constructor(args: {
     image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource
@@ -26,55 +23,46 @@ export default class Image extends SimpleCss {
     height?: number,
     sWidth?: number,
     sHeight?: number,
+    sx?: number,
+    sy?: number,
     dx?: number,
     dy?: number,
     dWidth?: number,
     dHeight?: number,
   }){
     super()
-    //@ts-ignore
-    this._extendsClassDraw = super._draw
-    if(args.width){
+    if(args.width !== undefined){
       this.width = args.width;
     }
     if(args.height){
       this.height = args.height;
     }
-    if(args.sWidth){
-      this.sWidth = args.sWidth
-    }
-    if(args.sHeight){
-      this.sHeight = args.sHeight
-    }
-    if(args.dx){
-      this.sHeight = args.dx
-    }
-    if(args.dy){
-      this.sHeight = args.dy
-    }
-    if(args.dWidth){
-      this.dWidth = args.dWidth
-    }
-    if(args.dHeight){
-      this.dHeight = args.dHeight
-    }
+
+    this.sx = args.sx
+    this.sy = args.sy
+    this.sWidth = args.sWidth ?? 0
+    this.sHeight = args.sHeight ?? 0
+    this.dx = args.dx ?? 0
+    this.dy = args.dy ?? 0
+    this.dWidth = args.dWidth ?? 0
+    this.dHeight = args.dHeight ?? 0
 	
     this.image = args.image
 		// 如果设置了 width 则认 width 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
-		if(!this.width){
+		if(!this.width && this.dWidth !== undefined){
 			this.width = this.dWidth
 		}else{
 			this.dWidth = this.width
 		}
 		// 如果设置了 height 则认 height 参数作为渲染宽度， 否则就将 dWidth 参数作为渲染宽度
-		if(!this.height){
+		if(!this.height && this.dHeight !== undefined){
 			this.height = this.dHeight
 		}else{
 			this.dHeight = this.height
 		}
 	}
 	
-	_drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
+	private _drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
 		/**
 		 * !! 注意参数变化,可省略的原始图像位置尺寸信息是排在前面的
 		 * drawImage(img, dx, dy);
@@ -83,7 +71,7 @@ export default class Image extends SimpleCss {
 		 */
 		
      ctx.globalAlpha = this._getAlpha()
-     if(this.sx != undefined){
+     if(this.sx !== undefined && this.sy !== undefined){
 			// 如果传了原始图起点，则说明要填完整所有参数
 			ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)
 		}else if(this.dWidth != undefined){
@@ -94,11 +82,10 @@ export default class Image extends SimpleCss {
 			ctx.drawImage(this.image, x, y)
 		}
 	}
-	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+	protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
     let [x, y] = this.getPosition()
 		x = this.dx + x
     y = this.dy + y
-    console.log(x, y)
 		// 调用 extends class 的 draw 方法，因为有可能需要设置样式
 		super._draw(ctx)
 
@@ -110,7 +97,10 @@ export default class Image extends SimpleCss {
       //@ts-ignore
 			v._draw(ctx)
 		})
-	}
+  }
+  draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+    this._draw(ctx);
+  }
 }
 
  
