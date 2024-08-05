@@ -1,3 +1,5 @@
+import Text from "../Text"
+
 // 旋转 90 弧度 直接得出常数 (90 * Math.PI / 180) 免于实时计算
 const ROTATE_90DEG = 1.5707963267948966
 // 需要旋转的 Unicode 码范围, 如中、日、韩文字
@@ -10,8 +12,8 @@ export const NO_ROTATION_RANGE = [
   [0x20000, 0x2FA1F]
 ]
 
-export function needRotation (char) {
-  let codePoint = char.codePointAt(0)
+export function needRotation (char: string) {
+  let codePoint: number = char.codePointAt(0) ?? -1
   for (let [lowerBound, upperBound] of NO_ROTATION_RANGE) {
     if (lowerBound <= codePoint && codePoint <= upperBound) {
       return false
@@ -23,15 +25,22 @@ export function needRotation (char) {
  *  文本绘制命令
  */
 export class FillText {
-	instance = null
-	name = 'FillText'
-	constructor (text, x, y) {
+	instance: Text|null = null
+  name = 'FillText'
+  text = ''
+  x: number
+  y: number
+	constructor (text: string, x: number, y: number) {
 		this.text = text
 		this.x  = x
 		this.y = y
 	}
-	exec(ctx, instance){
-		this.instance = instance
+	exec(ctx:  WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: Text){
+    this.instance = instance
+    if(!this.instance){
+      return;
+    }
+    
 		const [x, y] = instance.getPosition()
 		
 		ctx.font = instance.font
@@ -53,7 +62,7 @@ export class FillText {
 	/**
 	 * getTextArr 多行时计算每行显示多少个字符
 	 */
-	getTextArr(ctx, instance, text){
+	getTextArr(ctx:  WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance:Text, text: string){
 		const wrapWidth = instance.wrapWidth
 
 		let i = 0, j= 0, t = null, lineWidth = 0
@@ -72,7 +81,10 @@ export class FillText {
 		return arr
 	}
 	// 文本竖排
-	vertical(ctx, x, y){
+	vertical(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
+    if(!this.instance){
+      return;
+    }
 		const textArr = this.text.split('')
 		const verticalLineWidth = this.instance.fontSize + this.instance.lineGap
 		const lineWidth = this.instance.writeMode === 'vertical-rl' ? -verticalLineWidth : verticalLineWidth

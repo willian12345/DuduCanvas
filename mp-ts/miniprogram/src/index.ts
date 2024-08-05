@@ -5,7 +5,7 @@
 // export { default as ImgLoader } from './ImgLoader.ts'
 // export { default as Group } from './Group.ts';
 export { default as Stage } from './Stage';
-// export { default as Text } from './Text.js';
+export { default as Text } from './Text.js';
 // export { default as Image } from './Image.js';
 // export { default as Shape } from './Shape.js';
 // export { default as Sprite } from './Sprite.js';

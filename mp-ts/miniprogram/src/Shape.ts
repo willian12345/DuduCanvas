@@ -5,14 +5,11 @@
  * 3、所有绘制 api 命令都存在于 graphics 对象内， graphics 绘制在 Shape 对象内不参与 z 轴排序
  * 
  */
-import { getAlpha,  drawGraphics } from './config'
 import DisplayObject from './DisplayObject.js'
 
 export default class Shape extends DisplayObject{
 	name = 'Shape'
 	isMask = false
-	width = 0
-	height = 0
 	constructor(){
 		super()
 		this._drawGraphics = super._drawGraphics
@@ -20,9 +17,9 @@ export default class Shape extends DisplayObject{
 		// 新建一个shape对象时先执行beginPath命令，以重新开始 path 上下文
 		this.graphics.beginPath()
     }
-	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, isMask = false){
 		// shape 是否为遮罩
-		// this.isMask = !!isMask
+		this.isMask = !!isMask
 
 		// 设置透明度
 		ctx.globalAlpha = this._getAlpha()

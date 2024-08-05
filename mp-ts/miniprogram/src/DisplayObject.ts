@@ -17,8 +17,8 @@ export default class DisplayObject  extends Graphics{
 	name = 'DisplayObject'
 	x = 0
 	y = 0
-	width = 0
-	height = 0
+	_width = 0
+	_height = 0
 	alpha = 1
 	regX = 0
 	regY = 0
@@ -36,7 +36,21 @@ export default class DisplayObject  extends Graphics{
 		this._drawGraphics = super._drawGraphics
 		this._scale = 1
 		this._id = displayObjectId++
-	}
+  }
+  get width(): number {
+    return this._width;
+  }
+
+  set width(value: number) {
+    this._width = value;
+  }
+  get height(): number {
+    return this._height;
+  }
+
+  set height(value: number) {
+    this._height = value;
+  }
 	get mask(){
 		return this._mask
 	}
