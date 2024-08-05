@@ -1,12 +1,6 @@
 import SimpleCss from './SimpleCss.js'
-import { draw, drawGraphics } from './config'
+import { draw } from './config'
 
-const _width = Symbol('width')
-const _height = Symbol('height')
-const _alignItems = Symbol('_alignItems')
-const _justifyContent = Symbol('_justifyContent')
-const _direction = Symbol('_direction')
-const _flex = Symbol('_flex')
 const extendsClassDraw = Symbol('extendsClassDraw')
 
 /**
@@ -21,52 +15,56 @@ const extendsClassDraw = Symbol('extendsClassDraw')
  * Container 需要主动设置 width、height，默认为都为 0
  */
 export default class Container extends SimpleCss{
-	name = 'Container'
-	constructor(context){
+  name = 'Container'
+  _flex = ''
+  _direction: 'row'|'column'|'row-reverse' | 'column-reverse' = 'row'
+  _alignItems: 'flex-start'|'center'|'flex-end' =  'flex-start'
+  _justifyContent: 'flex-start'|'center'|'flex-end' =  'flex-start'
+	constructor(){
 		super()
-		this[extendsClassDraw] = super[draw]
+		// this[extendsClassDraw] = super[draw]
 		this.direction = 'row'
 		this.justifyContent = 'center'
 		this.alignItems = 'center'
 	}
 	set width(v){
-		this[_width] = v
+		this._width = v
 	}
 	get width(){
-		return this[_width]
+		return this._width
 	}
 	set height(v){
-		this[_height] = v
+		this._height = v
 	}
 	get height(){
-		return this[_height]
+		return this._height
 	}
 	get flex(){
-		return this[_flex]
+		return this._flex
 	}
-	set flex(v){
-		this[_flex] = v
+	set flex(v: string){
+		this._flex = v
 	}
 	// 排列方向
 	get direction(){
-		return this[_direction]
+		return this._direction
 	}
 	set direction(v){
-		this[_direction] = v
+		this._direction = v
 	}
 	// 垂直对齐
 	get alignItems(){
-		return this[_alignItems]
+		return this._alignItems
 	}
 	set alignItems(v){
-		this[_alignItems] = v
+		this._alignItems = v
 	}
 	// 水平对齐
 	get justifyContent(){
-		return this[_justifyContent]
+		return this._justifyContent
 	}
 	set justifyContent(v){
-		this[_justifyContent] = v
+		this._justifyContent = v
 	}
 	/**
 	 * 获取所有子元素宽度
@@ -87,28 +85,28 @@ export default class Container extends SimpleCss{
 	/**
 	 * 获取所有子元素在 between 模式下间隙宽度
 	 */
-	getBetweenGapWidth(parentWidth){
+	getBetweenGapWidth(parentWidth: number){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length - 1)
 	}
 	/**
 	 * 获取所有子元素在 between 模式下间隙高度
 	 */
-	getBetweenGapHeight(parentHeight){
+	getBetweenGapHeight(parentHeight: number){
 		const childsHeight = this.getChildsHeight()
 		return (parentHeight - childsHeight) / (this.childs.length - 1)
 	}
 	/**
 	 * 获取所有子元素在 around 模式下间隙宽度
 	 */
-	getAroundGapWidth(parentWidth){
+	getAroundGapWidth(parentWidth: number){
 		const childsWidth = this.getChildsWidth()
 		return (parentWidth - childsWidth) / (this.childs.length)
 	}
 	/**
 	 * 获取所有子元素在 around 模式下间隙高度
 	 */
-	getAroundGapHeight(parentHeight){
+	getAroundGapHeight(parentHeight: number){
 		const childsHeight = this.getChildsHeight()
 		return (parentHeight - childsHeight) / (this.childs.length)
 	}
@@ -150,7 +148,7 @@ export default class Container extends SimpleCss{
 			}
 		}
 		// align-self
-		childs.forEach((v) => {
+		childs.forEach((v:any) => {
 			if(v.alignSelf === 'flex-start'){
 				v.y = 0
 			}else if(v.alignSelf === 'center'){
@@ -163,7 +161,7 @@ export default class Container extends SimpleCss{
 	/**
 	 * 水平对齐
 	 */
-	setJustifyContent(isReverse){
+	setJustifyContent(isReverse?: boolean){
 		const parentWidth = this.width
 		let childs = this.childs
 		let justifyContent = this.justifyContent
@@ -235,7 +233,7 @@ export default class Container extends SimpleCss{
 	/**
 	 * column 模式(水平转垂直) 下的水平对齐，即垂直对齐
 	 */
-	setJustifyContentForColumn(isReverse){
+	setJustifyContentForColumn(isReverse?: boolean){
 		const parentHeight = this.height
 		let childs = this.childs
 		let justifyContent = this.justifyContent
@@ -327,7 +325,7 @@ export default class Container extends SimpleCss{
 			}
 		}
 		// align-self
-		childs.forEach((v)=>{
+		childs.forEach((v:any)=>{
 			if(v.alignSelf === 'flex-start'){
 				v.x = 0
 			}else if(v.alignSelf === 'center'){
@@ -345,7 +343,7 @@ export default class Container extends SimpleCss{
 		this.setJustifyContentForColumn(true)
 		this.setAlignItemsByColumn()
 	}
-	[draw](ctx){
+	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
 		const direction = this.direction
 		if(direction === 'row'){
 			this.setRow()
@@ -358,7 +356,7 @@ export default class Container extends SimpleCss{
 		}
 		// 所有位置计算完后再调用 extends class 的 draw 绘制
 		// 因为 Container 本身不需要绘制渲染
-		this[extendsClassDraw](ctx)
+		super._draw(ctx)
 	}
 }
 

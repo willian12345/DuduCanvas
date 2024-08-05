@@ -23,22 +23,22 @@ export default class Text extends DisplayObject {
   // 当前字体样式的属性。符合 CSS font 语法 的 DOMString 字符串，至少需要提供字体大小和字体族名。默认值为 10px sans-serif
   font = `${defaultFontSize}px sans-serif`
   // 暂时只支持 px 为单位
-  private _fontSize: number = 12
-  private _height = 0
-  private _width = 0
-  private _wrapHeight = -1
-  private _wrapWidth = -1
-  private _writeMode: 'vertical-lr' | 'vertical-rl' | '' = ''
-  private _text = ''
-  private _fontStretch?: string = ''
-  private _fontVariant?: string = ''
-  private _fontStyle?: string  = ''
-  private _fontWeight?: string|number  = ''
+  protected _fontSize: number = 12
+  protected _height = 0
+  protected _width = 0
+  protected _wrapHeight = -1
+  protected _wrapWidth = -1
+  protected _writeMode: 'vertical-lr' | 'vertical-rl' | '' = ''
+  protected _text = ''
+  protected _fontStretch?: string = ''
+  protected _fontVariant?: string = ''
+  protected _fontStyle?: string  = ''
+  protected _fontWeight?: string|number  = ''
   textAlign: WechatMiniprogram.CanvasRenderingContext.CanvasTextAlign = 'left'
   textBaseline: WechatMiniprogram.CanvasRenderingContext.CanvasTextBaseline = 'top'
   color = '#000'
   private _fontFamily = 'sans-serif';
-  constructor(t: TTextParams) {
+  constructor(t?: TTextParams) {
     super()
     this._drawGraphics = super._drawGraphics
     this.init(t ?? {})
@@ -189,7 +189,7 @@ export default class Text extends DisplayObject {
     // 优先执行 graphics 指令
     this._drawGraphics(ctx)
     if (this.mask && this.mask.name === 'Shape') {
-      this.mask.masked = this
+      // this.mask.masked = this
       this._mask?._draw(ctx, true)
     }
   }

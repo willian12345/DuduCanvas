@@ -1,7 +1,7 @@
 const fsm = wx.getFileSystemManager();
 
 
-const base64src = function(base64data) {
+const base64src = function(base64data: string) {
 	let fileBaseName = 'tmp_base64src' + new Date().getTime();
   return new Promise((resolve, reject) => {
     const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(base64data) || [];

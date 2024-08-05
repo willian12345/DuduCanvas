@@ -17,8 +17,8 @@ export default class DisplayObject  extends Graphics{
 	name = 'DisplayObject'
 	x = 0
 	y = 0
-	_width = 0
-	_height = 0
+	protected _width = 0
+	protected  _height = 0
 	alpha = 1
 	regX = 0
 	regY = 0
@@ -224,7 +224,7 @@ export default class DisplayObject  extends Graphics{
 	 */
 	transform(v:DisplayObject, context: Context2d){
 		if(v.name === 'Stage') return
-		const ctx = context
+    const ctx = context
 		const [_x, _y] = v.getPosition()
 		const rotation = v.getRotation()
 		let [scaleX, scaleY] = [v.scaleX, v.scaleY]
