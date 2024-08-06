@@ -1,63 +1,77 @@
+import { Application, ImgLoader, Text, Container, Image, } from '../../src/index';
 
-import {ImgLoader, Image, Text, Application, Sprite} from '../../src/index'
+const getCanvasSize = () => {
+  // 根据屏幕宽度计算 canvas 宽度
+  const systemInfo = wx.getSystemInfoSync();
+  const screenWidth = systemInfo.windowWidth;
+  const designWidth = 750;
+  const designHeight = 1334;
+  const canvasWidth = screenWidth;
+  const canvasHeight = (screenWidth / designWidth) * designHeight;
+  return {
+    canvasWidth,
+    canvasHeight,
+  }
+}
+let timer: number;
 Component({
+  data: {
+    canvasWidth: 0,
+    canvasHeight: 0
+  },
   lifetimes: {
-    attached() {
-
+    detached(){
+      clearInterval(timer)
     },
-    async ready(){
-        
-        const app = new Application('#myCanvas', {width: 375, height: 400}, this);
-        const stage = await app.init();
-        const loader = new ImgLoader(stage.canvas, [
-          {
-            id: 'button',
-            src: '../../assets/button.png'
-          }
-        ])
-        await loader.load()
-        const imageSource = loader.get('button');
-        if(!imageSource || !imageSource?.image){
-          return;
+    async ready() {
+      const { canvasWidth, canvasHeight } = getCanvasSize();
+
+      this.setData({
+        canvasWidth: canvasWidth,
+        canvasHeight: canvasHeight
+      });
+
+      const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight }, this);
+      const stage = await app.init();
+      const loader = new ImgLoader(stage.canvas, [
+        {
+          id: 'avatar',
+          src: '../../assets/avatar.jpeg'
         }
-        
-        // 原始按钮大小
-        const button = new Image({
-          image: imageSource.image,
-          width: 128, 
-          height: 64
-        })
-        button.x = stage.width / 2 - button.width / 2
-        button.y = 80
-        const t1 = new Text({text: '原始按钮大小'})
-        t1.fontSize = 14
-        t1.color = 'white';
-        t1.textAlign = 'center'
-        t1.x = button.width * .5
-        t1.y = button.height * .5 - (t1.height * .5)
-        button.addChild(t1)
-        stage.addChild(button)
-        
+      ])
+      await loader.load();
 
-        // 九宫格按钮，可随意拉升宽高示例
-        const bigButton = new Sprite(imageSource)
-        bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
-        bigButton.x = stage.width * .5;
-        bigButton.y = 320
-        bigButton.width = 320
-        bigButton.height = 80
-        bigButton.regX = bigButton.width * .5
-        bigButton.regY = bigButton.height * .5
+      const avatarTexture = loader.get('avatar')
+      if (!avatarTexture) {
+        return;
+      }
+      const avatar = new Image({
+        image: avatarTexture.image,
+        width: 100,
+        height: 100
+      })
+      avatar.x = stage.width / 2
+      avatar.y = stage.width / 2
+      avatar.regX = 50
+      avatar.regY = 50
+      avatar.borderRadius = '10 40 10';
+      
 
-        const t2 = new Text({text: '九宫格拉伸按钮'})
-        t2.fontSize = 20
-        t2.textAlign = 'center'
-        t2.x = bigButton.width * .5
-        t2.y = bigButton.height * .5 - (t2.height * .5)
-        bigButton.addChild(t2)
+      const name = new Text()
+      name.color = '#6c5149'
+      name.text = '龙傲天'
+      name.textAlign = "center"
+      name.x = avatar.x
+      name.y = 110
+      stage.addChild(avatar, name)
+      stage.update();
 
-        stage.addChild(bigButton)
-        stage.update();
+       // 异步更改属性后需要调用 stage.update() 方法
+    timer = setInterval(() => {
+      avatar.rotation += 2
+      name.text = `龙傲天 旋转：${avatar.rotation}`
+      stage.update()
+    }, 400)
     }
   },
 })

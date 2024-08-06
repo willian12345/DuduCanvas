@@ -1,0 +1,2 @@
+<!--pages/graphics/graphics.wxml-->
+<canvas type="2d" id="myCanvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"/>

@@ -5,7 +5,7 @@ import Shape from './Shape.js'
  * 解构圆角矩形值生成:  { tl: 0, tr: 0, br: 0, bl: 0 }
  * @param {*} value 
  */
-function getChangedBorderRadiusValue(value: string) {
+function getChangedBorderRadiusValue(value: string | number) {
     let borderRadiusValue: number | {
         tl: number;
         tr: number;
@@ -79,7 +79,7 @@ export default class SimpleCss extends DisplayObject {
         //@ts-ignore
         return this.borderRadiusValue
     }
-    set borderRadius(value: string) {
+    set borderRadius(value: string | number) {
         if (!value) return
         if (value != '100%') {
             this.borderRadiusValue = getChangedBorderRadiusValue(value)
@@ -218,6 +218,7 @@ export default class SimpleCss extends DisplayObject {
             const halfBorderWidth = borderWidth * .5
             // 如果有圆角属性，则需要画圆角边框
             if (this.borderRadius) {
+               //@ts-ignore
                 const _borderRadius = parseFloat(this.borderRadius);
                 let s
                 // 值为100%或值等于宽高值，且宽高相等时 表示显示想要显示成圆形
@@ -312,7 +313,6 @@ export default class SimpleCss extends DisplayObject {
             s.graphics.clip()
                 .fill()
         } else {
-            console.log(this.borderRadiusValue, 333)
             s = new Shape()
             s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
         }

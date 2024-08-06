@@ -1,4 +1,3 @@
-import { UniformBlock } from 'XrFrame/kanata/lib/index';
 import {Text, Application} from '../../src/index'
 Component({
   data: {
@@ -28,11 +27,14 @@ Component({
         t.y = 100
         t.textAlign = 'end'
         const t1 = new Text()
-        t1.text = ' 你好嘟嘟-通过单独引用各个                 hellworld 类的方式实现编码'
-        t1.x = 300
+        t1.text = ' 你好嘟嘟-通过单独引用各个hellworld 类的方式实现编码'
+        t1.x = 100
         t1.wrapHeight = 200
-        t1.writeMode = 'vertical-rl'
+        t1.writeMode = 'vertical-lr'
         t1.lineGap = 12;
+        // 给文本加个底色
+        t1.graphics.fillStyle('yellow')
+        .fillRect(0, 0, t1.width, t1.height)   
         stage.addChild(t, t1)
         console.log(t)
         stage.update()

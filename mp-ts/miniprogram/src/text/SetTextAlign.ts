@@ -5,6 +5,5 @@ export default  class SetTextAlign {
   }
   exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
     ctx.textAlign = this.textAlign
-    console.log(ctx.textAlign, this.textAlign)
   }
 }

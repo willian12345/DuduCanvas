@@ -48,7 +48,6 @@ protected _append(instructionsObject: any){
   // 绘制时执行所有当前文本
   protected _drawGraphics(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
     this._instructions.forEach((instruction) => {
-      console.log(instruction, this)
 			instruction.exec(ctx, this)
 		})
   }

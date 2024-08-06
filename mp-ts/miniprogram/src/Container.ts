@@ -1,7 +1,4 @@
 import SimpleCss from './SimpleCss.js'
-import { draw } from './config'
-
-const extendsClassDraw = Symbol('extendsClassDraw')
 
 /**
  * Container 
@@ -19,7 +16,7 @@ export default class Container extends SimpleCss{
   _flex = ''
   _direction: 'row'|'column'|'row-reverse' | 'column-reverse' = 'row'
   _alignItems: 'flex-start'|'center'|'flex-end' =  'flex-start'
-  _justifyContent: 'flex-start'|'center'|'flex-end' =  'flex-start'
+  _justifyContent: 'flex-start'|'center'|'flex-end' | 'space-around' | 'space-between' =  'flex-start'
 	constructor(){
 		super()
 		// this[extendsClassDraw] = super[draw]
