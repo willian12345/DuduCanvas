@@ -25,7 +25,7 @@ export function needRotation (char: string) {
  *  文本绘制命令
  */
 export class FillText {
-	instance: Text|null = null
+	instance!: Text
   name = 'FillText'
   text = ''
   x: number
@@ -37,10 +37,6 @@ export class FillText {
 	}
 	exec(ctx:  WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: Text){
     this.instance = instance
-    if(!this.instance){
-      return;
-    }
-    
 		const [x, y] = instance.getPosition()
 		
 		ctx.font = instance.font
@@ -49,10 +45,10 @@ export class FillText {
 			this.vertical(ctx, x, y)
 		}else if(instance.wrapWidth > -1){
 			// 如果设置了文本框宽度，则需要判断是否显示成多行
-			let textArr = this.getTextArr(ctx, instance, this.text)
+      let textArr = this.getTextArr(ctx, instance, this.text)
 			let h = 0
 			for(let i=0,l=textArr.length; i<l; i++){
-				h = y + (i * (instance.fontSize + instance.lineGap))
+        h = y + (i * (instance.fontSize + instance.lineGap))
 				ctx.fillText(textArr[i], x, h)
 			}
 		}else{
@@ -69,14 +65,18 @@ export class FillText {
 		let arr = []
 		while(t=text[i]){
 			// 根据每个单字计算字符宽度
-			lineWidth += ctx.measureText(t).width
+      lineWidth += ctx.measureText(t).width
 			if(lineWidth <= wrapWidth){
-				arr[j] ? arr[j] += text[i] : arr[j] = text[i]
+        if(arr[j]){
+          arr[j] += text[i]
+        }else{
+          arr[j] = text[i]
+        }
+        i++
 			}else{
 				lineWidth = 0
 				j++
 			}
-			i++
 		}
 		return arr
 	}
@@ -93,14 +93,15 @@ export class FillText {
 		let offsetY = 0
 		let offsetX = 0
 		const wrapHeight = this.instance.wrapHeight
-		
 		textArr.map( (t) => {
 			if(needRotation(t)){	
 				// 如果竖直文本大于限制高度，x 轴则向左或向右移一行
 				if(wrapHeight > -1 && offsetY + y + fontSizeHalf > wrapHeight + y){
 					offsetX += lineWidth
 					offsetY = 0
-				}
+        }
+        
+        
 				
 				const left = x + offsetX + fontSizeHalf
 				const top = y + offsetY + fontSizeHalf
@@ -109,15 +110,21 @@ export class FillText {
 				ctx.rotate(ROTATE_90DEG)
 				ctx.translate(-left, -top)	
 				// x 和 y 此处要和正常没旋转时的文本一样对待
-				ctx.fillText(t, x + offsetX,  y + offsetY)
-				offsetY += fontSizeHalf
-				ctx.restore()
+        ctx.fillText(t, x + offsetX,  y + offsetY)
+        if(offsetY > 0){
+          offsetY = offsetY + this.instance.letterSpace
+        }
+				offsetY +=  fontSizeHalf
+        ctx.restore()
 			}else{
 				// 如果竖直文本大于限制高度，x 轴则向左移一行
 				if(wrapHeight > -1 && offsetY + y + fontSize > wrapHeight + y){
 					offsetX += lineWidth
 					offsetY = 0
-				}
+        }
+        if(offsetY > 0){
+          offsetY = offsetY + this.instance.letterSpace
+        }
 				ctx.fillText(t, x + offsetX, y + offsetY)
 				offsetY += fontSize
 			}
