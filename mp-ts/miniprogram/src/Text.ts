@@ -1,7 +1,6 @@
 /**
  * 文本类
  */
-import { CubeTextureLoader } from 'XrFrame/loader'
 import DisplayObject from './DisplayObject'
 import { FillText, needRotation } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
@@ -9,15 +8,16 @@ import SetTextAlign from './text/SetTextAlign'
 import SetTextBaseline from './text/SetTextBaseline'
 
 const defaultFontSize = 10
-
+const ROTATE_90DEG = 1.5707963267948966
 /**
  * Text 文本类
  * 显示文本，支持横、竖排文字，换行
+ * 单字宽高直接使用 fontSize 所以非中文字体会有问题
  */
 export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: string|number, letterSpace?: number };
 export type TTextBlock = {
-  lineNum: number,
-  rowNumber: number,
+  rowNum: number,
+  colomnNum: number,
   text: string,
   width: number,
   height: number,
@@ -32,8 +32,8 @@ export default class Text extends DisplayObject {
   font = `${defaultFontSize}px sans-serif`
   // 暂时只支持 px 为单位
   protected _fontSize: number = 12
-  protected _height = 0
   protected _width = 0
+  protected _height = 0
   protected _wrapHeight = -1
   protected _wrapWidth = -1
   protected _writeMode: 'vertical-lr' | 'vertical-rl' | '' = ''
@@ -49,6 +49,12 @@ export default class Text extends DisplayObject {
   textBaseline: WechatMiniprogram.CanvasRenderingContext.CanvasTextBaseline = 'top'
   color = '#000'
   private _fontFamily = 'sans-serif';
+  get width(): number {
+    return this._width;
+  }
+  get height(): number{
+    return this._height;
+  }
   constructor(t?: TTextParams) {
     super()
     this._drawGraphics = super._drawGraphics
@@ -67,6 +73,7 @@ export default class Text extends DisplayObject {
     }
     if(t.fontSize){
       this._fontSize = t.fontSize;
+      this._height = t.fontSize;
     }
     if(t.fontFamily){
       this._fontFamily = t.fontFamily;
@@ -99,7 +106,15 @@ export default class Text extends DisplayObject {
     // 初始化就设置文本
     if (text) {
       this.text = text
+      this._width = this.getWidth()
     }
+  }
+  private getWidth (){
+    const ctx = DisplayObject.getContext()
+    // 测宽度前必须先设置字体大小
+    ctx.font = this.font
+    let w = ctx.measureText(this._text).width
+    return w;
   }
   // 凑成 font 减写
   // font: font-stretch font-variant font-style font-weight font-size font-family
@@ -112,26 +127,7 @@ export default class Text extends DisplayObject {
   set text(t) {
     t = String(t)
     this._text = t
-    this._height = this.fontSize
-  }
-  get width() {
-    // 设置竖排模式后需要重新计算尺寸
-    if (this._writeMode.length > 0) {
-      this.calcVerticalSize()
-    }else{
-      // 如果是横排，则需要计算一下高度
-      this._height = this.getTotalHeight();
-    }
-    return this._width
-  }
-  set width(w) {
-    this._width = w
-  }
-  get height() {
-    return this._height
-  }
-  set height(h) {
-    this._height = h
+    this._width = this.getWidth();
   }
   get lineGap() {
     return this._lineGap
@@ -154,7 +150,7 @@ export default class Text extends DisplayObject {
   }
   set wrapHeight(v) {
     this._wrapHeight = v
-    this._height = v
+    this.height = v
   }
   /**
    * 限制文本框宽度
@@ -166,7 +162,7 @@ export default class Text extends DisplayObject {
   set wrapWidth(v) {
     this._wrapWidth = v
     this._width = v
-    this._height = this.getTotalHeight();
+    this._assembleText();
   }
   /**
    * 设置字体大小
@@ -177,14 +173,7 @@ export default class Text extends DisplayObject {
   set fontSize(v) {
     this._fontSize = v
     this.font = this.getComposedFont();
-    // 设置竖排模式后需要重新计算尺寸
-    if (this._writeMode.length > 0) {
-      this.calcVerticalSize()
-    }else{
-      // 如果是横排，则需要计算一下高度
-      this._height = this.getTotalHeight();
-    }
-    // this._width = this.measureWidth(this.text, v)
+    this._assembleText();
   }
   get fontFamily(){
     return this._fontFamily
@@ -192,8 +181,7 @@ export default class Text extends DisplayObject {
   set fontFamily(v: string){
     this._fontFamily = v
     this.font = this.getComposedFont();
-    this._width = this.measureWidth(this.text, this.fontSize)
-    this._height = this.fontSize + this.lineGap
+    this._assembleText();
   }
   /**
    * 文本横排与竖排模式
@@ -205,7 +193,7 @@ export default class Text extends DisplayObject {
     this._writeMode = v
     // 设置竖排模式后需要重新计算尺寸
     if (v.length > 0) {
-      this.calcVerticalSize()
+      this._assembleText();
     }
   }
   assembleOneLine(textArr: string[]){
@@ -216,8 +204,8 @@ export default class Text extends DisplayObject {
       ctx.font = this.font
       let w = ctx.measureText(textArr[i]).width
       this.textBlocks[0].push({
-        lineNum: 0,
-        rowNumber: i,
+        rowNum: 0,
+        colomnNum: i,
         text: textArr[i],
         width: w,
         height: w,
@@ -225,49 +213,136 @@ export default class Text extends DisplayObject {
         letterSpace: 0,
       })
     }
-    console.log(this.textBlocks)
+  }
+  assembleMultiLine(textArr: string[]){
+    // const ctx = DisplayObject.getContext()
+    this.textBlocks[0] = this.textBlocks[0] ?? [];
+    let widthSum = 0;
+    let widthBound = this._wrapWidth;
+    let rowNum = 0;
+    let colomnNum = 0;
+    for(let i=0, l=textArr.length;i < l; i++){
+      
+      let w = this._fontSize;
+      if(widthSum > widthBound){
+        rowNum++;
+        widthSum = 0;
+        colomnNum = 0;
+      }
+      this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
+      this.textBlocks[rowNum].push({
+        rowNum: rowNum,
+        colomnNum: colomnNum,
+        text: textArr[i],
+        width: w + this._letterSpace,
+        height: w + this._lineGap,
+        lineGap: this._lineGap,
+        letterSpace: this._letterSpace,
+      })
+      widthSum += w;
+      colomnNum++;
+    }
+  }
+  assembleMultiLineVertical(textArr: string[]){
+    this.textBlocks[0] = this.textBlocks[0] ?? [];
+    let heightSum = 0;
+    let heightBound = this._wrapHeight;
+    let rowNum = 0;
+    let colomnNum = 0;
+    for(let i=0, l=textArr.length;i < l; i++){
+      let w = this._fontSize;
+      if(heightSum > heightBound){
+        colomnNum++;
+        heightSum = 0;
+        rowNum = 0;
+      }
+      this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
+      this.textBlocks[rowNum].push({
+        rowNum: rowNum,
+        colomnNum: colomnNum,
+        text: textArr[i],
+        width: w + this._letterSpace,
+        height: w + this._lineGap,
+        lineGap: this._lineGap,
+        letterSpace: this._letterSpace,
+      })
+      heightSum += w;
+      rowNum++;
+    }
+    // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 colomnNum 值
+    if(this._writeMode === 'vertical-rl'){
+      this.textBlocks = this.textBlocks.map( textBlockRow => {
+        textBlockRow.forEach( (textBlock, index) => {
+          textBlock.colomnNum = (textBlockRow.length - 1) - index
+        })
+        return textBlockRow.reverse();
+      })
+    }
   }
   assembleRowText(){
     let textArr = this._text.split('');
     if(this._wrapWidth > -1){
-
+      this.assembleMultiLine(textArr)
     }else{
       this.assembleOneLine(textArr);
     }
   }
+  assembleOneLineVertical(textArr: string[]){
+    this.textBlocks[0] = this.textBlocks[0] ?? [];
+    for(let i=0, l=textArr.length;i < l; i++){
+      let w = this._fontSize;
+      this.textBlocks[0].push({
+        rowNum: i,
+        colomnNum: 0,
+        text: textArr[i],
+        width: w,
+        height: w,
+        lineGap: 0,
+        letterSpace: 0,
+      })
+    }
+  }
   assembleVerticalText(){
     let textArr = this._text.split('');
-
-    for(let i=0, l=textArr.length;i < l; i++){
-
+    if(this.wrapHeight > -1){
+      this.assembleMultiLineVertical(textArr);
+    }else{
+      this.assembleOneLineVertical(textArr)
     }
   }
   /**
    * 整理文本状态
    */
   collectStatus() {
-    // if (this.fontSize) {
-    //   this._height = this.fontSize + this.lineGap
-    // }
     this._setTextAlign(this.textAlign)
     this._setTextBaseline(this.textBaseline)
     this._setFillStyle(this.color)
+    if(!this._needComposeText()){
+      this._fillText();
+    }
+  }
+  // 是否需要进行文本组装
+  private _needComposeText(){
+    return this._letterSpace > 0 || this._writeMode.length > 0 || this._wrapWidth > -1;
+  }
+  _assembleText(){
     // 收集竖写模式
     if(this._writeMode.length){
       this.assembleVerticalText();
     }else{
       this.assembleRowText();
     }
-    
-    // this._fillText()
   }
   // 执行指令集
   _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
     this.collectStatus()
     // 优先执行 graphics 指令
     this._drawGraphics(ctx)
+    // 如果需要排版则需要进行文本组装
+    if(this._needComposeText()){
+      this._composeText(ctx)
+    }
     
-    this._fillText(ctx)
     if (this.mask && this.mask.name === 'Shape') {
       // this.mask.masked = this
       this._mask?._draw(ctx, true)
@@ -282,32 +357,38 @@ export default class Text extends DisplayObject {
     this._append(new SetFillStyle(color))
     return this
   }
-  // fillStyle(color: string) {
-  //   return this._setFillStyle(color)
-  // }
-  /**
+   /**
    * fillText 绘制文本
    * @param  {String} text 
    * @param  {Number} x    
    * @param  {Number} y    
    */
-  private _fillText(ctx) {
-    // this._text = text
-    // this.x += x
-    // this.y += y
-    // this._width = this.measureWidth(this._text, this.fontSize)
-    // 如果之前有fillText,则需要先清一下之前填文本的命令
-    this._remove('FillText')
-    // !! 注意 fillText 方法不能放在 setTimeout 或 setInterval 内
-    // !! 因为会错过画布更新
+  private _fillText(){
+     // 如果之前有fillText,则需要先清一下之前填文本的命令
+    this._remove('FillText');
+		this._append(new FillText(this._text, this.x, this.y))
+    return this
+  }
+ 
+  private _composeText(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
+    ctx.save();
+    // 如果是复杂排版,则 textAlign 不起作用,直接默认为左侧
+    ctx.textAlign = 'left'
+    console.log(this._letterSpace)
     this.textBlocks.forEach(row => {
       row.forEach(_textBlock => {
-        console.log( this.x + (_textBlock.rowNumber * _textBlock.width), this.y +  (_textBlock.lineNum * _textBlock.height))
-        ctx.fillText(_textBlock.text, this.x + (_textBlock.rowNumber * _textBlock.width), this.y +  (_textBlock.lineNum * _textBlock.height))
-        // this._append(new FillText()
+        const left = this.x + (_textBlock.colomnNum * (_textBlock.width + this._letterSpace)) ;
+        const top = this.y +  (_textBlock.rowNum * (_textBlock.height + this._lineGap));
+        if(needRotation(_textBlock.text)){
+          ctx.translate(left , top)
+          ctx.rotate(ROTATE_90DEG)
+          ctx.translate(-left, -top)	
+        }
+
+        ctx.fillText(_textBlock.text, left,  top)
       })
     })
-    
+    ctx.restore();
     return this
   }
   
@@ -328,115 +409,6 @@ export default class Text extends DisplayObject {
     this.textAlign = textAlign
     this._append(new SetTextAlign(textAlign))
     return this
-  }
-  
-  /**
-   * 计算文本宽度
-   * @param {*} text 
-   * @param {*} fontSize 
-   */
-  measureWidth(text: string, fontSize: number) {
-    let w
-    if (!text) {
-      return 0
-    }
-    if (this.writeMode.length) {
-      w = fontSize
-    } else {
-      const ctx = DisplayObject.getContext()
-      // 测宽度前必须先设置字体大小
-      ctx.font = this.font
-      w = ctx.measureText(text).width
-    }
-    if(this._letterSpace > 0 && text.length > 1){
-      w += ( text.length - 1 )  * this._letterSpace;
-    }
-    return w
-  }
-  // 初始化竖排文本时的整体宽与高属性
-  calcVerticalSize() {
-    if (this.text.length) {
-      const { width, height } = this.getVerticalSize()
-      this._width = width
-      this._height = height
-    }
-  }
-  // 计算竖排文本时的整体文本宽,高
-  getVerticalSize() {
-    const fontSize = this._fontSize
-    // 如果
-    const lineGap = this._lineGap
-    // 单个字的行间距，如果竖写模式则不需要垂直间距，设为 0
-    const charLineGap = this._writeMode.length ? 0 : this._lineGap
-    const wrapHeight = this._wrapHeight
-    const halfFont = fontSize * .5
-    let  h = 0
-    let height = this._height
-    let width = this._width
-    let offset = 0
-    // 二维数组存放每个字文本与文本高度信息
-    let arr: { text: string, height: number }[][] = []
-    // 二维数组游标，可代表当前指向哪一行
-    let arrIndex = 0
-    // 计算每个字高度
-    this.text.split('').map((v) => {
-      let charHeight = 0
-      if (needRotation(v)) {
-        charHeight = halfFont + charLineGap + this._letterSpace
-      } else {
-        charHeight = fontSize + charLineGap + this._letterSpace
-      }
-      h += charHeight
-      offset += charHeight
-      
-      if (wrapHeight !== -1 && (offset) > wrapHeight) {
-        arrIndex++
-        offset = 0
-      }
-      if(offset > 0){
-        charHeight += this._letterSpace
-      }
-      arr[arrIndex] = arr[arrIndex] || []
-      arr[arrIndex].push({ text: v, height: charHeight })
-    })
-    
-    if (wrapHeight === -1) {
-      width = fontSize
-      height = h
-    }else{
-      height = wrapHeight
-      width = (arr.length * fontSize) + (arr.length * lineGap - lineGap)
-    }
-    // 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
-    return { width, height }
-  }
-  // 获取受限宽度下的文本整体高度，因为有可能会换行
-  getTotalHeight() {
-    const ctx = DisplayObject.getContext()
-    const wrapWidth = this._wrapWidth
-    const fontSize = this._fontSize
-    const text = this._text
-    // i 列 colomn， j 为行(row)
-    let i = 0, j = 0, t = null, lineWidth = 0
-    let arr = []
-    while (t = text[i]) {
-      // 根据每个单字计算字符宽度 !! 需要优化
-      ctx.font = this.font
-      lineWidth += ctx.measureText(t).width
-      //  * (fontSize / defaultFontSize)
-      if (lineWidth <= wrapWidth) {
-        arr[j] ? arr[j] += text[i] : arr[j] = text[i]
-      } else {
-        lineWidth = 0
-        j++
-      }
-      i++
-    }
-
-    // todo: 可优化点，此处计算出的文本单字可以直接用于 fillText 类内
-    // 高度 = 文本行数 * 字体大小 + 行间距
-    const h = arr.length * fontSize + (arr.length * this.lineGap - this.lineGap)
-    return h
   }
   addChild() {
     throw new Error('不能给 Text 类添加子元素')

@@ -5,7 +5,7 @@ type Context2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext
 
 let context!: Context2d
 let displayObjectId = 0
-
+let debug = false;
 
 /**
  * 显示对象类
@@ -79,7 +79,10 @@ export default class DisplayObject  extends Graphics{
 	}
 	static getContext(){
 		return context
-	}
+  }
+  static setDebug(_debug: boolean){
+    debug = _debug
+  }
 	// 添加子元素
 	addChild(...args: any[]){
 		// 指定父级
@@ -130,14 +133,15 @@ export default class DisplayObject  extends Graphics{
 			context.restore()
 
 			// context.setTransform(1, 0, 0, 1, 0, 0) 重置上下文向量坐标
-			// 调试显示可视对象边界线用于调试
-			
-			// if(!v.sliced){
-			// 	const b = v.getBounds()
-			// 	context.beginPath();
-			// 	context.strokeStyle = 'blue'
-			// 	context.strokeRect(b.left,b.top,b.width,b.height);
-			// }
+      // 调试显示可视对象边界线用于调试
+			if(debug){
+        const b = v.getBounds()
+        if(b){
+          context.beginPath();
+          context.strokeStyle = 'rgb(140, 202, 130)'
+          context.strokeRect(b.left, b.top,b.width,b.height);
+        }
+			}
 		})
 	}
 	/**
@@ -259,19 +263,20 @@ export default class DisplayObject  extends Graphics{
 	 * scale 形变后宽高可请自行乘上相应的 scale 倍数
 	 */
 	_getBounds(){
+    
 		let [x, y] = this.getPosition()
 		let w = this.width
 		let h = this.height
 		let regX = this.regX
 		let regY = this.regY
-		
+		console.log(x,y )
 		if(this.rotation !== 0){
-			const arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
+			let arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
 			// 相对坐标+原本的 x y 值成为绝对坐标
-			arr.map( v =>{
+			arr = arr.map( v =>{
 				return {...v, x: v.x + x + regX, y: v.y + y + regY}
-			})
-			
+      })
+  
 			// 获取最左，最右，最上最下 坐标
 			let [minX, minY, maxX, maxY] = getMaxValue(arr)
 			w = maxX - minX
@@ -283,7 +288,7 @@ export default class DisplayObject  extends Graphics{
 			x = x
 			y = y
 		}
-
+    
 		return {left: x, top: y, right: x + w, bottom: y + h, width: w, height: h}
 	}
 	// 寻找所有子元素的 bounds 边界宽高并存入数组

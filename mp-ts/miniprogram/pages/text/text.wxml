@@ -1,2 +1,1 @@
-<canvas type="2d" id="myCanvas" style="width: 375px; height: 400px;"/>
-<view>{{helloworld}}</view>
+<canvas type="2d" id="myCanvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"/>

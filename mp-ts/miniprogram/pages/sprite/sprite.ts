@@ -17,7 +17,7 @@ Component({
         ])
         await loader.load()
         const imageSource = loader.get('button');
-        if(!imageSource || !imageSource?.image){
+        if(!imageSource){
           return;
         }
         
