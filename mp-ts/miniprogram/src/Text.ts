@@ -1,6 +1,7 @@
 /**
  * 文本类
  */
+import { TickSystem } from 'XrFrame/systems'
 import DisplayObject from './DisplayObject'
 import { FillText, needRotation } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
@@ -131,7 +132,7 @@ export default class Text extends DisplayObject {
     t = String(t)
     this._text = t
     this._width = this.getWidth();
-    console.log(this._width)
+    // console.log(this._width)
   }
   get lineGap() {
     return this._lineGap
@@ -176,6 +177,7 @@ export default class Text extends DisplayObject {
   set fontSize(v) {
     this._fontSize = v
     this.font = this.getComposedFont();
+    this._height = this._fontSize;
   }
   get fontFamily(){
     return this._fontFamily
@@ -198,22 +200,27 @@ export default class Text extends DisplayObject {
     }
   }
   assembleOneLine(textArr: string[]){
-    const ctx = DisplayObject.getContext()
+    // const ctx = DisplayObject.getContext()
     this.textBlocks[0] = this.textBlocks[0] ?? [];
+    let sumWidth = 0;
     for(let i=0, l=textArr.length;i < l; i++){
       // 测宽度前必须先设置字体大小
-      ctx.font = this.font
-      let w = ctx.measureText(textArr[i]).width
+      // ctx.font = this.font
+      // let w = ctx.measureText(textArr[i]).width
+      let w = this._fontSize
+      sumWidth += w + this._letterSpace;
       this.textBlocks[0].push({
         rowNum: 0,
         colomnNum: i,
         text: textArr[i],
         width: w,
         height: w,
-        lineGap: 0,
-        letterSpace: 0,
+        lineGap: this._lineGap,
+        letterSpace: this._letterSpace,
       })
     }
+    this._width = sumWidth - this._letterSpace;
+    this._height = this._fontSize + this._lineGap;
   }
   assembleMultiLine(textArr: string[]){
     // const ctx = DisplayObject.getContext()
@@ -224,9 +231,9 @@ export default class Text extends DisplayObject {
     let colomnNum = 0;
     
     for(let i=0, l=textArr.length;i < l; i++){
-      let w = this._fontSize + this._letterSpace;
+      let w = this._fontSize;
       // 留出
-      if(widthSum + w > widthBound){
+      if(widthSum + w + this._letterSpace > widthBound){
         // console.log(w, (widthSum + w ), widthBound)
         rowNum++;
         widthSum = 0;
@@ -238,13 +245,15 @@ export default class Text extends DisplayObject {
         colomnNum: colomnNum,
         text: textArr[i],
         width: w,
-        height: w + this._lineGap,
+        height: w,
         lineGap: this._lineGap,
         letterSpace: this._letterSpace,
       })
       widthSum += w;
       colomnNum++;
     }
+    this._width = this._wrapWidth;
+    this._height = (this._fontSize + this._lineGap) * this.textBlocks.length;
   }
   assembleMultiLineVertical(textArr: string[]){
     this.textBlocks[0] = this.textBlocks[0] ?? [];
@@ -271,15 +280,14 @@ export default class Text extends DisplayObject {
         rowNum: rowNum,
         colomnNum: colomnNum,
         text: textArr[i],
-        width: w + this._letterSpace,
-        height: w + this._lineGap,
+        width: w,
+        height: w,
         lineGap: this._lineGap,
         letterSpace: this._letterSpace,
       })
-      heightSum += w;
+      heightSum += this._fontSize + this._lineGap;
       rowNum++;
     }
-
     // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 colomnNum 值
     if(this._writeMode === 'vertical-rl'){
       this.textBlocks = this.textBlocks.map( textBlockRow => {
@@ -289,6 +297,8 @@ export default class Text extends DisplayObject {
         return textBlockRow.reverse();
       })
     }
+    this._width = (this._fontSize + this._letterSpace) * (maxColomnNum + 1) ;
+    this._height = this._wrapHeight
   }
   assembleRowText(){
     let textArr = this._text.split('');
@@ -312,6 +322,8 @@ export default class Text extends DisplayObject {
         letterSpace: 0,
       })
     }
+    this._width = this._fontSize;
+    this._height = (this._fontSize + this._lineGap) * this.text.length;
   }
   assembleVerticalText(){
     let textArr = this._text.split('');
@@ -383,24 +395,19 @@ export default class Text extends DisplayObject {
   }
  
   private _composeText(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
-    ctx.save();
+    
     // 如果是复杂排版,则 textAlign 不起作用,直接默认为左侧
     ctx.textAlign = 'left'
-    console.log(this._letterSpace)
+    // console.log(this._letterSpace)
     this.textBlocks.forEach(row => {
       row.forEach(_textBlock => {
         const left = this.x + (_textBlock.colomnNum * (_textBlock.width + this._letterSpace)) ;
         const top = this.y +  (_textBlock.rowNum * (_textBlock.height + this._lineGap));
-        if(needRotation(_textBlock.text)){
-          ctx.translate(left , top)
-          ctx.rotate(ROTATE_90DEG)
-          ctx.translate(-left, -top)	
-        }
         ctx.font = this.font
         ctx.fillText(_textBlock.text, left,  top)
       })
     })
-    ctx.restore();
+    
     return this
   }
   

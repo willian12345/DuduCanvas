@@ -269,7 +269,6 @@ export default class DisplayObject  extends Graphics{
 		let h = this.height
 		let regX = this.regX
 		let regY = this.regY
-		console.log(x,y )
 		if(this.rotation !== 0){
 			let arr = this.getRectangleRotatedPosition(this.rotation, w, h, regX, regY)
 			// 相对坐标+原本的 x y 值成为绝对坐标

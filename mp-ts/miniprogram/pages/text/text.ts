@@ -40,29 +40,28 @@ Component({
         //   })
         // })
 
-        const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight, debug: true}, this);
+        const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight}, this);
         const stage = await app.init();
         
-        // let t = new Text({text: '单行文本居中显示', fontSize: 12})
-        // t.x = canvasWidth * .5
-        // t.y = 80
-        // t.rotation = 30
-        // t.color = 'red';
-        // stage.addChild(t)
-        // stage.update();
+        let t = new Text({text: '单行文本居中显示', fontSize: 12})
+        t.x = canvasWidth * .5
+        t.y = 80
+        t.rotation = 30
+        t.color = 'red';
+        stage.addChild(t)
+        stage.update();
 
 
         const t1 = new Text()
-        t1.text = '通过单独引用各个类的方式实现编码'
-        t1.textAlign = 'center'
+        t1.text = '通过单独引用单行文本居中显示依赖异常情况，可能会导'
         t1.x = 0
         t1.y = 180
-        // t1.wrapWidth = 90
+        // t1.wrapWidth = 120
         t1.wrapHeight = 100
         t1.fontSize = 20
         t1.letterSpace = 10
         t1.lineGap = 20
-        // t1.writeMode = 'vertical-lr'
+        t1.writeMode = 'vertical-lr'
         // t1.writeMode = 'vertical-rl'
         // t1.lineGap = 12;
         t1.color = 'green';
