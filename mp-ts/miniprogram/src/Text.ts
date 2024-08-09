@@ -55,6 +55,9 @@ export default class Text extends DisplayObject {
   get height(): number{
     return this._height;
   }
+  set height(v: number){
+    this._height = v;
+  }
   constructor(t?: TTextParams) {
     super()
     this._drawGraphics = super._drawGraphics
@@ -128,6 +131,7 @@ export default class Text extends DisplayObject {
     t = String(t)
     this._text = t
     this._width = this.getWidth();
+    console.log(this._width)
   }
   get lineGap() {
     return this._lineGap
@@ -162,7 +166,6 @@ export default class Text extends DisplayObject {
   set wrapWidth(v) {
     this._wrapWidth = v
     this._width = v
-    this._assembleText();
   }
   /**
    * 设置字体大小
@@ -173,7 +176,6 @@ export default class Text extends DisplayObject {
   set fontSize(v) {
     this._fontSize = v
     this.font = this.getComposedFont();
-    this._assembleText();
   }
   get fontFamily(){
     return this._fontFamily
@@ -181,7 +183,6 @@ export default class Text extends DisplayObject {
   set fontFamily(v: string){
     this._fontFamily = v
     this.font = this.getComposedFont();
-    this._assembleText();
   }
   /**
    * 文本横排与竖排模式
@@ -193,7 +194,7 @@ export default class Text extends DisplayObject {
     this._writeMode = v
     // 设置竖排模式后需要重新计算尺寸
     if (v.length > 0) {
-      this._assembleText();
+      // this._assembleText();
     }
   }
   assembleOneLine(textArr: string[]){
@@ -221,10 +222,12 @@ export default class Text extends DisplayObject {
     let widthBound = this._wrapWidth;
     let rowNum = 0;
     let colomnNum = 0;
+    
     for(let i=0, l=textArr.length;i < l; i++){
-      
-      let w = this._fontSize;
-      if(widthSum > widthBound){
+      let w = this._fontSize + this._letterSpace;
+      // 留出
+      if(widthSum + w > widthBound){
+        // console.log(w, (widthSum + w ), widthBound)
         rowNum++;
         widthSum = 0;
         colomnNum = 0;
@@ -234,7 +237,7 @@ export default class Text extends DisplayObject {
         rowNum: rowNum,
         colomnNum: colomnNum,
         text: textArr[i],
-        width: w + this._letterSpace,
+        width: w,
         height: w + this._lineGap,
         lineGap: this._lineGap,
         letterSpace: this._letterSpace,
@@ -247,8 +250,11 @@ export default class Text extends DisplayObject {
     this.textBlocks[0] = this.textBlocks[0] ?? [];
     let heightSum = 0;
     let heightBound = this._wrapHeight;
+
     let rowNum = 0;
     let colomnNum = 0;
+    // 最大列数
+    let maxColomnNum = colomnNum;
     for(let i=0, l=textArr.length;i < l; i++){
       let w = this._fontSize;
       if(heightSum > heightBound){
@@ -256,6 +262,10 @@ export default class Text extends DisplayObject {
         heightSum = 0;
         rowNum = 0;
       }
+      if(colomnNum > maxColomnNum){
+        maxColomnNum = colomnNum
+      }
+      
       this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
       this.textBlocks[rowNum].push({
         rowNum: rowNum,
@@ -269,11 +279,12 @@ export default class Text extends DisplayObject {
       heightSum += w;
       rowNum++;
     }
+
     // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 colomnNum 值
     if(this._writeMode === 'vertical-rl'){
       this.textBlocks = this.textBlocks.map( textBlockRow => {
         textBlockRow.forEach( (textBlock, index) => {
-          textBlock.colomnNum = (textBlockRow.length - 1) - index
+          textBlock.colomnNum = maxColomnNum - index
         })
         return textBlockRow.reverse();
       })
@@ -340,6 +351,7 @@ export default class Text extends DisplayObject {
     this._drawGraphics(ctx)
     // 如果需要排版则需要进行文本组装
     if(this._needComposeText()){
+      this._assembleText();
       this._composeText(ctx)
     }
     
@@ -384,7 +396,7 @@ export default class Text extends DisplayObject {
           ctx.rotate(ROTATE_90DEG)
           ctx.translate(-left, -top)	
         }
-
+        ctx.font = this.font
         ctx.fillText(_textBlock.text, left,  top)
       })
     })
