@@ -1,4 +1,4 @@
-import { Application, ImgLoader, Text, Container, Image, } from '../../src/index';
+import { Application, ImgLoader, Text, Image, } from '../../src/index';
 
 const getCanvasSize = () => {
   // 根据屏幕宽度计算 canvas 宽度

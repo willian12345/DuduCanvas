@@ -299,7 +299,7 @@ export default class SimpleCss extends DisplayObject {
             s = this.getHorizontalRoundRectPath(this.width, this.height)
             s.graphics.clip()
                 .fill()
-        } else if (this.borderRadiusValue >= this.width) {
+        } else if (typeof this.borderRadiusValue === 'number' && this.borderRadiusValue >= this.width) {
             // 上下半圆
             s = this.getVerticalRoundRectPath(this.width, this.height)
             s.graphics.clip()

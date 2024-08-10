@@ -1,15 +1,14 @@
 /**
  * 文本类
  */
-import { TickSystem } from 'XrFrame/systems'
 import DisplayObject from './DisplayObject'
-import { FillText, needRotation } from './text/FillText'
+import { FillText } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
 import SetTextAlign from './text/SetTextAlign'
 import SetTextBaseline from './text/SetTextBaseline'
 
 const defaultFontSize = 10
-const ROTATE_90DEG = 1.5707963267948966
+// const ROTATE_90DEG = 1.5707963267948966
 /**
  * Text 文本类
  * 显示文本，支持横、竖排文字，换行

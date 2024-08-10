@@ -10,13 +10,13 @@
  * @param {*} p1 起始点
  * @param {*} p2 终点
  */
-function oneOrderBezier(t: number, p1: [number, number], p2: [number, number]) {    
-	const [x1, y1] = p1;
-	const [x2, y2] = p2;
-	var x = x1 * (x2 - x1) * t,
-	    y = y1 * (y2 - y1) * t;
-	return [x, y];
-}
+// function oneOrderBezier(t: number, p1: [number, number], p2: [number, number]) {    
+// 	const [x1, y1] = p1;
+// 	const [x2, y2] = p2;
+// 	var x = x1 * (x2 - x1) * t,
+// 	    y = y1 * (y2 - y1) * t;
+// 	return [x, y];
+// }
 /**
  * 二次贝塞尔曲线(有一个控制点)求点的坐标
  * @param {*} t 是当前点所占的比例取值是0-1
@@ -25,39 +25,39 @@ function oneOrderBezier(t: number, p1: [number, number], p2: [number, number]) {
  * @param {*} p2 终点
  */
 
-function twoOrderBezier(t: number, p1: [number, number], cp: [number, number], p2: [number, number]) {
-	var [x1, y1] = p1,
-		[cx, cy] = cp,
-		[x2, y2] = p2;
-	var x = (1 - t) * (1 - t) * x1 + 2 * t * (1 - t) * cx + t * t * x2,
-		y = (1 - t) * (1 - t) * y1 + 2 * t * (1 - t) * cy + t * t * y2;
-	return [x, y];
-}
-/**
- * 三次贝塞尔曲线(有两个控制点)求点的坐标
- * @param {*} t 是当前点所占的比例取值是0-1
- * @param {*} p1 起始点
- * @param {*} cp1 控制点
- * @param {*} cp2 控制点
- * @param {*} p2 终点
- */
-function threeOrderBezier(t: number, p1: [number, number], cp1: [number, number], cp2: [number, number], p2: [number, number]) {
-	var [x1, y1] = p1,
-		[cx1, cy1] = cp1,
-		[cx2, cy2] = cp2,
-		[x2, y2] = p2;
-	var x =
-		x1 * (1 - t) * (1 - t) * (1 - t) +
-		3 * cx1 * t * (1 - t) * (1 - t) +
-		3 * cx2 * t * t * (1 - t) +
-		x2 * t * t * t;
-	var y =
-		y1 * (1 - t) * (1 - t) * (1 - t) +
-		3 * cy1 * t * (1 - t) * (1 - t) +
-		3 * cy2 * t * t * (1 - t) +
-		y2 * t * t * t;
-	return [x, y];
-}
+// function twoOrderBezier(t: number, p1: [number, number], cp: [number, number], p2: [number, number]) {
+// 	var [x1, y1] = p1,
+// 		[cx, cy] = cp,
+// 		[x2, y2] = p2;
+// 	var x = (1 - t) * (1 - t) * x1 + 2 * t * (1 - t) * cx + t * t * x2,
+// 		y = (1 - t) * (1 - t) * y1 + 2 * t * (1 - t) * cy + t * t * y2;
+// 	return [x, y];
+// }
+// /**
+//  * 三次贝塞尔曲线(有两个控制点)求点的坐标
+//  * @param {*} t 是当前点所占的比例取值是0-1
+//  * @param {*} p1 起始点
+//  * @param {*} cp1 控制点
+//  * @param {*} cp2 控制点
+//  * @param {*} p2 终点
+//  */
+// function threeOrderBezier(t: number, p1: [number, number], cp1: [number, number], cp2: [number, number], p2: [number, number]) {
+// 	var [x1, y1] = p1,
+// 		[cx1, cy1] = cp1,
+// 		[cx2, cy2] = cp2,
+// 		[x2, y2] = p2;
+// 	var x =
+// 		x1 * (1 - t) * (1 - t) * (1 - t) +
+// 		3 * cx1 * t * (1 - t) * (1 - t) +
+// 		3 * cx2 * t * t * (1 - t) +
+// 		x2 * t * t * t;
+// 	var y =
+// 		y1 * (1 - t) * (1 - t) * (1 - t) +
+// 		3 * cy1 * t * (1 - t) * (1 - t) +
+// 		3 * cy2 * t * t * (1 - t) +
+// 		y2 * t * t * t;
+// 	return [x, y];
+// }
 
 
 /**

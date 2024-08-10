@@ -41,7 +41,7 @@ export default class Stage extends DisplayObject {
     // }) as Promise<any>
 	}
 	name = 'Stage'
-	canvas: HTMLCanvasElement
+	canvas: WechatMiniprogram.Canvas
 	/**
 	 * 获取 canvas 上下文
 	 */

@@ -1,7 +1,7 @@
 import Text from "../Text"
 
 // 旋转 90 弧度 直接得出常数 (90 * Math.PI / 180) 免于实时计算
-const ROTATE_90DEG = 1.5707963267948966
+// const ROTATE_90DEG = 1.5707963267948966
 // 需要旋转的 Unicode 码范围, 如中、日、韩文字
 export const NO_ROTATION_RANGE = [
   [0x2E80, 0x2FEF],
