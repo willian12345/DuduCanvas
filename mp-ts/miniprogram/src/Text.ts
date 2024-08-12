@@ -17,7 +17,7 @@ const defaultFontSize = 10
 export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: string|number, letterSpace?: number };
 export type TTextBlock = {
   rowNum: number,
-  colomnNum: number,
+  columnNum: number,
   text: string,
   width: number,
   height: number,
@@ -130,6 +130,7 @@ export default class Text extends DisplayObject {
   set text(t) {
     t = String(t)
     this._text = t
+    this.textBlocks = [];
     this._width = this.getWidth();
     // console.log(this._width)
   }
@@ -199,7 +200,7 @@ export default class Text extends DisplayObject {
     }
   }
   assembleOneLine(textArr: string[]){
-    // const ctx = DisplayObject.getContext()
+    this.textBlocks = [];
     this.textBlocks[0] = this.textBlocks[0] ?? [];
     let sumWidth = 0;
     for(let i=0, l=textArr.length;i < l; i++){
@@ -210,7 +211,7 @@ export default class Text extends DisplayObject {
       sumWidth += w + this._letterSpace;
       this.textBlocks[0].push({
         rowNum: 0,
-        colomnNum: i,
+        columnNum: i,
         text: textArr[i],
         width: w,
         height: w,
@@ -222,62 +223,62 @@ export default class Text extends DisplayObject {
     this._height = this._fontSize + this._lineGap;
   }
   assembleMultiLine(textArr: string[]){
-    // const ctx = DisplayObject.getContext()
+    this.textBlocks = [];
     this.textBlocks[0] = this.textBlocks[0] ?? [];
     let widthSum = 0;
     let widthBound = this._wrapWidth;
     let rowNum = 0;
-    let colomnNum = 0;
+    let columnNum = 0;
     
     for(let i=0, l=textArr.length;i < l; i++){
       let w = this._fontSize;
       // 留出
-      if(widthSum + w + this._letterSpace > widthBound){
-        // console.log(w, (widthSum + w ), widthBound)
+      if(widthSum + w> widthBound){
         rowNum++;
         widthSum = 0;
-        colomnNum = 0;
+        columnNum = 0;
       }
       this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
       this.textBlocks[rowNum].push({
         rowNum: rowNum,
-        colomnNum: colomnNum,
+        columnNum: columnNum,
         text: textArr[i],
         width: w,
         height: w,
         lineGap: this._lineGap,
         letterSpace: this._letterSpace,
       })
-      widthSum += w;
-      colomnNum++;
+      widthSum += w + this._letterSpace;
+      columnNum++;
     }
     this._width = this._wrapWidth;
     this._height = (this._fontSize + this._lineGap) * this.textBlocks.length;
   }
   assembleMultiLineVertical(textArr: string[]){
+    this.textBlocks = [];
     this.textBlocks[0] = this.textBlocks[0] ?? [];
     let heightSum = 0;
     let heightBound = this._wrapHeight;
 
     let rowNum = 0;
-    let colomnNum = 0;
+    let columnNum = 0;
     // 最大列数
-    let maxColomnNum = colomnNum;
+    let maxColumnNum = columnNum;
     for(let i=0, l=textArr.length;i < l; i++){
       let w = this._fontSize;
       if(heightSum > heightBound){
-        colomnNum++;
+        columnNum++;
         heightSum = 0;
         rowNum = 0;
       }
-      if(colomnNum > maxColomnNum){
-        maxColomnNum = colomnNum
+      if(columnNum > maxColumnNum){
+        maxColumnNum = columnNum
       }
       
       this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
       this.textBlocks[rowNum].push({
         rowNum: rowNum,
-        colomnNum: colomnNum,
+        columnNum: columnNum,
         text: textArr[i],
         width: w,
         height: w,
@@ -287,16 +288,16 @@ export default class Text extends DisplayObject {
       heightSum += this._fontSize + this._lineGap;
       rowNum++;
     }
-    // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 colomnNum 值
+    // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 columnNum 值
     if(this._writeMode === 'vertical-rl'){
       this.textBlocks = this.textBlocks.map( textBlockRow => {
         textBlockRow.forEach( (textBlock, index) => {
-          textBlock.colomnNum = maxColomnNum - index
+          textBlock.columnNum = maxColumnNum - index
         })
         return textBlockRow.reverse();
       })
     }
-    this._width = (this._fontSize + this._letterSpace) * (maxColomnNum + 1) ;
+    this._width = (this._fontSize + this._letterSpace) * (maxColumnNum + 1) ;
     this._height = this._wrapHeight
   }
   assembleRowText(){
@@ -308,12 +309,13 @@ export default class Text extends DisplayObject {
     }
   }
   assembleOneLineVertical(textArr: string[]){
+    this.textBlocks = [];
     this.textBlocks[0] = this.textBlocks[0] ?? [];
     for(let i=0, l=textArr.length;i < l; i++){
       let w = this._fontSize;
       this.textBlocks[0].push({
         rowNum: i,
-        colomnNum: 0,
+        columnNum: 0,
         text: textArr[i],
         width: w,
         height: w,
@@ -397,11 +399,46 @@ export default class Text extends DisplayObject {
     
     // 如果是复杂排版,则 textAlign 不起作用,直接默认为左侧
     ctx.textAlign = 'left'
-    // console.log(this._letterSpace)
+    let maxColumn = 0;
+    let minColumn = 0;
+    this.textBlocks.forEach( tb => {
+      const l = tb.length;
+      if(minColumn === 0){
+        minColumn = l;
+      }
+      if(l > maxColumn){
+        maxColumn = l;
+      }
+      if(l < minColumn){
+        minColumn = l;
+      }
+    })
+
+    const maxColumnRows = this.textBlocks.filter((tb)=> {
+      return tb.length > minColumn
+    })
+
+    
     this.textBlocks.forEach(row => {
-      row.forEach(_textBlock => {
-        const left = this.x + (_textBlock.colomnNum * (_textBlock.width + this._letterSpace)) ;
-        const top = this.y +  (_textBlock.rowNum * (_textBlock.height + this._lineGap));
+      let extraX = 0
+      let extraY = 0;
+      // console.log((maxColumnNum - row.length) )
+        if(this.textAlign === 'center'){
+          if(!this._writeMode.length && row.length < maxColumn){
+            extraX =  (maxColumn - row.length) * (this._fontSize + this._letterSpace) * .5;
+          }
+        }
+      row.forEach((_textBlock, column) => {
+        if(this._writeMode.length){
+          if(column === maxColumn - 1){
+            const diff = this.textBlocks.length - maxColumnRows.length
+            extraY = diff  * (this._fontSize + this._lineGap) * .5;
+          }else{
+            extraY = 0;
+          }
+        }
+        const left = this.x + (_textBlock.columnNum * (_textBlock.width + this._letterSpace)) + extraX;
+        const top = this.y +  (_textBlock.rowNum * (_textBlock.height + this._lineGap)) + extraY;
         ctx.font = this.font
         ctx.fillText(_textBlock.text, left,  top)
       })

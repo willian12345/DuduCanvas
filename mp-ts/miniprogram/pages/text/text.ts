@@ -1,4 +1,4 @@
-import {Text, Application} from '../../src/index'
+import {Stage, Text, Application, Container} from '../../src/index'
 const getCanvasSize = () => {
   // 根据屏幕宽度计算 canvas 宽度
   const systemInfo = wx.getSystemInfoSync();
@@ -12,15 +12,24 @@ const getCanvasSize = () => {
     canvasHeight,
   }
 }
+
+let stage: Stage;
+let t1: Text;
+
 Component({
   data: {
     canvasWidth: 0,
     canvasHeight: 0
   },
-  lifetimes: {
-    attached() {
-
+  methods: {
+    sliderchange(e:any){
+      console.log(e.detail.value)
+      t1.letterSpace = e.detail.value;
+      stage.update();
     },
+  },
+  lifetimes: {
+    
     async ready(){
         const { canvasWidth, canvasHeight } = getCanvasSize();
         this.setData({
@@ -40,43 +49,44 @@ Component({
         //   })
         // })
 
-        const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight}, this);
-        const stage = await app.init();
-        
-        let t = new Text({text: '单行文本居中显示', fontSize: 12})
+        const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight, debug: true}, this);
+        stage = await app.init();
+        const container = new Container();
+        container.height = 400;
+        container.x = 0;
+        container.y = 0;
+        container.width = canvasWidth;
+        container.justifyContent = 'center'
+        container.alignItems = 'flex-start'
+        container.backgroundColor = 'green';
+        let t = new Text({text: 'yoyogo 你好啊世界yoyogo ', fontSize: 12})
         t.x = canvasWidth * .5
-        t.y = 80
+        t.y = 0
         t.rotation = 30
         t.color = 'red';
         stage.addChild(t)
         stage.update();
 
-
-        const t1 = new Text()
-        t1.text = '通过单独引用单行文本居中显示依赖异常情况，可能会导'
+        t1 = new Text()
+        t1.text = '你好啊世界你好啊世界你好啊世界'
         t1.x = 0
-        t1.y = 180
-        // t1.wrapWidth = 120
-        t1.wrapHeight = 100
+        t1.y = 120
+        t1.textAlign = 'center'
+        t1.wrapWidth = canvasWidth
+        t1.wrapHeight = 400
         t1.fontSize = 20
-        t1.letterSpace = 10
+        t1.letterSpace = 30
         t1.lineGap = 20
-        t1.writeMode = 'vertical-lr'
+        // t1.writeMode = 'vertical-lr'
         // t1.writeMode = 'vertical-rl'
         // t1.lineGap = 12;
-        t1.color = 'green';
-        // console.log(t1.width, t1.height)
+        t1.color = 'red';
         // 给文本加个底色
         // t1.graphics.fillStyle('yellow')
         // .fillRect(0, 0, t1.width, t1.height)   
+        // container.addChild(t1)
         stage.addChild(t1)
         stage.update()
-        // console.log(t1.width)
-
-        // setInterval(()=> {
-        //   t.rotation += 8;
-        //   stage.update();
-        // }, 1000)
     }
   },
 })

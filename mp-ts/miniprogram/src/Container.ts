@@ -1,4 +1,5 @@
-import SimpleCss from './SimpleCss.js'
+import SimpleCss from './SimpleCss'
+import DisplayObject from './DisplayObject'
 
 /**
  * Container 
@@ -188,7 +189,7 @@ export default class Container extends SimpleCss{
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
 					// x 轴起点是总宽度-子元素总宽度
-					child.x += parentWidth - childsWidth
+          child.x += parentWidth - childsWidth
 				}
 			}
 		}else if(justifyContent === 'center'){
@@ -199,7 +200,7 @@ export default class Container extends SimpleCss{
 					child.x += childs[index-1].x + childs[index-1].width
 				}else{
 					// x 轴起点是总宽度-子元素总宽度的一半
-					child.x += ((parentWidth - childsWidth) * .5)
+          child.x += ((parentWidth - childsWidth) * .5)
 				}
 			}
 		}else if(justifyContent === 'space-between'){
@@ -215,16 +216,21 @@ export default class Container extends SimpleCss{
 			}
 		}else if(justifyContent === 'space-around'){
 			// 水平中间间隔相等，两端间隔是中间间隔的一半
-			const aroundGapWidth = this.getAroundGapWidth(parentWidth)
-			for (let index = 0, l = childs.length; index < l; index++) {
-				const child = childs[index];
-				if(index > 0){
-					child.x += childs[index-1].x + childs[index-1].width + aroundGapWidth
-				}else{
-					// x 轴起点是单个间隔的一半
-					child.x += aroundGapWidth * .5
-				}
-			}
+      const aroundGapWidth = this.getAroundGapWidth(parentWidth)
+      if(childs.length === 1){
+        childs[0].x += (parentWidth - childs[0].width) * .5
+      }else{
+        for (let index = 0, l = childs.length; index < l; index++) {
+          const child = childs[index];
+          if(index > 0){
+            child.x += childs[index-1].x + childs[index-1].width + aroundGapWidth
+          }else{
+            // x 轴起点是单个间隔的一半
+            child.x += 0
+          }
+        }
+      }
+			
 		}
 	}
 	/**
@@ -339,9 +345,15 @@ export default class Container extends SimpleCss{
 	setColumnReverse(){
 		this.setJustifyContentForColumn(true)
 		this.setAlignItemsByColumn()
-	}
+  }
+
 	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
-		const direction = this.direction
+    
+    this.childs.forEach( (_child)=> {
+      _child._tempX = _child.x;
+      _child._tempY = _child.y;
+    })
+    const direction = this.direction
 		if(direction === 'row'){
 			this.setRow()
 		}else if(direction === 'row-reverse'){
@@ -350,10 +362,15 @@ export default class Container extends SimpleCss{
 			this.setColumn()
 		}else if(direction === 'column-reverse'){
 			this.setColumnReverse()
-		}
+    }
+
 		// 所有位置计算完后再调用 extends class 的 draw 绘制
 		// 因为 Container 本身不需要绘制渲染
-		super._draw(ctx)
+    super._draw(ctx)
+    this.childs.forEach( (_child)=> {
+       _child.x = _child._tempX;
+       _child.y = _child._tempY;
+    })
 	}
 }
 

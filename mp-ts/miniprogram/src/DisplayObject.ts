@@ -31,6 +31,7 @@ export default class DisplayObject  extends Graphics{
     isMask = false
     masked: DisplayObject|null = null
     protected _scale: number
+    zIndex = 0;
 	constructor(){
 		super()
 		this._drawGraphics = super._drawGraphics
@@ -84,7 +85,8 @@ export default class DisplayObject  extends Graphics{
     debug = _debug
   }
 	// 添加子元素
-	addChild(...args: any[]){
+	addChild(...args: DisplayObject[]){
+    console.log(args)
 		// 指定父级
 		const childs = args.map((v, index) => {
 			if(v._id === this._id){

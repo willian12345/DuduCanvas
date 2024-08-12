@@ -29,7 +29,8 @@ import SetLineDash from './SetLineDash'
  * Graphics 绘制类
  * 绘制命令，添加绘制命令集，最终在 draw 方法内集中绘制
  */
-export default class Graphics{
+
+export default abstract class Graphics{
   name = 'Graphics'
   protected _instructions: any[]
   constructor(){
@@ -172,4 +173,5 @@ protected _append(instructionsObject: any){
       return this.graphics
     }
   }
+  abstract addChild(): void;
 }
