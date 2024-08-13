@@ -24,6 +24,7 @@ export default class DisplayObject extends Graphics {
     isMask: boolean;
     masked: DisplayObject | null;
     protected _scale: number;
+    zIndex: number;
     constructor();
     get width(): number;
     set width(value: number);
@@ -39,7 +40,7 @@ export default class DisplayObject extends Graphics {
     static setContext(ctx: Context2d): void;
     static getContext(): WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
     static setDebug(_debug: boolean): void;
-    addChild(...args: any[]): void;
+    addChild(...args: DisplayObject[]): void;
     removeChild(child: DisplayObject): void;
     protected _draw(context: Context2d): void;
     /**

@@ -1,4 +1,4 @@
-import SimpleCss from './SimpleCss.js';
+import SimpleCss from './SimpleCss';
 /**
  * Container
  * 拥有 Flex 布局功能的容器，可往容器内添加子元素
@@ -227,14 +227,19 @@ export default class Container extends SimpleCss {
         else if (justifyContent === 'space-around') {
             // 水平中间间隔相等，两端间隔是中间间隔的一半
             const aroundGapWidth = this.getAroundGapWidth(parentWidth);
-            for (let index = 0, l = childs.length; index < l; index++) {
-                const child = childs[index];
-                if (index > 0) {
-                    child.x += childs[index - 1].x + childs[index - 1].width + aroundGapWidth;
-                }
-                else {
-                    // x 轴起点是单个间隔的一半
-                    child.x += aroundGapWidth * .5;
+            if (childs.length === 1) {
+                childs[0].x += (parentWidth - childs[0].width) * .5;
+            }
+            else {
+                for (let index = 0, l = childs.length; index < l; index++) {
+                    const child = childs[index];
+                    if (index > 0) {
+                        child.x += childs[index - 1].x + childs[index - 1].width + aroundGapWidth;
+                    }
+                    else {
+                        // x 轴起点是单个间隔的一半
+                        child.x += 0;
+                    }
                 }
             }
         }
@@ -366,6 +371,12 @@ export default class Container extends SimpleCss {
         this.setAlignItemsByColumn();
     }
     _draw(ctx) {
+        this.childs.forEach((_child) => {
+            //@ts-ignore
+            _child._tempX = _child.x;
+            //@ts-ignore
+            _child._tempY = _child.y;
+        });
         const direction = this.direction;
         if (direction === 'row') {
             this.setRow();
@@ -382,5 +393,11 @@ export default class Container extends SimpleCss {
         // 所有位置计算完后再调用 extends class 的 draw 绘制
         // 因为 Container 本身不需要绘制渲染
         super._draw(ctx);
+        this.childs.forEach((_child) => {
+            //@ts-ignore
+            _child.x = _child._tempX;
+            //@ts-ignore
+            _child.y = _child._tempY;
+        });
     }
 }

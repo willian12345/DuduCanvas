@@ -21,7 +21,7 @@ export type TTextParams = {
 };
 export type TTextBlock = {
     rowNum: number;
-    colomnNum: number;
+    columnNum: number;
     text: string;
     width: number;
     height: number;

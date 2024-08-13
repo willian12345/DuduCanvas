@@ -1,4 +1,4 @@
-import SimpleCss from './SimpleCss.js';
+import SimpleCss from './SimpleCss';
 /**
  * Container
  * 拥有 Flex 布局功能的容器，可往容器内添加子元素

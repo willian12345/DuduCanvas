@@ -350,7 +350,9 @@ export default class Container extends SimpleCss{
 	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
     
     this.childs.forEach( (_child)=> {
+			//@ts-ignore
       _child._tempX = _child.x;
+			//@ts-ignore
       _child._tempY = _child.y;
     })
     const direction = this.direction
@@ -368,7 +370,9 @@ export default class Container extends SimpleCss{
 		// 因为 Container 本身不需要绘制渲染
     super._draw(ctx)
     this.childs.forEach( (_child)=> {
+			//@ts-ignore
        _child.x = _child._tempX;
+			 //@ts-ignore
        _child.y = _child._tempY;
     })
 	}

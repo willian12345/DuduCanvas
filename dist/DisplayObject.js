@@ -26,6 +26,7 @@ export default class DisplayObject extends Graphics {
         this.shadow = '';
         this.isMask = false;
         this.masked = null;
+        this.zIndex = 0;
         this._drawGraphics = super._drawGraphics;
         this._scale = 1;
         this._id = displayObjectId++;
@@ -74,6 +75,7 @@ export default class DisplayObject extends Graphics {
     }
     // 添加子元素
     addChild(...args) {
+        console.log(args);
         // 指定父级
         const childs = args.map((v, index) => {
             if (v._id === this._id) {
