@@ -1,23 +1,33 @@
-import { Application, ImgLoader, Text, Image, } from '../../src/index';
+import { Application, ImgLoader, Text, Image, Stage} from '../../src/index';
+import {  checkPermission, showAuthTips, savePicture, getCanvasTempPath, getCanvasSize} from '../../utils/util';
 
-const getCanvasSize = () => {
-  // 根据屏幕宽度计算 canvas 宽度
-  const systemInfo = wx.getSystemInfoSync();
-  const screenWidth = systemInfo.windowWidth;
-  const designWidth = 750;
-  const designHeight = 1334;
-  const canvasWidth = screenWidth;
-  const canvasHeight = (screenWidth / designWidth) * designHeight;
-  return {
-    canvasWidth,
-    canvasHeight,
-  }
-}
 let timer: number;
+let stage: Stage;
 Component({
   data: {
     canvasWidth: 0,
     canvasHeight: 0
+  },
+  methods: {
+    async saveToTmpPath(){
+      checkPermission()
+      const tmpPath = await getCanvasTempPath(stage.canvas, 'myCanvas');
+      if (!tmpPath) {
+        return;
+      }
+      const authed = await checkPermission()
+      if (!authed) {
+        showAuthTips()
+        return;
+      }
+
+      const r = await savePicture(tmpPath);
+      if (r) {
+        wx.showToast({
+          title: '保存完成'
+        });
+      }
+    }
   },
   lifetimes: {
     detached(){
@@ -32,7 +42,7 @@ Component({
       });
 
       const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight }, this);
-      const stage = await app.init();
+      stage = await app.init();
       const loader = new ImgLoader(stage.canvas, [
         {
           id: 'avatar',
@@ -47,22 +57,28 @@ Component({
       }
       const avatar = new Image({
         image: avatarTexture.image,
-        width: 100,
-        height: 100
+        width: 200,
+        height: 200
       })
+      // 设置导出图片时背景白色
+      stage.graphics
+      .fillStyle('white')
+      .fillRect(0, 0, stage.width, stage.height)
+
       avatar.x = stage.width / 2
       avatar.y = stage.width / 2
-      avatar.regX = 50
-      avatar.regY = 50
-      avatar.borderRadius = '10 40 10';
+      avatar.regX = 100
+      avatar.regY = 100
+      avatar.borderRadius = '20 80 20';
       
 
       const name = new Text()
       name.color = '#6c5149'
       name.text = '龙傲天'
+      name.fontSize = 30
       name.textAlign = "center"
       name.x = avatar.x
-      name.y = 110
+      name.y = 220
       stage.addChild(avatar, name)
       stage.update();
 
