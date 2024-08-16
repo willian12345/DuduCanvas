@@ -25,7 +25,7 @@ export default class Shape extends DisplayObject{
 		ctx.globalAlpha = this._getAlpha()
 
 		// 执行所有命令
-		this._drawGraphics(ctx)
+    this._drawGraphics(ctx)
 	}
 	getBounds(){
 		console.error('Shape 不提供getBounds方法')

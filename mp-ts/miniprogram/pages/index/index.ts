@@ -61,33 +61,53 @@ Component({
         height: 200
       })
       // 设置导出图片时背景白色
-      stage.graphics
-      .fillStyle('white')
-      .fillRect(0, 0, stage.width, stage.height)
+      stage.backgroundColor = 'green'
 
-      avatar.x = stage.width / 2
-      avatar.y = stage.width / 2
+      avatar.rotation = 0
       avatar.regX = 100
       avatar.regY = 100
+      avatar.x = canvasWidth * .5;
+      avatar.y = 400
+      // avatar.borderRadius = '100%'
       avatar.borderRadius = '20 80 20';
+      stage.addChild(avatar)
+      stage.update();
+      
       
 
       const name = new Text()
       name.color = '#6c5149'
       name.text = '龙傲天'
-      name.fontSize = 30
-      name.textAlign = "center"
-      name.x = avatar.x
-      name.y = 220
-      stage.addChild(avatar, name)
+      name.textAlign = 'center'
+      name.fontSize = 26
+      name.x = canvasWidth * .5;
+      name.y = 180;
+      stage.addChild(name)
+      stage.update();
+      const name1 = new Text()
+      name1.color = '#6c5149'
+      name1.text = '給給給'
+      name1.fontSize = 13
+      name1.textAlign = "left"
+      name1.x = 0
+      name1.y = 50
+      const name2 = new Text()
+      name2.color = '#6c5149'
+      name2.text = '一一一'
+      name2.fontSize = 13
+      name2.textAlign = "left"
+      name2.x = 0
+      name2.y = 50
+      stage.addChild(name1, name2)
       stage.update();
 
        // 异步更改属性后需要调用 stage.update() 方法
-    timer = setInterval(() => {
-      avatar.rotation += 2
-      name.text = `龙傲天 旋转：${avatar.rotation}`
-      stage.update()
-    }, 400)
+      timer = setInterval(() => {
+        avatar.rotation += 2
+        // name.y += 2;
+        // name.text = `龙傲天 旋转：${avatar.rotation}`
+        stage.update()
+      }, 400)
     }
   },
 })

@@ -75,8 +75,9 @@ export default class Image extends SimpleCss {
 			// 如果传了原始图起点，则说明要填完整所有参数
 			ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)
 		}else if(this.dWidth != undefined){
-			// 如果传了绘制目标宽，则认为不管原图，只管绘制目标位置与宽高
-      ctx.drawImage(this.image, x, y, this.dWidth, this.dHeight)
+      // 如果传了绘制目标宽，则认为不管原图，只管绘制目标位置与宽高
+      
+      ctx.drawImage(this.image,0, 0, this.dWidth, this.dHeight)
 		}else{
 			// 只管绘制目标位置，会绘制原始图大小
 			ctx.drawImage(this.image, x, y)

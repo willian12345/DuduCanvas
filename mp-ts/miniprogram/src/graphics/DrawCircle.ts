@@ -14,10 +14,11 @@ export default class DrawCircle {
 	exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: DisplayObject){
 		const [_x, _y] = instance.getPosition()
 		// 要先 beginPath 重新开始 path 以防之前就有开始的路径影响
-		ctx.beginPath()
-		ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
+    ctx.beginPath()
+    ctx.arc(this.x + _x, this.y + _y, this.radius, 0, 2 * Math.PI)
+    console.log(this.x , this.y,_x, _y )
 		if(instance.isMask){
-			ctx.clip()
+			// ctx.clip()
 		}else{
 			if(this.fill){
 				ctx.fill()

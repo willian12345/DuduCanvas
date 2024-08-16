@@ -33,12 +33,11 @@ export class FillText {
 	constructor (text: string, x: number, y: number) {
 		this.text = text
 		this.x  = x
-		this.y = y
+    this.y = y
 	}
 	exec(ctx:  WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: Text){
     this.instance = instance
-		const [x, y] = instance.getPosition()
     ctx.font = instance.font
-    ctx.fillText(this.text, x, y)
+    ctx.fillText(this.text, 0, 0)
 	}
 }

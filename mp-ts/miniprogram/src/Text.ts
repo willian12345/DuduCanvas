@@ -360,18 +360,20 @@ export default class Text extends DisplayObject {
   // 执行指令集
   _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
     this.collectStatus()
+    
     // 优先执行 graphics 指令
     this._drawGraphics(ctx)
-    // 如果需要排版则需要进行文本组装
-    if(this._needComposeText()){
-      this._assembleText();
-      this._composeText(ctx)
-    }
     
-    if (this.mask && this.mask.name === 'Shape') {
-      // this.mask.masked = this
-      this._mask?._draw(ctx, true)
-    }
+    // // 如果需要排版则需要进行文本组装
+    // if(this._needComposeText()){
+    //   this._assembleText();
+    //   this._composeText(ctx)
+    // }
+    
+    // if (this.mask && this.mask.name === 'Shape') {
+    //   // this.mask.masked = this
+    //   this._mask?._draw(ctx, true)
+    // }
   }
   /**
    * setFillStyle 设置文本颜色
@@ -391,7 +393,7 @@ export default class Text extends DisplayObject {
   private _fillText(){
      // 如果之前有fillText,则需要先清一下之前填文本的命令
     this._remove('FillText');
-		this._append(new FillText(this._text, this.x, this.y))
+    this._append(new FillText(this._text, this.x, this.y))
     return this
   }
  

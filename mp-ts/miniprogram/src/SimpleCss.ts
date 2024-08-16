@@ -90,39 +90,56 @@ export default class SimpleCss extends DisplayObject {
     constructor() {
         super()
     }
+    updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+      // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
+      if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
+          this.initBorderRadiusMask()
+      }
+
+      // 绘制背景
+      if (this.backgroundColor) {
+          this.initBackgroundColor()
+      }
+
+      // 绘制边框
+      if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
+          this.initBorder()
+      }
+      // 遮罩，主要用于显示圆角及圆
+      if (this.mask) {
+          if (this.mask.name === 'Shape') {
+              // 遮罩层不参与显示所以也没有父级元素
+              this.mask.masked = this
+          }
+      }
+      super.updateContext(context)
+    }
     /**
      * 绘制接口
      * @param {*} ctx 
      */
-    protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
+    // protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
 
-        // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
-        if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
-            this.initBorderRadiusMask()
-        }
+    //     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
+    //     // if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
+    //     //     this.initBorderRadiusMask()
+    //     // }
 
-        // 绘制背景
-        if (this.backgroundColor) {
-            this.initBackgroundColor()
-        }
+    //     // // 绘制背景
+    //     // if (this.backgroundColor) {
+    //     //     this.initBackgroundColor()
+    //     // }
 
-        // 绘制边框
-        if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
-            this.initBorder()
-        }
+    //     // // 绘制边框
+    //     // if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
+    //     //     this.initBorder()
+    //     // }
 
-        // 遮罩，主要用于显示圆角及圆
-        if (this.mask) {
-            if (this.mask.name === 'Shape') {
-                // 遮罩层不参与显示所以也没有父级元素
-                this.mask.masked = this
-                this.mask._draw(ctx, true)
-            }
-        }
-        // 重载 DisplayObject draw 
-        // 调用 显示对象绘制方法
-        super._draw(ctx)
-    }
+        
+    //     // 重载 DisplayObject draw 
+    //     // 调用 显示对象绘制方法
+    //     super._draw(ctx)
+    // }
     /**
      * 解构边框线值字符串
      * @param {*} border 

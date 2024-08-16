@@ -1,4 +1,5 @@
 import DisplayObject from './DisplayObject.js'
+import SimpleCss from './SimpleCss.js';
 /**
  * Stage
  * 舞台对象
@@ -6,7 +7,7 @@ import DisplayObject from './DisplayObject.js'
  * Stage 的 render 发起所有子元素的 draw 方法调用
  * 子元素自身再递归调用子元素 draw 方法
  */
-export default class Stage extends DisplayObject {
+export default class Stage extends SimpleCss {
 	/**
 	 * 
 	 * @param {*} id canvas id
@@ -52,11 +53,17 @@ export default class Stage extends DisplayObject {
 	 * 重新渲染舞台
 	 */
 	update(){
-		this._render()
+    this.context.setTransform(1, 0, 0, 1, 0, 0);
+    this.context.save()
+    this.updateContext(this.context)
+    this._render()
+    this.context.restore();
+    
 	}
 	private _render(){
 		this.context.clearRect(0, 0, this.width, this.height)
-		// 调用 canvas draw 方法渲染图像
-		this._draw(this.context)
+    // 调用 canvas draw 方法渲染图像
+    this._draw(this.context)
+    
 	}
 }
