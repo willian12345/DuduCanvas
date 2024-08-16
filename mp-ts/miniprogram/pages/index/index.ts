@@ -41,7 +41,7 @@ Component({
         canvasHeight: canvasHeight
       });
 
-      const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight }, this);
+      const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight, debug: true }, this);
       stage = await app.init();
       const loader = new ImgLoader(stage.canvas, [
         {

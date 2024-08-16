@@ -5,6 +5,6 @@
   <navigator url="/pages/sprite/sprite" hover-class="navigator-hover">Image</navigator>
   <navigator url="/pages/graphics/graphics" hover-class="navigator-hover">path</navigator>
   <navigator url="/pages/text/text" hover-class="navigator-hover">Text</navigator>
-  <navigator url="/pages/graphics/graphics" hover-class="navigator-hover">Shape</navigator>
+  <!-- <navigator url="/pages/graphics/graphics" hover-class="navigator-hover">Shape</navigator> -->
   <navigator url="/pages/flex/flex" hover-class="navigator-hover">Flex</navigator>
 </view>

@@ -169,14 +169,14 @@ export default class DisplayObject extends Graphics {
       // context.setTransform(1, 0, 0, 1, 0, 0)
       //  重置上下文向量坐标
       // 调试显示可视对象边界线用于调试
-      // if (debug) {
-      //   const b = v.getBounds()
-      //   if (b) {
-      //     context.beginPath();
-      //     context.strokeStyle = 'rgb(140, 202, 130)'
-      //     context.strokeRect(b.left, b.top, b.width, b.height);
-      //   }
-      // }
+      if (debug) {
+        const b = v.getBounds()
+        if (b) {
+          context.beginPath();
+          context.strokeStyle = 'rgb(140, 202, 130)'
+          context.strokeRect(b.left, b.top, b.width, b.height);
+        }
+      }
       
     })
   }

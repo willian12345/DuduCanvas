@@ -69,11 +69,12 @@ Component({
 
         t1 = new Text()
         t1.text = '你好啊世界你好啊世界你好啊世界'
-        t1.x = 0
+        t1.x = 20
         t1.y = 120
+        t1.color = 'green'
         t1.textAlign = 'center'
-        t1.wrapWidth = canvasWidth
-        t1.wrapHeight = 400
+        t1.wrapWidth = 320
+        // t1.wrapHeight = 400
         t1.fontSize = 20
         t1.letterSpace = 30
         t1.lineGap = 20
@@ -81,9 +82,10 @@ Component({
         // t1.writeMode = 'vertical-rl'
         // t1.lineGap = 12;
         t1.color = 'red';
+        console.log(t1.height,333)
         // 给文本加个底色
-        // t1.graphics.fillStyle('yellow')
-        // .fillRect(0, 0, t1.width, t1.height)   
+        t1.graphics.fillStyle('yellow')
+        .fillRect(0, 0, t1.width, t1.height)   
         // container.addChild(t1)
         stage.addChild(t1)
         stage.update()

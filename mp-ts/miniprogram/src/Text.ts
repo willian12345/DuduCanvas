@@ -53,6 +53,9 @@ export default class Text extends DisplayObject {
     return this._width;
   }
   get height(): number{
+    if(this._needComposeText()){
+      this._assembleText();
+    }
     return this._height;
   }
   set height(v: number){
@@ -364,16 +367,16 @@ export default class Text extends DisplayObject {
     // 优先执行 graphics 指令
     this._drawGraphics(ctx)
     
-    // // 如果需要排版则需要进行文本组装
-    // if(this._needComposeText()){
-    //   this._assembleText();
-    //   this._composeText(ctx)
-    // }
+    // 如果需要排版则需要进行文本组装
+    if(this._needComposeText()){
+      // this._assembleText();
+      this._composeText(ctx)
+    }
     
-    // if (this.mask && this.mask.name === 'Shape') {
-    //   // this.mask.masked = this
-    //   this._mask?._draw(ctx, true)
-    // }
+    if (this.mask && this.mask.name === 'Shape') {
+      // this.mask.masked = this
+      this._mask?._draw(ctx, true)
+    }
   }
   /**
    * setFillStyle 设置文本颜色
@@ -439,10 +442,13 @@ export default class Text extends DisplayObject {
             extraY = 0;
           }
         }
+        ctx.save()
+        ctx.setTransform(1,0,0,1,0,0);
         const left = this.x + (_textBlock.columnNum * (_textBlock.width + this._letterSpace)) + extraX;
         const top = this.y +  (_textBlock.rowNum * (_textBlock.height + this._lineGap)) + extraY;
         ctx.font = this.font
         ctx.fillText(_textBlock.text, left,  top)
+        ctx.restore();
       })
     })
     
