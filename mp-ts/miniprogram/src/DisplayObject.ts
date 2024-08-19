@@ -123,27 +123,28 @@ export default class DisplayObject extends Graphics {
   updateContext(context: Context2d) {
     let mtx = this.matrix; 
     this.getMatrix(this.matrix);
-    console.log(this.matrix, this)
+    // console.log(this.matrix, this)
     var tx = mtx.tx, ty = mtx.ty;
     context.transform(mtx.a, mtx.b, mtx.c, mtx.d, tx, ty);
     context.globalAlpha *= this.alpha;
-    // if (this.compositeOperation) { context.globalCompositeOperation = o.compositeOperation; }
-  }
-  // 绘制
-  protected _draw(context: Context2d) {
-    // 如果带有遮罩，先绘制遮罩
+    
+    // 如果有遮罩，需要提前绘制
     if(this._mask){
       const mtx = this.matrix;
       // 复制此显示对象 matrix 至遮罩 matrix
       this._mask.getMatrix(this.matrix);
     	context.transform(mtx.a,  mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
       this._mask._draw(context);
-    	context.clip();
-    	// mtx.invert();
-    	// context.transform(mtx.a,  mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
+      context.clip();
     }
+    // if (this.compositeOperation) { context.globalCompositeOperation = o.compositeOperation; }
+  }
+  
+  // 绘制
+  protected _draw(context: Context2d) {
+    
     // 执行绘制 graphics 指令
-    // this._drawGraphics(context)
+    this._drawGraphics(context)
     this.childs.forEach((v) => {
       // 绘制前压栈
       context.save()
@@ -154,6 +155,7 @@ export default class DisplayObject extends Graphics {
       context.globalAlpha = this._getAlpha()
 			v.updateContext(context);
       v._draw(context);
+      // console.log(v, 222)
       context.restore();
 
       

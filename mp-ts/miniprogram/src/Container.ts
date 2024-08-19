@@ -362,6 +362,8 @@ export default class Container extends SimpleCss{
 		// 所有位置计算完后再调用 extends class 的 draw 绘制
 		// 因为 Container 本身不需要绘制渲染
     super._draw(ctx)
+
+    console.log(323333)
 	}
 }
 

@@ -86,17 +86,9 @@ export default class Image extends SimpleCss {
     let [x, y] = this.getPosition()
 		x = this.dx + x
     y = this.dy + y
-		// 调用 extends class 的 draw 方法，因为有可能需要设置样式
-		super._draw(ctx)
-
 		// 绘制图片
 		this._drawImage(ctx, x, y)
-
-		// 此处的子元素一般只用于样式绘制，不推荐添加其它类型的子元素
-		this.childs.forEach(v=>{
-      //@ts-ignore
-			v._draw(ctx)
-		})
+    super._draw(ctx)
   }
   draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
     this._draw(ctx);

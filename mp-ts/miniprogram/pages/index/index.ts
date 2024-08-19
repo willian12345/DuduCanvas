@@ -76,28 +76,28 @@ Component({
       
 
       const name = new Text()
-      name.color = '#6c5149'
+      name.color = 'white'
       name.text = '龙傲天'
       name.textAlign = 'center'
-      name.fontSize = 26
+      name.fontSize = 32
       name.x = canvasWidth * .5;
       name.y = 180;
       stage.addChild(name)
       stage.update();
       const name1 = new Text()
-      name1.color = '#6c5149'
+      name1.color = '#FFFF00'
       name1.text = '給給給'
-      name1.fontSize = 13
+      name1.fontSize = 26
       name1.textAlign = "left"
       name1.x = 0
       name1.y = 50
       const name2 = new Text()
-      name2.color = '#6c5149'
-      name2.text = '一一一'
-      name2.fontSize = 13
+      name2.color = '#0000FF'
+      name2.text = 'YOYOYO'
+      name2.fontSize = 26
       name2.textAlign = "left"
       name2.x = 0
-      name2.y = 50
+      name2.y = 150
       stage.addChild(name1, name2)
       stage.update();
 

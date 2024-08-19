@@ -1,14 +1,24 @@
-
+import {  getCanvasSize} from '../../utils/util';
 import {ImgLoader, Image, Text, Application, Sprite} from '../../src/index'
 Component({
+  data: {
+    canvasWidth: 0,
+    canvasHeight: 0
+  },
   lifetimes: {
     attached() {
 
     },
     async ready(){
-        
-        const app = new Application('#myCanvas', {width: 375, height: 400}, this);
+      const { canvasWidth, canvasHeight } = getCanvasSize();
+
+      this.setData({
+        canvasWidth: canvasWidth,
+        canvasHeight: canvasHeight
+      });
+        const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight}, this);
         const stage = await app.init();
+        stage.backgroundColor = '#d85542';
         const loader = new ImgLoader(stage.canvas, [
           {
             id: 'button',
@@ -27,7 +37,7 @@ Component({
           width: 128, 
           height: 64
         })
-        button.x = stage.width / 2 - button.width / 2
+        button.x = stage.width * .5 - button.width * .5
         button.y = 80
         const t1 = new Text({text: '原始按钮大小'})
         t1.fontSize = 14
@@ -41,24 +51,24 @@ Component({
         
 
         // 九宫格按钮，可随意拉升宽高示例
-        // const bigButton = new Sprite(imageSource)
-        // bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
-        // bigButton.x = stage.width * .5;
-        // bigButton.y = 320
-        // bigButton.width = 320
-        // bigButton.height = 80
-        // bigButton.regX = bigButton.width * .5
-        // bigButton.regY = bigButton.height * .5
+        const bigButton = new Sprite(imageSource)
+        bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
+        bigButton.x = stage.width * .5;
+        bigButton.y = 320
+        bigButton.width = 320
+        bigButton.height = 80
+        bigButton.regX = bigButton.width * .5
+        bigButton.regY = bigButton.height * .5
 
-        // const t2 = new Text({text: '九宫格拉伸按钮'})
-        // t2.fontSize = 20
-        // t2.textAlign = 'center'
-        // t2.x = bigButton.width * .5
-        // t2.y = bigButton.height * .5 - (t2.height * .5)
-        // bigButton.addChild(t2)
+        const t2 = new Text({text: '九宫格拉伸按钮'})
+        t2.fontSize = 20
+        t2.textAlign = 'center'
+        t2.x = bigButton.width * .5
+        t2.y = bigButton.height * .5 - (t2.height * .5)
+        bigButton.addChild(t2)
 
-        // stage.addChild(bigButton)
-        // stage.update();
+        stage.addChild(bigButton)
+        stage.update();
     }
   },
 })
