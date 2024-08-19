@@ -362,21 +362,24 @@ export default class Text extends DisplayObject {
   }
   // 执行指令集
   _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
-    this.collectStatus()
-    
+    debugger
+    // this.collectStatus()
     // 优先执行 graphics 指令
-    this._drawGraphics(ctx)
-    
+    // this._drawGraphics(ctx)
+    // ctx.fillText(this._text, 0, 0)
+    // console.log(this.matrix)
+    console.log(this._text,33333)
+    ctx.fillText(this.text, 40,40)
     // 如果需要排版则需要进行文本组装
     if(this._needComposeText()){
       // this._assembleText();
       this._composeText(ctx)
     }
     
-    if (this.mask && this.mask.name === 'Shape') {
-      // this.mask.masked = this
-      this._mask?._draw(ctx, true)
-    }
+    // if (this.mask && this.mask.name === 'Shape') {
+    //   // this.mask.masked = this
+    //   this._mask?._draw(ctx, true)
+    // }
   }
   /**
    * setFillStyle 设置文本颜色

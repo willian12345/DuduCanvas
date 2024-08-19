@@ -37,27 +37,28 @@ Component({
         t1.y = button.height * .5 - (t1.height * .5)
         button.addChild(t1)
         stage.addChild(button)
+        stage.update();
         
 
         // 九宫格按钮，可随意拉升宽高示例
-        const bigButton = new Sprite(imageSource)
-        bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
-        bigButton.x = stage.width * .5;
-        bigButton.y = 320
-        bigButton.width = 320
-        bigButton.height = 80
-        bigButton.regX = bigButton.width * .5
-        bigButton.regY = bigButton.height * .5
+        // const bigButton = new Sprite(imageSource)
+        // bigButton.sliceBounds = {left: 29, top: 21, right: 23, bottom: 24}
+        // bigButton.x = stage.width * .5;
+        // bigButton.y = 320
+        // bigButton.width = 320
+        // bigButton.height = 80
+        // bigButton.regX = bigButton.width * .5
+        // bigButton.regY = bigButton.height * .5
 
-        const t2 = new Text({text: '九宫格拉伸按钮'})
-        t2.fontSize = 20
-        t2.textAlign = 'center'
-        t2.x = bigButton.width * .5
-        t2.y = bigButton.height * .5 - (t2.height * .5)
-        bigButton.addChild(t2)
+        // const t2 = new Text({text: '九宫格拉伸按钮'})
+        // t2.fontSize = 20
+        // t2.textAlign = 'center'
+        // t2.x = bigButton.width * .5
+        // t2.y = bigButton.height * .5 - (t2.height * .5)
+        // bigButton.addChild(t2)
 
-        stage.addChild(bigButton)
-        stage.update();
+        // stage.addChild(bigButton)
+        // stage.update();
     }
   },
 })

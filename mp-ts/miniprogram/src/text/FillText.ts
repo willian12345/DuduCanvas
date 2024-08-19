@@ -38,6 +38,7 @@ export class FillText {
 	exec(ctx:  WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: Text){
     this.instance = instance
     ctx.font = instance.font
+    console.log('text,,333')
     ctx.fillText(this.text, 0, 0)
 	}
 }

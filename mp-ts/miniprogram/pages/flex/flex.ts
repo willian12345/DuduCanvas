@@ -39,9 +39,9 @@ Component({
         }
       ])
       await loader.load()
-      // container.direction = 'row'
+      container.direction = 'row'
       // container.alignItems = 'center'
-      container.justifyContent = 'space-around'
+      container.justifyContent = 'space-between'
       container.x = 0
       container.y = 0
       container.width = canvasWidth
@@ -63,7 +63,7 @@ Component({
           })
           if (i == 1) {
             avatar.borderRadius = '100%'
-            avatar.alpha = .5
+            // avatar.alpha = .5
             avatar.border = '4 solid blue'
           }
           container.addChild(avatar)

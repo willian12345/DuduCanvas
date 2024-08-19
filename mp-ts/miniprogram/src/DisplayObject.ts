@@ -123,7 +123,7 @@ export default class DisplayObject extends Graphics {
   updateContext(context: Context2d) {
     let mtx = this.matrix; 
     this.getMatrix(this.matrix);
-    // console.log(this.matrix, this)
+    console.log(this.matrix, this)
     var tx = mtx.tx, ty = mtx.ty;
     context.transform(mtx.a, mtx.b, mtx.c, mtx.d, tx, ty);
     context.globalAlpha *= this.alpha;
@@ -143,7 +143,7 @@ export default class DisplayObject extends Graphics {
     	// context.transform(mtx.a,  mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
     }
     // 执行绘制 graphics 指令
-    this._drawGraphics(context)
+    // this._drawGraphics(context)
     this.childs.forEach((v) => {
       // 绘制前压栈
       context.save()
@@ -153,7 +153,7 @@ export default class DisplayObject extends Graphics {
       }
       context.globalAlpha = this._getAlpha()
 			v.updateContext(context);
-			v._draw(context);
+      v._draw(context);
       context.restore();
 
       

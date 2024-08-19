@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/sprite/sprite",
     "pages/index/index",
     "pages/text/text",
     "pages/flex/flex",
-    "pages/graphics/graphics",
-    "pages/sprite/sprite"
+    "pages/graphics/graphics"
   ],
   "window": {
     "navigationBarTextStyle": "black",
