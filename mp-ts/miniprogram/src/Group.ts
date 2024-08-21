@@ -1,9 +1,9 @@
-import DisplayObject from './DisplayObject.js'
+import DisplayObjectContainer from './DisplayObjectContainer.js'
 /**
  * Group 组
  * 可添加多个显示对象进 Group 内，变成一个显示组，可集中对 Group 组操作
  */
-export default class Group extends DisplayObject{
+export default class Group extends DisplayObjectContainer{
   name = 'Group'
   _display: string = 'block'
   _alignItems = 'flex-start'

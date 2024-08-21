@@ -2,9 +2,9 @@ import { getPosAfterRotation, getMaxValue, findNodes } from './utils'
 import Graphics from './graphics/index'
 import Shape from './Shape'
 import Matrix2D from './Matrix'
-type Context2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D
+export type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D
 
-let context!: Context2d
+let context!: TContext2d
 let displayObjectId = 0
 let debug = false;
 
@@ -13,7 +13,7 @@ let debug = false;
  */
 
 export default class DisplayObject extends Graphics {
-  protected _id: number
+  _id: number
   protected _mask: Shape | null = null
   name = 'DisplayObject'
   x = 0
@@ -29,7 +29,6 @@ export default class DisplayObject extends Graphics {
   skewY =  0
   rotation = 0
   parent: DisplayObject | null = null
-  childs: DisplayObject[] = []
   shadow = ''
   isMask = false
   masked: DisplayObject | null = null
@@ -81,7 +80,7 @@ export default class DisplayObject extends Graphics {
   /**
    * 保存 Stage 时传入 canvas context
    */
-  static setContext(ctx: Context2d) {
+  static setContext(ctx: TContext2d) {
     context = ctx
   }
   static getContext() {
@@ -90,37 +89,12 @@ export default class DisplayObject extends Graphics {
   static setDebug(_debug: boolean) {
     debug = _debug
   }
-  // 添加子元素
-  addChild(...args: DisplayObject[]) {
-    // console.log(args)
-    // 指定父级
-    const childs = args.map((v, index) => {
-      if (v._id === this._id) {
-        throw new Error(`不能自己添加自己为 child :${v.name}`)
-      } else if (v.isMask) {
-        throw new Error(`已被设置成 mask 遮罩 不能 addChild 到其它父级内:${v.name}`)
-      }
-      // 如果添加的对象有 mask 遮罩则 mask 也指定父级，以对应对象的坐标
-      if (v.mask) {
-        v.mask.parent = this
-      }
-      v.parent = this
-      v.zIndex = index
-      return v
-    })
-
-    this.childs = this.childs.concat(childs)
-  }
-  // 删除子元素
-  removeChild(child: DisplayObject) {
-    this.childs = this.childs.filter(v => v._id != child._id)
-  }
   getMatrix(matrix: Matrix2D) {
     var o = this, mtx = matrix || new  Matrix2D();
 		return o.transformMatrix ?  mtx.copy(o.transformMatrix) :
 			(mtx.identity() && mtx.appendTransform(o.x, o.y, o.scaleX, o.scaleY, o.rotation, o.skewX, o.skewY, o.regX, o.regY));
 	}
-  updateContext(context: Context2d) {
+  updateContext(context: TContext2d) {
     let mtx = this.matrix; 
     this.getMatrix(this.matrix);
     // console.log(this.matrix, this)
@@ -139,49 +113,11 @@ export default class DisplayObject extends Graphics {
     }
     // if (this.compositeOperation) { context.globalCompositeOperation = o.compositeOperation; }
   }
-  
-  // 绘制
-  protected _draw(context: Context2d) {
-    
-    // 执行绘制 graphics 指令
-    this._drawGraphics(context)
-    this.childs.forEach((v) => {
-      // 绘制前压栈
-      context.save()
-      // 设置投影
-      if (v.shadow.length) {
-        this._setShadow(v)
-      }
-      context.globalAlpha = this._getAlpha()
-			v.updateContext(context);
-      v._draw(context);
-      // console.log(v, 222)
-      context.restore();
-
-      
-
-      // 设置 alpha 透明度
-      
-      // context.rotate(0)
-      // 递归绘制
-      // v._draw(context)
-      // 绘制完后弹栈
-      // context.restore()
-
-      // context.setTransform(1, 0, 0, 1, 0, 0)
-      //  重置上下文向量坐标
-      // 调试显示可视对象边界线用于调试
-      if (debug) {
-        const b = v.getBounds()
-        if (b) {
-          context.beginPath();
-          context.strokeStyle = 'rgb(140, 202, 130)'
-          context.strokeRect(b.left, b.top, b.width, b.height);
-        }
-      }
-      
-    })
+  draw(context: TContext2d){
+    this._draw(context);
   }
+  // 绘制
+  protected _draw(_context: TContext2d) { }
   /**
    * setShadow
    * 添加阴影效果， 遮罩(clip)过的对象不支持 shadow 效果
@@ -260,28 +196,6 @@ export default class DisplayObject extends Graphics {
     }
     return [scaleX, scaleY]
   }
-  /**
-   * 先形变后再绘制
-   * 移动、缩放、旋转 canvas
-   */
-  transform(v: DisplayObject, context: Context2d) {
-    if (v.name === 'Stage') return
-    const ctx = context
-    const [_x, _y] = v.getPosition()
-    const rotation = v.getRotation()
-    let [scaleX, scaleY] = [v.scaleX, v.scaleY]
-    const regPointerX = _x + v.regX
-    const regPointerY = _y + v.regY
-    // 变形过程顺序必须为先移动位置，再放大缩小或旋转
-    // 再移动回原来的位置
-    ctx.translate(regPointerX, regPointerY)
-    ctx.scale(scaleX, scaleY)
-    ctx.rotate(rotation * Math.PI / 180)
-    ctx.translate(-regPointerX, -regPointerY)
-    // return [_x, _y, rotation, regPointerX, regPointerY, scaleX, scaleY]
-    return this
-  }
-
   getRectangleRotatedPosition(rotation: number, w: number, h: number, regX: number, regY: number) {
     // 获取左上、右上、右下，左下绕自身注册点旋转后的坐标
     // left top

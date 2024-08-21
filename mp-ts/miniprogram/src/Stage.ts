@@ -25,21 +25,7 @@ export default class Stage extends SimpleCss {
     this.width = canvasWidth
     this.height = canvasHeight
     this.canvas = canvas;
-    DisplayObject.setContext(this.context)	
-    
-    // return new Promise((resolve) => {
-    //   const query = componentInstance ? createSelectorQuery().in(componentInstance) : createSelectorQuery()
-			
-    //   query.select(id) 
-    //   .node(async ({node}) => {
-        
-    //       // await callback(this, canvas, this.context)
-    //       // // 自动调用一次渲染
-    //       // this[render]()
-    //       resolve(this)
-    //   })
-    //   .exec()
-    // }) as Promise<any>
+    DisplayObject.setContext(this.context)
 	}
 	name = 'Stage'
 	canvas: WechatMiniprogram.Canvas
@@ -63,7 +49,7 @@ export default class Stage extends SimpleCss {
 	private _render(){
 		this.context.clearRect(0, 0, this.width, this.height)
     // 调用 canvas draw 方法渲染图像
-    this._draw(this.context)
+    this.draw(this.context)
     
 	}
 }

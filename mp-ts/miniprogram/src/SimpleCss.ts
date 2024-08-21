@@ -1,4 +1,4 @@
-import DisplayObject from './DisplayObject.js'
+import DisplayObjectContainer from './DisplayObjectContainer.js'
 import Shape from './Shape.js'
 
 /**
@@ -43,7 +43,7 @@ const BORDER_STYLES = ['solid', 'dashed']
  * SimpleCss 
  * 样式类
  */
-export default class SimpleCss extends DisplayObject {
+export default class SimpleCss extends DisplayObjectContainer {
     backgroundColor = ''
     border = ''
     borderTop = ''
