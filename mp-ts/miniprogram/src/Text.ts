@@ -69,6 +69,9 @@ export default class Text extends DisplayObject {
   color = '#000'
   private _fontFamily = 'sans-serif';
   get width(): number {
+    if (this._needComposeText()) {
+      this._assembleText();
+    }
     return this._width;
   }
   get height(): number {
@@ -222,141 +225,6 @@ export default class Text extends DisplayObject {
       // this._assembleText();
     }
   }
-  assembleOneLine(textArr: string[]) {
-    this.textBlocks = [];
-    this.textBlocks[0] = this.textBlocks[0] ?? [];
-    let sumWidth = 0;
-    for (let i = 0, l = textArr.length; i < l; i++) {
-      // 测宽度前必须先设置字体大小
-      // ctx.font = this.font
-      // let w = ctx.measureText(textArr[i]).width
-      let w = this._fontSize
-      sumWidth += w + this._letterSpace;
-      this.textBlocks[0].push({
-        rowNum: 0,
-        columnNum: i,
-        text: textArr[i],
-        width: w,
-        height: w,
-        lineGap: this._lineGap,
-        letterSpace: this._letterSpace,
-      })
-    }
-    this._width = sumWidth - this._letterSpace;
-    this._height = this._fontSize + this._lineGap;
-  }
-  assembleMultiLine(textArr: string[]) {
-    this.textBlocks = [];
-    this.textBlocks[0] = this.textBlocks[0] ?? [];
-    let widthSum = 0;
-    let widthBound = this._wrapWidth;
-    let rowNum = 0;
-    let columnNum = 0;
-
-    for (let i = 0, l = textArr.length; i < l; i++) {
-      let w = this._fontSize;
-      // 留出
-      if (widthSum + w > widthBound) {
-        rowNum++;
-        widthSum = 0;
-        columnNum = 0;
-      }
-      this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
-      this.textBlocks[rowNum].push({
-        rowNum: rowNum,
-        columnNum: columnNum,
-        text: textArr[i],
-        width: w,
-        height: w,
-        lineGap: this._lineGap,
-        letterSpace: this._letterSpace,
-      })
-      widthSum += w + this._letterSpace;
-      columnNum++;
-    }
-    this._width = this._wrapWidth;
-    this._height = (this._fontSize + this._lineGap) * this.textBlocks.length;
-  }
-  assembleMultiLineVertical(textArr: string[]) {
-    this.textBlocks = [];
-    this.textBlocks[0] = this.textBlocks[0] ?? [];
-    let heightSum = 0;
-    let heightBound = this._wrapHeight;
-
-    let rowNum = 0;
-    let columnNum = 0;
-    // 最大列数
-    let maxColumnNum = columnNum;
-    for (let i = 0, l = textArr.length; i < l; i++) {
-      let w = this._fontSize;
-      if (heightSum > heightBound) {
-        columnNum++;
-        heightSum = 0;
-        rowNum = 0;
-      }
-      if (columnNum > maxColumnNum) {
-        maxColumnNum = columnNum
-      }
-
-      this.textBlocks[rowNum] = this.textBlocks[rowNum] ?? [];
-      this.textBlocks[rowNum].push({
-        rowNum: rowNum,
-        columnNum: columnNum,
-        text: textArr[i],
-        width: w,
-        height: w,
-        lineGap: this._lineGap,
-        letterSpace: this._letterSpace,
-      })
-      heightSum += this._fontSize + this._lineGap;
-      rowNum++;
-    }
-    // 如果是从右向左写，则需要将 textBlocks 数组内每行数组内容反一反，且重新调整 columnNum 值
-    if (this._writeMode === 'vertical-rl') {
-      this.textBlocks = this.textBlocks.map(textBlockRow => {
-        textBlockRow.forEach((textBlock, index) => {
-          textBlock.columnNum = maxColumnNum - index
-        })
-        return textBlockRow.reverse();
-      })
-    }
-    this._width = (this._fontSize + this._letterSpace) * (maxColumnNum + 1);
-    this._height = this._wrapHeight
-  }
-  assembleRowText() {
-    let textArr = this._text.split('');
-    if (this._wrapWidth > -1) {
-      this.assembleMultiLine(textArr)
-    } else {
-      this.assembleOneLine(textArr);
-    }
-  }
-  assembleOneLineVertical(textArr: string[]) {
-    this.textBlocks = [];
-    this.textBlocks[0] = this.textBlocks[0] ?? [];
-    for (let i = 0, l = textArr.length; i < l; i++) {
-      let w = this._fontSize;
-      this.textBlocks[0].push({
-        rowNum: i,
-        columnNum: 0,
-        text: textArr[i],
-        width: w,
-        height: w,
-        lineGap: 0,
-        letterSpace: 0,
-      })
-    }
-    this._width = this._fontSize;
-    this._height = (this._fontSize + this._lineGap) * this.text.length;
-  }
-  assembleVerticalText() {
-    let textArr = this._text.split('');
-    if (this.wrapHeight > -1) {
-      this.assembleMultiLineVertical(textArr);
-    } else {
-      this.assembleOneLineVertical(textArr)
-    }
-  }
   /**
    * 整理文本状态
    */
@@ -368,24 +236,29 @@ export default class Text extends DisplayObject {
       this._fillText();
     }
   }
+
+  private _assembleText(){
+    this.computeRows(DisplayObject.getContext());
+    let renderHeight = 0;
+    let renderWidth = 0;
+    this.rows.forEach((row) => {
+      console.log(row)
+      renderHeight += row.height
+      renderWidth = Math.max(renderWidth, row.width)
+    })
+    this._height = renderHeight;
+    this._width = renderWidth;
+  }
   // 是否需要进行文本组装
   private _needComposeText() {
     return this._letterSpace > 0 || this._writeMode.length > 0 || this._wrapWidth > -1;
   }
-  _assembleText() {
-    // 收集竖写模式
-    if (this._writeMode.length) {
-      this.assembleVerticalText();
-    } else {
-      this.assembleRowText();
-    }
-  }
-
   // 计算行渲染数据
   computeRows(ctx: TContext2d) {
+    this.rows = [];
     // 实际内容可用宽度
-    let contentWidth = this._wrapWidth
-
+    let contentWidth = this._wrapWidth === -1 ? 10000 : this._wrapWidth;
+    console.log(contentWidth)
     // 行数据
     this.rows.push({
       width: 0,
@@ -435,6 +308,7 @@ export default class Text extends DisplayObject {
     let renderHeight = this.y;
     this.rows.forEach((row) => {
       let renderWidth = this.x;
+      console.log(renderWidth,row)
       // 辅助线
       ctx.moveTo(this.x, renderHeight + row.height)
       ctx.lineTo(400, renderHeight + row.height)
@@ -464,8 +338,6 @@ export default class Text extends DisplayObject {
     if (this._needComposeText()) {
       this.computeRows(ctx);
       this.renderRows(ctx);
-      // this._assembleText();
-      // this._composeText(ctx)
     }
 
     if (this.mask && this.mask.name === 'Shape') {
