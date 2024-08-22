@@ -51,31 +51,34 @@ Component({
 
         const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight, debug: true}, this);
         stage = await app.init();
-        const container = new Container();
-        container.height = 400;
-        container.x = 0;
-        container.y = 0;
-        container.width = canvasWidth;
-        container.justifyContent = 'center'
-        container.alignItems = 'flex-start'
-        container.backgroundColor = 'green';
-        let t = new Text({text: 'yoyogo 你好啊世界yoyogo ', fontSize: 12})
-        t.x = canvasWidth * .5
-        t.y = 0
-        t.rotation = 30
-        t.color = 'red';
-        stage.addChild(t)
-        stage.update();
+
+        // const container = new Container();
+        // container.height = 400;
+        // container.x = 0;
+        // container.y = 0;
+        // container.width = canvasWidth;
+        // container.justifyContent = 'center'
+        // container.alignItems = 'flex-start'
+        // container.backgroundColor = 'green';
+        // let t = new Text({text: 'yoyogo 你好啊世界yoyogo ', fontSize: 12})
+        // t.x = canvasWidth * .5
+        // t.y = 0
+        // t.rotation = 30
+        // t.color = 'red';
+        // stage.addChild(t)
+        // stage.update();
 
         t1 = new Text()
-        t1.text = '你好啊世界你好啊世界你好啊世界'
-        t1.x = 20
-        t1.y = 120
+        t1.text = `析] 为避免影响调试，
+        开发者工具在
+        非自定义启动模式`
+        t1.x = 0
+        t1.y = 0
         t1.color = 'green'
-        t1.textAlign = 'center'
-        t1.wrapWidth = 320
+        t1.textAlign = 'left'
+        t1.wrapWidth = 200
         // t1.wrapHeight = 400
-        t1.fontSize = 20
+        t1.fontSize = 40
         t1.letterSpace = 30
         t1.lineGap = 20
         // t1.writeMode = 'vertical-lr'
