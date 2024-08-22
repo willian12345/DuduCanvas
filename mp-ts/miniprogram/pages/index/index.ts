@@ -9,6 +9,9 @@ Component({
     canvasHeight: 0
   },
   methods: {
+    handleTap(e: any){
+      console.log(e)
+    },
     async saveToTmpPath(){
       checkPermission()
       const tmpPath = await getCanvasTempPath(stage.canvas, 'myCanvas');

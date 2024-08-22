@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
-<canvas type="2d" id="myCanvas" width="{{canvasWidth}}" height="{{canvasHeight}}" style="width: {{canvasWidth / 2 }}px; height: {{canvasHeight / 2}}px;"/>
+<canvas type="2d" id="myCanvas" width="{{canvasWidth}}" height="{{canvasHeight}}" style="width: {{canvasWidth / 2 }}px; height: {{canvasHeight / 2}}px; margin-top: 100px;" bind:tap="handleTap"/>
 <button bind:tap="saveToTmpPath">导出至临时目录</button>
 <view class="btn-area">
   <navigator url="/pages/sprite/sprite" hover-class="navigator-hover">Image</navigator>

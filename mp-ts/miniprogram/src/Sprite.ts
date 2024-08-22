@@ -10,7 +10,7 @@ import type {ImageTexture} from './ImgLoader'
 export type TBound = { left: number, top: number, right: number, bottom: number }
 export default class Sprite extends Group{	
 	name = 'Sprite'
-	img!: ImageTexture
+	imageTexture!: ImageTexture
   sliced = false
   _sliceBounds: TBound = { left: 0, top: 0, right: 0, bottom: 0 }
   _left = 0
@@ -34,13 +34,13 @@ export default class Sprite extends Group{
 	}
 	/**
 	 * 
-	 * @param {*} img Image 对象
+	 * @param {*} imageTexture Image 对象
 	 * @param {*} sliceBound 九宫格图 {left: 0, top: 0, right: 0, bottom: 0}
 	 */
-	constructor(img: ImageTexture, sliceBound?: TBound){
+	constructor(imageTexture: ImageTexture, sliceBound?: TBound){
 		super()
-		if(img){
-			this.img = img	
+		if(imageTexture){
+			this.imageTexture = imageTexture	
     }
     //@ts-ignore
 		this.parentDraw = super._draw
@@ -48,21 +48,11 @@ export default class Sprite extends Group{
 			this._setSlice(sliceBound)
 		}
 	}
-	// get rotation(){
-	// 	return this[rotation]
-	// }
-	// set rotation(r){
-	// 	if(this.sliced){
-	// 		throw new Error('Sprite 因为旋转后会出现拼接缝隙，在九宫格状态下暂时无法旋转, 待小程序完全支持离屏渲染后修复')
-	// 	}else{
-	// 		this[rotation] = r
-	// 	}
-	// }
 	protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
 		const [x, y] = this.getPosition()
 		
-		this.wRatio = this.width / this.img.width
-		this.hRatio = this.height / this.img.height
+		this.wRatio = this.width / this.imageTexture.width
+		this.hRatio = this.height / this.imageTexture.height
 
 		// 伸缩后的宽、高
 		this.enableWidth = (this.width - this._left - this._right) * this.scaleX
@@ -78,16 +68,16 @@ export default class Sprite extends Group{
 		}else{
 			this._drawImage(ctx, x, y)
 		}
-		
+    
 		// 绘制子元素
 		this.childs.forEach( v =>{
-      //@ts-ignore
-			v._draw(ctx)
+      v.updateContext(ctx);
+			v.draw(ctx);
 		})
 		
 	}
 	private _drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
-    const yoyo = this.img.image
+    const yoyo = this.imageTexture.image
 		const img = new Image({
 			image: yoyo,
 			dx: x,
@@ -96,57 +86,56 @@ export default class Sprite extends Group{
 			dHeight: this.height
 		})
     img.draw(ctx)
-    console.log(img, yoyo)
 	}
 	// 绘制九宫格图像
 	private _drawSliced(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number, alpha: number){
 		// 计算九宫格每块位置信息
 		// 上左
 		const ltParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: 0,
 			sy: 0,
 			sWidth: this._left,
 			sHeight: this._top,
 			dWidth: this._left * this.scaleX,
 			dHeight: this._top * this.scaleY,
-			dx: x,
-			dy: y,
+			dx: 0,
+			dy: 0,
 		}
 		
 		// 上中
 		const tParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: this._left,
 			sy: 0,
-			sWidth: this.img.width - this._right - this._left,
+			sWidth: this.imageTexture.width - this._right - this._left,
 			sHeight: this._top,
 			dWidth: this.enableWidth,
 			dHeight: this._top * this.scaleY,
-			dx: ((this._left * this.scaleX) + x),
-			dy: y,
+			dx: ((this._left * this.scaleX)),
+			dy: 0,
 		}
 
 		// 上右
 		const rtParams = {
-			image: this.img.image,
-			sx: this.img.width - this._right,
+			image: this.imageTexture.image,
+			sx: this.imageTexture.width - this._right,
 			sy: 0,
 			sWidth: this._right,
 			sHeight: this._top,
 			dWidth: this._right * this.scaleX,
 			dHeight: this._top * this.scaleY,
-			dx: (this._left * this.scaleX) + tParams.dWidth + x,
-			dy: y,
+			dx: (this._left * this.scaleX) + tParams.dWidth,
+			dy: 0,
 		}
 
 		// 右中
 		const rParams = {
-			image: this.img.image,
-			sx: this.img.width - this._right,
+			image: this.imageTexture.image,
+			sx: this.imageTexture.width - this._right,
 			sy: this._top,
 			sWidth: this._right,
-			sHeight: this.img.height - this._bottom - this._top,
+			sHeight: this.imageTexture.height - this._bottom - this._top,
 			dWidth: this._right * this.scaleX,
 			dHeight: this.enableHeight,
 			dx: rtParams.dx,
@@ -156,9 +145,9 @@ export default class Sprite extends Group{
 
 		// 右下
 		const rbParams = {
-			image: this.img.image,
-			sx: this.img.width - this._right,
-			sy: this.img.height - this._bottom,
+			image: this.imageTexture.image,
+			sx: this.imageTexture.width - this._right,
+			sy: this.imageTexture.height - this._bottom,
 			sWidth: this._right,
 			sHeight: this._bottom,
 			dWidth: this._right * this.scaleX,
@@ -169,10 +158,10 @@ export default class Sprite extends Group{
 
 		// 下中
 		const bParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: this._left,
-			sy: this.img.height - this._bottom,
-			sWidth: this.img.width - this._left - this._right,
+			sy: this.imageTexture.height - this._bottom,
+			sWidth: this.imageTexture.width - this._left - this._right,
 			sHeight: this._bottom,
 			dWidth: this.enableWidth,
 			dHeight: this._bottom * this.scaleY,
@@ -182,9 +171,9 @@ export default class Sprite extends Group{
 
 		// 左下
 		const lbParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: 0,
-			sy: this.img.height - this._bottom,
+			sy: this.imageTexture.height - this._bottom,
 			sWidth: this._left,
 			sHeight: this._bottom,
 			dWidth: this._left * this.scaleX,
@@ -194,11 +183,11 @@ export default class Sprite extends Group{
 		}
 		// 左中
 		const lParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: 0,
 			sy: this._top,
 			sWidth: this._left,
-			sHeight: this.img.height - this._top - this._bottom,
+			sHeight: this.imageTexture.height - this._top - this._bottom,
 			dWidth: this._left * this.scaleX,
 			dHeight: this.enableHeight,
 			dx: ltParams.dx,
@@ -207,7 +196,7 @@ export default class Sprite extends Group{
 
 		// 中间 
 		const cParams = {
-			image: this.img.image,
+			image: this.imageTexture.image,
 			sx: ltParams.sWidth,
 			sy: ltParams.sHeight,
 			sWidth: tParams.sWidth,
@@ -217,7 +206,7 @@ export default class Sprite extends Group{
 			dx: ltParams.dx + ltParams.dWidth,
 			dy: ltParams.dy + ltParams.dHeight,
 		}
-		const peices = [ltParams, tParams, rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams]
+		const peices = [ltParams, tParams,  rtParams, rParams, rbParams, bParams, lbParams, lParams, cParams];
 		// 用离屏渲染成整张图再绘制到主canvas中解决接触缝隙问题以及性能问题
 		// const offScreen = wx.createOffscreenCanvas(375, 375)
 		// var offScreenCtx = offScreen.getContext("2d")		

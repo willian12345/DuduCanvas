@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/sprite/sprite",
+    "pages/index/index",
     "pages/text/text",
     "pages/flex/flex",
     "pages/graphics/graphics"
