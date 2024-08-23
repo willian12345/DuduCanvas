@@ -1,4 +1,4 @@
-import {Stage, Text, Application, Container} from '../../src/index'
+import {Stage, Text, Application, RichText} from '../../src/index'
 const getCanvasSize = () => {
   // 根据屏幕宽度计算 canvas 宽度
   const systemInfo = wx.getSystemInfoSync();
@@ -14,7 +14,7 @@ const getCanvasSize = () => {
 }
 
 let stage: Stage;
-let t1: Text;
+let t1: RichText;
 
 Component({
   data: {
@@ -60,15 +60,15 @@ Component({
         // container.justifyContent = 'center'
         // container.alignItems = 'flex-start'
         // container.backgroundColor = 'green';
-        // let t = new Text({text: 'yoyogo 你好啊世界yoyogo ', fontSize: 12})
-        // t.x = canvasWidth * .5
-        // t.y = 0
-        // t.rotation = 30
-        // t.color = 'red';
-        // stage.addChild(t)
-        // stage.update();
+        let t = new Text({text: 'yoyogo 你好啊世界yoyogo ', fontSize: 12})
+        t.x = canvasWidth * .5
+        t.y = 0
+        t.rotation = 30
+        t.color = 'red';
+        stage.addChild(t)
+        stage.update();
 
-        t1 = new Text()
+        t1 = new RichText()
         t1.text = `析] 为避免影响调试，开发者工具在非自定义启动模式`
         t1.x = 0
         t1.y = 0

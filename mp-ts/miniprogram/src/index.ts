@@ -6,6 +6,7 @@ export { default as ImgLoader } from './ImgLoader'
 export { default as Group } from './Group';
 export { default as Stage } from './Stage';
 export { default as Text } from './Text';
+export { default as RichText } from './RichText';
 export { default as Image } from './Image';
 export { default as Shape } from './Shape';
 export { default as Sprite } from './Sprite';

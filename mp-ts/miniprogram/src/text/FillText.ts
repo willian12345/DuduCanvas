@@ -39,5 +39,6 @@ export class FillText {
     this.instance = instance
     ctx.font = instance.font
     ctx.fillText(this.text, 0, 0)
+    console.log(this.text)
 	}
 }

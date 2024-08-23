@@ -174,5 +174,4 @@ protected _append(instructionsObject: any){
       return this.graphics
     }
   }
-  abstract addChild(): void;
 }
