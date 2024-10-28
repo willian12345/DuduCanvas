@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/card/card",
+    "pages/flex/flex",
     "pages/text/text",
     "pages/sprite/sprite",
     "pages/index/index",
-    "pages/flex/flex",
     "pages/graphics/graphics"
   ],
   "window": {

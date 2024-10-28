@@ -8,7 +8,6 @@ export default class MoveTo {
 		this.y = y
 	}
 	exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: DisplayObject ){
-		const [_x, _y] = instance.getPosition()
-		ctx.moveTo(this.x + _x, this.y + _y)	
+		ctx.moveTo(this.x, this.y)	
 	}
 }

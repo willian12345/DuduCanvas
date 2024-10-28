@@ -7,7 +7,6 @@ export default class LineTo {
 		this.y = y
 	}
 	exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: DisplayObject ){
-		let [_x, _y] = instance.getPosition()
-		ctx.lineTo(this.x + _x, this.y + _y)	
+        ctx.lineTo(this.x, this.y)
 	}
 }

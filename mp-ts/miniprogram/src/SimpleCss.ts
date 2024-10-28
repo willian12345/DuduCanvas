@@ -232,6 +232,7 @@ export default class SimpleCss extends DisplayObjectContainer {
             const [borderWidth, borderStyle, borderColor] = this.getBorderAttr(this.border)
             
             this.setBorderStyles(borderWidth, borderStyle, borderColor)
+            console.log(borderWidth, borderStyle, borderColor)
             const halfBorderWidth = borderWidth * .5
             // 如果有圆角属性，则需要画圆角边框
             if (this.borderRadius) {

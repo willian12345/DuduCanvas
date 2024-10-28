@@ -3,6 +3,7 @@
  */
 import DisplayObject, { TContext2d } from './DisplayObject'
 import Text from './Text'
+import { FillText } from './text/FillText'
 
 // const ROTATE_90DEG = 1.5707963267948966
 /**
@@ -143,7 +144,6 @@ export default class RichText extends Text {
     let renderHeight = 0;
     let renderWidth = 0;
     this.rows.forEach((row) => {
-      console.log(row)
       renderHeight += row.height
       renderWidth = Math.max(renderWidth, row.width)
     })
@@ -155,7 +155,6 @@ export default class RichText extends Text {
     this.rows = [];
     // 实际内容可用宽度
     let contentWidth = this._wrapWidth === -1 ? 10000 : this._wrapWidth;
-    console.log(contentWidth)
     // 行数据
     this.rows.push({
       width: 0,
@@ -199,30 +198,32 @@ export default class RichText extends Text {
         })
       }
     })
-    console.log(this.rows);
   }
   renderRows(ctx: TContext2d) {
-    let renderHeight = this.y;
+    let renderHeight = 0;
     this.rows.forEach((row) => {
-      let renderWidth = this.x;
-      console.log(renderWidth, row)
-      // 辅助线
-      ctx.moveTo(this.x, renderHeight + row.height)
-      ctx.lineTo(400, renderHeight + row.height)
-      ctx.stroke()
-      row.elementList.forEach((item: TElementListItem) => {
+      let renderWidth = 0;
+    //   ctx.beginPath()
+    //   // 辅助线
+    //   ctx.moveTo(this.x, renderHeight + row.height)
+    //   ctx.lineTo(400, renderHeight + row.height)
+    //   ctx.stroke()
+      row.elementList.forEach((item: TElementListItem, index) => {
         // 跳过换行符
         if (item.value === '\n') {
           return
         }
+        
+        ctx.transform(1, 0,0, 1, 0, 0);
         ctx.save()
-        // 渲染文字
+        // // 渲染文字
         ctx.font = this.font
         ctx.fillText(item.value, renderWidth, renderHeight + (row.height - row.originHeight) / 2)
         // 更新当前行绘制到的宽度
         renderWidth += item.style.width
         ctx.restore()
       })
+    //   ctx.closePath();
       renderHeight += row.height
     })
   }
@@ -237,9 +238,8 @@ export default class RichText extends Text {
   // 执行指令集
   _draw(ctx: TContext2d) {
     this.collectStatus()
-    // 优先执行 graphics 指令
-    this._drawGraphics(ctx)
     // 如果需要排版则需要进行文本组装
+    this._drawGraphics(ctx)
     this.computeRows(ctx);
     this.renderRows(ctx);
     if (this.mask && this.mask.name === 'Shape') {

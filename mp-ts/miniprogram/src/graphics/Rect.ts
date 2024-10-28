@@ -24,7 +24,7 @@ exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, ins
         ctx.clip()
     } else {
         if (this.isStroke) {
-            ctx.strokeRect(dx, dy, this.w, this.h)
+            ctx.strokeRect(0, 0, this.w, this.h)
         } else {
             ctx.fillRect(0, 0, this.w, this.h)
         }
