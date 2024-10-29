@@ -57,6 +57,23 @@ export function getMaxValue(arr: {x:number, y: number}[]){
 }
 
 // 递归找到所有子元素深度优先
+// export function findNodes(node:DisplayObject, arr:DisplayObject[] = []): DisplayObject[]{
+// 	const l = node.childs.length
+// 	if(l){
+// 		for(let i=0; i<l; i++){
+// 			if(node.childs[i].childs && node.childs[i].childs.length){
+// 				const nodes = findNodes(node.childs[i])
+// 				arr.push(node.childs[i])
+// 				return arr.concat(nodes)
+// 			}else{
+// 				arr.push(node.childs[i])
+// 			}
+// 		}	
+// 	}else{
+// 		arr.push(node)
+// 	}
+// 	return arr
+// }
 export function findNodes(node:DisplayObject, arr:DisplayObject[] = []): DisplayObject[]{
 	const l = node.childs.length
 	if(l){

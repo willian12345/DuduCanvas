@@ -2,9 +2,9 @@
   "pages": [
     "pages/card/card",
     "pages/flex/flex",
+    "pages/index/index",
     "pages/text/text",
     "pages/sprite/sprite",
-    "pages/index/index",
     "pages/graphics/graphics"
   ],
   "window": {

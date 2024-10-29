@@ -167,6 +167,13 @@ export default class RichText extends Text {
       ctx.font = this.font
       let { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
         ctx.measureText(value)
+        // 如果没有这两个属性则直接取字号一半
+        if(!actualBoundingBoxAscent){
+            actualBoundingBoxAscent = this.fontSize * .5
+        }
+        if(!actualBoundingBoxDescent){
+            actualBoundingBoxDescent = this.fontSize * .5
+        }
       // 尺寸信息
       let style = {
         width,
@@ -174,6 +181,7 @@ export default class RichText extends Text {
         ascent: actualBoundingBoxAscent,
         descent: actualBoundingBoxDescent
       }
+      console.log(style,11111)
       // 完整数据
       let element = {
         value,
@@ -214,7 +222,7 @@ export default class RichText extends Text {
           return
         }
         
-        ctx.transform(1, 0,0, 1, 0, 0);
+        // ctx.transform(1, 0,0, 1, 0, 0);
         ctx.save()
         // // 渲染文字
         ctx.font = this.font

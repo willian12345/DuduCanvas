@@ -1,5 +1,5 @@
 import { createSelectorQuery } from './config';
-import DisplayObject from './DisplayObject';
+import DisplayObjectContainer from './DisplayObjectContainer';
 import Stage  from './Stage';
 export default class Application {
   id: string
@@ -11,7 +11,7 @@ export default class Application {
     this.width = width;
     this.height = height;
     this.componentInstance = componentInstance;
-    DisplayObject.setDebug(debug);
+    DisplayObjectContainer.setDebug(debug);
   }
   init(){
     return new Promise((resolve) => {

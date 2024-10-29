@@ -1,8 +1,12 @@
 import DisplayObject, { TContext2d } from './DisplayObject';
+let debug = false
 export default class DisplayObjectContainer extends DisplayObject {
     childs: DisplayObject[] = []
     constructor() {
         super();
+    }
+    static setDebug(_debug: boolean) {
+        debug = _debug
     }
     protected _draw(context: TContext2d) {
         // 执行绘制 graphics 指令
@@ -15,12 +19,23 @@ export default class DisplayObjectContainer extends DisplayObject {
                 this._setShadow(v)
             }
             context.globalAlpha = this._getAlpha()
+
             v.updateContext(context);
+            
             v.draw(context);
-            // console.log(v, 222)
+            
+            if(debug){
+                context.beginPath();
+                context.setLineDash([]);
+                context.strokeStyle = 'rgb(255, 0, 255)'
+                context.strokeRect(0, 0, v.width, v.height);
+                context.closePath()
+            }
+
             context.restore();
+            
         })
-        
+
     }
     // 添加子元素
     addChild(...args: DisplayObject[]) {
@@ -45,5 +60,10 @@ export default class DisplayObjectContainer extends DisplayObject {
     // 删除子元素
     removeChild(child: DisplayObject) {
         this.childs = this.childs.filter(v => v._id != child._id)
+    }
+    findNodesBounds(node: DisplayObjectContainer) {
+        return node.childs.map(v => {
+            return v._getBounds()
+        })
     }
 }

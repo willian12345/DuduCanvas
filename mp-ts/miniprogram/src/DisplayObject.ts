@@ -86,9 +86,6 @@ export default class DisplayObject extends Graphics {
   static getContext() {
     return context
   }
-  static setDebug(_debug: boolean) {
-    debug = _debug
-  }
   getMatrix(matrix: Matrix2D) {
     var o = this, mtx = matrix || new  Matrix2D();
 		return o.transformMatrix ?  mtx.copy(o.transformMatrix) :
@@ -243,13 +240,9 @@ export default class DisplayObject extends Graphics {
     return { left: x, top: y, right: x + w, bottom: y + h, width: w, height: h }
   }
   // 寻找所有子元素的 bounds 边界宽高并存入数组
-  findNodesBounds(node: DisplayObject) {
-    return findNodes(node).map(v => {
-      return v._getBounds()
-    })
-  }
+  
   // 获取元素的绝对宽度
-  protected getBounds(): {
+  getBounds(): {
     left: number;
     top: number;
     right: number;
@@ -258,42 +251,6 @@ export default class DisplayObject extends Graphics {
     height: number;
   } | null {
     // 如果没有子元素，则直接返回自身的宽度
-    if (this.childs.length === 0) {
-      return this._getBounds()
-    } else {
-      let bounds = this.findNodesBounds(this)
-
-      const l: number[] = []
-      const r: number[] = []
-      const t: number[] = []
-      const b: number[] = []
-      bounds.forEach((v) => {
-        l.push(v.left)
-        r.push(v.right)
-        t.push(v.top)
-        b.push(v.bottom)
-      })
-
-      const left = Math.min(...l)
-      const right = Math.max(...r)
-      const top = Math.min(...t)
-      const bottom = Math.max(...b)
-
-      if (this.name === 'Group') {
-        // 计算子元素合并宽高后，再继续计算整体旋转后的大小位置
-        const rect = new DisplayObject()
-        rect.width = right - left
-        rect.height = bottom - top
-        rect.x = this.x
-        rect.y = this.y
-        rect.regX = this.regX
-        rect.regY = this.regY
-        rect.rotation = this.rotation
-        return this._getBounds.call(rect)
-      } else {
-        return { left, top, right, bottom, width: right - left, height: bottom - top }
-      }
-    }
-
+    return this._getBounds()
   }
 }

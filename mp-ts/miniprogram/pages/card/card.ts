@@ -9,7 +9,6 @@ const getCanvasSize = () => {
     const canvasWidth = screenWidth;
     const canvasHeight = (screenWidth / designWidth) * designHeight;
     const ratio = screenWidth / designWidth
-    console.log(ratio, 111)
     return {
         canvasWidth,
         canvasHeight,
@@ -38,7 +37,11 @@ Component({
                 {
                     id: 'avatar',
                     src: '../../assets/avatar.jpeg'
-                }
+                },
+                {
+                    id: 'arrow',
+                    src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAYAAAArK+5dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADxSURBVHgBxZbdDYMwDIQdJmAERuho2SDZpGwSNugIsAHd4Gq3QU2lKrGhqJ+Ul8i+C3Z+IPonAHoegUfiMePNmuc8j4GsSFIW0HJVG+VVrbAjOb4lHnCcUFv5r/Dfat4qi6VsEjuUBmMjIeK1o27Qk8rVtwg51mrSW2q/xyRKQoIeq0mSYOuet5jMhH2oTTrah1NHsskCG9FQotXaZIu4MElwhA6ruOC3hDPEhaFzzt05d2q3ik8lkRz/C+kYWXvZsjWX3Qw9n5ddNjnvui5MtA2vEauFw5lPZmEiPWm9ESUTDvxd+CxQftWS554PUU3jAQjUh4VxFIXRAAAAAElFTkSuQmCC'
+                  }
             ])
             await loader.load()
 
@@ -76,6 +79,7 @@ Component({
             card.addChild(header, roundedCard)
 
             // 头像与名称信息行
+            
             const cardInfo = new Container()
             cardInfo.direction = 'row'
             cardInfo.alignItems = 'center'
@@ -84,6 +88,7 @@ Component({
             cardInfo.width = 180 * ratio
             cardInfo.height = 50 * ratio
             // cardInfo.borderBottom = '1px solid red'
+            
             cardInfo.graphics
                 .beginPath()
                 .setLineDash([10, 10])
@@ -92,7 +97,6 @@ Component({
                 .moveTo(0, cardInfo.height + 22)
                 .lineTo(cardInfo.width, cardInfo.height + 22)
                 .stroke()
-
 
             const avatarTexture = loader.get('avatar')
             if (avatarTexture) {
@@ -130,6 +134,7 @@ Component({
             infoList.addChild(name, companyName)
             cardInfo.addChild(infoList)
             roundedCard.addChild(cardInfo)
+            
             const button = new Container()
             button.backgroundColor = '#F57011'
             button.width = 180 * ratio
@@ -140,9 +145,10 @@ Component({
             const buttonText = new Text({ text: '立即对话', fontSize: 15 * ratio, color: 'white' })
             button.addChild(buttonText)
             // button icon
-            if (avatarTexture) {
+            const arrowTexture = loader.get('arrow')
+            if (arrowTexture) {
                 const icon = new Image({
-                    image: avatarTexture.image,
+                    image: arrowTexture.image,
                     width: 12 * ratio,
                     height: 12 * ratio,
                 })
