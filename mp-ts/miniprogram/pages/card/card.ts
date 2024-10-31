@@ -1,14 +1,15 @@
-import { Application, ImgLoader, Text, Container, Image, Shape, RichText } from '../../src/index';
+import { Application, ImgLoader, Text, Container, Image, RichText } from '../../src/index';
 
 const getCanvasSize = () => {
     // 根据屏幕宽度计算 canvas 宽度
-    const systemInfo = wx.getSystemInfoSync();
+    const systemInfo = wx.getWindowInfo();
     const screenWidth = systemInfo.windowWidth;
-    const designWidth = 210;
-    const designHeight = 1334;
-    const canvasWidth = screenWidth;
-    const canvasHeight = (screenWidth / designWidth) * designHeight;
-    const ratio = screenWidth / designWidth
+    const designWidth = 750;
+    const designHeight = 1024;
+    // 宽高放大一倍
+    const canvasWidth = screenWidth * 2;
+    const canvasHeight = ((screenWidth / designWidth) * designHeight) * 2;
+    const ratio = canvasWidth / 210
     return {
         canvasWidth,
         canvasHeight,
@@ -30,8 +31,9 @@ Component({
                 canvasHeight: canvasHeight
             });
 
-            const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight, debug: true }, this);
+            const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight, }, this);
             const stage = await app.init();
+            
             const card = new Container()
             const loader = new ImgLoader(stage.canvas, [
                 {
@@ -45,25 +47,22 @@ Component({
             ])
             await loader.load()
 
-
-
             card.direction = 'column'
             card.x = 0
             card.y = 0
-            card.width = canvasWidth
-            card.height = 336
+            card.width = 210 * ratio
+            card.height = 168 * ratio
             card.backgroundColor = '#9BBD00'
-            console.log(canvasWidth, 3333)
 
             const header = new Container()
-            header.width = canvasWidth
+            header.width = 210 * ratio
             header.direction = 'row'
             header.justifyContent = 'flex-start'
             header.height = 18 * ratio
             const title = new Text()
             title.textAlign = 'left'
             title.fontSize = 10 * ratio
-            title.x = 10
+            title.x = 10 * ratio
             title.text = '小 绿 页，你 的 智 能 主 页'
             title.color = 'white'
             header.addChild(title)
@@ -87,17 +86,18 @@ Component({
             cardInfo.gap = 8 * ratio
             cardInfo.width = 180 * ratio
             cardInfo.height = 50 * ratio
-            // cardInfo.borderBottom = '1px solid red'
             
+            // 灰色分割线
             cardInfo.graphics
                 .beginPath()
                 .setLineDash([10, 10])
                 .strokeStyle('rgba(0,0,0, .1)')
                 .lineWidth(2)
-                .moveTo(0, cardInfo.height + 22)
-                .lineTo(cardInfo.width, cardInfo.height + 22)
+                .moveTo(0, cardInfo.height + (11 * ratio))
+                .lineTo(cardInfo.width, cardInfo.height + (11 * ratio))
                 .stroke()
 
+            // 头像
             const avatarTexture = loader.get('avatar')
             if (avatarTexture) {
                 const avatar = new Image({
@@ -108,24 +108,26 @@ Component({
                 avatar.borderRadius = '100%'
                 cardInfo.addChild(avatar)
             }
+
             // 名称与公司名列
             const infoList = new Container()
             infoList.direction = 'column'
             infoList.alignItems = 'flex-start'
-            infoList.width = 264
-            infoList.height = 80
-            
+            infoList.width = 264 * ratio
+            infoList.height = 80 * ratio
+            // 用户名
             const name = new Text({
                 text: 'NextHuman',
                 fontSize: 14 * ratio,
-                color: 'black'
+                color: 'black',
+                fontWeight: 500
             })
             name.height = 22 * ratio
-
+            // 单位名
             const companyName = new RichText()
             companyName.x = 0
             companyName.y = 0
-            companyName.text = '名字超长的公司名称展示自动换行科技有限公司'
+            companyName.text = '唯物（杭州）科技有限公司'
             companyName.wrapWidth = 132 * ratio
             companyName.fontSize = 11 * ratio
             companyName.color = 'rgba(0, 0, 0, .45)'
@@ -135,12 +137,13 @@ Component({
             cardInfo.addChild(infoList)
             roundedCard.addChild(cardInfo)
             
+            // 立即对话按钮
             const button = new Container()
             button.backgroundColor = '#F57011'
             button.width = 180 * ratio
             button.height = 37 * ratio
-            button.gap = 4
-            button.borderRadius = 38
+            button.gap = 4 * ratio
+            button.borderRadius = 38  * ratio
 
             const buttonText = new Text({ text: '立即对话', fontSize: 15 * ratio, color: 'white' })
             button.addChild(buttonText)

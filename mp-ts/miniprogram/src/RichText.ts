@@ -181,7 +181,7 @@ export default class RichText extends Text {
         ascent: actualBoundingBoxAscent,
         descent: actualBoundingBoxDescent
       }
-      console.log(style,11111)
+
       // 完整数据
       let element = {
         value,

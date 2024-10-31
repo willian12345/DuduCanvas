@@ -19784,7 +19784,7 @@ try {
 }
 ``` */
         getStorageInfoSync(): GetStorageInfoSyncOption
-        /** [Object wx.getSystemInfoSync()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getSystemInfoSync.html)
+        /** [Object wx.getWindowInfo()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getWindowInfo.html)
 *
 * 在插件中使用：需要基础库 `1.9.6`
 *
@@ -19810,7 +19810,7 @@ wx.getSystemInfo({
 *
 * ```js
 try {
-  const res = wx.getSystemInfoSync()
+  const res = wx.getWindowInfo()
   console.log(res.model)
   console.log(res.pixelRatio)
   console.log(res.windowWidth)
@@ -19822,7 +19822,7 @@ try {
   // Do something when catch error
 }
 ``` */
-        getSystemInfoSync(): SystemInfo
+        getWindowInfo(): SystemInfo
         /** [Object wx.getSystemSetting()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getSystemSetting.html)
 *
 * 需要基础库： `2.20.1`
@@ -20102,7 +20102,7 @@ innerAudioContext.stop() // 停止
          *
          * 在插件中使用：需要基础库 `2.8.1`
          *
-         * 创建插屏广告组件。请通过 [wx.getSystemInfoSync()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getSystemInfoSync.html) 返回对象的 SDKVersion 判断基础库版本号后再使用该 API。每次调用该方法创建插屏广告都会返回一个全新的实例（小程序端的插屏广告实例不允许跨页面使用）。 */
+         * 创建插屏广告组件。请通过 [wx.getWindowInfo()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getWindowInfo.html) 返回对象的 SDKVersion 判断基础库版本号后再使用该 API。每次调用该方法创建插屏广告都会返回一个全新的实例（小程序端的插屏广告实例不允许跨页面使用）。 */
         createInterstitialAd(option: CreateInterstitialAdOption): InterstitialAd
         /** [[LivePlayerContext](https://developers.weixin.qq.com/miniprogram/dev/api/media/live/LivePlayerContext.html) wx.createLivePlayerContext(string id, Object this)](https://developers.weixin.qq.com/miniprogram/dev/api/media/live/wx.createLivePlayerContext.html)
          *
@@ -20473,7 +20473,7 @@ wx.request({
          *
          * 在插件中使用：需要基础库 `2.8.1`
          *
-         * 创建激励视频广告组件。请通过 [wx.getSystemInfoSync()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getSystemInfoSync.html) 返回对象的 SDKVersion 判断基础库版本号后再使用该 API（小游戏端要求 >= 2.0.4， 小程序端要求 >= 2.6.0）。调用该方法创建的激励视频广告是一个单例（小游戏端是全局单例，小程序端是页面内单例，在小程序端的单例对象不允许跨页面使用）。 */
+         * 创建激励视频广告组件。请通过 [wx.getWindowInfo()](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/wx.getWindowInfo.html) 返回对象的 SDKVersion 判断基础库版本号后再使用该 API（小游戏端要求 >= 2.0.4， 小程序端要求 >= 2.6.0）。调用该方法创建的激励视频广告是一个单例（小游戏端是全局单例，小程序端是页面内单例，在小程序端的单例对象不允许跨页面使用）。 */
         createRewardedVideoAd(
             option: CreateRewardedVideoAdOption
         ): RewardedVideoAd
@@ -20753,7 +20753,7 @@ wx.canIUse('Image.src')
 
 // wx接口参数、回调或者返回值
 wx.canIUse('openBluetoothAdapter')
-wx.canIUse('getSystemInfoSync.return.safeArea.left')
+wx.canIUse('getWindowInfo.return.safeArea.left')
 wx.canIUse('getSystemInfo.success.screenWidth')
 wx.canIUse('showToast.object.image')
 wx.canIUse('onCompassChange.callback.direction')
@@ -22643,7 +22643,7 @@ wx.getSystemInfo({
 *
 * ```js
 try {
-  const res = wx.getSystemInfoSync()
+  const res = wx.getWindowInfo()
   console.log(res.model)
   console.log(res.pixelRatio)
   console.log(res.windowWidth)

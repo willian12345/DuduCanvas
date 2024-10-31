@@ -2,38 +2,11 @@ import DisplayObjectContainer from './DisplayObjectContainer.js'
 import Shape from './Shape.js'
 
 /**
- * 解构圆角矩形值生成:  { tl: 0, tr: 0, br: 0, bl: 0 }
+ * 解构圆角矩形值生成:  number[]
  * @param {*} value 
  */
 function getChangedBorderRadiusValue(value: string | number) {
-    let borderRadiusValue: number | {
-        tl: number;
-        tr: number;
-        br: number;
-        bl: number;
-    } = 0;
-    const roundCorner = { tl: 0, tr: 0, br: 0, bl: 0 }
-    const valueArr = String(value).split(' ').map(v => parseFloat(v))
-    const valueLength = valueArr.length
-    if (valueLength === 1) {
-        borderRadiusValue = valueArr[0]
-    } else if (valueLength === 2) {
-        roundCorner.tl = roundCorner.br = valueArr[0]
-        roundCorner.tr = roundCorner.bl = valueArr[1]
-        borderRadiusValue = roundCorner
-    } else if (valueLength === 3) {
-        roundCorner.tl = valueArr[0]
-        roundCorner.br = valueArr[2]
-        roundCorner.tr = roundCorner.bl = valueArr[1]
-        borderRadiusValue = roundCorner
-    } else if (valueLength === 4) {
-        roundCorner.tl = valueArr[0]
-        roundCorner.tr = valueArr[1]
-        roundCorner.br = valueArr[2]
-        roundCorner.bl = valueArr[3]
-        borderRadiusValue = roundCorner
-    }
-    return borderRadiusValue
+    return String(value).split(' ').map(v => parseFloat(v))
 }
 
 // 仅支持二种风格的边框
@@ -59,12 +32,7 @@ export default class SimpleCss extends DisplayObjectContainer {
      */
     borderRightRound = false
 
-    borderRadiusValue: number | {
-        tl: number;
-        tr: number;
-        br: number;
-        bl: number;
-    } | string = ''
+    borderRadiusValue: number | number[] | string = ''
     /**
      * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
      * eg1: 10
@@ -169,61 +137,6 @@ export default class SimpleCss extends DisplayObjectContainer {
             .strokeStyle(borderColor)
     }
     /**
-     * 生成水平半圆角矩形路径
-     * 当 borderRadius 值超过元素高度 height 时，表示左右显示成半圆
-     * @param {*} width 
-     * @param {*} height 
-     */
-    getHorizontalRoundRectPath(width: number, height: number) {
-        const s = new Shape()
-        const radius = height * .5
-        s.graphics.beginPath()
-            .fillStyle('#ff00ff')
-            .arc(radius, radius, radius, Math.PI * .5, Math.PI * 1.5)
-            .lineTo(width - radius, 0)
-            .arc(width - radius, radius, radius, Math.PI * 1.5, Math.PI * 2.5)
-            .lineTo(radius, height)
-        return s
-    }
-    getLeftRoundRectPath(width: number, height: number) {
-        const s = new Shape()
-        const radius = height * .5
-        s.graphics.beginPath()
-            // .fillStyle('#ff00ff')
-            .arc(radius, radius, radius, Math.PI * .5, Math.PI * 1.5)
-            .lineTo(width, 0)
-            .lineTo(width, height)
-            .lineTo(radius, height)
-        return s
-    }
-    getRightRoundRectPath(width: number, height: number) {
-        const s = new Shape()
-        const radius = height * .5
-        s.graphics.beginPath()
-            // .fillStyle('#ff00ff')
-            .moveTo(0, 0)
-            .lineTo(width - radius, 0)
-            .arc(width - radius, radius, radius, Math.PI * 1.5, Math.PI * 2.5)
-            .lineTo(0, height)
-        return s
-    }
-    /**
-     * 生成垂直半圆角矩形路径
-     * 当 borderRadius 值超过元素宽度 width 时，表示上高显示成半圆
-     * @param {*} width 
-     * @param {*} height 
-     */
-    getVerticalRoundRectPath(width: number, height: number) {
-        const s = new Shape()
-        const radius = width * .5
-        s.graphics.beginPath()
-            .arc(radius, radius, radius, Math.PI, Math.PI * 2)
-            .lineTo(width, height - radius)
-            .arc(radius, height - radius, radius, 0, Math.PI)
-            .lineTo(0, radius)
-        return s
-    }
-    /**
      * 初始化边框线
      */
     initBorder() {
@@ -232,7 +145,7 @@ export default class SimpleCss extends DisplayObjectContainer {
             const [borderWidth, borderStyle, borderColor] = this.getBorderAttr(this.border)
             
             this.setBorderStyles(borderWidth, borderStyle, borderColor)
-            console.log(borderWidth, borderStyle, borderColor)
+            
             const halfBorderWidth = borderWidth * .5
             // 如果有圆角属性，则需要画圆角边框
             if (this.borderRadius) {
@@ -244,14 +157,6 @@ export default class SimpleCss extends DisplayObjectContainer {
                     s = new Shape()
                     const radius = this.width * .5
                     s.graphics.strokeCircle(radius, radius, radius)
-                } else if (_borderRadius >= this.height) {
-                    // 提交简易方法生成左右两边半圆角路径
-                    s = this.getHorizontalRoundRectPath(this.width, this.height)
-                    s.graphics.stroke()
-                } else if (_borderRadius >= this.width) {
-                    // 提交简易方法生成上下两边半圆角路径
-                    s = this.getVerticalRoundRectPath(this.width, this.height)
-                    s.graphics.stroke()
                 } else {
                     s = new Shape()
                     s.graphics.strokeRoundRect(0, 0, this.width, this.height, _borderRadius)
@@ -311,28 +216,11 @@ export default class SimpleCss extends DisplayObjectContainer {
             const radius = this.width * .5
             s = new Shape()
             s.graphics.fillCircle(radius, radius, radius)
-            //@ts-ignore ???
-        } else if (this.borderRadiusValue >= this.height || (this.borderRightRadius && this.borderLeftRadius)) {
-            // 两边半圆
-            s = this.getHorizontalRoundRectPath(this.width, this.height)
-            s.graphics.clip()
-                .fill()
-        } else if (typeof this.borderRadiusValue === 'number' && this.borderRadiusValue >= this.width) {
-            // 上下半圆
-            s = this.getVerticalRoundRectPath(this.width, this.height)
-            s.graphics.clip()
-                .fill()
-        } else if (this.borderLeftRound) {
-            s = this.getLeftRoundRectPath(this.width, this.height)
-            s.graphics.clip()
-                .fill()
-        } else if (this.borderRightRound) {
-            s = this.getRightRoundRectPath(this.width, this.height)
-            s.graphics.clip()
-                .fill()
         } else {
             s = new Shape()
-            s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
+            if(typeof this.borderRadiusValue !== 'string'){
+                s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
+            }
         }
         this.mask = s
     }

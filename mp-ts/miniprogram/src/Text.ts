@@ -14,7 +14,7 @@ const defaultFontSize = 10
  * 显示普通文本
  * 单字宽高直接使用 fontSize 所以非中文字体会有问题
  */
-export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: string | number};
+export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: number};
 
 // font: font-stretch font-variant font-style font-weight font-size font-family
 // 
@@ -30,21 +30,12 @@ export default class Text extends DisplayObject {
   protected _fontStretch?: string = ''
   protected _fontVariant?: string = ''
   protected _fontStyle?: string = ''
-  protected _fontWeight?: string | number = ''
+  protected _fontWeight?: number = 400
   test: string[] = []
   textAlign: WechatMiniprogram.CanvasRenderingContext.CanvasTextAlign = 'left'
   textBaseline: WechatMiniprogram.CanvasRenderingContext.CanvasTextBaseline = 'top'
   color = '#000'
   protected _fontFamily = 'sans-serif';
-  get width(): number {
-    return this._width;
-  }
-  get height(): number {
-    return this._height;
-  }
-  set height(v: number) {
-    this._height = v;
-  }
   constructor(t?: TTextParams) {
     super()
     this._drawGraphics = super._drawGraphics
@@ -52,9 +43,12 @@ export default class Text extends DisplayObject {
     this.test.push('hellworld');
   }
   init(t: TTextParams) {
-    let { text, font, color } = t
+    let { text, font, color, fontWeight } = t
     if (t.fontStretch) {
       this._fontStretch = t.fontStretch
+    }
+    if(fontWeight){
+        this._fontWeight = fontWeight
     }
     if (t.fontVariant) {
       this._fontVariant = t.fontVariant
@@ -109,6 +103,21 @@ export default class Text extends DisplayObject {
   // font: font-stretch font-variant font-style font-weight font-size font-family
   protected getComposedFont() {
     return `${this._fontStretch} ${this._fontVariant} ${this._fontStyle} ${this._fontWeight} ${this._fontSize}px ${this._fontFamily}`.trim();
+  }
+  get width(): number {
+    return this._width;
+  }
+  get height(): number {
+    return this._height;
+  }
+  set height(v: number) {
+    this._height = v;
+  }
+  get fontWeight(): number {
+    return this._fontWeight ?? 400;
+  }
+  set fontWeight(v: number) {
+    this._fontWeight = v;
   }
   get text() {
     return this._text

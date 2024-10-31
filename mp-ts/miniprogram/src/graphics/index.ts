@@ -148,17 +148,12 @@ protected _append(instructionsObject: any){
       console.log(this._instructions)
       return this.graphics
     },
-    fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius: string | number | {
-        tl: number;
-        tr: number;
-        br: number;
-        bl: number;
-    } = 8, fill?: boolean, stroke?: boolean)=> {
+    fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius: number | number[], fill?: boolean, stroke?: boolean)=> {
         //@ts-ignore
       this._append(new RoundRect(x, y, w, h, radius, fill, stroke))
       return this.graphics
     },
-    strokeRoundRect: (x: number, y: number, w: number, h: number, radius: number | Record<string, number>) => {
+    strokeRoundRect: (x: number, y: number, w: number, h: number, radius: number | number[]) => {
       this._append(new RoundRect(x, y, w, h, radius, false, true))
       this._append(new Stroke())
       return this.graphics

@@ -1,6 +1,6 @@
 export const getCanvasSize = () => {
 	// 根据屏幕宽度计算 canvas 宽度
-	const systemInfo = wx.getSystemInfoSync();
+	const systemInfo = wx.getWindowInfo();
 	const screenWidth = systemInfo.windowWidth;
   const designWidth = 750;
   const designHeight = 800;
