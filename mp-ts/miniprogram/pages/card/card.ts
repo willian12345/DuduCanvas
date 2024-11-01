@@ -127,6 +127,7 @@ Component({
             const companyName = new RichText()
             companyName.x = 0
             companyName.y = 0
+            companyName.lineClamp = 2
             companyName.text = '唯物（杭州）科技有限公司'
             companyName.wrapWidth = 132 * ratio
             companyName.fontSize = 11 * ratio

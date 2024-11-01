@@ -72,6 +72,7 @@ Component({
         t1.text = `析] 为避免影响调试，开发者工具在非自定义启动模式`
         t1.x = 0
         t1.y = 0
+        t1.lineClamp = 2
         t1.color = 'green'
         t1.textAlign = 'left'
         t1.wrapWidth = 200

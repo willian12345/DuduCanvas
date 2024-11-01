@@ -3,14 +3,13 @@
  */
 import DisplayObject, { TContext2d } from './DisplayObject'
 import Text from './Text'
-import { FillText } from './text/FillText'
 
 // const ROTATE_90DEG = 1.5707963267948966
 /**
  * RichText 文本类
  * 显示文本，支持横、竖排文字，换行
  */
-export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: string | number, letterSpace?: number };
+export type TTextParams = { text?: string, font?: string, color?: string, fontSize?: number, fontFamily?: string, fontStretch?: string, fontVariant?: string, fontStyle?: string, fontWeight?: string | number, letterSpace?: number, lineClamp?: number };
 
 
 export type TElementListItem = {
@@ -36,7 +35,7 @@ export default class RichText extends Text {
   protected _writeMode: 'vertical-lr' | 'vertical-rl' | '' = ''
   protected _lineGap = 0;
   protected _letterSpace = 0;
-  private _lineHeight = 1.5
+  lineClamp = -1
   rows: TRow[] = []
   color = '#000'
   get width(): number {
@@ -51,7 +50,9 @@ export default class RichText extends Text {
     this._height = v;
   }
   constructor(t?: TTextParams) {
+    //@ts-ignore
     super(t);
+    this.lineClamp = t?.lineClamp ?? -1
   }
   getWidth() {
     const ctx = DisplayObject.getContext()
@@ -163,17 +164,18 @@ export default class RichText extends Text {
       elementList: [],
     })
 
-    this.text.split('').forEach(value => {
+    for(let i = 0; i < this.text.length; i++){
+      const value = this.text[i]
       ctx.font = this.font
       let { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
         ctx.measureText(value)
-        // 如果没有这两个属性则直接取字号一半
-        if(!actualBoundingBoxAscent){
-            actualBoundingBoxAscent = this.fontSize * .5
-        }
-        if(!actualBoundingBoxDescent){
-            actualBoundingBoxDescent = this.fontSize * .5
-        }
+      // 某些浏览器环境 actualBoundingBoxAscent actualBoundingBoxDescent 还不支持
+      // 如果没有这两个属性则其值直接取字号一半
+      if (!actualBoundingBoxAscent) {
+        actualBoundingBoxAscent = this.fontSize * .5
+        actualBoundingBoxDescent = actualBoundingBoxAscent
+      }
+      
       // 尺寸信息
       let style = {
         width,
@@ -190,38 +192,53 @@ export default class RichText extends Text {
 
       // 判断当前行是否能容纳
       let curRow = this.rows[this.rows.length - 1]
-      if (curRow.width + style.width <= contentWidth && value !== '\n') {
+      const enoughWidth = (curRow.width + style.width <= contentWidth)
+      const notNewLine = value !== '\n'
+      
+      // 在当前行追加
+      if (enoughWidth && notNewLine) {
         curRow.elementList.push(element)
         curRow.width += style.width
         // 保存加上 lineGap 后的高度
         curRow.height = Math.max(curRow.height, style.height + this._lineGap)
         // 保存原始最高的文本高度
         curRow.originHeight = Math.max(curRow.originHeight, style.height)
-      } else {
-        this.rows.push({
-          width: style.width,
-          height: style.height + this._lineGap,
-          originHeight: style.height,
-          elementList: [element]
-        })
+        continue
       }
-    })
+
+      // 如果 lineClamp 超过后是否要显示 "..."
+      const needClamp = (this.lineClamp > -1 && this.rows.length >= this.lineClamp)
+      if(needClamp){
+        const lastChar = curRow.elementList[curRow.elementList.length-1]
+        lastChar.value = '...'
+        break
+      }
+
+      // 另起一行
+      this.rows.push({
+        width: style.width,
+        height: style.height + this._lineGap,
+        originHeight: style.height,
+        elementList: [element]
+      })
+    }
+
   }
   renderRows(ctx: TContext2d) {
     let renderHeight = 0;
     this.rows.forEach((row) => {
       let renderWidth = 0;
-    //   ctx.beginPath()
-    //   // 辅助线
-    //   ctx.moveTo(this.x, renderHeight + row.height)
-    //   ctx.lineTo(400, renderHeight + row.height)
-    //   ctx.stroke()
+      //   ctx.beginPath()
+      //   // 辅助线
+      //   ctx.moveTo(this.x, renderHeight + row.height)
+      //   ctx.lineTo(400, renderHeight + row.height)
+      //   ctx.stroke()
       row.elementList.forEach((item: TElementListItem, index) => {
         // 跳过换行符
         if (item.value === '\n') {
           return
         }
-        
+
         // ctx.transform(1, 0,0, 1, 0, 0);
         ctx.save()
         // // 渲染文字
@@ -231,7 +248,7 @@ export default class RichText extends Text {
         renderWidth += item.style.width
         ctx.restore()
       })
-    //   ctx.closePath();
+      //   ctx.closePath();
       renderHeight += row.height
     })
   }
