@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/card/card",
+    "pages/index/index",
     "pages/text/text",
     "pages/flex/flex",
-    "pages/index/index",
     "pages/sprite/sprite",
     "pages/graphics/graphics"
   ],

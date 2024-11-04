@@ -1,4 +1,4 @@
-import { Application, ImgLoader, Text, Container, Image, RichText } from '../../src/index';
+import { Application, ImgLoader, Text, Container, Image, RichText } from '../../libs/duducanvas/index';
 
 const getCanvasSize = () => {
     // 根据屏幕宽度计算 canvas 宽度
