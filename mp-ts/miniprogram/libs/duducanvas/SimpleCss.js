@@ -1,5 +1,5 @@
-import DisplayObjectContainer from './DisplayObjectContainer.js';
-import Shape from './Shape.js';
+import DisplayObjectContainer from './DisplayObjectContainer';
+import Shape from './Shape';
 /**
  * 解构圆角矩形值生成:  number[]
  * @param {*} value

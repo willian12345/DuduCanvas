@@ -1,4 +1,4 @@
-import Group from './Group.js';
+import Group from './Group';
 import type { ImageTexture } from './ImgLoader';
 /**
  * Sprite 雪碧类

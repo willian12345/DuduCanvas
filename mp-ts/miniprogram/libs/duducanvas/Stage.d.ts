@@ -1,4 +1,4 @@
-import SimpleCss from './SimpleCss.js';
+import SimpleCss from './SimpleCss';
 /**
  * Stage
  * 舞台对象

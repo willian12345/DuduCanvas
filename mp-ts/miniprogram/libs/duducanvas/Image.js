@@ -1,4 +1,4 @@
-import SimpleCss from './SimpleCss.js';
+import SimpleCss from './SimpleCss';
 /**
  * Image 图片显示类
  * 继承自SimpleCss类，支持 borderRadius、border

@@ -1,5 +1,5 @@
-import Group from './Group.js'
-import Image from './Image.js'
+import Group from './Group'
+import Image from './Image'
 import type {ImageTexture} from './ImgLoader'
 
 // const rotation = Symbol('rotation')

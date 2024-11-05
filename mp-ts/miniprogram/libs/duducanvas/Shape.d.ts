@@ -5,7 +5,7 @@
  * 3、所有绘制 api 命令都存在于 graphics 对象内， graphics 绘制在 Shape 对象内不参与 z 轴排序
  *
  */
-import DisplayObject from './DisplayObject.js';
+import DisplayObject from './DisplayObject';
 export default class Shape extends DisplayObject {
     name: string;
     isMask: boolean;

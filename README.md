@@ -69,7 +69,7 @@ Duducanvas 1.3.0 已对接 小程序的  Canvas 2D 接口
 创建舞台，注意使用的是 async/await 写法，请包含在 async 函数内
 
 ```
-import { Stage } from 'duducanvas.js'
+import { Stage } from 'duducanvas'
 
 async function () {
     const stage = await new Stage('#myCanvas', {width: 375, height: 400})
@@ -80,7 +80,7 @@ async function () {
 ！！如果是在自定义组件内则需要传 this 组件实例
 
 ```
-import { Stage } from 'duducanvas.js'
+import { Stage } from 'duducanvas'
 
 async function () {
     const stage = await new Stage('#myCanvas', {width: 375, height: 400})
@@ -90,7 +90,7 @@ async function () {
 ### 添加图片
 
 ```
-  import { ImgLoader, Stage, Image} from 'duducanvas.js'
+  import { ImgLoader, Stage, Image} from 'duducanvas'
 
   async function () {
       // 先获取舞台实例
@@ -123,7 +123,7 @@ async function () {
 ### 添加文本
 
 ```
-import { Stage, Text } from 'duducanvas.js'
+import { Stage, Text } from 'duducanvas'
 
 async function(){
   const stage = await new Stage('#myCanvas', {width: 375, height: 400})

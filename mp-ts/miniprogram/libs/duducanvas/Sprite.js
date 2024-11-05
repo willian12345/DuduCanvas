@@ -1,5 +1,5 @@
-import Group from './Group.js';
-import Image from './Image.js';
+import Group from './Group';
+import Image from './Image';
 export default class Sprite extends Group {
     get sliceBounds() {
         return this._sliceBounds;

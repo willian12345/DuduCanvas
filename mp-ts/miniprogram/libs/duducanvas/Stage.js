@@ -1,5 +1,5 @@
-import DisplayObject from './DisplayObject.js';
-import SimpleCss from './SimpleCss.js';
+import DisplayObject from './DisplayObject';
+import SimpleCss from './SimpleCss';
 /**
  * Stage
  * 舞台对象

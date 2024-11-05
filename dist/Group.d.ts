@@ -1,4 +1,4 @@
-import DisplayObjectContainer from './DisplayObjectContainer.js';
+import DisplayObjectContainer from './DisplayObjectContainer';
 /**
  * Group 组
  * 可添加多个显示对象进 Group 内，变成一个显示组，可集中对 Group 组操作

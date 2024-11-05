@@ -1,4 +1,4 @@
-import DisplayObjectContainer from './DisplayObjectContainer.js';
+import DisplayObjectContainer from './DisplayObjectContainer';
 /**
  * SimpleCss
  * 样式类
