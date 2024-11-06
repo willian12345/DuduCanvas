@@ -14,30 +14,6 @@ const BORDER_STYLES = ['solid', 'dashed'];
  * 样式类
  */
 export default class SimpleCss extends DisplayObjectContainer {
-    /**
-     * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
-     * eg1: 10
-     * eg2: '10 20'
-     * eg3: '10 20 10'
-     * eg4: '10, 20, 30, 40'
-     *
-     * 2、borderRadius设置为 '100%'，则认为是圆形遮罩
-     * eg: '100%'
-     */
-    get borderRadius() {
-        //@ts-ignore
-        return this.borderRadiusValue;
-    }
-    set borderRadius(value) {
-        if (!value)
-            return;
-        if (value != '100%') {
-            this.borderRadiusValue = getChangedBorderRadiusValue(value);
-        }
-        else {
-            this.borderRadiusValue = value;
-        }
-    }
     constructor() {
         super();
         this.backgroundColor = '';
@@ -55,6 +31,28 @@ export default class SimpleCss extends DisplayObjectContainer {
          */
         this.borderRightRound = false;
         this.borderRadiusValue = '';
+    }
+    /**
+     * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
+     * eg1: 10
+     * eg2: '10 20'
+     * eg3: '10 20 10'
+     * eg4: '10, 20, 30, 40'
+     *
+     * 2、borderRadius设置为 '100%'，则认为是圆形遮罩
+     * eg: '100%'
+     */
+    get borderRadius() {
+        //@ts-ignore
+        return this.borderRadiusValue;
+    }
+    set borderRadius(value) {
+        if (value != '100%') {
+            this.borderRadiusValue = getChangedBorderRadiusValue(value);
+        }
+        else {
+            this.borderRadiusValue = value;
+        }
     }
     updateContext(context) {
         // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
@@ -78,27 +76,6 @@ export default class SimpleCss extends DisplayObjectContainer {
         }
         super.updateContext(context);
     }
-    /**
-     * 绘制接口
-     * @param {*} ctx
-     */
-    // protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
-    //     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
-    //     // if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
-    //     //     this.initBorderRadiusMask()
-    //     // }
-    //     // // 绘制背景
-    //     // if (this.backgroundColor) {
-    //     //     this.initBackgroundColor()
-    //     // }
-    //     // // 绘制边框
-    //     // if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
-    //     //     this.initBorder()
-    //     // }
-    //     // 重载 DisplayObject draw 
-    //     // 调用 显示对象绘制方法
-    //     super._draw(ctx)
-    // }
     /**
      * 解构边框线值字符串
      * @param {*} border

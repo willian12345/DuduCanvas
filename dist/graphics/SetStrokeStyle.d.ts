@@ -1,3 +1,4 @@
+/// <reference types="types" />
 export default class SetStrokeStyle {
     style: string;
     constructor(style: string);

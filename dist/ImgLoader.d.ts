@@ -1,15 +1,16 @@
+/// <reference types="types" />
 /**
  * 预加载图片
  *
  */
-export type ImageTexture = {
+export declare type ImageTexture = {
     path: string;
     width: number;
     height: number;
     image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource;
 };
-export type TImageMap = Map<string, ImageTexture>;
-export type TImgArr = {
+export declare type TImageMap = Map<string, ImageTexture>;
+export declare type TImgArr = {
     id: string;
     src: string;
 }[];

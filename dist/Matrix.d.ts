@@ -1,4 +1,4 @@
-export type TMatrix2D = {
+export declare type TMatrix2D = {
     a: number;
     b: number;
     c: number;

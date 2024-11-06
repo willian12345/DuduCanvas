@@ -1,3 +1,4 @@
+/// <reference types="types" />
 import DisplayObjectContainer from './DisplayObjectContainer';
 /**
  * SimpleCss
@@ -33,10 +34,6 @@ export default class SimpleCss extends DisplayObjectContainer {
     set borderRadius(value: string | number);
     constructor();
     updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
-    /**
-     * 绘制接口
-     * @param {*} ctx
-     */
     /**
      * 解构边框线值字符串
      * @param {*} border

@@ -1,3 +1,4 @@
+/// <reference types="types" />
 import type { TStyle } from './SetFillStyle';
 /**
  * Graphics 绘制类

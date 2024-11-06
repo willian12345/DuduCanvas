@@ -4,17 +4,6 @@
 import DisplayObject from './DisplayObject';
 import Text from './Text';
 export default class RichText extends Text {
-    get width() {
-        this._computeSize();
-        return this._width;
-    }
-    get height() {
-        this._computeSize();
-        return this._height;
-    }
-    set height(v) {
-        this._height = v;
-    }
     constructor(t) {
         var _a;
         //@ts-ignore
@@ -29,6 +18,17 @@ export default class RichText extends Text {
         this.rows = [];
         this.color = '#000';
         this.lineClamp = (_a = t === null || t === void 0 ? void 0 : t.lineClamp) !== null && _a !== void 0 ? _a : -1;
+    }
+    get width() {
+        this._computeSize();
+        return this._width;
+    }
+    get height() {
+        this._computeSize();
+        return this._height;
+    }
+    set height(v) {
+        this._height = v;
     }
     getWidth() {
         const ctx = DisplayObject.getContext();

@@ -1,3 +1,4 @@
+/// <reference types="types" />
 export default class SetLineDash {
     lineDash: number[];
     constructor(dash?: number[]);

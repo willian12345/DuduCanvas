@@ -1,10 +1,11 @@
+/// <reference types="types" />
 import Group from './Group';
 import type { ImageTexture } from './ImgLoader';
 /**
  * Sprite 雪碧类
  * 用于显示九宫格类型的图片
  */
-export type TBound = {
+export declare type TBound = {
     left: number;
     top: number;
     right: number;

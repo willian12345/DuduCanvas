@@ -7,7 +7,7 @@ import Text from './Text';
  * RichText 文本类
  * 显示文本，支持横、竖排文字，换行
  */
-export type TTextParams = {
+export declare type TTextParams = {
     text?: string;
     font?: string;
     color?: string;
@@ -20,7 +20,7 @@ export type TTextParams = {
     letterSpace?: number;
     lineClamp?: number;
 };
-export type TElementListItem = {
+export declare type TElementListItem = {
     value: string;
     style: {
         width: number;
@@ -29,7 +29,7 @@ export type TElementListItem = {
         descent: number;
     };
 };
-export type TRow = {
+export declare type TRow = {
     width: number;
     height: number;
     originHeight: number;

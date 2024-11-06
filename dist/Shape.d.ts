@@ -1,3 +1,4 @@
+/// <reference types="types" />
 /**
  * Shape 图形类
  * 1、包含了各类绘制 api

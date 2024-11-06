@@ -1,4 +1,4 @@
-class Matrix2D {
+export default class Matrix2D {
     constructor(a = 1, b = 0, c = 0, d = 1, tx = 0, ty = 0) {
         this.a = 1;
         this.b = 0;
@@ -196,4 +196,3 @@ class Matrix2D {
 }
 Matrix2D.DEG_TO_RAD = Math.PI / 180;
 Matrix2D.identity = null;
-export default Matrix2D;

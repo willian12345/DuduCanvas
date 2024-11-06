@@ -1,3 +1,4 @@
+/// <reference types="types" />
 /**
  * lineJoin = "bevel|round|miter"
  * bevel	创建斜角。

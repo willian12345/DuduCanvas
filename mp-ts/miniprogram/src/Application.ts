@@ -16,11 +16,19 @@ export default class Application {
   init(){
     return new Promise((resolve) => {
       const query = this.componentInstance ? createSelectorQuery().in(this.componentInstance) : createSelectorQuery()
-      query.select(this.id) 
-      .node(async ({node}:any) => {
-          resolve(new Stage(node, {width: this.width, height: this.height}))
-      })
-      .exec()
-    }) as Promise<Stage>
+      try{
+        query.select(this.id)
+        .node((res:any) => {
+            if(res?.node){
+              resolve(new Stage(res.node, {width: this.width, height: this.height}))
+            }else{
+              resolve(null)
+            }
+        })
+        .exec()
+      }catch(e){
+        resolve(null)
+      }
+    }) as Promise<Stage|null>
   }
 }

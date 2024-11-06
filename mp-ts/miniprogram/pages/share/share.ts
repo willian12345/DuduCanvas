@@ -36,6 +36,10 @@ Component({
             const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight });
             const stage = await app.init();
 
+            if(!stage){
+                return;
+            }
+
             const card = new Container()
             const loader = new ImgLoader(stage.canvas, [
                 {

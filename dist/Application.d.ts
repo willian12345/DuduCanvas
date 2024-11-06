@@ -3,11 +3,11 @@ export default class Application {
     id: string;
     width: number;
     height: number;
-    componentInstance: any;
+    componentInstance?: any;
     constructor(id: string, { width, height, debug }: {
         width: number;
         height: number;
         debug?: boolean;
-    }, componentInstance: any);
+    }, componentInstance?: any);
     init(): Promise<Stage>;
 }

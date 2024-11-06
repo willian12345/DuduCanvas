@@ -1,3 +1,4 @@
+/// <reference types="types" />
 export default class SetTextAlign {
     textAlign: WechatMiniprogram.CanvasRenderingContext.CanvasTextAlign;
     constructor(textAlign: WechatMiniprogram.CanvasRenderingContext.CanvasTextAlign);

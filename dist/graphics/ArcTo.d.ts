@@ -1,3 +1,4 @@
+/// <reference types="types" />
 export default class ArcTo {
     name: string;
     x1: number;
