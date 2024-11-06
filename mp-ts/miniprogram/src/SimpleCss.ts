@@ -48,7 +48,6 @@ export default class SimpleCss extends DisplayObjectContainer {
         return this.borderRadiusValue
     }
     set borderRadius(value: string | number) {
-        if (!value) return
         if (value != '100%') {
             this.borderRadiusValue = getChangedBorderRadiusValue(value)
         } else {
@@ -82,32 +81,7 @@ export default class SimpleCss extends DisplayObjectContainer {
       }
       super.updateContext(context)
     }
-    /**
-     * 绘制接口
-     * @param {*} ctx 
-     */
-    // protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
-
-    //     // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
-    //     // if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
-    //     //     this.initBorderRadiusMask()
-    //     // }
-
-    //     // // 绘制背景
-    //     // if (this.backgroundColor) {
-    //     //     this.initBackgroundColor()
-    //     // }
-
-    //     // // 绘制边框
-    //     // if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
-    //     //     this.initBorder()
-    //     // }
-
-        
-    //     // 重载 DisplayObject draw 
-    //     // 调用 显示对象绘制方法
-    //     super._draw(ctx)
-    // }
+    
     /**
      * 解构边框线值字符串
      * @param {*} border 

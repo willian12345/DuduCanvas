@@ -84,7 +84,6 @@ Component({
         // t1.writeMode = 'vertical-rl'
         // t1.lineGap = 12;
         t1.color = 'red';
-        console.log(t1.height,333)
         // 给文本加个底色
         t1.graphics.fillStyle('yellow')
         .fillRect(0, 0, t1.width, t1.height)   
