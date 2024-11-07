@@ -33,6 +33,7 @@ export default class SimpleCss extends DisplayObjectContainer {
     borderRightRound = false
 
     borderRadiusValue: number | number[] | string = ''
+    _overflowHidden = false
     /**
      * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
      * eg1: 10
@@ -53,6 +54,14 @@ export default class SimpleCss extends DisplayObjectContainer {
         } else {
             this.borderRadiusValue = value
         }
+    }
+    // 水平对齐
+    get overflowHidden() {
+        return this._overflowHidden
+    }
+    set overflowHidden(b: boolean) {
+        this._overflowHidden = b
+        this.setOverflowHiddenMask(b)
     }
     constructor() {
         super()
@@ -177,6 +186,16 @@ export default class SimpleCss extends DisplayObjectContainer {
                 }
                 this.graphics.stroke()
             }
+        }
+    }
+    // overflow hidden 用 mask 实现
+    setOverflowHiddenMask(b: boolean){
+        if(b){
+            const s = new Shape()
+            s.graphics.fillRect(this.x, this.y, this.width, this.height)
+            this.mask = s
+        }else{
+            this.mask = null
         }
     }
     /**

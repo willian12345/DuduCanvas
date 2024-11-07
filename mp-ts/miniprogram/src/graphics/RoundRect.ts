@@ -258,7 +258,7 @@ export default class RoundRect {
         roundRect(x, y, width, height, radius, ctx)
 
         if (instance.isMask) {
-            ctx.clip()
+            // ctx.clip()
         } else {
             if (fill) {
                 ctx.fill();

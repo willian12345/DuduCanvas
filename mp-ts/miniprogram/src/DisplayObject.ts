@@ -6,7 +6,6 @@ export type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderin
 
 let context!: TContext2d
 let displayObjectId = 0
-let debug = false;
 
 /**
  * 显示对象类
@@ -65,7 +64,9 @@ export default class DisplayObject extends Graphics {
     if (s?.name !== 'Shape') {
       throw new Error('遮罩必须是 Shape 对象')
     }
-    s && (s.isMask = true)
+    if(s){
+      s.isMask = true
+    }
     this._mask = s
   }
   get scale() {
