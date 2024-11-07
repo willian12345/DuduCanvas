@@ -208,10 +208,12 @@ export default class SimpleCss extends DisplayObjectContainer {
         if ((this.borderRadiusValue === '100%' || this.borderRadiusValue === this.width) && (this.width === this.height)) {
             const radius = this.width * .5
             s = new Shape()
+            s.graphics.beginPath()
             s.graphics.fillCircle(radius, radius, radius)
         } else {
             s = new Shape()
             if(typeof this.borderRadiusValue !== 'string'){
+                s.graphics.beginPath()
                 s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
             }
         }

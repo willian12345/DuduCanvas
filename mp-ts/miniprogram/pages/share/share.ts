@@ -35,31 +35,23 @@ Component({
 
             const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight });
             const stage = await app.init();
-
             if(!stage){
                 return;
             }
-
-            const card = new Container()
             const loader = new ImgLoader(stage.canvas, [
                 {
                     id: 'avatar',
                     src: '../../assets/avatar.jpeg'
-                },
-                {
-                    id: 'arrow',
-                    src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAYAAAArK+5dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADxSURBVHgBxZbdDYMwDIQdJmAERuho2SDZpGwSNugIsAHd4Gq3QU2lKrGhqJ+Ul8i+C3Z+IPonAHoegUfiMePNmuc8j4GsSFIW0HJVG+VVrbAjOb4lHnCcUFv5r/Dfat4qi6VsEjuUBmMjIeK1o27Qk8rVtwg51mrSW2q/xyRKQoIeq0mSYOuet5jMhH2oTTrah1NHsskCG9FQotXaZIu4MElwhA6ruOC3hDPEhaFzzt05d2q3ik8lkRz/C+kYWXvZsjWX3Qw9n5ddNjnvui5MtA2vEauFw5lPZmEiPWm9ESUTDvxd+CxQftWS554PUU3jAQjUh4VxFIXRAAAAAElFTkSuQmCC'
                 }
             ])
             await loader.load()
 
+            const card = new Container()
             card.direction = 'column'
-            card.x = 0
-            card.y = 0
-            card.gap = 5
             card.width = 210 * ratio
-            card.height = 200 * ratio
-            card.backgroundColor = 'white'
+            card.height = 300 * ratio 
+            card.backgroundColor = 'pink'
+            
 
             const header = new Container()
             header.width = 210 * ratio
@@ -74,24 +66,26 @@ Component({
             header.addChild(title)
 
 
-            // 白色圆角矩形
+            // 灰色矩形
             const rect = new Container()
             rect.direction = 'column'
             rect.justifyContent = 'space-around'
             rect.width = 210 * ratio
             rect.height = 169 * ratio
             rect.backgroundColor = '#f5f5f5'
-            rect.borderRadius = 0;
+            rect.overflowHidden = true;
+
             card.addChild(header, rect)
 
+            // 大圈套小圈
             const circle0 = new Container()
             circle0.x = 0
-            circle0.y = -20 * ratio
+            circle0.y = -10 * ratio
             circle0.width = 178 * ratio
             circle0.height = 178 * ratio
             circle0.borderRadius = '100%'
             circle0.shadow = '0 0 20px rgba(0,0,0,.02)'
-            circle0.backgroundColor = '#f6f6f6'
+            circle0.backgroundColor = 'red'
 
             const circle1 = new Container()
             circle1.x = 0
@@ -100,7 +94,7 @@ Component({
             circle1.height = 138 * ratio
             circle1.borderRadius = '100%'
             circle1.shadow = '0 0 20px rgba(0,0,0,.02)'
-            circle1.backgroundColor = '#f8f8f8'
+            circle1.backgroundColor = 'green'
 
             const circle2 = new Container()
             circle2.x = 0
@@ -109,7 +103,7 @@ Component({
             circle2.height = 102 * ratio
             circle2.borderRadius = '100%'
             circle2.shadow = '0 0 20px rgba(0,0,0,.02)'
-            circle2.backgroundColor = '#fafafa'
+            circle2.backgroundColor = 'blue'
 
             // 头像
             const avatarTexture = loader.get('avatar')
@@ -131,7 +125,7 @@ Component({
 
             // 名称与公司名容器
             const infoList = new Container()
-            infoList.y = 134 * ratio;
+            infoList.y = -20;
             infoList.direction = 'column'
             infoList.gap = 8 * ratio
             infoList.width = 216 * ratio
@@ -160,8 +154,9 @@ Component({
             companyName.letterSpace = 4
             companyName.lineGap = 8
             infoList.addChild(name, companyName)
-
-            stage.addChild(card, infoList)
+            rect.addChild(infoList)
+            stage.addChild(card)
+            
             stage.update();
         }
     },

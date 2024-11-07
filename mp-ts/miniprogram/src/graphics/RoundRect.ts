@@ -239,11 +239,8 @@ export default class RoundRect {
         this.radius = radius
     }
     exec(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, instance: DisplayObject) {
-        // 如果是作为遮罩，则需要获取并参照定位于被遮罩物的坐标
-        const [_x, _y] = instance.getPosition()
-        let x = _x + this.x,
-            y = _y + this.y,
-            radius = this.radius,
+
+        let radius = this.radius,
             width = this.width,
             height = this.height
         let fill, stroke
@@ -255,7 +252,7 @@ export default class RoundRect {
             stroke = this.stroke
         }
 
-        roundRect(x, y, width, height, radius, ctx)
+        roundRect(0, 0, width, height, radius, ctx)
 
         if (instance.isMask) {
             // ctx.clip()

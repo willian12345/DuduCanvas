@@ -20,7 +20,6 @@ export default class Shape extends DisplayObject{
 	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
 		// 设置透明度
 		ctx.globalAlpha = this._getAlpha()
-
 		// 执行所有命令
     this._drawGraphics(ctx)
 	}

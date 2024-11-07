@@ -1,4 +1,4 @@
-import { Application, ImgLoader, Text, Container, Image, RichText } from '../../libs/duducanvas/index';
+import { Application, ImgLoader, Text, Container, Image, RichText } from '../../src/index';
 
 const getCanvasSize = () => {
     // 根据屏幕宽度计算 canvas 宽度
@@ -31,9 +31,11 @@ Component({
                 canvasHeight: canvasHeight
             });
 
-            const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight, }, this);
+            const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight}, this);
             const stage = await app.init();
-            
+            if(!stage){
+                return;
+            }
             const card = new Container()
             const loader = new ImgLoader(stage.canvas, [
                 {
@@ -48,6 +50,8 @@ Component({
             await loader.load()
 
             card.direction = 'column'
+            card.justifyContent = 'center'
+            card.alignItems = 'center'
             card.x = 0
             card.y = 0
             card.width = 210 * ratio
@@ -69,12 +73,12 @@ Component({
 
             // 白色圆角矩形
             const roundedCard = new Container()
-            roundedCard.borderRadius = 20
+            roundedCard.borderRadius = 100
             roundedCard.direction = 'column'
             roundedCard.justifyContent = 'space-around'
             roundedCard.width = 200 * ratio
             roundedCard.height = 133 * ratio
-            roundedCard.backgroundColor = 'white'
+            roundedCard.backgroundColor = 'red'
             card.addChild(header, roundedCard)
 
             // 头像与名称信息行

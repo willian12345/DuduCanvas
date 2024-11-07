@@ -156,6 +156,7 @@ export default class Container extends SimpleCss {
         childs.forEach((v: any) => {
             if (v.alignSelf === 'flex-start') {
                 v.y = 0
+                console.log(1111)
             } else if (v.alignSelf === 'center') {
                 v.y = parentHeight * .5 - (v.height * .5)
             } else if (v.alignSelf === 'flex-end') {
