@@ -66,31 +66,31 @@ export default class SimpleCss extends DisplayObjectContainer {
     constructor() {
         super()
     }
-    updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
-      // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
-      if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
-          this.initBorderRadiusMask()
-      }
+    updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
+        // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
+        if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
+            this.initBorderRadiusMask()
+        }
 
-      // 绘制背景
-      if (this.backgroundColor) {
-          this.initBackgroundColor()
-      }
+        // 绘制背景
+        if (this.backgroundColor) {
+            this.initBackgroundColor()
+        }
 
-      // 绘制边框
-      if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
-          this.initBorder()
-      }
-      // 遮罩，主要用于显示圆角及圆
-      if (this.mask) {
-          if (this.mask.name === 'Shape') {
-              // 遮罩层不参与显示所以也没有父级元素
-              this.mask.masked = this
-          }
-      }
-      super.updateContext(context)
+        // 绘制边框
+        if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
+            this.initBorder()
+        }
+        // 遮罩，主要用于显示圆角及圆
+        if (this.mask) {
+            if (this.mask.name === 'Shape') {
+                // 遮罩层不参与显示所以也没有父级元素
+                this.mask.masked = this
+            }
+        }
+        super.updateContext(context)
     }
-    
+
     /**
      * 解构边框线值字符串
      * @param {*} border 
@@ -126,25 +126,21 @@ export default class SimpleCss extends DisplayObjectContainer {
         // 四边都有边框
         if (this.border) {
             const [borderWidth, borderStyle, borderColor] = this.getBorderAttr(this.border)
-            
+
             this.setBorderStyles(borderWidth, borderStyle, borderColor)
-            
+
             const halfBorderWidth = borderWidth * .5
             // 如果有圆角属性，则需要画圆角边框
             if (this.borderRadius) {
-               //@ts-ignore
+                //@ts-ignore
                 const _borderRadius = parseFloat(this.borderRadius);
-                let s
                 // 值为100%或值等于宽高值，且宽高相等时 表示显示想要显示成圆形
                 if ((this.borderRadius === '100%' || _borderRadius === this.width) && (this.width === this.height)) {
-                    s = new Shape()
                     const radius = this.width * .5
-                    s.graphics.strokeCircle(radius, radius, radius)
+                    this.graphics.strokeCircle(radius, radius, radius)
                 } else {
-                    s = new Shape()
-                    s.graphics.strokeRoundRect(0, 0, this.width, this.height, _borderRadius)
+                    this.graphics.strokeRoundRect(0, 0, this.width, this.height, _borderRadius)
                 }
-                this.addChild(s)
             } else {
                 this.graphics.strokeRect(halfBorderWidth, halfBorderWidth, this.width - borderWidth, this.height - borderWidth)
             }
@@ -189,12 +185,12 @@ export default class SimpleCss extends DisplayObjectContainer {
         }
     }
     // overflow hidden 用 mask 实现
-    setOverflowHiddenMask(b: boolean){
-        if(b){
+    setOverflowHiddenMask(b: boolean) {
+        if (b) {
             const s = new Shape()
             s.graphics.fillRect(this.x, this.y, this.width, this.height)
             this.mask = s
-        }else{
+        } else {
             this.mask = null
         }
     }
@@ -204,18 +200,21 @@ export default class SimpleCss extends DisplayObjectContainer {
     */
     initBorderRadiusMask() {
         let s
+        const isFull = this.borderRadiusValue === '100%'
         // 正圆形
-        if ((this.borderRadiusValue === '100%' || this.borderRadiusValue === this.width) && (this.width === this.height)) {
+        if ((isFull) && (this.width === this.height)) {
             const radius = this.width * .5
             s = new Shape()
             s.graphics.beginPath()
             s.graphics.fillCircle(radius, radius, radius)
         } else {
+            // 非正圆形
             s = new Shape()
-            if(typeof this.borderRadiusValue !== 'string'){
-                s.graphics.beginPath()
-                s.graphics.fillRoundRect(0, 0, this.width, this.height, this.borderRadiusValue)
-            }
+            // 如果还是100% 则取宽|高最小值
+            const radius = isFull ? Math.min(this.width * .5, this.height * .5) : this.borderRadiusValue
+            s.graphics.beginPath()
+            //@ts-ignore
+            s.graphics.fillRoundRect(0, 0, this.width, this.height, radius)
         }
         this.mask = s
     }

@@ -251,7 +251,7 @@ export default class RoundRect {
             fill = this.fill
             stroke = this.stroke
         }
-
+        console.log(width, height, radius, 9999)
         roundRect(0, 0, width, height, radius, ctx)
 
         if (instance.isMask) {

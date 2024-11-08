@@ -32,6 +32,9 @@ Component({
       const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight }, this);
       const stage = await app.init();
       const container = new Container()
+      if(!stage){
+        return
+      }
       const loader = new ImgLoader(stage.canvas, [
         {
           id: 'avatar',
@@ -77,8 +80,8 @@ Component({
       const subContainer = new Container()
       subContainer.width = 120
       subContainer.height = 40
-      subContainer.borderRadius = 20
       subContainer.border = '2 solid red'
+      subContainer.borderRadius = '100%'
       subContainer.backgroundColor = '#999'
       subContainer.addChild(t2)
 
