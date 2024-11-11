@@ -269,7 +269,7 @@ export default class RichText extends Text {
     this.renderRows(ctx);
     if (this.mask && this.mask.name === 'Shape') {
       this.mask.masked = this
-      this._mask?._draw(ctx, true)
+      this._mask?._draw(ctx)
     }
   }
 }

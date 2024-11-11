@@ -1,20 +1,20 @@
-import { Application, ImgLoader, Shape, Text, Container, Image, Stage} from '../../src/index';
-import {  checkPermission, showAuthTips, savePicture, getCanvasTempPath, getCanvasSize} from '../../utils/util';
+import { Application, ImgLoader, Shape, Text, RichText, Container, Image, Stage } from '../../src/index';
+import { checkPermission, showAuthTips, savePicture, getCanvasTempPath, getCanvasSize } from '../../utils/util';
 
 let timer: number;
-let stage: Stage|null;
+let stage: Stage | null;
 Component({
   data: {
     canvasWidth: 0,
     canvasHeight: 0
   },
   methods: {
-    handleTap(e: any){
+    handleTap(e: any) {
       console.log(e)
     },
-    async saveToTmpPath(){
+    async saveToTmpPath() {
       checkPermission()
-      if(!stage){
+      if (!stage) {
         return;
       }
       const tmpPath = await getCanvasTempPath(stage.canvas, 'myCanvas');
@@ -36,7 +36,7 @@ Component({
     }
   },
   lifetimes: {
-    detached(){
+    detached() {
       clearInterval(timer)
     },
     async ready() {
@@ -47,9 +47,9 @@ Component({
         canvasHeight: canvasHeight
       });
 
-      const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight, debug: true }, this);
+      const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight }, this);
       stage = await app.init();
-      if(!stage){
+      if (!stage) {
         return
       }
       const loader = new ImgLoader(stage.canvas, [
@@ -59,7 +59,7 @@ Component({
         }
       ])
       await loader.load();
-      
+
       const avatarTexture = loader.get('avatar')
       if (!avatarTexture) {
         return;
@@ -82,6 +82,28 @@ Component({
 
       stage.addChild(rect)
       stage.update();
+
+      const card = new Container()
+
+      card.width = 210
+      card.height = 210
+      card.backgroundColor = '#9BBD00'
+      card.border = '2px solid red'
+      card.borderRadius = 10
+      card.alignItems = 'center'
+      card.direction = 'column'
+      card.gap = 10
+
+
+      const hello = new Text()
+      hello.text = 'Hello'
+
+      const word = new Text()
+      word.text = 'World'
+      card.addChild(hello, word)
+      stage.addChild(card)
+      stage.update()
+
     }
   },
 })

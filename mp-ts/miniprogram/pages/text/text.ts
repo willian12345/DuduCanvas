@@ -37,21 +37,23 @@ Component({
           canvasHeight: canvasHeight
         });
 
-        // await new Promise((resolve) => {
-        //   wx.loadFontFace({
-        //     family: 'myFont',
-        //     source: 'https://cdn.jsdelivr.net/gh/Tallone/qutools-fonts/mini-hwmct.ttf',
-        //     scopes: ['native'],
-        //     success: (res)=> {
-        //       console.log(res)
-        //       resolve(true)
-        //     }
-        //   })
-        // })
+        await new Promise((resolve) => {
+          wx.loadFontFace({
+            family: 'myFont',
+            source: 'https://cdn.jsdelivr.net/gh/Tallone/qutools-fonts/mini-hwmct.ttf',
+            scopes: ['native'],
+            success: (res)=> {
+              console.log(res)
+              resolve(true)
+            }
+          })
+        })
 
         const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight, debug: true}, this);
-        stage = await app.init();
-
+        const stage = await app.init();
+        if(!stage){
+          return;
+        }
         // const container = new Container();
         // container.height = 400;
         // container.x = 0;

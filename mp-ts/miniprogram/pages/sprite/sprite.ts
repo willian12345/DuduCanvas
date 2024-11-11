@@ -1,5 +1,5 @@
 import {  getCanvasSize} from '../../utils/util';
-import {ImgLoader, Image, Text, Application, Sprite} from '../../src/index'
+import {ImgLoader, Text, Application, Sprite} from '../../src/index'
 Component({
   data: {
     canvasWidth: 0,
@@ -18,6 +18,9 @@ Component({
       });
         const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight}, this);
         const stage = await app.init();
+        if(!stage){
+          return
+        }
         stage.backgroundColor = '#d85542';
         const loader = new ImgLoader(stage.canvas, [
           {

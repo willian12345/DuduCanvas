@@ -164,7 +164,7 @@ export default class Text extends DisplayObject {
     this._drawGraphics(ctx)
     if (this.mask && this.mask.name === 'Shape') {
       this.mask.masked = this
-      this._mask?._draw(ctx, true)
+      this._mask?._draw(ctx)
     }
   }
   /**
