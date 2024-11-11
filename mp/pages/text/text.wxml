@@ -1,5 +1,0 @@
-<!--index.wxml-->
-<view class="container">
-	<!--  <image src="../../image/health-bad.png" /> -->
-  <canvas id="myCanvas"  type="2d" style="width: 375px; height: 400px"></canvas>
-</view>

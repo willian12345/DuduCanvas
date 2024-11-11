@@ -1,0 +1,17 @@
+<!--pages/index/index.wxml-->
+<view class="canvas-container">
+  <canvas  type="2d" id="myCanvas" width="{{canvasWidth}}" height="{{canvasHeight}}" style="width: {{canvasWidth / 2 }}px; height: {{canvasHeight / 2}}px;" bind:tap="handleTap"/>
+</view>
+
+<view class="btn-area">
+  <navigator class="btn" url="/pages/card/card" hover-class="navigator-hover">分享图生成1</navigator>
+  <navigator class="btn" url="/pages/share/share" hover-class="navigator-hover">分享图生成2</navigator>
+</view>
+<view class="btn-area">
+  <navigator class="btn" url="/pages/sprite/sprite" hover-class="navigator-hover">Image</navigator>
+  <navigator class="btn" url="/pages/graphics/graphics" hover-class="navigator-hover">path</navigator>
+  <navigator class="btn" url="/pages/text/text" hover-class="navigator-hover">Text</navigator>
+  <navigator class="btn" url="/pages/flex/flex" hover-class="navigator-hover">Flex</navigator>
+</view>
+
+<button bind:tap="saveToTmpPath">导出至临时目录</button>
