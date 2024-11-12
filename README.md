@@ -39,7 +39,17 @@ Duducanvas 1.4.0 更新：
 ### 快速开始
 --------------------------------------
 
-直接 dist/目录下 index 文件引入 或通过 [npm 包安装](#npmPackage)
+直接 dist/目录下 index 文件引入 
+
+```
+import { Application } from 'dist/index';
+```
+
+或通过 [npm 包安装](#npmPackage)
+
+```
+import { Application } from 'duducanvas';
+```
 
 ### 页面内添加 canvas 标签
 
@@ -333,7 +343,7 @@ Skyline 理论上就可以直接输出图而不用 canvas 了
 
 3. 在微信开发者工具中，点击菜单栏的“工具” -> “构建 npm ”
 
-4. 在小程序页面的 js 内引入  `import  { Text, Stage } from 'dist/index'`
+4. 在小程序页面的 js 内引入  `import  { Text, Stage } from 'duducanvas'`
 
 5. 如果引入不成功可试试  `import  { Text, Stage } from '../../miniprogram_npm/duducanvas/index'`
 
@@ -343,6 +353,80 @@ uniapp 内引入 npm 包也类似操作，只是不需要构建 npm
 
 具体可参考 https://uniapp.dcloud.net.cn/tutorial/page-script.html#npm支持
 
+
+### 在 uniapp 中使用
+
+1. 在 uniapp 项目根目录 `pnpm install duducanvas`
+
+2. 在 script 内引入 `import { Application } from 'duducanvas'`;
+
+以下是 uniapp vue3.0 内使用的 demo
+
+index.vue 文件：
+```
+<template>
+	<canvas type="2d" id="myCanvas" :width="canvasWidth" :height="canvasHeight" :style="{width: `${canvasWidth/2}px`, height: `${canvasHeight / 2}px`}"/>
+</template>
+
+<script setup>
+	import {onMounted, ref} from 'vue'
+	import { Application, RichText, Container } from 'duducanvas';
+	const getCanvasSize = () => {
+	    // 根据屏幕宽度计算 canvas 宽度
+	    const systemInfo = wx.getSystemInfoSync();
+	    const screenWidth = systemInfo.windowWidth;
+	    const designWidth = 750;
+	    const designHeight = 1024;
+	    // 宽高放大一倍
+	    const canvasWidth = screenWidth * 2;
+	    // 高度比例计算
+	    const canvasHeight = ((screenWidth / designWidth) * designHeight) * 2;
+	    // ratio 用于计算缩放比例，用于尺寸与定位
+	    const ratio = canvasWidth / 210
+	    return {
+	        canvasWidth,
+	        canvasHeight,
+	        ratio
+	    }
+	}
+	
+	const canvasInfo = getCanvasSize();
+	const canvasWidth = ref(canvasInfo.canvasWidth)
+	const canvasHeight = ref(canvasInfo.canvasHeight)
+	
+	const init = async ()=> {
+		const app = new Application('#myCanvas', { width: canvasWidth.value, height: canvasHeight.value });
+		const stage = await app.init();
+		if(!stage){
+			return;
+		}
+		
+		stage.backgroundColor = 'green'
+		
+		const container = new Container()
+		container.width = canvasWidth.value * .5;
+		container.height = canvasHeight.value * .5;
+		container.backgroundColor = 'pink'
+		
+		const rtText = new RichText()
+		rtText.text = `小程序提供了一个的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务`
+		rtText.lineClamp = 2
+		rtText.wrapWidth = 200
+		rtText.fontSize = 20
+		rtText.lineGap = 10
+		
+		container.addChild(rtText)
+		stage.addChild(container)
+		stage.update();
+	}
+	
+	onMounted(()=>{
+		init()
+	})
+</script>
+```
+
+在 uniapp vue2.0 中使用方法类似
 
 ### 源码 tsc 构建 
 ==================================================
