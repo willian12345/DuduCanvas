@@ -22,6 +22,8 @@ export default class Sprite extends Group {
         this.enableHeight = 0;
         if (imageTexture) {
             this.imageTexture = imageTexture;
+            this.width = imageTexture.width;
+            this.height = imageTexture.height;
         }
         //@ts-ignore
         this.parentDraw = super._draw;
