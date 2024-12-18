@@ -60,6 +60,7 @@ export default class Image extends SimpleCss {
 		}else{
 			this.dHeight = this.height
 		}
+    console.log(this.width, this.height)
 	}
 	
 	private _drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){

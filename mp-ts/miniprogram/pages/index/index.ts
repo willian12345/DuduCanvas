@@ -66,19 +66,21 @@ Component({
       }
       const avatar = new Image({
         image: avatarTexture.image,
-        width: 50,
-        height: 50
+        width: 350,
+        height: 350
       })
+      console.log(avatar)
       // 设置导出图片时背景白色
       stage.backgroundColor = 'green'
 
       const rect = new Container()
-      rect.width = 400
-      rect.height = 400
-      rect.x = 0
-      rect.y = 0
-      rect.addChild(avatar)
+      rect.width = 200
+      rect.height = 200
+      rect.x = 300
+      rect.y = 300
+      rect.backgroundColor = 'white'
       rect.overflowHidden = true
+      rect.addChild(avatar)
 
       stage.addChild(rect)
       stage.update();

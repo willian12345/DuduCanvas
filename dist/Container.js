@@ -137,7 +137,7 @@ export default class Container extends SimpleCss {
         if (this.alignItems === 'center') {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
-                child.y += parentHeight * .5 - (child.height * .5);
+                child.y = parentHeight * .5 - (child.height * .5);
             }
         }
         else if (this.alignItems === 'flex-start') {
@@ -149,14 +149,13 @@ export default class Container extends SimpleCss {
         else if (this.alignItems === 'flex-end') {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
-                child.y += parentHeight - child.height;
+                child.y = parentHeight - child.height;
             }
         }
         // align-self
         childs.forEach((v) => {
             if (v.alignSelf === 'flex-start') {
                 v.y = 0;
-                console.log(1111);
             }
             else if (v.alignSelf === 'center') {
                 v.y = parentHeight * .5 - (v.height * .5);
@@ -186,7 +185,7 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.x += childs[index - 1].x + childs[index - 1].width + this.gap;
+                    child.x = childs[index - 1].x + childs[index - 1].width + this.gap;
                 }
                 else {
                     child.x = child.x;
@@ -198,11 +197,11 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.x += childs[index - 1].x + childs[index - 1].width + this.gap;
+                    child.x = childs[index - 1].x + childs[index - 1].width + this.gap;
                 }
                 else {
                     // x 轴起点是总宽度-子元素总宽度
-                    child.x += parentWidth - childsWidth;
+                    child.x = parentWidth - childsWidth;
                 }
             }
         }
@@ -211,11 +210,11 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.x += childs[index - 1].x + childs[index - 1].width + this.gap;
+                    child.x = childs[index - 1].x + childs[index - 1].width + this.gap;
                 }
                 else {
                     // x 轴起点是总宽度-子元素总宽度的一半
-                    child.x += ((parentWidth - childsWidth) * .5);
+                    child.x = ((parentWidth - childsWidth) * .5);
                 }
             }
         }
@@ -225,10 +224,10 @@ export default class Container extends SimpleCss {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.x += childs[index - 1].x + childs[index - 1].width + betweenGapWidth;
+                    child.x = childs[index - 1].x + childs[index - 1].width + betweenGapWidth;
                 }
                 else {
-                    child.x += 0;
+                    child.x = 0;
                 }
             }
         }
@@ -236,17 +235,17 @@ export default class Container extends SimpleCss {
             // 水平中间间隔相等，两端间隔是中间间隔的一半
             const aroundGapWidth = this.getAroundGapWidth(parentWidth);
             if (childs.length === 1) {
-                childs[0].x += (parentWidth - childs[0].width) * .5;
+                childs[0].x = (parentWidth - childs[0].width) * .5;
             }
             else {
                 for (let index = 0, l = childs.length; index < l; index++) {
                     const child = childs[index];
                     if (index > 0) {
-                        child.x += childs[index - 1].x + childs[index - 1].width + aroundGapWidth;
+                        child.x = childs[index - 1].x + childs[index - 1].width + aroundGapWidth;
                     }
                     else {
                         // x 轴起点是单个间隔的一半
-                        child.x += 0;
+                        child.x = 0;
                     }
                 }
             }
@@ -272,10 +271,10 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.y += childs[index - 1].y + childs[index - 1].height + this.gap;
+                    child.y = childs[index - 1].y + childs[index - 1].height + this.gap;
                 }
                 else {
-                    child.y += 0;
+                    child.y = 0;
                 }
             }
         }
@@ -284,11 +283,11 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.y += childs[index - 1].y + childs[index - 1].height + this.gap;
+                    child.y = childs[index - 1].y + childs[index - 1].height + this.gap;
                 }
                 else {
                     // y 轴起点是总宽度-子元素总宽度
-                    child.y += parentHeight - childsHeight;
+                    child.y = parentHeight - childsHeight;
                 }
             }
         }
@@ -297,7 +296,7 @@ export default class Container extends SimpleCss {
             for (let index = 0; index < childs.length; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.y += childs[index - 1].y + childs[index - 1].height + this.gap;
+                    child.y = childs[index - 1].y + childs[index - 1].height + this.gap;
                 }
                 else {
                     // y 轴起点是总宽度-子元素总宽度的一半
@@ -311,10 +310,10 @@ export default class Container extends SimpleCss {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.y += childs[index - 1].y + childs[index - 1].height + betweenGapHeight;
+                    child.y = childs[index - 1].y + childs[index - 1].height + betweenGapHeight;
                 }
                 else {
-                    child.y += 0;
+                    child.y = 0;
                 }
             }
         }
@@ -324,11 +323,11 @@ export default class Container extends SimpleCss {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
                 if (index > 0) {
-                    child.y += childs[index - 1].y + childs[index - 1].height + aroundGapHeight;
+                    child.y = childs[index - 1].y + childs[index - 1].height + aroundGapHeight;
                 }
                 else {
                     // x 轴起点是单个间隔的一半
-                    child.y += aroundGapHeight * .5;
+                    child.y = aroundGapHeight * .5;
                 }
             }
         }
@@ -342,7 +341,7 @@ export default class Container extends SimpleCss {
         if (this.alignItems === 'center') {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
-                child.x += parentWidth * .5 - (child.width * .5);
+                child.x = parentWidth * .5 - (child.width * .5);
             }
         }
         else if (this.alignItems === 'flex-start') {
@@ -354,7 +353,7 @@ export default class Container extends SimpleCss {
         else if (this.alignItems === 'flex-end') {
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
-                child.x += parentWidth - child.width;
+                child.x = parentWidth - child.width;
             }
         }
         // align-self

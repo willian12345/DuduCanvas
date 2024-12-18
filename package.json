@@ -1,6 +1,6 @@
 {
   "name": "duducanvas",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Duducanvas 小程序canvas对象化封装, 微信小程序海报生成",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

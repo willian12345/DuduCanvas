@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/text/text",
     "pages/share/share",
     "pages/card/card",
-    "pages/text/text",
     "pages/flex/flex",
     "pages/sprite/sprite",
     "pages/graphics/graphics"

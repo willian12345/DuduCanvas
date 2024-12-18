@@ -38,6 +38,7 @@ export default class Image extends SimpleCss {
         else {
             this.dHeight = this.height;
         }
+        console.log(this.width, this.height);
     }
     _drawImage(ctx, x, y) {
         /**
