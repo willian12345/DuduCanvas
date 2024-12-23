@@ -269,6 +269,8 @@ Container 允许特殊设置的属性：
 * direction
 * gap
 
+**显示对象加入容器后，会自动根据容器的宽高进行定位，手动设置 x,y 值将不起作用, 可用 regX, regY 属性做自身偏移**
+
 
 ### 获取 context 直接操作 canvas 
 

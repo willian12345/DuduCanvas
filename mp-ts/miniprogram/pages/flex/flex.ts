@@ -43,7 +43,8 @@ Component({
       ])
       await loader.load()
       container.direction = 'row'
-      // container.alignItems = 'center'
+      container.alignItems = 'center'
+      container.gap = 120
       container.justifyContent = 'space-between'
       container.x = 0
       container.y = 0

@@ -64,12 +64,21 @@ Component({
       if (!avatarTexture) {
         return;
       }
-      const avatar = new Image({
+      const avatar1 = new Image({
         image: avatarTexture.image,
-        width: 350,
-        height: 350
+        width: 320,
+        height: 320
       })
-      console.log(avatar)
+
+      const avatar2 = new Image({
+        image: avatarTexture.image,
+        width: 80,
+        height: 80
+      })
+
+      avatar2.x = stage.width * .5;
+      avatar2.y = stage.height * .5;
+      
       // 设置导出图片时背景白色
       stage.backgroundColor = 'green'
 
@@ -77,10 +86,10 @@ Component({
       rect.width = 200
       rect.height = 200
       rect.x = 300
-      rect.y = 300
+      rect.y = 100
       rect.backgroundColor = 'white'
       rect.overflowHidden = true
-      rect.addChild(avatar)
+      rect.addChild(avatar1)
 
       stage.addChild(rect)
       stage.update();
@@ -103,7 +112,7 @@ Component({
       const word = new Text()
       word.text = 'World'
       card.addChild(hello, word)
-      stage.addChild(card)
+      stage.addChild(card, avatar2)
       stage.update()
 
     }
