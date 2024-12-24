@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json", // 继承根目录的配置
   "compilerOptions": {
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -18,11 +19,17 @@
     "strictPropertyInitialization": true,
     "lib": ["ES2020"],
     "typeRoots": [
-      "./typings"
+      "./typings",
+      "../node_modules/@types", // 确保包含根目录的类型声明
+      "./node_modules/@types"    // 如果有本地类型声明
     ]
+    
   },
+  "types": ["jest", "@jest/globals"], // 确保包含 Jest 类型
   "include": [
-    "./**/*.ts"
+    "./**/*.ts",
+    "mp-ts/miniprogram/src/index.ts",
+    "src/**/*.ts", "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules"
