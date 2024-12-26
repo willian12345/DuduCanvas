@@ -170,6 +170,7 @@ t1.text = '你好世界Hello'
 t1.color = 'red'
 t1.x = 100
 t1.y = 300
+t1.shadow = "0 0 2 white"
 // 添加至舞台
 stage.addChild(t1)
 stage.update()

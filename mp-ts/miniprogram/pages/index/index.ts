@@ -108,6 +108,7 @@ Component({
 
       const hello = new Text()
       hello.text = 'Hello'
+      hello.shadow = "0 0 2 white";
 
       const word = new Text()
       word.text = 'World'
