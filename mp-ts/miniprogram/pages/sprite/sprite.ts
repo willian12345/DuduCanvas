@@ -21,11 +21,16 @@ Component({
         if(!stage){
           return
         }
-        stage.backgroundColor = '#d85542';
+
+
         const loader = new ImgLoader(stage.canvas, [
           {
             id: 'button',
             src: '../../assets/button.png'
+          },
+          {
+            id: 'bigImage',
+            src: '../../assets/8cuq1nm4phyy.jpg'
           },
           {
             id: 'b64Image',
@@ -33,6 +38,32 @@ Component({
           }
         ])
         await loader.load()
+
+        const bigImageTexture = loader.get('bigImage')
+        if(bigImageTexture){
+
+            // 加个大图背景
+            const bigImageSprite = new Sprite(bigImageTexture)
+            stage.addChild(bigImageSprite)
+
+            // 加个缩小版的图
+            const bigImage = new Image({
+                image: bigImageTexture.image,
+                sx: 0,
+                sy: 0,
+                dx: 0,
+                dy: 0,
+                sWidth: bigImageTexture.width,
+                sHeight: bigImageTexture.height,
+                dWidth: 300,
+                dHeight: 300 / bigImageTexture.width * bigImageTexture.height,
+            })
+            bigImage.x = 220
+            bigImage.y = 200
+            console.log(bigImage.width, bigImage.height)
+            stage.addChild(bigImage)
+        }
+        
         const imageSource = loader.get('button');
         if(!imageSource){
           return;

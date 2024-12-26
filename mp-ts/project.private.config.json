@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/sprite/sprite",
+          "pathName": "pages/sprite/sprite",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/flex/flex",
           "pathName": "pages/flex/flex",
           "query": "",
