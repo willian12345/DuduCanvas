@@ -163,9 +163,9 @@ export default class RichText extends Text {
       originHeight: 0,
       elementList: [],
     })
-
-    for(let i = 0; i < this.text.length; i++){
-      const value = this.text[i]
+    const arr = Array.from(this.text)
+    for(let i = 0; i < arr.length; i++){
+      const value = arr[i]
       ctx.font = this.font
       let { width, actualBoundingBoxAscent, actualBoundingBoxDescent } =
         ctx.measureText(value)

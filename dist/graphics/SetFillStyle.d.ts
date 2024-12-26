@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import CreateLinearGradient from "../color/CreateLinearGradient";
 import CreateRadialGradient from "../color/CreateRadialGradient";
 import DisplayObject from "../DisplayObject";
@@ -6,7 +5,7 @@ import DisplayObject from "../DisplayObject";
  * 设置样式类
  * 样式可以是 颜色 或 Pattern
  */
-export declare type TStyle = string | CreateLinearGradient | CreateRadialGradient;
+export type TStyle = string | CreateLinearGradient | CreateRadialGradient;
 export default class SetFillStyle {
     /**
      * @param {*} style 颜色值，或 Pattern

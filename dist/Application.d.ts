@@ -9,5 +9,5 @@ export default class Application {
         height: number;
         debug?: boolean;
     }, componentInstance?: any);
-    init(): Promise<Stage>;
+    init(): Promise<Stage | null>;
 }

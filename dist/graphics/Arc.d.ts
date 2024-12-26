@@ -1,4 +1,3 @@
-/// <reference types="types" />
 export default class Arc {
     name: string;
     x: number;

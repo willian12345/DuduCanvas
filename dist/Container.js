@@ -221,6 +221,7 @@ export default class Container extends SimpleCss {
         else if (justifyContent === 'space-between') {
             // 水平中间间隔相等，两端无间隔
             const betweenGapWidth = this.getBetweenGapWidth(parentWidth);
+            console.log(betweenGapWidth, 23);
             for (let index = 0, l = childs.length; index < l; index++) {
                 const child = childs[index];
                 if (index > 0) {
@@ -379,6 +380,10 @@ export default class Container extends SimpleCss {
     }
     _draw(ctx) {
         const direction = this.direction;
+        // 如果指定了分布，则取消 gap 值设置
+        if (this._justifyContent === 'space-around' || this._justifyContent === 'space-between') {
+            this._gap = 0;
+        }
         if (direction === 'row') {
             this.setRow();
         }

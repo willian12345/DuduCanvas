@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import SimpleCss from './SimpleCss';
 /**
  * Image 图片显示类

@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import SimpleCss from './SimpleCss';
 /**
  * Stage

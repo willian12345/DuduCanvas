@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import Text from "../Text";
 export declare const NO_ROTATION_RANGE: number[][];
 export declare function needRotation(char: string): boolean;

@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import DisplayObject from "../DisplayObject";
 /**
  * 二次贝塞尔曲线

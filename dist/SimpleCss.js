@@ -14,25 +14,6 @@ const BORDER_STYLES = ['solid', 'dashed'];
  * 样式类
  */
 export default class SimpleCss extends DisplayObjectContainer {
-    constructor() {
-        super();
-        this.backgroundColor = '';
-        this.border = '';
-        this.borderTop = '';
-        this.borderRight = '';
-        this.borderBottom = '';
-        this.borderLeft = '';
-        /**
-         * 左边显示成半圆
-         */
-        this.borderLeftRound = false;
-        /**
-         * 右边显示成半圆
-         */
-        this.borderRightRound = false;
-        this.borderRadiusValue = '';
-        this._overflowHidden = false;
-    }
     /**
      * 1、borderRadius 值设置请参与 css3 的 border-radius 属性;
      * eg1: 10
@@ -62,6 +43,25 @@ export default class SimpleCss extends DisplayObjectContainer {
     set overflowHidden(b) {
         this._overflowHidden = b;
         this.setOverflowHiddenMask(b);
+    }
+    constructor() {
+        super();
+        this.backgroundColor = '';
+        this.border = '';
+        this.borderTop = '';
+        this.borderRight = '';
+        this.borderBottom = '';
+        this.borderLeft = '';
+        /**
+         * 左边显示成半圆
+         */
+        this.borderLeftRound = false;
+        /**
+         * 右边显示成半圆
+         */
+        this.borderRightRound = false;
+        this.borderRadiusValue = '';
+        this._overflowHidden = false;
     }
     updateContext(context) {
         // 如果设置了 borderRadius 值则需要使用遮罩实现圆角

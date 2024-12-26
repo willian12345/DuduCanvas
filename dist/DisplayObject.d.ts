@@ -1,8 +1,7 @@
-/// <reference types="types" />
 import Graphics from './graphics/index';
 import Shape from './Shape';
 import Matrix2D from './Matrix';
-export declare type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
+export type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
 /**
  * 显示对象类
  */

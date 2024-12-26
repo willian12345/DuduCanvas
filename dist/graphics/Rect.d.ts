@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import DisplayObject from "../DisplayObject";
 export default class Rect {
     x: number;

@@ -1,4 +1,3 @@
-/// <reference types="types" />
 import DisplayObjectContainer from './DisplayObjectContainer';
 /**
  * SimpleCss

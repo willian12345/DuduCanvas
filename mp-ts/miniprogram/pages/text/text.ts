@@ -64,7 +64,7 @@ Component({
         stage.update();
 
         t1 = new RichText()
-        t1.text = `析] 为避免影响调试，开发者工具在非自定义启动模式`
+        t1.text = `🍺析] 为避免影响调试，开发者工具在非自定义启动模式`
         t1.x = 0
         t1.y = 0
         t1.lineClamp = 2

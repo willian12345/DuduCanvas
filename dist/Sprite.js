@@ -1,6 +1,14 @@
 import Group from './Group';
 import Image from './Image';
 export default class Sprite extends Group {
+    get sliceBounds() {
+        return this._sliceBounds;
+    }
+    set sliceBounds(bounds) {
+        // const { left, top, right, bottom } = bounds
+        this._setSlice(bounds);
+        this._sliceBounds = bounds;
+    }
     /**
      *
      * @param {*} imageTexture Image 对象
@@ -30,14 +38,6 @@ export default class Sprite extends Group {
         if (sliceBound) {
             this._setSlice(sliceBound);
         }
-    }
-    get sliceBounds() {
-        return this._sliceBounds;
-    }
-    set sliceBounds(bounds) {
-        // const { left, top, right, bottom } = bounds
-        this._setSlice(bounds);
-        this._sliceBounds = bounds;
     }
     _draw(ctx) {
         const [x, y] = this.getPosition();
