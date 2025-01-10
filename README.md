@@ -1,33 +1,26 @@
-Duducanvas 小程序canvas对象化封装, 微信小程序海报生成
+Duducanvas 微信小程序海报生成 canvas 对象化封装
 ==================================================
 ----
 举个栗子
 ----
-![image](screenshot/WX20211214-192038.png)
+![image](screenshot/demo1.png)
 
-![image](screenshot/WX20211214-192114.png)
+![image](screenshot/demo2.png)
 
-![image](screenshot/WX20211214-192132.png)
+![image](screenshot/demo3.png)
 
-![image](screenshot/WX20211214-192145.png)
+![image](screenshot/demo4.png)
 
-----
-uniapp vue2.0
 
-![image](screenshot/WX20211214-192348.png)
-----
-uniapp vue3.0
+目录结构
 
-![image](screenshot/WX20211214-192419.png)
-
-整个目录可以用 “微信开发者工具” 直接打开
 ```
 —— 根目录
-———— mp 微信小程序目录
-———— uniapp-vue3.0 demo 目录
-———— uniapp-vue2.0 demo 目录
-———— dist Duducanvas 编译后文件
+———— mp-ts 微信小程序目录，可直接使用微信开发者工具打开
+———— dist Duducanvas 编译后 js 文件 及其 ts 类型文件及
 ```
+
+
 ==================================================
 
 ## duducanvas 使用
@@ -35,118 +28,185 @@ uniapp vue3.0
 
 ### 更新说明
 
-Duducanvas 1.3.0 已对接 小程序的  Canvas 2D 接口
+Duducanvas 1.4.0 更新：
 
-为适应新版 canvas 接口，Duducanvas 变动如下：
-
-- 取消原 new Stage 回调传递，采用 Promise 返回 stage 实例对象
-
-- 新建顺序变更： 需要先建 Stage 后再调用 ImgLoader 并传入 stage 实例
-
-- 需要舞台呈现渲染画面最后需要调用 `stage.update()`
-
-- wxml 内的 canvas 标签需要添加 `type="2d"` 属性
-
-- ImgLoader 的实例方法 get() 返回了一个对象 `{path, width, height, image}`
-
-
-### 老版本请在 v1 分支查看，
-
-> canvas 接口有哪些变化 可参考 旧版 Canvas 迁移指南 https://developers.weixin.qq.com/miniprogram/dev/framework/ability/canvas-legacy-migration.html
+1. typescript 重写
+2. 使用 Matrix 定位
+3. Container 容器优化
+4. 增加 RichText 支持多行文本
 
 
 ### 快速开始
 --------------------------------------
 
-直接下载 duducanvas.js 文件引入 或通过 [npm 包安装](#npmPackage)
+直接 dist/目录下 index 文件引入 
+
+```
+import { Application } from 'dist/index';
+```
+
+或通过 [npm 包安装](#npmPackage)
+
+```
+import { Application } from 'duducanvas';
+```
 
 ### 页面内添加 canvas 标签
 
-```
-  <canvas id="myCanvas"  type="2d" style="width: 375px; height: 400px"></canvas>
-```
-
-创建舞台，注意使用的是 async/await 写法，请包含在 async 函数内
+wxml 文件内：
 
 ```
-import { Stage } from 'duducanvas.js'
+  <canvas type="2d" id="myCanvas" width="{{canvasWidth}}" height="{{canvasHeight}}" style="width: {{canvasWidth / 2 }}px; height: {{canvasHeight / 2}}px;"/>
 
-async function () {
-    const stage = await new Stage('#myCanvas', {width: 375, height: 400})
+```
+
+ts 文件内, 设置画布的宽/高都要放大一倍：
+
+```
+const getCanvasSize = () => {
+    // 根据屏幕宽度计算 canvas 宽度
+    const systemInfo = wx.getWindowInfo();
+    const screenWidth = systemInfo.windowWidth;
+    const designWidth = 750;
+    const designHeight = 1024;
+    // 宽高放大一倍
+    const canvasWidth = screenWidth * 2;
+    // 高度比例计算
+    const canvasHeight = ((screenWidth / designWidth) * designHeight) * 2;
+    // ratio 用于计算缩放比例，用于尺寸与定位
+    const ratio = canvasWidth / 210
+    return {
+        canvasWidth,
+        canvasHeight,
+        ratio
+    }
 }
 
+Component({
+    data: {
+        canvasWidth: 0,
+        canvasHeight: 0
+    },
+    lifetimes: {
+        async ready() {
+            const { canvasWidth, canvasHeight, ratio } = getCanvasSize();
+
+            this.setData({
+                canvasWidth: canvasWidth,
+                canvasHeight: canvasHeight
+            });
+        }
+    }
+})
+
 ```
 
-！！如果是在自定义组件内则需要传 this 组件实例
+这样 canvas 算是设置好了，要点是 canvas 尺寸放大一倍，再通过style 样式缩小至 page 尺寸
+
+
+
+
+## 创建 Application 和 stage 
+
+width / height 取上面计算出的值 canvasWidth 与 canvasHeight
+
+**app.init 是异步的**
 
 ```
-import { Stage } from 'duducanvas.js'
+import { Application } from 'dist/index';
 
-async function () {
-    const stage = await new Stage('#myCanvas', {width: 375, height: 400})
-}
+const app = new Application('#myCanvas', { width: canvasWidth, height: canvasHeight });
+const stage = await app.init();
+
 ```
+
+如果是在自定义组件内 Application 第三个参数则需要传 this 组件实例，否则会找不到 canvas 
+
+
 
 ### 添加图片
 
 ```
-  import { ImgLoader, Stage, Image} from 'duducanvas.js'
+  import { ImgLoader, Stage, Image} from 'dist/index'
 
-  async function () {
-      // 先获取舞台实例
-      const stage = await new Stage('#myCanvas', {width: 375, height: 400})
-
-      // 加载图片时需要将 stage 舞台实例传入 ImgLoader
-      const loader = await new ImgLoader(stage.canvas, [
-        {
-          id: 'avatar',
-          src: '/image/132.jpeg'
-        }
-      ])
-
-      // 添加图片，
-      const avatar = new Image({
-        image: loader.get('avatar'),
-        width: 100, 
-        height: 100,
-      })
-      // 将头像变成圆形
-      avatar.borderRadius = '100%'
-      
-      // 添加至舞台
-      stage.addChild(avatar)
-      stage.update()
+  const app = new Application('#myCanvas', {width: canvasWidth, height: canvasHeight});
+  const stage = await app.init();
+  if(!stage){
+    return
   }
+  // 先加载(下载图片)
+  const loader = new ImgLoader(stage.canvas, [
+    {
+      id: 'avatar',
+      src: '../../assets/avatar.jpeg'
+    }
+  ])
+  await loader.load();
   
+  const avatarTexture = loader.get('avatar')
+  if (!avatarTexture) {
+    return;
+  }
+  const avatar = new Image({
+    image: avatarTexture.image,
+    width: 50,
+    height: 50
+  }) 
+
+  stage.addChild(avatar)
+  stage.update()
+
 ```
+
+**注意**: 添加完图片后需要 `stage.update()`
 
 ### 添加文本
 
 ```
-import { Stage, Text } from 'duducanvas.js'
+import { Stage, Text } from 'dist/index'
 
-async function(){
-  const stage = await new Stage('#myCanvas', {width: 375, height: 400})
-  const t1 = new Text()
-  t1.text = '你好世界Hello'
-  t1.color = 'red'
-  t1.x = 100
-  t1.y = 300
-  // 添加至舞台
-  stage.addChild(t1)
-  stage.update()
-}
+const t1 = new Text()
+t1.text = '你好世界Hello'
+t1.color = 'red'
+t1.x = 100
+t1.y = 300
+// 添加至舞台
+stage.addChild(t1)
+stage.update()
 
 ```
+
+### 添加多行文本
+
+```
+import { Stage, RichText } from 'dist/index'
+
+const rtText = new RichText()
+rtText.text = `小程序提供了一个的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务`
+rtText.lineClamp = 2
+rtText.wrapWidth = 200
+rtText.fontSize = 20
+rtText.lineGap = 10
+
+stage.addChild(rtText)
+stage.update();
+```
+
+多行文本可设置 lineGap、 lineClamp、letterSpace 
+
+
 
 ### 添加形状
 
 ```
-  const shape = new Shape()
-  shape.graphics.fillStyle('green')
-  shape.graphics.fillCircle(160, 160, 40)
-  stage.addChild(shape)
-  stage.update()
+import { Stage, TexShapet } from 'dist/index'
+
+const shape = new Shape()
+shape.graphics.fillStyle('pink')
+shape.graphics.fillCircle(160, 160, 40)
+stage.addChild(shape)
+stage.update()
+
 ```
 
 ### Shape内可以画多个图形形状
@@ -163,6 +223,54 @@ async function(){
   stage.addChild(muliShape)
   stage.update()
 ```
+
+### Container 容器
+
+在绘制分享海报时最重要的是容器，容器可以包含多个子元素，并且可以设置容器的位置、大小、旋转角度等。
+
+容器需要手动指定其宽与高
+
+```
+import { Container, Text } from 'dist/index';
+
+const card = new Container()
+card.width = 210
+card.height = 210
+card.backgroundColor = '#9BBD00'
+card.border = '2px solid red'
+card.borderRadius = 10
+card.alignItems = 'center'
+card.direction = 'column'
+card.gap = 10
+
+// 第一个文本，也可以是其它显示对象
+const hello = new Text()
+hello.text = 'Hello'
+
+// 第二个文本，也可以是其它元素
+const word = new Text()
+word.text = 'World'
+card.addChild(hello, word)
+stage.addChild(card)
+stage.update()
+
+```
+
+容器提供了简易的 Flex 布局，默认其内添加的子元素会横排并垂直居中
+
+
+
+Container 允许特殊设置的属性：
+
+* border
+* borderRadius
+* overflowHidden
+* alignItems
+* direction
+* gap
+
+**显示对象加入容器后，会自动根据容器的宽高进行定位，手动设置 x,y 值将不起作用, 可用 regX, regY 属性做自身偏移**
+
 
 ### 获取 context 直接操作 canvas 
 
@@ -186,23 +294,21 @@ stage 实例属性内有 canvas 和 context 属性
 ```
 
 
-### 类
+### 常用类
 
 - ImgLoader 图片加载
 - Stage 舞台
-- DisplayObject 显示对象
 - Container 容器
-- Group 组
+- Text 文本
+- RichText 多行文本
 - Image 图片
 - Shape 形状
 - Sprite 特殊图像
-- Text 文本
 
 ### 注意事项
 
 - Shape 类没有没有自动计算 width 与 height 属性，如有需要可自行主动设置
-- Group 类没有自动计算 width 与 height 属性，可通过实例方法 getBound 获取 {left, top, right, bottom}
-- flex 只实现了简单的布局功能，并未完全实现 flex 功能，flex完全体非常复杂，用都还没用明白
+- Container 只实现了简单的布局功能，并未完全实现 flex 功能
 
 
 ### 小程序 canvas 海报生成注意事项
@@ -213,6 +319,7 @@ stage 实例属性内有 canvas 和 context 属性
 - 微信头像需要下载后上传至自己的服务器绘制，直接使用微信服务器上的头像绘制时某些 Android 机型上会下载超时导致绘制失败
 - canvas page页面下不能嵌在Component组件内，否则某些机型会导致绘制失败
 - canvas 不能像h5中的canvas那样通过style来缩小，所以为了生成海报不模糊必须将 canvas 至少设置放大两倍，然后将canvas通过 css position 负值移到屏幕外，绘制后可以直接通过image标签来实现预览
+- 在微信小程序中，绘制海报如果需要 canvas 不可见，*不能直接设置其 display:none* 而是需要将其移到屏幕外，否则某些手机上会绘制失败
 
 ### 微信小程序的重大变化
 
@@ -249,38 +356,104 @@ uniapp 内引入 npm 包也类似操作，只是不需要构建 npm
 具体可参考 https://uniapp.dcloud.net.cn/tutorial/page-script.html#npm支持
 
 
-### 源码 rollup 构建 
+### 在 uniapp 中使用
+
+1. 在 uniapp 项目根目录 `pnpm install duducanvas`
+
+2. 在 script 内引入 `import { Application } from 'duducanvas'`;
+
+以下是 uniapp vue3.0 内使用的 demo
+
+index.vue 文件：
+```
+<template>
+	<canvas type="2d" id="myCanvas" :width="canvasWidth" :height="canvasHeight" :style="{width: `${canvasWidth/2}px`, height: `${canvasHeight / 2}px`}"/>
+</template>
+
+<script setup>
+	import {onMounted, ref} from 'vue'
+	import { Application, RichText, Container } from 'duducanvas';
+	const getCanvasSize = () => {
+	    // 根据屏幕宽度计算 canvas 宽度
+	    const systemInfo = wx.getSystemInfoSync();
+	    const screenWidth = systemInfo.windowWidth;
+	    const designWidth = 750;
+	    const designHeight = 1024;
+	    // 宽高放大一倍
+	    const canvasWidth = screenWidth * 2;
+	    // 高度比例计算
+	    const canvasHeight = ((screenWidth / designWidth) * designHeight) * 2;
+	    // ratio 用于计算缩放比例，用于尺寸与定位
+	    const ratio = canvasWidth / 210
+	    return {
+	        canvasWidth,
+	        canvasHeight,
+	        ratio
+	    }
+	}
+	
+	const canvasInfo = getCanvasSize();
+	const canvasWidth = ref(canvasInfo.canvasWidth)
+	const canvasHeight = ref(canvasInfo.canvasHeight)
+	
+	const init = async ()=> {
+		const app = new Application('#myCanvas', { width: canvasWidth.value, height: canvasHeight.value });
+		const stage = await app.init();
+		if(!stage){
+			return;
+		}
+		
+		stage.backgroundColor = 'green'
+		
+		const container = new Container()
+		container.width = canvasWidth.value * .5;
+		container.height = canvasHeight.value * .5;
+		container.backgroundColor = 'pink'
+		
+		const rtText = new RichText()
+		rtText.text = `小程序提供了一个的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务`
+		rtText.lineClamp = 2
+		rtText.wrapWidth = 200
+		rtText.fontSize = 20
+		rtText.lineGap = 10
+		
+		container.addChild(rtText)
+		stage.addChild(container)
+		stage.update();
+	}
+	
+	onMounted(()=>{
+		init()
+	})
+</script>
+```
+
+在 uniapp vue2.0 中使用方法类似
+
+### 源码 tsc 构建 
 ==================================================
 
-源码在 `/mp/src` 目录下，修改后构建成功生成 `dist/duducanvas.js`
+源码在 `/mp-ts/miniprogram/src` 目录下，修改后构建成功生成 `dist/`
 
-rollup版本 v2.58.1
 
 ```
-rollup -c rollup.config.js
+pnpm build
 ```
 
 
 
-
-
-### 以前的纠结
+### 纠结
 --------------------------------------
 
-以前纠结要不要为这个库添加 ui 事件
+纠结要不要为这个库添加 ui 事件
 
-- 小程序框架js运行层与 view 渲染层完全分离的，用户操作行为触发事件需要通过中转才能到达 view 渲染层，一旦用到 touchmove 频繁操作 UI 的事件就会明显的性能下降顿挫
+小程序框架 js 运行层与 view 渲染层完全分离，用户操作行为触发事件需要通过中转才能到达 view 渲染层，一旦用到 touchmove 频繁操作 UI 的事件就会明显的性能下降顿挫
 
-- 添加上了事件不就完全成了小游戏了么，那干麻不直接用小游戏框架
+但小程序新 skyline 渲染引擎倒是解决了这个问题，但还不成熟，成熟后再看看加不加 ui 事件
 
-看过了 EaseJS 和 PixiJS 的源码后，我感觉对于事件实现也不是特别复杂，但小程序的 canvas bug 还是比较多的... 到现在 OffscreenCanvas 都没办法融合到 canvas-2d 上，无语了...
+
 
 算了再等等吧
-
-### todo
-
-- typescript
-- Matrix 属性计算
 
 ### 资料参考
 - 小程序 canvas 开发文档 https://developers.weixin.qq.com/miniprogram/dev/api/canvas/Canvas.html
@@ -289,3 +462,7 @@ rollup -c rollup.config.js
 - canvas API https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API
 
 
+
+### 老版本请在 v1 分支查看，
+
+> canvas 接口有哪些变化 可参考 旧版 Canvas 迁移指南 https://developers.weixin.qq.com/miniprogram/dev/framework/ability/canvas-legacy-migration.html
