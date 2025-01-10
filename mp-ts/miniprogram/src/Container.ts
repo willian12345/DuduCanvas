@@ -1,5 +1,4 @@
 import SimpleCss from './SimpleCss'
-import DisplayObject from './DisplayObject'
 
 /**
  * Container 
