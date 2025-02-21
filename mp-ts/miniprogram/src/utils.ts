@@ -1,5 +1,5 @@
 import DisplayObject from "./DisplayObject"
-
+import {prefix} from './config'
 /**
  * getPosAfterRotation
  * 获取旋转后的坐标
@@ -119,7 +119,8 @@ export function getTransformedFourValue(value: number|string):number|number[]{
 }
 
 export const isWeb = () => {
-	if(typeof window === 'object'){
+	// 如果没有前缀，则代表处于web环境
+	if(Object.keys(prefix).length === 0){
 		return true
 	}
 	return false
