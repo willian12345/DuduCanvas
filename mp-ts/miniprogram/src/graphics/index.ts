@@ -24,7 +24,7 @@ import LineCap from './LineCap'
 import LineJoin from './LineJoin'
 import LineWidth from './LineWidth'
 import SetLineDash from './SetLineDash'
-
+import type {TContext2d} from '../types/index'
 /**
  * Graphics 绘制类
  * 绘制命令，添加绘制命令集，最终在 draw 方法内集中绘制
@@ -47,7 +47,7 @@ protected _append(instructionsObject: any){
     })
   }
   // 绘制时执行所有当前文本
-  protected _drawGraphics(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+  protected _drawGraphics(ctx: TContext2d){
     
     this._instructions.forEach((instruction) => {
 			instruction.exec(ctx, this)

@@ -1,5 +1,5 @@
-/// <reference types="types" />
 import SimpleCss from './SimpleCss';
+import type { TContext2d, TCanvas } from './types/index';
 /**
  * Stage
  * 舞台对象
@@ -14,17 +14,17 @@ export default class Stage extends SimpleCss {
      * @param {*} callback 初始化舞台后的回调
      * @param {*} componentInstance 如果是在自定义组件内，则需要将组件实例 this 传进来
      */
-    context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
-    constructor(canvas: WechatMiniprogram.Canvas, { width, height }: {
+    context: TContext2d;
+    constructor(canvas: TCanvas, { width, height }: {
         width: number;
         height: number;
     });
     name: string;
-    canvas: WechatMiniprogram.Canvas;
+    canvas: TCanvas;
     /**
      * 获取 canvas 上下文
      */
-    getContext(): WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
+    getContext(): TContext2d;
     /**
      * 重新渲染舞台
      */

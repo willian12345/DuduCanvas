@@ -1,4 +1,5 @@
 import SimpleCss from './SimpleCss'
+import type {TContext2d, TImage} from './types/index'
 
 /**
  * Image 图片显示类
@@ -6,7 +7,7 @@ import SimpleCss from './SimpleCss'
  */
 export default class Image extends SimpleCss {	
 	name = 'Image'
-	image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource
+	image: TImage
 	path = null
 	sx?: number
   sy?: number
@@ -18,7 +19,7 @@ export default class Image extends SimpleCss {
 	dHeight: number
 	
 	constructor(args: {
-    image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource
+    image: TImage
     width?: number, 
     height?: number,
     sWidth?: number,
@@ -60,10 +61,10 @@ export default class Image extends SimpleCss {
 		}else{
 			this.dHeight = this.height
 		}
-    console.log(this.width, this.height)
+    // console.log(this.width, this.height)
 	}
 	
-	private _drawImage(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D, x: number, y: number){
+	private _drawImage(ctx: TContext2d, x: number, y: number){
 		/**
 		 * !! 注意参数变化,可省略的原始图像位置尺寸信息是排在前面的
 		 * drawImage(img, dx, dy);
@@ -74,16 +75,19 @@ export default class Image extends SimpleCss {
      ctx.globalAlpha = this._getAlpha()
      if(this.sx !== undefined && this.sy !== undefined){
       // 如果传了原始图起点，则说明要填完整所有参数
+      //@ts-ignore
       ctx.drawImage(this.image, this.sx, this.sy, this.sWidth, this.sHeight, x, y, this.dWidth, this.dHeight)
 		}else if(this.dWidth != undefined){
       // 如果传了绘制目标宽，则认为不管原图，只管绘制目标位置与宽高
+      //@ts-ignore
       ctx.drawImage(this.image,0, 0, this.dWidth, this.dHeight)
 		}else{
 			// 只管绘制目标位置，会绘制原始图大小
+      //@ts-ignore
 			ctx.drawImage(this.image, x, y)
 		}
 	}
-	protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+	protected _draw(ctx: TContext2d){
     let [x, y] = this.getPosition()
 		x = this.dx + x
     y = this.dy + y
@@ -91,7 +95,7 @@ export default class Image extends SimpleCss {
 		this._drawImage(ctx, x, y)
     super._draw(ctx)
   }
-  draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+  draw(ctx: TContext2d){
     this._draw(ctx);
   }
 }

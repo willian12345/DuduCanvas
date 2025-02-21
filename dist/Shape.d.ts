@@ -1,4 +1,3 @@
-/// <reference types="types" />
 /**
  * Shape 图形类
  * 1、包含了各类绘制 api
@@ -7,10 +6,11 @@
  *
  */
 import DisplayObject from './DisplayObject';
+import type { TContext2d } from './types/index';
 export default class Shape extends DisplayObject {
     name: string;
     isMask: boolean;
     constructor();
-    _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
+    _draw(ctx: TContext2d): void;
     getBounds(): any;
 }

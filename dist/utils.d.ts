@@ -39,3 +39,4 @@ export declare function findNodes(node: DisplayObject, arr?: DisplayObject[]): D
  * @param {*} value
  */
 export declare function getTransformedFourValue(value: number | string): number | number[];
+export declare const isWeb: () => boolean;

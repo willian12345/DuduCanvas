@@ -1,5 +1,6 @@
 import DisplayObjectContainer from './DisplayObjectContainer'
 import Shape from './Shape'
+import type {TContext2d, TCanvas} from './types/index'
 
 /**
  * 解构圆角矩形值生成:  number[]
@@ -66,7 +67,7 @@ export default class SimpleCss extends DisplayObjectContainer {
     constructor() {
         super()
     }
-    updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D) {
+    updateContext(context: TContext2d) {
         // 如果设置了 borderRadius 值则需要使用遮罩实现圆角
         if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
             this.initBorderRadiusMask()

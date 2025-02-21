@@ -1,5 +1,5 @@
-/// <reference types="types" />
 import type { TStyle } from './SetFillStyle';
+import type { TContext2d } from '../types/index';
 /**
  * Graphics 绘制类
  * 绘制命令，添加绘制命令集，最终在 draw 方法内集中绘制
@@ -10,7 +10,7 @@ export default abstract class Graphics {
     constructor();
     protected _append(instructionsObject: any): void;
     protected _remove(instructionName: string): void;
-    protected _drawGraphics(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
+    protected _drawGraphics(ctx: TContext2d): void;
     /**
      * 命令方法名与 w3c 一致
      */

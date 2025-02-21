@@ -1,14 +1,14 @@
-/// <reference types="types" />
 /**
  * 文本类
  */
-import DisplayObject, { TContext2d } from './DisplayObject';
+import DisplayObject from './DisplayObject';
+import type { TContext2d } from './types/index';
 /**
  * Text 文本类
  * 显示普通文本
  * 单字宽高直接使用 fontSize 所以非中文字体会有问题
  */
-export declare type TTextParams = {
+export type TTextParams = {
     text?: string;
     font?: string;
     color?: string;

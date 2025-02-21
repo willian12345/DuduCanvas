@@ -1,4 +1,3 @@
-/// <reference types="types" />
 /**
  * lineCap = butt | round | square
  * butt	默认。向线条的每个末端添加平直的边缘。

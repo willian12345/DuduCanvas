@@ -114,3 +114,9 @@ export function getTransformedFourValue(value) {
         return value;
     }
 }
+export const isWeb = () => {
+    if (typeof window === 'object') {
+        return true;
+    }
+    return false;
+};

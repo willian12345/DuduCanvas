@@ -1,8 +1,9 @@
-import { getPosAfterRotation, getMaxValue, findNodes } from './utils'
+import { getPosAfterRotation, getMaxValue } from './utils'
 import Graphics from './graphics/index'
 import Shape from './Shape'
 import Matrix2D from './Matrix'
-export type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D
+import type {TContext2d} from './types/index'
+
 
 let context!: TContext2d
 let displayObjectId = 0

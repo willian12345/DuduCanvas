@@ -1,12 +1,12 @@
-/// <reference types="types" />
 import SimpleCss from './SimpleCss';
+import type { TContext2d, TImage } from './types/index';
 /**
  * Image 图片显示类
  * 继承自SimpleCss类，支持 borderRadius、border
  */
 export default class Image extends SimpleCss {
     name: string;
-    image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource;
+    image: TImage;
     path: any;
     sx?: number;
     sy?: number;
@@ -17,7 +17,7 @@ export default class Image extends SimpleCss {
     dWidth: number;
     dHeight: number;
     constructor(args: {
-        image: WechatMiniprogram.CanvasRenderingContext.CanvasImageSource;
+        image: TImage;
         width?: number;
         height?: number;
         sWidth?: number;
@@ -30,6 +30,6 @@ export default class Image extends SimpleCss {
         dHeight?: number;
     });
     private _drawImage;
-    protected _draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
-    draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
+    protected _draw(ctx: TContext2d): void;
+    draw(ctx: TContext2d): void;
 }

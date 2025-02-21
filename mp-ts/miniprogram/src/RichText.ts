@@ -1,8 +1,9 @@
 /**
  * 文本类
  */
-import DisplayObject, { TContext2d } from './DisplayObject'
+import DisplayObject from './DisplayObject'
 import Text from './Text'
+import type {TContext2d} from './types/index'
 
 // const ROTATE_90DEG = 1.5707963267948966
 /**

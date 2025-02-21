@@ -6,6 +6,7 @@
  * 
  */
 import DisplayObject from './DisplayObject'
+import type {TContext2d} from './types/index'
 
 export default class Shape extends DisplayObject{
 	name = 'Shape'
@@ -17,7 +18,7 @@ export default class Shape extends DisplayObject{
 		// 新建一个shape对象时先执行beginPath命令，以重新开始 path 上下文
 		this.graphics.beginPath()
     }
-	_draw(ctx: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D){
+	_draw(ctx: TContext2d){
 		// 设置透明度
 		ctx.globalAlpha = this._getAlpha()
 		// 执行所有命令

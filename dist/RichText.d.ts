@@ -1,13 +1,10 @@
-/**
- * 文本类
- */
-import { TContext2d } from './DisplayObject';
 import Text from './Text';
+import type { TContext2d } from './types/index';
 /**
  * RichText 文本类
  * 显示文本，支持横、竖排文字，换行
  */
-export declare type TTextParams = {
+export type TTextParams = {
     text?: string;
     font?: string;
     color?: string;
@@ -20,7 +17,7 @@ export declare type TTextParams = {
     letterSpace?: number;
     lineClamp?: number;
 };
-export declare type TElementListItem = {
+export type TElementListItem = {
     value: string;
     style: {
         width: number;
@@ -29,7 +26,7 @@ export declare type TElementListItem = {
         descent: number;
     };
 };
-export declare type TRow = {
+export type TRow = {
     width: number;
     height: number;
     originHeight: number;

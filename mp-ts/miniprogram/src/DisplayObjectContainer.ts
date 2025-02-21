@@ -1,4 +1,5 @@
-import DisplayObject, { TContext2d } from './DisplayObject';
+import DisplayObject from './DisplayObject';
+import type {TContext2d} from './types/index'
 let debug = false
 export default class DisplayObjectContainer extends DisplayObject {
     childs: DisplayObject[] = []

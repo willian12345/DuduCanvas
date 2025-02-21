@@ -117,3 +117,10 @@ export function getTransformedFourValue(value: number|string):number|number[]{
 		return value
 	}
 }
+
+export const isWeb = () => {
+	if(typeof window === 'object'){
+		return true
+	}
+	return false
+}

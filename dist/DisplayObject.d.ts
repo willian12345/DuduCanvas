@@ -1,8 +1,7 @@
-/// <reference types="types" />
 import Graphics from './graphics/index';
 import Shape from './Shape';
 import Matrix2D from './Matrix';
-export declare type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
+import type { TContext2d } from './types/index';
 /**
  * 显示对象类
  */
@@ -43,7 +42,7 @@ export default class DisplayObject extends Graphics {
      * 保存 Stage 时传入 canvas context
      */
     static setContext(ctx: TContext2d): void;
-    static getContext(): WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D;
+    static getContext(): TContext2d;
     getMatrix(matrix: Matrix2D): Matrix2D;
     updateContext(context: TContext2d): void;
     draw(context: TContext2d): void;

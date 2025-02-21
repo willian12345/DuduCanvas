@@ -1,5 +1,5 @@
-/// <reference types="types" />
 import DisplayObjectContainer from './DisplayObjectContainer';
+import type { TContext2d } from './types/index';
 /**
  * SimpleCss
  * 样式类
@@ -36,7 +36,7 @@ export default class SimpleCss extends DisplayObjectContainer {
     get overflowHidden(): boolean;
     set overflowHidden(b: boolean);
     constructor();
-    updateContext(context: WechatMiniprogram.CanvasRenderingContext.CanvasRenderingContext2D): void;
+    updateContext(context: TContext2d): void;
     /**
      * 解构边框线值字符串
      * @param {*} border

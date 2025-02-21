@@ -30,6 +30,9 @@ function getPrefix() {
         // 字节跳动
         prefix = tt;
     }
+    else {
+        prefix = {};
+    }
     return prefix;
 }
 export const prefix = getPrefix();

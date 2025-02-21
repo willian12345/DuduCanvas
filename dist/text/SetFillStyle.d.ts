@@ -1,4 +1,3 @@
-/// <reference types="types" />
 export default class SetFillStyle {
     style: string;
     constructor(style: string);

@@ -1,12 +1,14 @@
 import { createSelectorQuery } from './config';
+import { isWeb } from './utils';
 import DisplayObjectContainer from './DisplayObjectContainer';
 import Stage  from './Stage';
+
 export default class Application {
   id: string
   width: number
   height: number
   componentInstance?: any
-  constructor(id: string, {width, height, debug = false}: {width: number, height: number, debug?: boolean}, componentInstance?: any){
+  constructor(id: string, {width, height, debug = false }: {width: number, height: number, debug?: boolean}, componentInstance?: any){
     this.id = id;
     this.width = width;
     this.height = height;
@@ -14,7 +16,14 @@ export default class Application {
     DisplayObjectContainer.setDebug(debug);
   }
   init(){
-    return new Promise((resolve) => {
+    if(isWeb()){
+      return this.createWebStage()
+    }
+    return this.createStage()
+  }
+  // 小程序
+  createStage(){
+    return new Promise((resolve: (value: Stage | null) => void)=> {
       const query = this.componentInstance ? createSelectorQuery().in(this.componentInstance) : createSelectorQuery()
       try{
         query.select(this.id)
@@ -29,6 +38,18 @@ export default class Application {
       }catch(e){
         resolve(null)
       }
-    }) as Promise<Stage|null>
+    })
+    
+  }
+  // 普通 web
+  async createWebStage(){
+    const targetCanvas = document.getElementById(this.id) as HTMLCanvasElement | undefined
+    if(!targetCanvas){
+      return null
+    }
+    return new Stage(targetCanvas, {width: this.width, height: this.height}) 
+  }
+  destroy(){
+    // todo 
   }
 }

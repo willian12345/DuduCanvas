@@ -1,7 +1,8 @@
 /**
  * 文本类
  */
-import DisplayObject, { TContext2d } from './DisplayObject'
+import DisplayObject from './DisplayObject'
+import type {TContext2d} from './types/index'
 import { FillText } from './text/FillText'
 import SetFillStyle from './text/SetFillStyle'
 import SetTextAlign from './text/SetTextAlign'

@@ -10,4 +10,7 @@ export default class Application {
         debug?: boolean;
     }, componentInstance?: any);
     init(): Promise<Stage>;
+    createStage(): Promise<Stage>;
+    createWebStage(): Promise<Stage>;
+    destroy(): void;
 }

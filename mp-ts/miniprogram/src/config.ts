@@ -34,7 +34,10 @@ function getPrefix(){
   else if(typeof tt  !== 'undefined'){
     // 字节跳动
     prefix = tt
+  }else{
+    prefix = {}
   }
+
   return prefix
 }
 

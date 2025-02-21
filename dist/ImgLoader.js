@@ -1,3 +1,4 @@
+import { isWeb } from './utils';
 export default class ImgLoader {
     constructor(canvas, imgArr) {
         this._total = 0;
@@ -11,8 +12,15 @@ export default class ImgLoader {
     load(loadProgressCallback) {
         return new Promise((resolve) => {
             this.imgArr.forEach(v => {
-                const image = this.canvas.createImage();
+                let image;
+                if (isWeb()) {
+                    image = new Image();
+                }
+                else {
+                    image = this.canvas.createImage();
+                }
                 image.onload = () => {
+                    console.log('loaded', image);
                     this._imageMap.set(v.id, {
                         path: v.src,
                         width: image.width,
