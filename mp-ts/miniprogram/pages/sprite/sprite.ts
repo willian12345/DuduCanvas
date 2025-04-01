@@ -21,6 +21,7 @@ Component({
         if(!stage){
           return
         }
+        
         stage.backgroundColor = '#d85542';
         const loader = new ImgLoader(stage.canvas, [
           {

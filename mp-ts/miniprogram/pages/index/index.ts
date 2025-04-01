@@ -55,6 +55,9 @@ Component({
       const loader = new ImgLoader(stage.canvas, [
         {
           id: 'avatar',
+          // src: 'https://cdn.xiaolvye.cn/other/etmz7zuewwyy.mp4?x-oss-process=image/snapshot,f_jpg,t_0,m_fast'
+          // src: 'https://cdn.xiaolvye.cn/other/etmz7zuewwyy.mp4?x-oss-process=image/snapshot,f_jpg,t_0,m_fast'
+          // src: 'https://cdn.wehome.cn/cmn/mp4/3/META-H8UKWHWU-YAUTZH7ECGRDC57FD3NI3-CUGVCS8M-CD.mp4?x-oss-process=video/snapshot,t_1,f_jpg,w_800,h_600,m_fast'
           src: '../../assets/avatar.jpeg'
         }
       ])
