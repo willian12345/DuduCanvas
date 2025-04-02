@@ -3,3 +3,10 @@ export type TContext2d = WechatMiniprogram.CanvasRenderingContext.CanvasRenderin
 export type TCanvas = WechatMiniprogram.Canvas | HTMLCanvasElement
 
 export type TImage = WechatMiniprogram.CanvasRenderingContext.CanvasImageSource | HTMLImageElement
+
+export type TImageTexture = {
+  path: string,
+  width: number,
+  height: number,
+  image: TImage,
+}

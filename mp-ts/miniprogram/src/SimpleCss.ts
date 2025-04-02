@@ -203,7 +203,7 @@ export default class SimpleCss extends DisplayObjectContainer {
         let s
         const isFull = this.borderRadiusValue === '100%'
         // 正圆形
-        if ((isFull) && (this.width === this.height)) {
+        if (isFull && (this.width === this.height)) {
             const radius = this.width * .5
             s = new Shape()
             s.graphics.beginPath()

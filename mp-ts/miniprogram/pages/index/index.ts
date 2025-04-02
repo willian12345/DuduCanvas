@@ -1,4 +1,4 @@
-import { Application, ImgLoader, Shape, Text, RichText, Container, Image, Stage } from '../../src/index';
+import { Application, ImgLoader, Shape, Text, RichText, Container, Image, ModeImage, Stage } from '../../src/index';
 import { checkPermission, showAuthTips, savePicture, getCanvasTempPath, getCanvasSize } from '../../utils/util';
 
 let timer: number;
@@ -52,14 +52,20 @@ Component({
       if (!stage) {
         return
       }
+      // stage.scale = .5
       const loader = new ImgLoader(stage.canvas, [
         {
           id: 'avatar',
-          // src: 'https://cdn.xiaolvye.cn/other/etmz7zuewwyy.mp4?x-oss-process=image/snapshot,f_jpg,t_0,m_fast'
-          // src: 'https://cdn.xiaolvye.cn/other/etmz7zuewwyy.mp4?x-oss-process=image/snapshot,f_jpg,t_0,m_fast'
-          // src: 'https://cdn.wehome.cn/cmn/mp4/3/META-H8UKWHWU-YAUTZH7ECGRDC57FD3NI3-CUGVCS8M-CD.mp4?x-oss-process=video/snapshot,t_1,f_jpg,w_800,h_600,m_fast'
-          src: '../../assets/avatar.jpeg'
-        }
+          src: '../../assets/avatar.jpeg',
+        },
+        {
+          id: 'pic',
+          src: 'https://cdn.xiaolvye.cn/avatar/e1688q9f6yyy_cover.jpg'
+        },
+        {
+          id: 'hoz',
+          src: '../../assets/hoz.png'
+        },
       ])
       await loader.load();
 
@@ -67,11 +73,44 @@ Component({
       if (!avatarTexture) {
         return;
       }
-      const avatar1 = new Image({
-        image: avatarTexture.image,
-        width: 320,
-        height: 320
+      const picTexture = loader.get('pic')
+      if (!picTexture) {
+        return;
+      }
+      const hozTexture = loader.get('hoz')
+      if (!hozTexture) {
+        return;
+      }
+      
+      const pic = new ModeImage({
+        texture: picTexture,
+        width: 300,
+        height: 300,
+        mode: 'aspectFit'
       })
+      console.log(pic)
+      pic.x = 300
+      stage.addChild(pic)
+      stage.update();
+
+      
+
+      // 按 等比缩放至 280 宽度
+      const avatar1 = new Image({
+        image: picTexture.image,
+        width: 150,
+        height: picTexture.height * (150/picTexture.width),
+      })
+      // 非等比的 avatar1 需要用正圆形的 avatarWrapper 包一下
+      const avatarWrapper = new Container()
+      avatarWrapper.width = 150
+      avatarWrapper.height = 150
+      avatarWrapper.x = 300
+      avatarWrapper.y = 350
+      avatarWrapper.borderRadius = '100%'
+      avatarWrapper.addChild(avatar1)
+      stage.addChild(avatarWrapper)
+      stage.update();
 
       const avatar2 = new Image({
         image: avatarTexture.image,
@@ -79,23 +118,11 @@ Component({
         height: 80
       })
 
-      avatar2.x = stage.width * .5;
-      avatar2.y = stage.height * .5;
+      avatar2.x = stage.width * .5 + 200;
+      avatar2.y = stage.height * .5 + 200;
       
       // 设置导出图片时背景白色
-      stage.backgroundColor = 'green'
-
-      const rect = new Container()
-      rect.width = 200
-      rect.height = 200
-      rect.x = 300
-      rect.y = 100
-      rect.backgroundColor = 'white'
-      rect.overflowHidden = true
-      rect.addChild(avatar1)
-
-      stage.addChild(rect)
-      stage.update();
+      stage.backgroundColor = 'green'      
 
       const card = new Container()
 

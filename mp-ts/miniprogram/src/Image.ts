@@ -88,9 +88,9 @@ export default class Image extends SimpleCss {
 		}
 	}
 	protected _draw(ctx: TContext2d){
-    let [x, y] = this.getPosition()
-		x = this.dx + x
-    y = this.dy + y
+    // let [x, y] = this.getPosition()
+		const x = this.dx + this.x
+    const y = this.dy + this.y
 		// 绘制图片
 		this._drawImage(ctx, x, y)
     super._draw(ctx)

@@ -2,7 +2,18 @@ export const getCanvasSize = () => {
 	// 根据屏幕宽度计算 canvas 宽度
 	const systemInfo = wx.getWindowInfo();
 	const screenWidth = systemInfo.windowWidth;
-	// const dpr = systemInfo.pixelRatio
+	// const dpr = window.devicePixelRatio || 1;
+	// const logicalWidth = 300;
+	// const logicalHeight = 200;
+
+	// // 设置画布物理像素
+	// canvas.width = logicalWidth * dpr;
+	// canvas.height = logicalHeight * dpr;
+
+	// // 设置画布显示尺寸（CSS像素）
+	// canvas.style.width = `${logicalWidth}px`;
+	// canvas.style.height = `${logicalHeight}px`;
+
   const designWidth = 750;
   const designHeight = 800;
   const canvasWidth = screenWidth * 2;

@@ -1,16 +1,10 @@
-import type {TCanvas, TImage} from './types/index'
+import type {TCanvas, TImage, TImageTexture} from './types/index'
 import { isWeb } from './utils';
 /**
  * 预加载图片
  * 
  */
-export type ImageTexture = {
-  path: string,
-  width: number,
-  height: number,
-  image: TImage,
-}
-export type TImageMap = Map<string, ImageTexture>
+export type TImageMap = Map<string, TImageTexture>
 export type TImgArr = {id: string, src: string}[];
 export default class ImgLoader {
   canvas: TCanvas
