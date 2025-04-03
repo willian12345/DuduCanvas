@@ -83,12 +83,11 @@ Component({
       }
       
       const pic = new ModeImage({
-        texture: picTexture,
+        texture: hozTexture,
         width: 300,
         height: 300,
         mode: 'aspectFit'
       })
-      console.log(pic)
       pic.x = 300
       stage.addChild(pic)
       stage.update();

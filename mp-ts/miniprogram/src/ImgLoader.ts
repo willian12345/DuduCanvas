@@ -30,7 +30,7 @@ export default class ImgLoader {
         }
         
         image.onload = () => {
-          console.log('loaded',image)
+          // console.log('loaded',image)
           this._imageMap.set(v.id, {
             path: v.src,
             width: image.width,

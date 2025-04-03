@@ -145,7 +145,7 @@ protected _append(instructionsObject: any){
     strokeRect: (x = 0, y = 0, w = 10, h = 20)=> {
       this._append(new Rect(x,y,w,h, true))
       this._append(new Stroke())
-      console.log(this._instructions)
+      // console.log(this._instructions)
       return this.graphics
     },
     fillRoundRect: (x = 0, y = 0, w = 10, h = 10, radius: number | number[], fill?: boolean, stroke?: boolean)=> {

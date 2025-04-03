@@ -62,27 +62,29 @@ export default class ModeImage extends SimpleCss {
       this.mode = args.mode
     }
     this.overflowHidden = true;
-    this.border = '1px solid red'
-    const img = this.createImg()
-    img && this.addChild(img)
+    // this.backgroundColor = 'white';
+    const img = this.createImgWithMode()
+    this.addChild(img)
 	}
 
-  private createImg (){
+  private createImgWithMode (){
     const texture = this.texture
-    if(this.mode === 'scaleToFill'){
-      return new Image({
-        image: texture.image,
-        dx: this.x,
-        dy: this.y,
-        dWidth: this.width,
-        dHeight: this.height
-      })
-    }else if(this.mode === 'aspectFit'){
-      let w = this.width
-      let h = (this.width / texture.width) * texture.height
+    const mode = this.mode
+    
+    // 保持缩放比，只保证长边能完全显示 居中显示
+    if(mode === 'aspectFit'){
+      let w = 0
+      let h = 0
+      let offsetX = 0
+      let offsetY = 0
       if(texture.width < texture.height){
         w = (this.height / texture.height) * texture.width
         h = this.height
+        offsetX = (this.width - w) * .5
+      }else{
+        w = this.width
+        h = (this.width / texture.width) * texture.height
+        offsetY = (this.height - h) * .5
       }
       return new Image({
         image: texture.image,
@@ -90,13 +92,46 @@ export default class ModeImage extends SimpleCss {
         sy: 0,
         sWidth: texture.width,
         sHeight: texture.height,
-        dx: this.x,
-        dy: this.y,
+        dx: this.x + offsetX,
+        dy: this.y + offsetY,
         dWidth: w,
         dHeight: h
       })
     }
-    return undefined
+    // 保证短边能完全显示，长边可能发生截取, 截取轴居中显示
+    if(mode === 'aspectFill'){
+      let w = 0
+      let h = 0
+      let offsetX = 0
+      let offsetY = 0
+      if(texture.width < texture.height){
+        w = this.width
+        h = (this.width / texture.width) * texture.height
+        offsetY = (this.height - h) * .5
+      }else{
+        w = (this.height / texture.height) * texture.width
+        h = this.height
+        offsetX = (this.width - w) * .5
+      }
+      return new Image({
+        image: texture.image,
+        sx: 0,
+        sy: 0,
+        sWidth: texture.width,
+        sHeight: texture.height,
+        dx: this.x + offsetX,
+        dy: this.y + offsetY,
+        dWidth: w,
+        dHeight: h
+      })
+    }
+    return new Image({
+      image: texture.image,
+      dx: this.x,
+      dy: this.y,
+      dWidth: this.width,
+      dHeight: this.height
+    })
   }
 }
 
