@@ -15,3 +15,5 @@ export { default as Container } from './Container';
 export { default as CreateLinearGradient } from './color/CreateLinearGradient'
 export { default as CreateRadialGradient } from './color/CreateRadialGradient'
 export { default as Application } from './Application'
+
+export * from './types/index'

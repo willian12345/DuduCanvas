@@ -1,5 +1,6 @@
 import { getPosAfterRotation, getMaxValue } from './utils'
 import Graphics from './graphics/index'
+import DisplayObjectContainer from './DisplayObjectContainer'
 import Shape from './Shape'
 import Matrix2D from './Matrix'
 import type {TContext2d} from './types/index'
@@ -28,9 +29,12 @@ export default class DisplayObject extends Graphics {
   skewX = 0
   skewY =  0
   rotation = 0
-  parent: DisplayObject | null = null
+  offsetX = 0
+  offsetY = 0
+  parent: DisplayObjectContainer | null = null
   shadow = ''
   isMask = false
+  filters: ((context: TContext2d, self: DisplayObject)=> void)[] = []
   masked: DisplayObject | null = null
   protected _scale: number
   zIndex = 0
@@ -97,7 +101,7 @@ export default class DisplayObject extends Graphics {
     let mtx = this.matrix; 
     this.getMatrix(this.matrix);
     // console.log(this.matrix, this)
-    var tx = mtx.tx, ty = mtx.ty;
+    var tx = mtx.tx + this.offsetX, ty = mtx.ty + this.offsetY;
     context.transform(mtx.a, mtx.b, mtx.c, mtx.d, tx, ty);
     context.globalAlpha *= this.alpha;
     
@@ -106,7 +110,7 @@ export default class DisplayObject extends Graphics {
       const mtx = this.matrix;
       // 复制此显示对象 matrix 至遮罩 matrix
       this._mask.getMatrix(this.matrix);
-    	context.transform(mtx.a,  mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
+    	context.transform(mtx.a,  mtx.b, mtx.c, mtx.d, mtx.tx + this.offsetX, mtx.ty + this.offsetY);
       this._mask._draw(context);
       context.clip();
     }
@@ -114,6 +118,9 @@ export default class DisplayObject extends Graphics {
   }
   draw(context: TContext2d){
     this._draw(context);
+  }
+  drawFilters(context: TContext2d){
+    this.filters.map(func => func?.(context, this))
   }
   // 绘制
   protected _draw(_context: TContext2d) { }

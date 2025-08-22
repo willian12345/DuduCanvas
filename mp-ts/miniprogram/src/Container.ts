@@ -14,7 +14,7 @@ import DisplayObject from './DisplayObject'
  */
 export default class Container extends SimpleCss {
     name = 'Container'
-    _flex = ''
+    _flex: boolean = true
     _direction: 'row' | 'column' | 'row-reverse' | 'column-reverse' = 'row'
     _alignItems: 'flex-start' | 'center' | 'flex-end' = 'flex-start'
     _justifyContent: 'flex-start' | 'center' | 'flex-end' | 'space-around' | 'space-between' = 'flex-start'
@@ -47,7 +47,7 @@ export default class Container extends SimpleCss {
     get flex() {
         return this._flex
     }
-    set flex(v: string) {
+    set flex(v: boolean) {
         this._flex = v
     }
     // 排列方向
@@ -371,7 +371,7 @@ export default class Container extends SimpleCss {
         } else if (direction === 'column-reverse') {
             this.setColumnReverse()
         }
-
+        
         // 所有位置计算完后再调用 extends class 的 draw 绘制
         // 因为 Container 本身不需要绘制渲染
         super._draw(ctx)

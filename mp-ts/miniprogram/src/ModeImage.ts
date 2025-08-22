@@ -125,6 +125,9 @@ export default class ModeImage extends SimpleCss {
         dHeight: h
       })
     }
+
+    
+
     return new Image({
       image: texture.image,
       dx: this.x,

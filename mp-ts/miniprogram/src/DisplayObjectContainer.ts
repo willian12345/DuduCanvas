@@ -22,7 +22,7 @@ export default class DisplayObjectContainer extends DisplayObject {
             context.globalAlpha = this._getAlpha()
 
             v.updateContext(context);
-            
+            v.drawFilters(context);
             v.draw(context);
             
             if(debug){
