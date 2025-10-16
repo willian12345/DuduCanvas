@@ -20,11 +20,9 @@ export default class DisplayObjectContainer extends DisplayObject {
                 this._setShadow(v)
             }
             context.globalAlpha = this._getAlpha()
-
             v.updateContext(context);
             v.drawFilters(context);
             v.draw(context);
-            
             if(debug){
                 context.beginPath();
                 context.setLineDash([]);

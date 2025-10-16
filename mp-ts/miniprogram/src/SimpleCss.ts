@@ -18,12 +18,12 @@ const BORDER_STYLES = ['solid', 'dashed']
  * 样式类
  */
 export default class SimpleCss extends DisplayObjectContainer {
-    backgroundColor = ''
-    border = ''
-    borderTop = ''
-    borderRight = ''
-    borderBottom = ''
-    borderLeft = ''
+    private _backgroundColor = ''
+    private _border = ''
+    private  _borderTop = ''
+    private  _borderRight = ''
+    private  _borderBottom = ''
+    private  _borderLeft = ''
     /**
      * 左边显示成半圆
      */
@@ -56,6 +56,8 @@ export default class SimpleCss extends DisplayObjectContainer {
             this.borderRadiusValue = value
         }
     }
+
+
     // 水平对齐
     get overflowHidden() {
         return this._overflowHidden
@@ -64,6 +66,51 @@ export default class SimpleCss extends DisplayObjectContainer {
         this._overflowHidden = b
         this.setOverflowHiddenMask(b)
     }
+    
+    get backgroundColor(): string {
+        return this._backgroundColor;
+    }
+    set backgroundColor(v: string) {
+        this._backgroundColor = v;
+        this.initBackgroundColor()
+    }
+
+    get border(): string{
+        return this._border
+    }
+    set border(v: string){
+        this._border = v
+        this.initBorder();
+    }
+    get borderTop(): string{
+        return this._borderTop
+    }
+    set borderTop(v: string){
+        this._borderTop = v
+        this.initBorder();
+    }
+    get borderRight(): string{
+        return this._borderRight
+    }
+    set borderRight(v: string){
+        this._borderRight = v
+        this.initBorder();
+    }
+    get borderBottom(): string{
+        return this._borderBottom
+    }
+    set borderBottom(v: string){
+        this._borderBottom = v
+        this.initBorder();
+    }
+    get borderLeft(): string{
+        return this._borderLeft
+    }
+    set borderLeft(v: string){
+        this._borderLeft = v
+        this.initBorder();
+    }
+
     constructor() {
         super()
     }
@@ -72,16 +119,7 @@ export default class SimpleCss extends DisplayObjectContainer {
         if (this.borderRadiusValue || this.borderLeftRound || this.borderRightRound) {
             this.initBorderRadiusMask()
         }
-
-        // 绘制背景
-        if (this.backgroundColor) {
-            this.initBackgroundColor()
-        }
-
-        // 绘制边框
-        if (this.border || this.borderTop || this.borderRight || this.borderBottom || this.borderLeft) {
-            this.initBorder()
-        }
+       
         // 遮罩，主要用于显示圆角及圆
         if (this.mask) {
             if (this.mask.name === 'Shape') {
@@ -89,6 +127,7 @@ export default class SimpleCss extends DisplayObjectContainer {
                 this.mask.masked = this
             }
         }
+
         super.updateContext(context)
     }
 
@@ -224,7 +263,7 @@ export default class SimpleCss extends DisplayObjectContainer {
      */
     initBackgroundColor() {
         this.graphics.beginPath()
-            .fillStyle(this.backgroundColor)
-            .fillRect(0, 0, this.width, this.height)
+        .fillStyle(this._backgroundColor)
+        .fillRect(0, 0, this.width, this.height)
     }
 }

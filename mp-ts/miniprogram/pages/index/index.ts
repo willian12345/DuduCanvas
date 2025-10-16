@@ -177,31 +177,27 @@ Component({
       linearGradient.addColorStop(0, '#ffffffcc'); // #ffffffcc 相当于 rgba(255,255,255,0.8)
       linearGradient.addColorStop(1, '#ffffff4d'); // #ffffff4d 相当于 rgba(255,255,255,0.3)
           
-      const rect = new Shape()
-      rect.graphics.fillStyle(linearGradient)
-      rect.graphics.fillRect(40, 0, rectWidth, 200)
-      rect.width = rectWidth
-      rect.height = 200
-      
-      
 
       const rectContainer = new Container()
-      // rectContainer.flex = false
       rectContainer.width = rectWidth
-      rectContainer.height = 112
       rectContainer.x = 0
+      rectContainer.y = 20
       rectContainer.filters = [applyOptimizedBlur]
       rectContainer.overflowHidden = true
       rectContainer.borderRadius = '24px 24px 0 0'
-      rectContainer.addChild(rect)
+      rectContainer.backgroundColor = 'rgba(255, 255, 255, .12)'
+      rectContainer.graphics.fillStyle(linearGradient)
+      rectContainer.graphics.fillRect(40, 0, rectWidth, 200)
+      rectContainer.width = rectWidth
+      rectContainer.height = 112
 
       const textContainer = new Container()
       textContainer.width = rectWidth
       textContainer.alignItems = 'flex-start'
       textContainer.height = 112
-      textContainer.y = 24
-      textContainer.x = 24
       textContainer.gap = 16
+      textContainer.offsetX = 10
+      textContainer.offsetY  = 10
       textContainer.direction = 'column'
       
       let t1 = new RichText({text: '朱迪的七七八八朱迪的七七八八朱迪的七七八八朱迪的七七八八', fontSize: 28, fontFamily: 'PingFangSC-Medium', fontWeight: 500})
@@ -214,13 +210,24 @@ Component({
       t2.color = '#414A64';
       textContainer.addChild(t1, t2)
       
-      
+      rectContainer.addChild(textContainer)
       
 
 
-      stage.addChild(rectContainer, textContainer)
+      stage.addChild(rectContainer)
       stage.update()
 
+      timer = setTimeout(()=> {
+        if(stage){
+          stage.update()
+          stage.update()
+          stage.update()
+          stage.update()
+          stage.update()
+          stage.update()
+        }
+        
+      }, 1000)
     }
   },
 })

@@ -263,6 +263,8 @@ export default class RichText extends Text {
   }
   // 执行指令集
   _draw(ctx: TContext2d) {
+    this.graphics.reset()
+    // 此处后期应改成仅绘制，不收集状态，状态命令设置应该在初始化时
     this.collectStatus()
     // 如果需要排版则需要进行文本组装
     this._drawGraphics(ctx)

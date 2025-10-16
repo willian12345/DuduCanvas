@@ -160,6 +160,8 @@ export default class Text extends DisplayObject {
   
   // 执行指令集
   _draw(ctx: TContext2d) {
+    this.graphics.reset()
+    // 此处后期应改成仅绘制，不收集状态，状态命令设置应该在初始化时
     this.collectStatus()
     // 优先执行 graphics 指令
     this._drawGraphics(ctx)

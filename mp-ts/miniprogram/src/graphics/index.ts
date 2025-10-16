@@ -48,7 +48,6 @@ protected _append(instructionsObject: any){
   }
   // 绘制时执行所有当前文本
   protected _drawGraphics(ctx: TContext2d){
-    
     this._instructions.forEach((instruction) => {
 			instruction.exec(ctx, this)
 		})
@@ -57,6 +56,9 @@ protected _append(instructionsObject: any){
    * 命令方法名与 w3c 一致
    */
   graphics = {
+    reset: ()=> {
+      this._instructions = []
+    },
     beginPath: () => {
       this._append(new BeginPath())
       return this.graphics
